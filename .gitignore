@@ -43,8 +43,8 @@ Temporary Items
 .apdisk
 
 # My ignore dir
+/nbproject/*
 /data/*
 !/data/db/backup
-/nbproject/*
 /vendor/*
 !/vendor/library/phpQuery
