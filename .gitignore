@@ -45,7 +45,7 @@ Temporary Items
 # My ignore dir
 ################
 /data/*
-!/data/backup/myblog.db
+!/data/backup
 /nbproject/*
 /vendor/*
-!/vendor/library/phpQuery/phpQuery-onefile.php
+!/vendor/library/phpQuery
