@@ -1,0 +1,76 @@
+/* 
+    Document   : reset
+    Created on : 19.02.2013, 8:47:18
+    Author     : Бескоровайный Сергей
+    Description: Сброс CSS
+*/
+
+/*===== Сброс стилей для HTML5   ====*/
+/*html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,
+blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,
+em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,
+b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,
+table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,
+details,embed,figure,figcaption,footer,header,hgroup,menu,nav,
+output,ruby,section,summary,time,mark,audio,video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section {
+    display: block;  делаем элементы блочными (для старых браузеров) 
+}
+body {
+    line-height: 1;  межстрочный интервал текста на странице 
+}
+ol,ul {
+    list-style: none;
+}
+blockquote:before,blockquote:after,
+q:before,q:after {
+    content: '';  Убираем кавычки у Q и BLOCKQUOTE 
+    content: none;  добавляем для верности 
+}
+blockquote,q {
+    quotes: none;  еще один способ убрать кавычки 
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}*/
+
+/*===== Сброс стилей от Яхо   ====*/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,
+form,fieldset,input,textarea,p,blockquote,th,td { 
+    margin: 10px;
+    padding: 5px;
+}
+fieldset,img,abbr,acronym { 
+    border: 0;
+}
+address,caption,cite,code,dfn,em,strong,th,var {
+    font-style: normal;
+    font-weight: normal;
+}
+table {
+    border-collapse: collapse; /* общие границы для ячеек таблиц */
+    border-spacing: 0; /* обнуление расстояния между ячейками */
+}
+caption,th {
+    text-align: left; /* выравнивание текста по левому краю */
+}
+ol,ul {
+    list-style: circle  убираем маркеры списков 
+}
+h1,h2,h3,h4,h5,h6 {
+    font-size: 100%;
+    font-weight: normal;
+}
+q:before,q:after {
+    content: ''; /* отменяем кавычки у тега Q */
+}
+

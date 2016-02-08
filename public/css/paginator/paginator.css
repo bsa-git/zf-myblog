@@ -1,0 +1,118 @@
+/* Pager Definition */
+
+
+div.my-pager {
+    font-family: helvetica, arial, freesans, clean, sans-serif;
+    font-size: 11px;
+}
+
+div.my-pager {
+    width: 550px; /* 476 */
+    height: 22px;
+/*    background-color: #eee;*/
+    background-color: #F7F7F7;
+    border-left: solid 1px #ccc;
+    border-right: solid 1px #ccc;
+    border-bottom: solid 1px #ccc;
+    border-top:  solid 1px #ccc;
+    cursor: default;
+    padding: 2px;
+    text-shadow: 1px 1px 0 white;
+}
+
+div.my-pager
+{
+    -webkit-border-radius: 5px; 
+    -moz-border-radius: 5px; 
+    -o-border-radius: 5px; 
+    -khtml-border-radius: 5px; 
+    behavior:url(/css/pie/PIE.htc);
+}
+
+input.my-page-input {
+    font-size: 11px;
+    width: 25px;
+    margin: 0;
+}
+
+span.my-pager-message {
+    float: left;
+    padding: 2px;
+    color: #666;
+}
+
+table.my-pager-table {
+    float: right;
+    font-size: 11px;
+    margin: 0;
+}
+
+table.my-pager-table td {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+a.my-pager-control {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+div.my-pager-loader {
+    background: url(images/mtg-loader.gif) center no-repeat transparent;
+    width: 16px;
+    height: 16px;
+}
+
+div.first-page {
+    background: url(images/first.gif) center no-repeat transparent;
+    width: 16px;
+/*    height: 16px;*/
+}
+
+div.first-page-disabled {
+    background: url(images/first-disabled.gif) center no-repeat transparent;
+    width: 16px;
+/*    height: 16px;*/
+}
+
+div.previous-page {
+    background: url(images/prev.gif) center no-repeat transparent;
+    width: 16px;
+/*    height: 16px;*/
+}
+
+div.previous-page-disabled {
+    background: url(images/prev-disabled.gif) center no-repeat transparent;
+    width: 16px;
+/*    height: 16px;*/
+}
+
+div.next-page {
+    background: url(images/next.gif) center no-repeat transparent;
+    width: 16px;
+/*    height: 16px;*/
+}
+
+div.next-page-disabled {
+    background: url(images/next-disabled.gif) center no-repeat transparent;
+    width: 16px;
+/*    height: 16px;*/
+}
+
+div.last-page {
+    background: url(images/last.gif) center no-repeat transparent;
+    width: 16px;
+/*    height: 16px;*/
+}
+
+div.last-page-disabled {
+    background: url(images/last-disabled.gif) center no-repeat transparent;
+    width: 16px;
+/*    height: 16px;*/
+}
+
+div.my-pager-separator {
+    background: url(images/y-sep.png) center no-repeat transparent;
+    width: 2px;
+/*    height: 13px;*/
+}

@@ -1,0 +1,72 @@
+
+a.toolbar-button {
+    display: inline-block;
+    margin-right:   10px;
+    padding:  2px;
+    float: left;
+    text-decoration: none;
+    border: 1px solid #bbb;
+    border-bottom-color: #999;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    background: url('images/bg-btn.gif') repeat-x scroll 0 0 #ddd;
+    box-shadow: 0 1px 0 #f8f8f8;
+    -wekbit-box-shadow: 0 1px 0 #f8f8f8;
+    -moz-box-shadow: 0 1px 0 #f8f8f8;
+}
+
+a.toolbar-button:hover {
+    background-position: 0 -6px;
+    border: 1px solid #999;
+    border-bottom-color: #666;
+}
+
+a.toolbar-button span.icon {
+    display: inline-block;
+    vertical-align: bottom;
+    width: 16px;
+    height: 16px;
+    margin-left: 3px;
+}
+
+span.add-button {
+    background: url(images/sprite-icons.png) -64px -16px;
+    top: 1px;
+    margin-right: 1px;
+    margin-bottom: 0;
+    position: relative;
+}
+
+span.delete-button {
+    background: url(images/sprite-icons.png) -80px -16px;
+    top: 1px;
+    margin-right: 1px;
+    margin-bottom: 0;
+    position: relative;
+}
+
+span.save-button {
+    background: url(images/save.png) left center no-repeat;
+}
+
+span.search-index-button {
+    background: url(images/search-index.png) left center no-repeat;
+}
+
+span.info-button {
+    background: url(images/info.png) left center no-repeat;
+}
+
+a.toolbar-button span.text {
+    padding: 3px;
+    text-shadow: 1px 1px 0 white;
+    color: #333;
+    line-height: 16px;
+    vertical-align: middle;
+}
+
+a.toolbar-button span.text {
+    font-family: helvetica, arial, freesans, clean, sans-serif;
+    font-size: 11px;
+}

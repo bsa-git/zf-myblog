@@ -1,0 +1,69 @@
+/* 
+    Document   : tabs
+    Created on : 18.04.2013, 12:33:12
+    Author     : Admin
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+.tabs{
+    margin-left: 4px;
+    padding: 0;
+    background: transparent;
+/*    voice-family: "\"}\"";
+    voice-family: inherit;*/
+    padding-left: 5px;
+}
+.tabs ul{
+    font: bold 11px Arial, Verdana, sans-serif;
+    margin:0;
+    padding:0;
+    list-style: none;
+}
+.tabs li{
+    display:inline;
+    margin:0 2px 0 0;
+    padding:0;
+    text-transform:uppercase;
+}
+.tabs a{
+    float:left;
+/*    background:#A3BBE6 url(images/tabs_left.gif) no-repeat left top;*/
+    background:#A3BBE6;
+    margin:0 2px 0 0;
+    padding:0 0 1px 3px;
+    text-decoration:none;
+}
+
+.tabs a span{
+    float:left;
+    display:block;
+/*    background: transparent url(images/tabs_right.gif) no-repeat right top;*/
+    padding:4px 9px 2px 6px;
+}
+
+.tabs a span{
+    float:none;
+}
+
+.tabs a:hover{
+    background-color: #7E94B9;
+    color: white;
+}
+
+.tabs a:hover span{
+    background-color: #7E94B9;
+}
+
+li.tabHeaderActive span, li.tabHeaderActive a { 
+    background-color: #42577B; 
+    color:#fff;
+}
+
+.tabContent {
+    clear:both;
+    border:2px solid #42577B;
+    padding-top:2px;
+    background-color:#FFF;
+}

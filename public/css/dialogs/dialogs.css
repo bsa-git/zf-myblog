@@ -1,0 +1,114 @@
+/* 
+    Document   : dialogs
+    Created on : 15.03.2012, 15:23:43
+    Author     : Бескоровайный С.А.
+    Description:
+        Отображение Dialogs
+*/
+
+root { 
+    display: block;
+}
+
+.overlay-dialog {
+    background-color: #666666;/*#666666  #85BBEF*/
+    filter:alpha(opacity=60);
+    -moz-opacity: 0.6;
+    opacity: 0.6;
+    z-index: 101;
+}
+
+.dialog-content {
+    width: 355px; /* Ширина элемента в пикселах */
+    height: 120px; /* Высота элемента в пикселах */
+    padding: 10px; /* Поля вокруг текста */
+    /*margin: 0 auto; /* Выравниваем по центру */
+    background: #fff; /* Цвет фона */
+    border: 4px double black; /* Параметры границы */
+}
+
+.dialog-content {
+    z-index: 100;
+    position: absolute;
+    overflow:visible;
+    color: #000;
+    font-family: Tahoma, Arial, sans-serif;
+    font: 12px arial;
+    
+}
+.dialog-content h3 {
+    font-weight: bold; 
+}
+
+#modal-dialog-message{
+    text-align: center;
+}
+
+/* Класс для  iframe ВНИМАНИЕ!!! */
+iframe.progress {
+    position: absolute;
+    left: -100px;
+    top: -100px;
+    width: 10px;
+    height: 10px;
+    overflow: hidden;
+}
+
+#progress-bar {
+    position: absolute;
+    left: 50px;
+    top: 60px;
+}
+
+.pg-progressbar {
+    position: relative;
+
+    width: 250px;
+    height: 24px;
+    overflow: hidden;
+
+    border: 1px solid #c6c6c6;
+}
+
+.pg-progress {
+    z-index: 150;
+
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    width: 0;
+    height: 24px;
+    overflow: hidden;
+}
+
+.pg-progressstyle {
+    height: 22px;
+    border: 1px solid #748a9e;
+    background: url('../images/system/animation.gif');
+    /*background: #0782C1;*/
+
+
+}
+
+.pg-text,
+.pg-invertedtext {
+    position: absolute;
+    left: 0;
+    top: 4px;
+
+    width: 250px;
+
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 12px;
+}
+
+.pg-invertedtext {
+    color: #ffffff;
+}
+
+.pg-text {
+    z-index: 100;
+    color: #000000;
+}

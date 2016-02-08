@@ -1,0 +1,70 @@
+/**
+ * MYUI, version 1.0
+ *
+ * Dual licensed under the MIT and GPL licenses.
+ *
+ * Copyright 2009 Pablo Aravena, all rights reserved.
+ * http://pabloaravena.info
+ *
+ */
+
+MY.TableGrid.CellCheckbox = Class.create({
+    initialize: function (options) {
+        options = options || {};
+        this.onClickCallback = options.onClick || null;
+        this.selectable = options.selectable || false;
+        if (options.getValueOf)
+            this.getValueOf = options.getValueOf;
+    }
+});
+
+
+MY.TableGrid.CellRadioButton = Class.create({
+    initialize: function (options) {
+        options = options || {};
+        this.onClickCallback = options.onClick || null;
+        this.selectable = options.selectable || false;
+        if (options.getValueOf)
+            this.getValueOf = options.getValueOf;
+    }
+});
+
+MY.BrowseInput = Class.create(MY.TextField, {
+    initialize: function (options) {
+        this.baseInitialize(options);
+        this.afterUpdate = options.afterUpdate || null;
+        this.onClick = options.onClick || null;
+    },
+    render: function ($super, input) {
+        $super(input);
+        this.targetElement = input;
+        if (this.targetElement)
+            this.decorate(this.targetElement);
+    },
+    decorate: function (element) {
+        var self = this;
+        var width = element.getDimensions().width;
+        var height = element.getDimensions().height;
+        Element.wrap(element, 'div'); // auto complete container
+        element.setStyle({width: (width - 29) + 'px'});
+        var container = element.up();
+        container.id = this.id + '_container';
+        container.setStyle({width: width + 'px', height: height + 'px'});
+        var browseBtn = new Element('div');
+        browseBtn.addClassName('my-tablegrid-browse-button');
+        container.insert(browseBtn);
+        var onClickFlg = false;
+        browseBtn.observe('click', function (event) {
+            if (self.onClick)
+                self.onClick();
+            event.stop();
+            onClickFlg = true;
+        });
+        this.afterUpdateCallback = function (element, value) {
+            if (self.afterUpdate && !onClickFlg) {
+                self.afterUpdate(element, value);
+            }
+            onClickFlg = false;
+        };
+    }
+});

@@ -1,0 +1,56 @@
+ul.accordion {
+    border-left:  1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom:1px solid #ccc;
+    margin: 0;
+    padding: 0;
+}
+
+ul.accordion li.section {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.accordion li a.title {
+    background-image: url(../images/buttonover-bg.gif);
+    color: #000;
+    display: block;
+    font-weight: bold;
+    height: 34px;
+    line-height: 30px;
+    padding: 0 10px;
+    text-decoration: none;
+    
+}
+
+ul.accordion li a.title img {
+    vertical-align: middle;
+}
+
+ul.accordion li:first-child a.title {
+    border-top: 0;
+}
+
+ul.accordion li a.title:hover {
+    background-image: url(../images/buttonsel-bg.gif);
+}
+
+ul.accordion li div.toggle {
+    padding-bottom: 5px;
+    padding-top:  5px;
+    padding-left:  5px;
+    padding-right:  20px;
+
+}
+
+ul.accordion li.section.expanded a.title {
+    background-image: url(../images/buttonsel-bg.gif);
+}
+
+.disabled, .disabled * {
+    /*border-color: red !important;*/
+    color: red !important;
+    opacity: 0.8;
+}
+

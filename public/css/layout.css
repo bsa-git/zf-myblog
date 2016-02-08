@@ -1,0 +1,24 @@
+/* 
+    layout
+*/
+#header {
+    margin-bottom: 20px;
+}
+.layout { 
+    overflow: hidden; 
+}
+#left-container { 
+    background: #FFFFF; 
+    float: left; 
+    width: 250px; 
+}
+#content-container { 
+    background: #FFFFF; 
+    margin: 0 250px 0 250px;  
+}
+#right-container { 
+    background: #FFFFF; 
+    width: 250px; 
+    float: right; 
+}
+

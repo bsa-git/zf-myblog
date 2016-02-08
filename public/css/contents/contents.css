@@ -1,0 +1,78 @@
+/*
+Copyright (c) 2003-2012, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.html or http://ckeditor.com/license
+*/
+
+div.info-content
+{
+    /* Font */
+    font-family: sans-serif, Arial, Verdana, "Trebuchet MS";
+    font-size: 12px;
+
+    /* Text color */
+    color: #333;
+
+    /* Remove the background color to make it transparent */
+    background-color: #fff;
+
+    margin: 20px;
+}
+
+
+div.info-content a
+{
+    color: #0782C1;
+}
+
+div.info-content ol,ul,dl
+{
+    /* IE7: reset rtl list margin. (#7334) */
+    *margin-right: 0px;
+    /* preserved spaces for list items with text direction other than the list. (#6249,#8049)*/
+/*    padding: 0 40px;*/
+}
+
+div.info-content h1,
+div.info-content h2,
+div.info-content h3,
+div.info-content h4,
+div.info-content h5,
+div.info-content h6
+{
+    font-family : Verdana, Georgia, serif;
+    font-weight: normal;
+/*    line-height: 1.2em;*/
+/*    color : #666;*/
+/*    text-decoration : underline;*/
+}
+
+div.info-content h1 { font-size : 1.7em; color : #666;}
+div.info-content h2 { font-size : 1.5em; color : #666;}
+div.info-content h3 { font-size : 1.3em; color : #666;}
+div.info-content h4 { font-size : 1.1em; color : #666;}
+div.info-content h5 { font-size : 1.0em; color : #666;}
+
+div.info-content hr
+{
+    border: 0px;
+    border-top: 1px solid #ccc;
+}
+
+div.info-content img.right {
+    border: 1px solid #ccc;
+    float: right;
+    margin-left: 15px;
+    padding: 5px;
+}
+
+div.info-content img.left {
+    border: 1px solid #ccc;
+    float: left;
+    margin-right: 15px;
+    padding: 5px;
+}
+
+div.info-content img:hover {
+    opacity: .9;
+    filter: alpha(opacity = 90);
+}

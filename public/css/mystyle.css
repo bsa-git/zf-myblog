@@ -1,0 +1,741 @@
+/* 
+    Document   : mystyle
+    Created on : 27.07.2010, 10:09:00
+    Author     : Бескоровайный Сергей
+    Description: Purpose of the stylesheet follows.
+*/
+
+a:hover {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.box .hero-unit{
+    margin-bottom: 0px;
+}
+
+/****** Links *******/
+a.accordion-toggle{
+    text-decoration: none;
+    color: #9a0822;
+}
+
+a.accordion-toggle:hover {
+    text-decoration: none;
+    color: #9a0822;
+}
+
+a.carousel-control {
+    color: #fff;
+    text-decoration: none;
+}
+
+a.btn {
+    color: #fff;
+    text-decoration: none;
+}
+
+ul.nav-tabs a {
+    text-decoration: none;
+    color: #9a0822;
+}
+
+ul.nav-tabs a:hover {
+    text-decoration: none;
+    color: #9a0822;
+}
+
+/****** Logo2  *******/
+#logo2 {
+    position: absolute;
+    right: 3%;
+    top: 25px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .4), 0 0 15px rgba(255, 255, 255, .175);
+    font-family: playball, sans-serif;
+    font-size: 24px;
+    z-index: 4;
+}
+
+#logo2.view-panel {
+    top: 40px;
+}
+
+a#logo2{
+    text-decoration: none;
+    color: #b8bfcb;
+}
+
+a#logo2:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
+/***** Элементы формы ******/
+#search  input[type="text"]{
+    margin-bottom: 0px;
+}
+
+.my-pager input[type="text"]{
+    height: 10px;
+    margin-bottom: 0px;
+    /*padding-bottom: 4px;*/
+}
+
+.my-tablegrid-pager input[type="text"]{
+    height: 10px;
+    margin-bottom: 0px;
+    /*padding-bottom: 4px;*/
+}
+
+fieldset legend {
+    border-bottom: none;
+    width: auto;
+}
+
+#search-input_container input[type="text"]{
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    behavior:url(/css/pie/PIE.htc);
+}
+
+.myfilter input[type="text"]{
+    height: 16px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    behavior:url(/css/pie/PIE.htc);
+}
+
+/***** Форматирование формы ******/
+
+form.myfrm
+{
+    font-family: Tahoma, Arial, Helvetica, Sans-Serif;
+    font-style: italic;
+    font-weight: normal;
+    text-align: left;
+}
+
+form.myfrm
+{
+    -webkit-border-radius: 5px; 
+    -moz-border-radius: 5px; 
+    -o-border-radius: 5px; 
+    -khtml-border-radius: 5px; 
+    behavior:url(/css/pie/PIE.htc);
+}
+form.myfrm
+{
+    /*margin-left:10px;*/
+    padding:10px;
+    border:1px solid #A3B1C9;
+}
+
+form.myfrm dt, dd
+{
+    padding:2px;
+}
+form.myfrm label 
+{
+    color:#3E4E68;
+}
+form.myfrm label.caption_group 
+{
+    color:#ffffff;
+}
+form.myfrm label.required 
+{
+    font-weight:bold
+}
+form.myfrm dd
+{
+    padding-bottom:10px;
+    -webkit-margin-start: 0px;
+}
+
+form.myfrm th
+{
+    background-color: #f22;
+}
+
+form.myfrm fieldset
+{
+    width: 95%;
+    /*    margin-right: 40px;*/
+    padding:10px;
+    border:1px solid #A3B1C9;
+}
+form.myfrm fieldset
+{
+    -webkit-border-radius: 5px; 
+    -moz-border-radius: 5px; 
+    -o-border-radius: 5px; 
+    -khtml-border-radius: 5px; 
+    behavior:url(/css/pie/PIE.htc);
+}
+form.myfrm fieldset legend
+{
+    color:#3E4E68;
+    font-size:1.4em;
+}
+form.myfrm #captcha-input
+{
+    margin-top:5px;
+    display: block;
+}
+form.myfrm ul.errors 
+{
+    color:red;
+}
+form.myfrm #fieldset-buttonsGroup
+{
+    border:0px;
+}
+
+form.myfrm #title
+{
+    width: 80%;
+}
+
+form#login-form
+{
+    /*width: 450px;*/
+    border-width: 0px;
+}
+form#fetchpassword-form
+{
+    /*width: 450px;*/
+    border-width: 0px;
+}
+form#blogpost-form
+{
+    border-width: 0px;
+}
+
+
+
+/***** Форматирование fieldset myfrm ******/
+
+fieldset.myfrm
+{
+    /*    margin-bottom: 10px;
+        margin-left: 10px;*/
+    width: 95%;
+    margin: 10px;
+    padding:10px;
+    border:1px solid #A3B1C9;
+
+    /*overflow: auto;*/
+}
+
+fieldset.myfrm
+{
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    behavior:url(/css/pie/PIE.htc);
+}
+fieldset.myfrm
+{
+    font-family: Tahoma, Arial, Helvetica, Sans-Serif;
+    font-weight: normal;
+    text-align: left;
+}
+fieldset.myfrm legend
+{
+    color:#3E4E68;
+    font-size:1.4em;
+    font-style: italic;
+}
+fieldset.myfrm label
+{
+    color:#3E4E68;
+}
+
+fieldset.myfrm input {
+    font-size: 0.95em;
+}
+
+
+/***** Форматирование filter ******/
+
+fieldset.myfilter
+{
+    margin:10px;
+    padding:10px;
+    border:1px solid #A3B1C9;
+
+    /*overflow: auto;*/
+}
+
+fieldset.myfilter
+{
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    behavior:url(/css/pie/PIE.htc);
+}
+
+fieldset.myfilter legend
+{
+    color:#3E4E68;
+    font-size:1.4em;
+    font-style: italic;
+}
+
+input.filter-compare{
+    width: 50px;
+}
+
+input.filter-input{
+    width: 120px;
+}
+
+
+/*** Стиль содержания окна ***/
+
+.win-content
+{
+    padding     : 10px;
+    line-height : 1.8em;
+}
+
+.win-content
+{
+    color       : #333;
+    background  : #fafafa;
+    font-family : Verdana, Arial, Helvetica, sans-serif;
+    font-size   : 1.2em;
+}
+
+.win-content a {
+    color: #005580;
+    text-decoration: underline;
+}
+
+.win-content a:hover, .win-content a:focus {
+    color: #005580;
+    text-decoration: none;
+}
+
+
+
+.win-content h2 {
+    color       : #005580;
+}
+
+div.report-buttons { 
+    /* position: relative; /* Абсолютное позиционирование */
+    /* top: 0px; /* Положение от верхнего края */
+    /*left: 90%;*/
+    /*background-color: #FFE0AE;*/
+    text-align: right;
+    padding-right: 20px;
+}
+
+div.report-buttons a:hover { 
+    color : #000;   
+    background: #fff;
+    text-decoration : none; }
+
+.report-button {
+    margin-left: 5px;
+}
+
+/***** Списки *****/
+
+dd.dd-list {
+    font-style: italic; /* Курсивное начертание текста */
+}
+dt.dt-list {
+    font-size: larger;
+    font-weight: bold; 
+    margin-top: 1em; /* Отступ сверху */
+}
+
+div.menu-list ul {
+    padding-left: 5px;
+}
+
+dd.dd-list ul{
+    padding-left: 35px;
+}
+
+/***** System Messages blockquote *****/
+
+blockquote p, blockquote ul
+{
+    color:#555;
+    font-family: Tahoma, Arial, Helvetica, Sans-Serif;
+    font-style: italic;
+/*    font-weight: bolder;*/
+    text-align: left;
+}
+
+
+blockquote
+{
+    margin:10px 10px 10px 50px;
+    padding:5px 5px 5px 48px;
+    background-image:url('../images/system/PostQuote.png');
+    background-position:left top;
+    background-repeat:no-repeat;
+    border-left:  3px solid #bbb;
+    
+}
+
+
+/****** System Messages warnings/information *******/
+
+#messages {
+    color: #ffa;
+}
+
+em {
+    font-weight: bold;
+    font-style: italic;
+}
+
+div.warning, div.caution, div.information, div.message, div.error {
+    margin: 20px;
+    padding: 10px 20px;
+}
+
+div.warning p, div.caution p,div.information p, div.message p, div.error p {
+    text-align: left;
+}
+
+b.warning, b.caution, b.information, b.message, b.error {
+    position:relative;
+    left: 25%;
+}
+
+a#close-message-items {
+/*    position:relative;
+    left: 99%;*/
+    float: right;
+    text-decoration: none;
+    cursor: auto;
+    /*    top: 30%;*/
+}
+
+
+/* System Standard Messages radius, shadow*/
+div.warning, div.caution ,div.information, div.message, div.error
+{
+    -webkit-border-radius: 5px; 
+    -moz-border-radius: 5px; 
+    -o-border-radius: 5px; 
+    -khtml-border-radius: 5px; 
+    behavior:url(/css/pie/PIE.htc);
+}
+
+div.warning {
+    border: 1px solid #660;
+    color: #600;
+    background: #fee url(../images/system/dialog-warning.png) no-repeat;
+    background-position: center left;
+    padding-left: 92px;
+    min-height: 80px;
+}
+div.information {
+    border: 1px solid #00c;
+    color: #006;
+    background: #eef url(../images/system/dialog-information.png) no-repeat;
+    background-position: center left;
+    padding-left: 92px;
+    min-height: 80px;
+}
+div.caution {
+    border: 1px solid #333;
+    color: #333;
+    background: #ffc url(../images/system/warning.png) 10px no-repeat;
+    padding-left: 80px;
+}
+div.message {
+    border: 1px solid #333;
+    color: #333;
+    background: #ffc url(../images/system/message.png) 10px no-repeat;
+    padding-left: 80px;
+}
+
+div.error {
+    border: 1px solid #660;
+    color: #600;
+    background: #fee url(../images/system/error.png) 10px no-repeat;
+    padding-left: 80px;
+}
+
+/****** Для грида таблицы js скрипта MYUI *******/
+
+a.toolbar-button {
+    font-weight: bold; /**/
+    line-height: 1em;  /**/
+}
+
+div.my-tablegrid-setting-button {
+    z-index: 10;
+}
+
+div.my-tablegrid-setting-button div.icon, div.icon-print {
+    width: 15px;
+    height: 15px;
+}
+
+div.my-tablegrid-setting-button div.icon-print {
+    background: url(../images/system/print15x15.png);
+/*    top: 2px;*/
+    margin-right: 1px;
+    margin-bottom: 0;
+    position: relative;
+}
+
+
+span.EditButton {
+    background: url(../images/system/EditInformation.png);
+    top: 1px;
+    margin-right: 1px;
+    margin-bottom: 0;
+    position: relative;
+}
+span.PrintButton {
+    background: url(../images/system/print16x16.png);
+    top: 1px;
+    margin-right: 1px;
+    margin-bottom: 0;
+    position: relative;
+}
+
+span.ReportButton {
+    background: url(../images/system/pdf.gif);
+    top: 1px;
+    margin-right: 1px;
+    margin-bottom: 0;
+    position: relative;
+}
+div.ReportPDF {
+    background-image: url(../images/system/pdf.gif);
+    width: 16px;
+    height: 16px;
+}
+div.ReportHTML {
+    background-image: url(../images/system/html16x16.png);
+    width: 16px;
+    height: 16px;
+}
+
+.loadingBox {/* Увеличим размер */
+    width: 110px;
+}
+
+/****** Диалоговые окна *******/
+
+div#cancel-dialog-info a:hover { 
+    color : #000;   
+    background: #fff;
+    text-decoration : none; 
+}
+
+/****** Карусель *******/
+
+.spinner {
+    position: absolute;
+    top: 0px;
+    left: 50px;
+    width: 100%;
+    height: 240px;
+    background: #FFF;
+    z-index: 10;
+    text-align: center;
+    font-size: 40px;
+    line-height: 40px;
+    padding-top: 50px;
+    opacity: 0;
+    margin-left: -50px;
+}
+
+/*** Preview Images ***/
+ul#preview-images li form {
+    margin-top: 2px;
+}
+
+/****** View Video *******/
+
+#post-video li{
+    list-style:none;   
+    float:left;
+    margin: 3px;
+    border: 1px solid #ddd;
+    padding-left: 2px;
+}
+
+#post-video .youtube{
+    /*
+    padding-right: 6px;
+    /*padding-top: 6px;
+    width: 174px;
+    */
+}
+
+#post-video .file{
+    width: 130px;
+}
+
+/*#post-video img { 
+    position: relative;
+    left: 0px;
+}*/
+
+#post-video form { 
+    position: relative;
+    top: 0px;
+}
+
+#post-video a:hover { 
+    color : #000;   
+    /*    background: #fff;*/
+    text-decoration : none; 
+
+}
+
+.video-title a{
+    
+}
+
+/****** Wait Progress *******/
+
+div.wait_progress{
+    width: 15px; 
+    height: 15px; 
+    position: absolute;
+}
+
+/****** Tooltip *******/
+.help-hint {
+    color:#191;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/****** Map Locations *******/
+
+#map-locations{
+    height: 100%;
+}
+
+#preview-locations li {
+    margin: 0;
+    padding: 0 5px;
+    display: inline;
+    padding: 2px 4px;
+    white-space: nowrap;
+    background-color: #f7f7f9;
+    border: 1px solid #e1e1e8;
+    
+}
+
+/****** Edit CKEditor *******/
+span.marker{
+    background-color: yellow;
+}
+
+/*** MARKDOWN ***/
+
+.markdown-body {
+    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 16px;
+    line-height: 1.6;
+    word-wrap: break-word;
+}
+
+.markdown-body a {
+    color: #4078c0;
+    text-decoration: none;
+}
+
+.markdown-body h1 {
+    color: #333;
+    padding-bottom: 0.3em;
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+
+.markdown-body h2 {
+    color: #333;
+    padding-bottom: 0.3em;
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
+
+.markdown-body h3 {
+    font-size: 1.5em;
+    color: #333;
+    line-height: 1.43;
+}
+
+.markdown-body h1, 
+.markdown-body h2, 
+.markdown-body h3, 
+.markdown-body h4, 
+.markdown-body h5, 
+.markdown-body h6 {
+    /*margin-top: 1em;*/
+    margin-bottom: 16px;
+    font-weight: bold;
+    line-height: 1.4;
+}
+
+.markdown-body code, .markdown-body tt {
+    color: #333;
+}
+
+.markdown-body table {
+    display: block;
+    width: 100%;
+    overflow: auto;
+    word-break: normal;
+    word-break: keep-all;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.markdown-body table tr {
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+}
+
+.markdown-body table th, .markdown-body table td {
+    padding: 6px 13px;
+    border: 1px solid #ddd;
+}
+
+.markdown-body ol, 
+.markdown-body ul {
+    list-style: disc
+}
+
+.markdown-body code, .markdown-body tt {
+    padding-left: 2px;
+    padding-right: 2px;
+    margin: 0;
+    font-size: 85%;
+    background-color: rgba(0,0,0,0.04);
+    border-radius: 3px;
+    behavior:url(/css/pie/PIE.htc);
+}
+
+.markdown-body p, 
+.markdown-body blockquote, 
+.markdown-body ul, 
+.markdown-body ol, 
+.markdown-body dl, 
+.markdown-body table, 
+.markdown-body pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+}

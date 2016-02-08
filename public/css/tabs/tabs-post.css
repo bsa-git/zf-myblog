@@ -1,0 +1,81 @@
+/* 
+    Document   : tabs
+    Created on : 18.04.2013, 12:33:12
+    Author     : Admin
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+#tabs-post div.tabsHeader{
+    /* dimensions */
+/*    width:378px; 760px;378px;*/
+    height:31px !important;
+    margin:0 !important; 
+    padding:0;	
+
+    /* IE6 specific branch (prefixed with "_") */
+    _margin-bottom:-2px;
+}
+
+#tabs-post div.tabsHeader li{
+    float:left; 
+    margin:0; 
+    padding:0; 
+    text-indent:0; 
+    list-style-type:none;
+}
+#tabs-post div.tabsHeader a{
+    background: url(images/blue_panes.jpg) no-repeat;
+    display:block;
+    height: 31px;   
+    width: 190px; 	
+    padding:0px;
+    margin:0px;
+
+    /* font decoration */
+    color:#000;
+    font-size:12px;
+    line-height:33px;
+    text-align:center;
+    text-decoration:none;
+}/*tabs-post_tabHeader1*/
+
+/* adjust the background image position on each tab */
+#tabs-post a#tabs-post_tabHeader1 			{ background-position: 0 0; }
+#tabs-post a#tabs-post_tabHeader2 			{ background-position: -189px 0; }
+/*#tabs-post a#tabs-post_tabHeader3 			{ background-position: -378px 0; }
+#tabs-post a#tabs-post_tabHeader4 			{ background-position: -567px 0; width:192px;}*/
+
+/* mouseover state */
+#tabs-post div.tabsHeader a:hover 		{ color:#fff;	 }
+#tabs-post a#tabs-post_tabHeader1:hover 	{ background-position:      0 -33px; }
+#tabs-post a#tabs-post_tabHeader2:hover 	{ background-position: -189px -33px; }
+/*#tabs-post a#tabs-post_tabHeader3:hover 	{ background-position: -378px -33px; }
+#tabs-post a#tabs-post_tabHeader4:hover 	{ background-position: -567px -33px; }*/
+
+/* currently selected tabs */
+#tabs-post div.tabsHeader a.tabActive		{ cursor:default; color:#fff; line-height:34px; }
+#tabs-post a#tabs-post_tabHeader1.tabActive { background-position:      0 -66px; }
+#tabs-post a#tabs-post_tabHeader2.tabActive { background-position: -189px -66px; }
+/*#tabs-post a#tabs-post_tabHeader3.tabActive { background-position: -378px -66px; }
+#tabs-post a#tabs-post_tabHeader4.tabActive { background-position: -567px -66px; }*/
+
+#tabs-post .tabContent {
+    background-color:#FFF;
+    width:99%;
+    height:100%;
+    overflow: auto;
+}
+
+#tabs-post .tabContent {
+    border-top: 4px;
+    border-left: 4px;
+    border-right: 4px;
+    border-bottom: 4px;
+    border-style: double;
+    border-color: #1360CA;
+    
+}
+
+

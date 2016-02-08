@@ -1,0 +1,1 @@
+{include file='config/lib/left-menu.tpl'}

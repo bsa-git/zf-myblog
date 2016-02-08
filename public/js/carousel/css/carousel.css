@@ -1,0 +1,155 @@
+/* Horizontal Carousel */
+.horizontal_carousel {
+  float: left;
+  width: 520px;
+  /*height: 240px;*/
+  height: 150px;
+  margin-bottom: 10px;
+  position: relative;
+  left: 0%;
+}
+
+.horizontal_carousel .carousel-container {
+  float: left;
+  width: 450px;
+  /*height: 240px;*/
+  height: 150px;
+  position: relative;    
+  overflow: hidden;
+}
+
+.horizontal_carousel ul {
+  /*margin: 0;*/
+  margin: 0;
+  padding:0;
+  width: 100000px;
+  position: relative;
+  top: 0;
+  left: 0;
+  /*height: 240px;*/
+  height: 150px;
+}                      
+
+.horizontal_carousel ul li {
+  /*width: 250px;
+  height: 240px;*/
+  width: 150px;
+  height: 150px;
+  text-align: center; 
+  list-style:none;   
+  float:left;
+  margin-top: 40px;
+}
+
+.horizontal_carousel .previous_button {
+  float:left;  
+  width: 32px;
+  height: 175px;
+  background: url(../images/horizontal/left.png);
+  z-index: 100;
+  cursor: pointer;
+}
+
+.horizontal_carousel .previous_button_over {
+  background: url(../images/horizontal/left_over.png);
+}
+
+.horizontal_carousel .previous_button_disabled {
+  background: url(../images/horizontal/left_disabled.png);
+  cursor: default;
+}
+
+.horizontal_carousel .next_button {
+  float:left;  
+  width: 32px;
+  height: 175px;
+  background: url(../images/horizontal/right.png);
+  z-index: 100;
+  cursor: pointer;
+}
+
+.horizontal_carousel .next_button_over {
+  background: url(../images/horizontal/right_over.png);
+}
+
+.horizontal_carousel .next_button_disabled {
+  background: url(../images/horizontal/right_disabled.png);
+  cursor: default;
+}
+
+
+/* vertical Carousel */
+
+.ui_vertical_carousel {
+}
+
+.vertical_carousel {
+  float:left;
+  width: 350px;
+  height: 270px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.vertical_carousel .carousel-container {
+  float:left;  
+  width: 260px;
+  height: 240px;
+  overflow: hidden;
+}
+
+.vertical_carousel ul {
+  margin: 0;
+  padding:0;
+  height: 100000px;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.vertical_carousel ul li {
+  width: 260px;
+  height: 240px;
+  text-align: center;      
+  list-style:none;   
+  float:left;
+}                         
+
+.vertical_carousel .previous_button {
+  float:left;
+  height: 32px;
+  width: 175px;
+  background: url(../images/vertical/left.png);
+  cursor: pointer;    
+  display:inline;
+  margin: 0 0 10px 40px;
+}
+
+.vertical_carousel .previous_button_over {
+  background: url(../images/vertical/left_over.png);
+}
+
+.vertical_carousel .previous_button_disabled {
+  background: url(../images/vertical/left_disabled.png);
+  cursor: default;
+}
+
+.vertical_carousel .next_button {
+  float:left;
+  height: 32px;
+  width: 175px;
+  background: url(../images/vertical/right.png);
+  display:inline;
+  margin-left: 40px;
+  cursor: pointer;
+}
+
+.vertical_carousel .next_button_over {
+  background: url(../images/vertical/right_over.png);
+}
+
+.vertical_carousel .next_button_disabled {
+  background: url(../images/vertical/right_disabled.png);
+  cursor: default;
+}
+

@@ -1,0 +1,185 @@
+/*
+ *
+ *    Скрипт комментариев.
+ *    Версия: 1.0 (beta)
+ *    Дата: 10.02.2012
+ *    Автор: Чернышов Роман
+ *    Сайт: http://rche.ru
+ *    Эл.почта: houseprog@ya.ru
+ *
+*/
+
+#rcheComments #ajaxComment {
+    display:none;
+    text-align:center;
+}
+#rcheComments {
+    position:relative;
+    width:100%;
+}
+#rcheComments .titleComment {
+    color:#6A6A6A;
+    font:italic 18px tahoma, arial;
+    border-bottom:1px dotted #ddd;}
+#rcheComments #newComment {
+    color:#6A6A6A;
+    font:16px tahoma, arial;
+}
+#rcheComments #allComment {
+    margin:10px;
+    position:relative;
+}
+#rcheComments #allComment .itemComment {
+    position:relative;
+    border-left:1px dotted #CCC;
+    background:#FFF;
+    padding:0 10px 10px 60px;
+    margin:10px 0;
+}
+#rcheComments #allComment .greyBg {
+    background:#EEE;
+}
+#rcheComments .avatarComment {
+    position:absolute;
+    left:0;top:0;width:48px;
+    height:48px;
+    padding:2px;
+    border:1px solid #EEE;
+}
+#rcheComments .panelComment {
+    position:relative;
+    margin:0 0 5px 0;
+}
+#rcheComments .panelComment a.userComment {
+    color:#0E8BDF;
+    font:14px tahoma, arial;margin:0 10px 0 0;
+    text-decoration:underline;
+}
+#rcheComments .panelComment .dateComment {
+    color:#333;
+    font:italic 11px tahoma, arial;
+}
+#rcheComments .footerComment a.replyComment {
+    color:#555;
+    font:11px tahoma, arial;
+    text-decoration:underline;
+}
+
+#rcheComments .footerComment a.editComment {
+    color:#555;
+    font:11px tahoma, arial;
+    text-decoration:underline;
+}
+
+#rcheComments .footerComment a.delComment {
+    color:red;
+    font:11px tahoma, arial;
+    text-decoration:underline;
+}
+#rcheComments .footerComment {
+    margin:5px 0 0 0;
+}
+#rcheComments .panelComment a.userComment:hover,
+#rcheComments .footerComment a.replyComment:hover,
+#rcheComments .footerComment a.editComment:hover,
+#rcheComments .footerComment a.delComment:hover {
+    text-decoration:none;
+}
+#rcheComments .bodyComment {
+    position:relative;
+    color:#333;
+    font:12px tahoma, arial;
+}
+#rcheComments #tableComment td.section-one {
+    text-align:right;
+    padding:0 20px 0 0;
+    width:170px;
+    color:#333;
+    font:12px tahoma, arial;
+}
+#rcheComments #tableComment td {
+    vertical-align:top
+}
+#rcheComments .inputComment {
+    border:1px solid #eee;
+    width:200px;
+}
+#rcheComments .textareaComment {
+    border:1px solid #eee;
+    width:400px;
+    height:70px;
+}
+#rcheComments #pageComment {
+    width:100%;
+    padding:10px;
+    text-align:center;
+}
+#rcheComments #pageComment span {
+    margin:0 5px;
+    padding:2px 5px;
+    color:#999;
+    border:1px solid #EEE;
+}
+#rcheComments #pageComment a {
+    margin:0 5px;
+    padding:2px 5px;
+    color:#333;
+    border:1px solid #DDD;
+    text-decoration:none;
+}
+#rcheComments #pageComment a:hover {
+    color:#000;
+    background:#eee;
+}
+/*#rcheComments .submitComment {border:0;font:12px tahoma;color: #FFF;cursor:pointer;
+        background:url('comment/btn120.gif') no-repeat 0 0;text-align:center;width:120px;height:24px;}*/
+#rcheComments #messComment {
+    display:none;
+    padding:10px;
+    border:1px dotted #D4A4A9;
+    background:#FFEEEE;
+    text-align:center;
+    color:#000;
+    font:14px tahoma;
+}
+#rcheComments #RformComment {
+    margin:5px 0 0 0;
+}
+#rcheComments #RformComment .submitComment {
+    margin:5px 0;
+}
+#RformComment .inputComment {
+    border:1px solid #eee;
+    width:100px;
+    font:11px tahoma;
+    color:#333;
+}
+#RformComment {
+    font:11px tahoma;
+    color:#333;
+}
+#rcheComments #nameCommentCap, #rcheComments #RnameCommentCap {
+    display:none
+}
+
+#rcheComments form.myfrm
+{
+    margin-left:10px;
+    padding:10px;
+    border:0px;
+}
+
+#rcheComments form.myfrm fieldset
+{
+/*    width: 550px;*/
+    padding:10px;
+    border:1px solid #A3B1C9;
+}
+
+#rcheComments #fieldset-buttonsGroup
+{
+/*    width: 700px;*/
+    padding:10px;
+    border:0px;
+}
+

@@ -1,0 +1,18 @@
+.report-content, .report-content td, .report-content th, .report-content h1, .report-content h2 {font-family: sans-serif; color: #000000;}
+.report-content pre {margin: 0px; font-family: monospace;}
+.report-content a {color: #000099; text-decoration: none; background-color: #ffffff;}
+.report-content a:hover {text-decoration: underline;}
+.report-content table {border-collapse: collapse; width: 100%; margin-left: auto; margin-right: auto; text-align: left;}
+.report-content {text-align: center;}
+.report-content th { text-align: center !important; }
+.report-content td, .report-content th { border: 1px solid #000000; font-size: 100%; vertical-align: baseline;}
+.report-content h1 {font-size: 150%;}
+.report-content h2 {font-size: 125%;}
+.report-content .p {text-align: left;}
+.report-content .e {background-color: #ccccff; font-weight: bold; color: #000000;}
+.report-content .h {background-color: #9999cc; font-weight: bold; color: #000000;}
+.report-content .v {background-color: #cccccc; color: #000000;}
+.report-content .vr {background-color: #cccccc; text-align: right; color: #000000;}
+.report-content img {float: right; border: 0px;}
+.report-content hr {width: 600px; background-color: #cccccc; border: 0px; height: 1px; color: #000000;}
+.report-content div.table-container {overflow: auto}

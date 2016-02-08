@@ -1,0 +1,51 @@
+html{
+    background: #fff;
+}
+
+body { margin : 0; padding : 0; min-width : 100%; background-color: #fff; background: #fff}
+
+.body2 { background: none }
+.body4 { background: none }
+.body7 { background: none }
+.box {background-color: #fff; }
+.box {border-radius:0px;-moz-border-radius:0px;-webkit-border-radius:0px;box-shadow:none;-moz-box-shadow:none;-webkit-box-shadow:none;position:relative;padding:28px 43px 23px 47px;color:#000;behavior:url(/css/pie/PIE.htc);}
+#content-container { 
+    margin: 0px;  
+}
+
+header.title {
+    text-align: left;
+}
+
+#content {
+    border      : 0px;
+    padding     : 10px;
+    line-height : 1.8em;
+}
+
+
+/**
+ * Elements to hide
+*/
+#header { display : none; }
+/*#title { display : none; }*/
+#nav { display : none; }
+#breadcrumbs { display : none; }
+#post-tags { display : none; }
+#post-images { display : none; }
+#post-locations { display : none; }
+#left-container { display : none; }
+#right-container { display : none; }
+#footer { display : none; }
+#bsa-footer { display : none; }
+.banners-bottom {display : none; }
+
+#status-form  { display : none; }
+#preview-tags  { display : none; }
+#preview-images  { display : none; }
+#upload-images  { display : none; }
+#preview-locations  { display : none; }
+#content-show-window  { display : none; }
+
+.report-buttons { display : none; }
+.phpinfo div.table-container {overflow: visible}

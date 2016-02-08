@@ -1,0 +1,100 @@
+/* 
+    Document   : sections
+    Created on : 28.01.2013, 14:37:20
+    Author     : Бескоровайный С.А.
+    Description:
+        оформление секций, панелей и т.д.
+*/
+
+div.panel-row-gray  {
+    clear:both;
+    border:1px solid #ddd;
+    margin: 20px;
+    padding:10px;
+    color:#666;
+    background-color:#efefef;
+}
+
+div.panel-row-yellow  {
+    background:#F8F2D9;
+    border:1px solid #ccc;
+    padding:5px 10px;
+    margin: 10px 0px 10px 15px;
+}
+
+div.panel-row-green  {
+    background:#EEFFCC;
+    border:1px solid #ccc;
+    padding:5px 10px;
+    margin: 10px 0px 10px 15px;
+}
+
+div.panel-row-h80  {
+    clear:both;
+    border:1px solid #ddd;
+    margin: 20px;
+    padding:10px;
+    color:#666;
+    background: url('images/h80.png') repeat-x;
+}
+
+div.panel-row-h150  {
+    clear:both;
+    border:1px solid #ddd;
+    margin: 20px;
+    padding:10px;
+    color:#666;
+    background: url('images/h150.png') repeat-x;
+}
+
+div.panel-row-h500  {
+    clear:both;
+    border:1px solid #ddd;
+    margin: 20px;
+    padding:10px;
+    color:#666;
+    background: url('images/h500.png') repeat-x;
+}
+
+div.panel-row-h600  {
+    clear:both;
+    border:1px solid #ddd;
+    margin: 20px;
+    padding:10px;
+    color:#666;
+    background: url('images/h600.png') repeat-x;
+}
+
+div.panel-row-h800  {
+    clear:both;
+    border:1px solid #ddd;
+    margin: 20px;
+    padding:10px;
+    color:#666;
+    background: url('images/h800.png') repeat-x;
+}
+
+div.info-edit{
+    position: relative;
+/*    display: none;*/
+/*    left: 87%;*/
+}
+
+div.info-edit a { 
+    color : #000;   
+    text-decoration : none; 
+    
+}
+
+div.info-edit a:hover { 
+    color : #000;   
+    background: #F8F0F0;
+    text-decoration : none; 
+    
+}
+
+div.section-title{
+    color:#666;
+    font-size: medium;
+    font-weight: bold;
+}

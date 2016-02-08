@@ -1,0 +1,27 @@
+/* 
+    Document   : tooltip
+    Created on : 12.04.2013, 12:38:32
+    Author     : Admin
+    Description:
+        Отображать всплывающие подсказки
+*/
+
+#floatTip {
+  position: absolute; /* Абсолютное позиционирование */
+  display: none; /* Прячем от показа */
+  border: 1px solid #999; /*  #000;  Параметры рамки */
+  padding: 10px; /* Поля вокруг  текста */
+  font-family: sans-serif; /* Рубленый шрифт */
+  font-size: 9pt; /* Размер  шрифта */
+  color: #333; /* Цвет текста */
+  background: #F8F2D9; /* Цвет фона #ffe5ff */
+  z-index: 100;
+/*  white-space: pre-line;*/
+}
+
+#floatTip{
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Для Firefox */
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Для Safari и Chrome */
+    box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Параметры тени */
+}
+

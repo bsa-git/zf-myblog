@@ -1,0 +1,133 @@
+/* 
+    Document   : resizing
+    Created on : 28.07.2012, 17:10:22
+    Author     : bsa
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+/* container has a background image */
+div.video-row a.player {
+    position: relative;/* for IE7,8 */
+    display:block;
+    width:128px;
+    height:128px;
+    padding:0;
+    text-align:center;
+    float:left;
+    margin:0 20px 0 0;
+    color : #000;   
+    text-decoration : none; 
+}
+
+/* splash image */
+div.video-row a.player img {
+    margin-top:45px;
+    margin-left: 70px;
+    border:0;
+}
+
+/* "row" contains video and "lorem ipsum" text */
+div.video-row  {
+    clear:both;
+    border:1px solid #ddd;
+    margin: 20px;
+    padding:10px;
+    color:#666;
+    /*    background-color:#efefef;*/
+    background: url('../../images/system/sections/h800.png') repeat-x;
+}
+
+div.video-row {
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    behavior:url(/css/pie/PIE.htc);
+}
+
+div.video-info {
+    padding: 10px;
+    text-align:  left;
+}
+
+.video-title {
+    font-weight: bold;
+    color: #555;
+}
+
+div.section-title {
+    color: #666;
+    font-size: medium;
+}
+
+div.section-content {
+    padding: 10px;
+    text-align:  left;
+}
+
+div.player-close{
+
+}
+
+div.player-close a { 
+    color : #000;   
+    text-decoration : none; 
+
+}
+
+div.player-close a:hover { 
+    color : #000;   
+    background: #F8F0F0;
+    text-decoration : none; 
+
+}
+
+
+
+div#player{
+    /*    position: relative;*/
+    /*    display: none;*/
+    /*    top: 20px;*/
+}
+
+div.flashplayer-download  {
+    width:90%;
+    text-align: center;
+    position: relative;/* for IE7,8 */
+}
+
+#audio_list {
+    list-style-type: none; /* Убираем маркеры */
+    margin-left: 20px; /* Отступ слева в браузере IE и Opera */
+    padding-left: 0; /* Отступ слева в браузере Firefox */
+}
+#streaming-video-list {
+    list-style-type: none; /* Убираем маркеры */
+    margin-left: 20px; /* Отступ слева в браузере IE и Opera */
+    padding-left: 0; /* Отступ слева в браузере Firefox */
+}
+div.audio-item
+{
+    width: 18px; 
+    height: 18px;
+    background-image: url("../../images/system/music18x18.png");
+}
+div.streaming-video-item
+{
+    width: 16px; 
+    height: 16px;
+    background-image: url("../../images/system/audio2.png");
+}
+div.audio-play
+{
+    width: 16px; 
+    height: 16px;
+    background-image: url(../../images/system/play16x16.png);
+}
+div.audio-pause
+{
+    width: 16px; 
+    height: 16px;
+    background-image: url(../../images/system/pause16x16.png);
+}
