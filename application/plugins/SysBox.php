@@ -301,7 +301,7 @@ abstract class Default_Plugin_SysBox {
         if (!is_file($path)) {
             $arrPath = explode('/', $path);
             $file = $arrPath[count($arrPath) - 1];
-            $backupPath = str_replace($file, '', $path) . "backup/{$file}";
+            $backupPath = str_replace("db/{$file}", '', $path) . "backup/{$file}";
             if (is_file($backupPath)) {
                 if (!copy($backupPath, $path)) {
                     throw new Exception("Could not be copied '{$backupPath}' to '{$path}'.");

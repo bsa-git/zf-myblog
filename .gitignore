@@ -45,6 +45,5 @@ Temporary Items
 # My ignore dir
 /nbproject/*
 /data/*
-!/data/db/backup
 /vendor/*
-!/vendor/library/phpQuery
+!/data/backup/
