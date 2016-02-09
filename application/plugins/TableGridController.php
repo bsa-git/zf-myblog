@@ -724,9 +724,9 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
 
                     // Проверим наличие файла mpdf.php
                     // Если нет, то выдадим ошибку!
-                    $path = APPLICATION_BASE . '/vendor/library/mPDF/mpdf.php';
+                    $path = APPLICATION_BASE . '/library/mPDF/mpdf.php';
                     if (!is_file($path)) {
-                        throw new Exception($this->Translate('Не установлена библиотека mPDF', '/vendor/library/mPDF', 'http://www.mpdf1.com/mpdf/index.php?page=Download'));
+                        throw new Exception($this->Translate('Не установлена библиотека mPDF', '/library/mPDF', 'http://www.mpdf1.com/mpdf/index.php?page=Download'));
                     }
 
 

@@ -42,8 +42,12 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# My ignore dir
-/nbproject/*
-/data/*
-/vendor/*
+# =========================
+# My Ignore
+# =========================
+/nbproject/
+/data/
 !/data/backup/
+/vendor/
+/library/
+/public/upload/users/admin/files/mPDF/

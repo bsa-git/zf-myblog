@@ -13,17 +13,17 @@ $_startTime = microtime(1);
 // Set APPLICATION_ENV
 putenv("APPLICATION_ENV=development");
 
-// Ensure zf library/ is on include_path /../vendor/library
+// Ensure zf library/ is on include_path /../library
 set_include_path(
-        implode(PATH_SEPARATOR, array(realpath(dirname(__FILE__) . '/../vendor/library'), get_include_path())));
+        implode(PATH_SEPARATOR, array(realpath(dirname(__FILE__) . '/../library'), get_include_path())));
 
 // Установим путь к файлам mPDF
 set_include_path(
-        implode(PATH_SEPARATOR, array(realpath(dirname(__FILE__) . '/../vendor/library/mPDF'), get_include_path())));
+        implode(PATH_SEPARATOR, array(realpath(dirname(__FILE__) . '/../library/mPDF'), get_include_path())));
 
 // Установим путь к файлам phpQuery
 set_include_path(
-        implode(PATH_SEPARATOR, array(realpath(dirname(__FILE__) . '/../vendor/library/phpQuery'), get_include_path())));
+        implode(PATH_SEPARATOR, array(realpath(dirname(__FILE__) . '/../library/phpQuery'), get_include_path())));
 
 // Определим путь к временным файлам и кешированию для MPDF
 defined('_MPDF_TEMP_PATH') || define('_MPDF_TEMP_PATH', realpath(dirname(__FILE__) . '/../data/tmp/mpdf'));
@@ -67,9 +67,9 @@ try {
 
     // Проверим наличие файла mpdf.php
     // Если нет, то выдадим ошибку!
-    $path = APPLICATION_BASE . '/vendor/library/Zend/Application.php';
+    $path = APPLICATION_BASE . '/library/Zend/Application.php';
     if (!is_file($path)) {
-        echo  'Not installed the library Zend Framework 1.<br> The library should be placed in a folder \'/vendor/library/Zend\'.<br> The latest version of the library can be downloaded at - <a href="http://framework.zend.com/downloads/latest">here</a>';
+        echo  'Not installed the library Zend Framework 1.<br> The library should be placed in a folder \'/library/Zend\'.<br> The latest version of the library can be downloaded at - <a href="http://framework.zend.com/downloads/latest">here</a>';
         return;
     }
 
