@@ -5,16 +5,29 @@
     Description: Purpose of the stylesheet follows.
 */
 
-a:hover {
-    text-decoration: none;
-    color: #ffffff;
+
+/****** List *******/
+ol, ul {
+    list-style: inherit;
 }
+
+#header ol, #header ul {
+    list-style: none;
+}
+
+/****** Hero *******/
 
 .box .hero-unit{
     margin-bottom: 0px;
 }
 
 /****** Links *******/
+
+a:hover {
+    text-decoration: none;
+    color: #ffffff;
+}
+
 a.accordion-toggle{
     text-decoration: none;
     color: #9a0822;
