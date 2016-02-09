@@ -30,12 +30,26 @@ BSA.Sys = {
         message_items: 'message-items',
         close_message: 'close-message-items',
         messages_hide_delay: 10,
-        list_file_resources: ['.doc', '.xls', '.pdf', '.txt', , '.rtf', '.zip', '.rar',
-            '.mp3', '.swf', '.flv', '.mov', '.mp4', '.m4v', '.f4v'],
         classesAjaxClickActions: [//List of DOM elemets classes for ajax click events
             'ajax-system-click'
         ],
-        isLoadFlashPlayerFromMySite: false 
+        isLoadFlashPlayerFromMySite: false,
+        list_file_resources: [
+            // text
+            '.txt', '.json', '.xml',
+            // images
+            '.png', '.jpe', '.jpeg', '.jpg', '.gif', '.bmp', '.ico', '.tiff', '.tif', '.svg', '.svgz',
+            // archives
+            '.zip', '.rar', '.exe', '.msi', '.cab',
+            // audio/video
+            '.mp3', '.qt', '.mov', '.mp4', '.m4v', '.f4v', '.flv', '.swf',
+            // adobe
+            '.pdf', '.psd', '.ai', '.eps', '.ps',
+            // ms office
+            '.doc', '.rtf', '.xls', '.ppt',
+            // open office
+            '.odt', '.ods'
+        ],
     },
     // Ф-ия инициализации скрипта
     init: function ()
@@ -407,7 +421,7 @@ BSA.Sys = {
             this.messagebox_write(json.class_message, json.messages);
             return json;
         }
-        
+
         // Если есть доп. сообщение выведем его
         if (json.unexpected_message) {
             this.onFailure(json.unexpected_message);

@@ -326,6 +326,7 @@ BSA.BlogLocations = Class.create({
                     a.observe('click', this.onOpenWinForURL.bindAsEventListener(this));
                 } else {
                     isFileResource = false;
+                    a.writeAttribute('target', '_blank');
                 }
             }
         }.bind(this));
