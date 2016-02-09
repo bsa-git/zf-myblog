@@ -3,7 +3,7 @@
         <h3>{'Помощь'|translate}</h3>
         <ul>
             <li>
-                <a href="https://github.com/bsa-git/silex-mvc/" target="_blank" >GitHub</a>
+                <a href="https://github.com/bsa-git/zf-myblog" target="_blank" >GitHub</a>
             </li>
             <li>
                 <a href="/index/license">{'Лицензия'|translate}</a>
