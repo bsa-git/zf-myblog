@@ -45,9 +45,10 @@ Temporary Items
 # =========================
 # My Ignore
 # =========================
-/nbproject/
-/data/
+/nbproject/*
+/data/*
 !/data/backup/
-/vendor/
-/library/
+/vendor/*
+/library/*
+!/library/phpQuery/
 /public/upload/users/admin/files/mPDF/
