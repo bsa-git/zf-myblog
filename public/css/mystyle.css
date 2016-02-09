@@ -7,12 +7,12 @@
 
 
 /****** List *******/
-ol, ul {
+#blog-posts-summary ol, #blog-posts-summary ul {
     list-style: inherit;
 }
 
-#header ol, #header ul {
-    list-style: none;
+#tabs-post ol, #tabs-post ul {
+    list-style: inherit;
 }
 
 /****** Hero *******/
