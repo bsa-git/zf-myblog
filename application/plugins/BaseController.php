@@ -380,7 +380,7 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
         $this->_config = Zend_Registry::get('config');
 
         // Получить google.maps.key
-        $this->view->googleMapsKey = Default_Plugin_SysBox::getGoogleMapsKey('localhost');
+        $this->view->googleMapsKey = Default_Plugin_SysBox::getGoogleMapsKey('zf-myblog');
 
         // Этот параметр определяет режим отчета
         // на экран выводиться только содержание сообщения

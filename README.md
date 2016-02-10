@@ -9,28 +9,29 @@ Examples of the application installation are for `OS "Windows"` and web server `
 
 #### Main features of the application:
 
-- Application implements a simple application management blog.
-- Expands with configuration file `application.ini` located in the `application/configs`.
-- Realized the localization of three languages: English, Russian and Ukrainian.
-- Ensures the registration process, user authentication and authorization.
-- The database created three users with the appropriate rights. The administrator (login = admin; pass = admin), editor (login = editor; pass = editor), user (login = user1; pass = user1).
-- Uses a database type SqlLite `data/db/myblog.db`.
-- Full-text search is implemented by using the `Zend_Search_Lucene`, included in `Zend Framework 1`;
-- Used template [Smarty 2](http://www.smarty.net/) `vendor/smarty/smarty/libs`;
-- User message can consist of a text message itself and five for fitting resources (images, audio, video, streaming audio/video, geo-coordinates);
-- You can give comments to the appropriate user message or other users comments;
-- The following types of resources. Images (jpeg, png, gif), audio (mp3), video (swf, flv, mov, mp4, m4v, f4v, YouTube), streaming video (RTMP, PSEUDOSTREAMIN, ADOBE HTTP STREAMING);
-- For creating and editing a text message using editor [CKEditor](http://ckeditor.com/);
-- To view and listen to video and audio resources used [FlowPlayer](http://flash.flowplayer.org/);
-- To view video [YouTube] (https://www.youtube.com/) uses the class [ProtoTube](http://scripts.downloadroute.com/ProtoTube-f4dbde0a.html);
-- To display geo-coordinates using Google Maps ([JavaScript API V3](https://developers.google.com/maps/documentation/javascript/3.exp/reference));
-- Geo-coordinates, you can place your notes, and more information on the area (photos, reports, etc.);
-- User resource in the form of images, documents, video and audio files can be downloaded and viewed using web file manager [CKFinder] (http://kcfinder.sunhater.com/);
-- Added libraries such as [Zend-Framework 1] (http://framework.zend.com/downloads/latest#ZF1) (this is basic application library), [mPDF] (http://www.mpdf1.com/mpdf/index .php) (to create reports in PDF), [phpQuery] (https://code.google.com/archive/p/phpquery/) (CSS DOM selector). These libraries are located in the `vendor/library`;
-- Also added plug-ins for working with arrays, strings, XML, HTTP, and others `application/plugins`;
-- Added site administration module `application/modules/admin`. With this module you can manage registered users, users messages, configure the application, and use a variety of tools;
-- With the site administration module, you can view and clear the error logs, reports and statistics. And you can generate reports in HTML and PDF formats;
-- On the client side using the librarys [Prototype](http://prototypejs.org/), [Scriptaculous](http://madrobby.github.io/scriptaculous/), [Bootstrap 2](http://twbs.github.io/bootstrap/2.3.2/), а также сервисы [Lightbox](http://lokeshdhakar.com/projects/lightbox2/), [Highlight](http://highlightjs.readthedocs.org/en/latest/#), [MyUi](http://pabloaravena.info/mytablegrid/index.html#), [Prototype-window](http://prototype-window.xilinus.com/index.html), [Prototype Accordion](https://github.com/deleteme/prototype-accordion), [Prototype Carousel](http://miedlar.com/dev/carousel), which are `public/js`.
+- Application implements a simple application management blog
+- Expands with configuration file `application.ini` located in the `application/configs`
+- Realized the localization of three languages: English, Russian and Ukrainian
+- Ensures the registration process, user authentication and authorization
+- The database created three users with the appropriate rights. The administrator (login = admin; pass = admin), editor (login = editor; pass = editor), user (login = user1; pass = user1)
+- Uses a database type SqlLite `data/db/myblog.db`
+- Full-text search is implemented by using the `Zend_Search_Lucene`, included in `Zend Framework 1`
+- Used template [Smarty 2](http://www.smarty.net/) `vendor/smarty/smarty/libs`
+- User message can consist of a text message itself and five for fitting resources (images, audio, video, streaming audio/video, geo-coordinates)
+- You can give comments to the appropriate user message or other users comments
+- The following types of resources. Images (jpeg, png, gif), audio (mp3), video (swf, flv, mov, mp4, m4v, f4v, YouTube), streaming video (RTMP, PSEUDOSTREAMIN, ADOBE HTTP STREAMING)
+- You can create slide shows based on `mp3` audio format and the configuration file `json` format `public/upload/users/admin/files/video`
+- For creating and editing a text message using editor [CKEditor](http://ckeditor.com/)
+- To view and listen to video and audio resources used [FlowPlayer](http://flash.flowplayer.org/)
+- To view video [YouTube] (https://www.youtube.com/) uses the class [ProtoTube](http://scripts.downloadroute.com/ProtoTube-f4dbde0a.html)
+- To display geo-coordinates using Google Maps ([JavaScript API V3](https://developers.google.com/maps/documentation/javascript/3.exp/reference))
+- Geo-coordinates, you can place your notes, and more information on the area (photos, reports, etc.)
+- User resource in the form of images, documents, video and audio files can be downloaded and viewed using web file manager [CKFinder] (http://kcfinder.sunhater.com/)
+- Added libraries such as [Zend-Framework 1] (http://framework.zend.com/downloads/latest#ZF1) (this is basic application library), [mPDF] (http://www.mpdf1.com/mpdf/index .php) (to create reports in PDF), [phpQuery] (https://code.google.com/archive/p/phpquery/) (CSS DOM selector). These libraries are located in the `vendor/library`
+- Also added plug-ins for working with arrays, strings, XML, HTTP, and others `application/plugins`
+- Added site administration module `application/modules/admin`. With this module you can manage registered users, users messages, configure the application, and use a variety of tools
+- With the site administration module, you can view and clear the error logs, reports and statistics. And you can generate reports in HTML and PDF formats
+- On the client side using the librarys [Prototype](http://prototypejs.org/), [Scriptaculous](http://madrobby.github.io/scriptaculous/), [Bootstrap 2](http://twbs.github.io/bootstrap/2.3.2/), а также сервисы [Lightbox](http://lokeshdhakar.com/projects/lightbox2/), [Highlight](http://highlightjs.readthedocs.org/en/latest/#), [MyUi](http://pabloaravena.info/mytablegrid/index.html#), [Prototype-window](http://prototype-window.xilinus.com/index.html), [Prototype Accordion](https://github.com/deleteme/prototype-accordion), [Prototype Carousel](http://miedlar.com/dev/carousel), which are `public/js`
 
 ## Installing
 

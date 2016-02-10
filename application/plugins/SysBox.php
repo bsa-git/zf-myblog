@@ -34,6 +34,7 @@ abstract class Default_Plugin_SysBox {
      */
     static $arrAppPaths = array(
         "data" => "/data",
+        "db" => "/data/db",
         "cache" => "/data/cache",
         "cache_db" => "/data/cache/db",
         "cache_file" => "/data/cache/file",

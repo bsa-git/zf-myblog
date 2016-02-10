@@ -3,7 +3,7 @@
 /**
  * index.php
  * 
- * Точка входа в систему управления сайтом
+ * The entry point into the content management system
  * 
  * @package public
  * 
@@ -17,18 +17,18 @@ putenv("APPLICATION_ENV=development");
 set_include_path(
         implode(PATH_SEPARATOR, array(realpath(dirname(__FILE__) . '/../library'), get_include_path())));
 
-// Установим путь к файлам mPDF
+// Set the path to the files mPDF
 set_include_path(
         implode(PATH_SEPARATOR, array(realpath(dirname(__FILE__) . '/../library/mPDF'), get_include_path())));
 
-// Установим путь к файлам phpQuery
+// Set the path to the files phpQuery
 set_include_path(
         implode(PATH_SEPARATOR, array(realpath(dirname(__FILE__) . '/../library/phpQuery'), get_include_path())));
 
-// Определим путь к временным файлам и кешированию для MPDF
+// Define path to the temporary files and cached for MPDF
 defined('_MPDF_TEMP_PATH') || define('_MPDF_TEMP_PATH', realpath(dirname(__FILE__) . '/../data/tmp/mpdf'));
 
-// Определим путь к кешированию шрифтов для MPDF 
+// Define path to the font caching for MPDF 
 defined('_MPDF_TTFONTDATAPATH') || define('_MPDF_TTFONTDATAPATH', realpath(dirname(__FILE__) . '/../data/tmp/mpdfttfontdata/ttf/empty'));
 
 // Define path to application public directory
@@ -55,7 +55,7 @@ defined('APPLICATION_CONFIG') || define('APPLICATION_CONFIG', realpath(dirname(_
 // Define application environment
 defined('APPLICATION_ENV') || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
-// Получим используемую память в начале скрипта
+// Obtain used memory at the beginning of the script
 $memoryUsage_StartIndexPHP = memory_get_usage();
 $memoryUsage_StartIndexPHP = round($memoryUsage_StartIndexPHP / 1024, 3);
 $memoryUsage_StartIndexPHP = number_format($memoryUsage_StartIndexPHP, 3, '.', ' ');
@@ -65,8 +65,8 @@ try {
     //Set timezone
     date_default_timezone_set("UTC");
 
-    // Проверим наличие файла mpdf.php
-    // Если нет, то выдадим ошибку!
+    // Check availability file mpdf.php
+    // If not, it throws an error!
     $path = APPLICATION_BASE . '/library/Zend/Application.php';
     if (!is_file($path)) {
         echo  'Not installed the library Zend Framework 1.<br> The library should be placed in a folder \'/library/Zend\'.<br> The latest version of the library can be downloaded at - <a href="http://framework.zend.com/downloads/latest">here</a>';
@@ -79,7 +79,7 @@ try {
 
     
 
-    // Автозагрузчик для composer
+    // Autoloader for composer
     require_once APPLICATION_BASE . '/vendor/autoload.php';
 
     // Create application, bootstrap, and run
@@ -89,34 +89,35 @@ try {
     $_startTime2 = microtime(1);
     $totalTime_StartApplication = $_startTime2 - $_startTime;
 
-    // Получим используемую память в начале скрипта
+    // Obtain used memory at the beginning of the Application
     $memoryUsage_StartApplication = memory_get_usage();
     $memoryUsage_StartApplication = round($memoryUsage_StartApplication / 1024, 3);
     $memoryUsage_StartApplication = number_format($memoryUsage_StartApplication, 3, '.', ' ');
 
-    // Выполним загрузчик (инициализацию)
+    // Perform bootstrap
     $application->bootstrap();
 
-    //------------ Установим время выполнения Bootstrap -------------
-    //Запомним информацию о выполнении скрипта
+    //------------ An execution time Bootstrap -------------
+    
+    // Get total time of bootstrap
     $_startTime3 = microtime(1);
-    $totalTime_Bootstrap = $_startTime3 - $_startTime2; //Default_Plugin_SysBox::profilerTime2Registry($_startTime2, $infoProfiler);
-    // Получим используемую память после Bootstrap
+    $totalTime_Bootstrap = $_startTime3 - $_startTime2; 
+    // Get used memory after bootstrap
     $memoryUsage_Bootstrap = Default_Plugin_SysBox::showMemoryUsage('kb');
 
-    //Сохраним времена выполнения в регистре
+    // Save time performing different parts of the script in the register
     Zend_Registry::set("Duration_StartApplication", $totalTime_StartApplication);
     Zend_Registry::set("Duration_Bootstrap", $totalTime_Bootstrap);
     Zend_Registry::set("MemoryUsage_StartIndexPHP", $memoryUsage_StartIndexPHP);
     Zend_Registry::set("MemoryUsage_StartApplication", $memoryUsage_StartApplication);
     Zend_Registry::set("MemoryUsage_Bootstrap", $memoryUsage_Bootstrap);
 
-    // Выполним цикл деспетчеризации
+    // Perform dispatch loop
     $application->run();
 } catch (Zend_Exception $e) {
-    // Перехват исключений 
+    // Intercept exceptions 
     Default_Plugin_Error::catchException($e);
 } catch (Exception $e) {
-    // Перехват исключений 
+    // Intercept exceptions 
     Default_Plugin_Error::catchException($e);
 }
