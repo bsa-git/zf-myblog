@@ -7,7 +7,15 @@
 
 
 /****** List *******/
-#blog-posts-summary ol, #blog-posts-summary ul {
+/*#blog-posts-summary ol, #blog-posts-summary ul {
+    list-style: inherit;
+}
+
+#search-posts-summary ol, #search-posts-summary ul {
+    list-style: inherit;
+}*/
+
+.teaser ol, .teaser ul {
     list-style: inherit;
 }
 

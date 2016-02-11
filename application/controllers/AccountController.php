@@ -3,17 +3,18 @@
 /**
  * AccountController
  *
- * Контроллер - Account
- * управляет регистрацией и аутентификацией пользователя
+ * Controller - Account
+ * manages the registration and user authentication
  *
  * @uses       Default_Plugin_BaseController
  * @package    Module-Default
  * @subpackage Controllers
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class AccountController extends Default_Plugin_BaseController {
 
     /**
-     * Инициализация контроллера
+     * Initialization controller
      *
      */
     public function init() {
@@ -24,11 +25,10 @@ class AccountController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - index
+     * Action - index
+     * Go to the author's profile
      * 
-     * Заходим в профиль автора
-     * 
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /account/index
      *
      * @return void
@@ -38,9 +38,10 @@ class AccountController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Регистрация пользователя на сайте
+     * Action - registration
+     * User Registration on the site
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /account/registration
      *
      * @return void
@@ -110,10 +111,10 @@ class AccountController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - registercomplete
-     * завершение регистрации пользователя
+     * Action - registercomplete
+     * completion of user registration
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /account/registercomplete
      *
      * @return void
@@ -147,10 +148,10 @@ class AccountController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - login
-     * Аутентификация пользователя
+     * Action - login
+     * user authentication
      * 
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /account/login
      *
      * @return void
@@ -296,10 +297,10 @@ class AccountController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - logout
-     * Выход пользователя
+     * Action - logout
+     * logout user
      * 
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /account/logout
      *
      * @return void
@@ -318,10 +319,10 @@ class AccountController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - fetchpassword
-     * Получить новый пароль
+     * Action - fetchpassword
+     * fetch new password
      * 
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /account/fetchpassword
      *
      * @return void
@@ -476,10 +477,10 @@ class AccountController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - details
-     * Детальная информация о пользователе
+     * Action - details
+     * detailed information about the user
      * 
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /account/details
      *
      * @return void
@@ -599,10 +600,10 @@ class AccountController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - detailscomplete
-     * Окончание редактирования детальной информации о пользователе
+     * Action - detailscomplete
+     * end edit detailed information about the user
      * 
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /account/detailscomplete
      *
      * @return void

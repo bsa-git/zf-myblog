@@ -3,7 +3,7 @@
 /**
  * Bootstrap
  * 
- * Файл начальной загрузки и инициализации приложения
+ * File boot and application initialization
  *
  * @uses    Zend_Application_Bootstrap_Bootstrap
  * @package Bootstrap
@@ -11,7 +11,7 @@
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
     /**
-     * Инициализация Autoloader, Session, Auth, Locale,
+     * Initialization Autoloader, Session, Auth, Locale,
      *
      * @return void
      */
@@ -19,8 +19,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
         $_startTime = microtime(1);
 
-        //------- Определим параметры автозагрузки ------------
-        //Определим базовый префикс и базовый путь к ресурсам для модуля по умолчанию
+        //------- Define the autoloader parameters ------------
+        // Define basic prefix and the base path to the resources for the default module
         $autoloader = new Zend_Application_Module_Autoloader(
                 array('namespace' => 'Default', 'basePath' => dirname(__FILE__)));
         
@@ -36,44 +36,44 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             ),
         ));
 
-        //------- Создадим директории приложения ------------
+        //------- Create an application directory ------------
         Default_Plugin_SysBox::createAppPaths();
         
-        //--------- Запомним конфигурацию в регистре ---------
+        //--------- Remember the configuration to register ---------
         $config = $this->_options;
         Zend_Registry::set('config', $config);
 
-        //----------------- Установим сессию ---------------
-        //Запустим сессию
+        //----------------- Set session ---------------
+        // Start session
         Zend_Session::start();
-        //Установим опцию для того чтобы предотвратить повторное выполнение
-        //Zend_Session::start() при вызове метода (new Zend_Session_Namespace)
+        // Install option in order to prevent re-execution
+        // Zend_Session::start() when calling (new Zend_Session_Namespace)
         Zend_Session::setOptions(array('strict' => true));
 
-        //Получим экземпляры объектов для соответствующих пространств имен
+        // Obtain an instance session object for the appropriate namespace
         $Zend_Auth = new Zend_Session_Namespace('Zend_Auth');
 
-        //Запомним экземпляры объектов для соответствующих пространств имен
+        // Save to Registry
         Zend_Registry::set("Zend_Auth", $Zend_Auth);
 
-        //Добавим новый тип ресурса для плагинов контроллеров
+        // Add a new type of resource controllers for plug-ins
         //$autoloader->addResourceType('cplugins', 'controllers/plugins', 'Controller_Plugins');
-        //---- Настройка аутентификации пользователя -----
+        //---- Configuring user authentication -----
         $auth = Zend_Auth::getInstance();
         $auth->setStorage(new Zend_Auth_Storage_Session());
 
-        //------ Регистрация плагинов ---------
-        // Запустим 'FrontController'
+        //------ Registering plugins ---------
+        // Start 'FrontController'
         $this->bootstrap('FrontController');
 
         $front = Zend_Controller_Front::getInstance();
 
-        //Плагин проверка доступа пользователя к ресурсам
+        // The plugin checks the user's access to resources
         $front->registerPlugin(
                 new Default_Plugin_AclManager($auth));
 
-        //------------ Сконфигурируем язык перевода -------------
-        //$basePathApplication = dirname(__FILE__);
+        //------------ Configure language translation -------------
+        
         $translate = new Zend_Translate('array', APPLICATION_PATH . '/languages/ru/My_Messages.php', 'ru');
         $translate->addTranslation(
                 APPLICATION_PATH . '/languages/ru/Zend_Validate.php', 'ru');
@@ -92,7 +92,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $translate->addTranslation(
                 APPLICATION_PATH . '/languages/en/My_Validate.php', 'en');
 
-        //------------ Сконфигурируем язык перевода для модулей -------------
+        //------------ Configure language translation modules -------------
         $translate->addTranslation(
                 APPLICATION_PATH . '/modules/hr/languages/ru/My_Messages.php', 'ru');
         $translate->addTranslation(
@@ -100,7 +100,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $translate->addTranslation(
                 APPLICATION_PATH . '/modules/hr/languages/en/My_Messages.php', 'en');
 
-        //Установим язык перевода по умолчанию
+        // Set the default translation language
         if (!isset($Zend_Auth->translate_locale)) {
             $Zend_Auth->translate_locale = $config['user']['locale'];
         } else {
@@ -112,21 +112,22 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         }
         $translate->setLocale($Zend_Auth->translate_locale);
 
-        //Запомним переводчик в регистре
+        // Save to Registry
         Zend_Registry::set('Zend_Translate', $translate);
 
-        //------------ Сконфигурируем локализацию сайта -------------
-        //Получим строку типа локализации
+        //------------ Configure site localization -------------
+        
+        // Get type localization
         $paramLocal = Default_Plugin_SysBox::getLocalParam(
                         $Zend_Auth->translate_locale);
-        // Установим локализацию сайта
+        // Set localization
         $locale = new Zend_Locale($paramLocal);
-        // Настройки локали
+        // Set timezone
         date_default_timezone_set($config['user']['timezone']);
-        //Запомним локализацию в регистре
+        // Save to Registry
         Zend_Registry::set('Zend_Locale', $locale);
 
-        //------------ Установим цветовую схему сайта -------------
+        //------------ Set the color scheme of the site -------------
         if (!isset($Zend_Auth->user_scheme)) {
             $Zend_Auth->user_scheme = $config['user']['scheme'];
         } else {
@@ -137,16 +138,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             }
         }
 
-        //---- Определение времени выполнения скрипта ----
+        //---- Defining script execution time ----
         $infoProfiler = Default_Plugin_SysBox::Translate("Время выполнения") . " Bootstrap_initAutoload(): ";
         Default_Plugin_SysBox::profilerTime2Registry($_startTime, $infoProfiler);
 
-        //Сохраним
         return $autoloader;
     }
 
     /**
-     * Инициализация маршрутов
+     * Initialization routes
      *
      * @return void
      */
@@ -264,13 +264,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
         $front->getRouter()->addRoute('feed_tag_all', $route);
 
-        //---- Определение времени выполнения скрипта ----
+        //---- Defining script execution time ----
         $infoProfiler = Default_Plugin_SysBox::Translate("Время выполнения") . " Bootstrap_initRouter(): ";
         Default_Plugin_SysBox::profilerTime2Registry($_startTime, $infoProfiler);
     }
 
     /**
-     * Инициализация View
+     * Initialization View
      *
      * @return void
      */
@@ -280,14 +280,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $_startTime = microtime(1);
 
         $this->bootstrap('view');
-        //!!!! Инициализация Smarty выполняется в классе - Default_Plugin_AclManager
-        //---- Определение времени выполнения скрипта ----
+        //!!!! Initialization Smarty. It is performed in the class - Default_Plugin_AclManager
+        //---- Defining script execution time ----
         $infoProfiler = "Время выполнения" . " Bootstrap_initViews(): ";
         Default_Plugin_SysBox::profilerTime2Registry($_startTime, $infoProfiler);
     }
 
     /**
-     * Инициализация Базы данных
+     * Initialization DB
      *
      * @return void
      */
@@ -299,37 +299,35 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         //--------------------
         try {
             
-            //------- Скопируем базу данных, если нужно ------------
+            //------- Copy the database, if needed ------------
             $dbname = $this->_options['resources']['db']['params']['dbname'];
             Default_Plugin_SysBox::copyDataBase($dbname);
             
-            // Получим параметры для подключению базы данных
+            // Get parameters for the database connection
             $arrParam = $this->_options['resources']['db']['params'];
             
-            // Подключение к БД
+            // Connection to DB
             $db = Zend_Db::factory(
                             "PDO_SQLITE", $arrParam);
             $db->getConnection();
-            // Задание адаптера по умолчанию для наследников класса Zend_Db_Table_Abstract
+            // Setting the default adapter class heirs Zend_Db_Table_Abstract
             Zend_Db_Table_Abstract::setDefaultAdapter($db);
-            // Занесение объекта соединения c БД в реестр
+            // Save to Registry
             Zend_Registry::set('db', $db);
 
-            //---- Определение времени выполнения скрипта ----
+            //---- Defining script execution time ----
             $infoProfiler = Default_Plugin_SysBox::Translate("Время выполнения") . " Bootstrap_initDb(): ";
             Default_Plugin_SysBox::profilerTime2Registry($_startTime, $infoProfiler);
 
         } catch (Zend_Db_Adapter_Exception $e) {
-            // возможно, неправильные параметры соединения или СУРБД не запущена
             throw $e;
         } catch (Zend_Exception $e) {
-            // возможно, попытка загрузки требуемого класса адаптера потерпела неудачу
             throw $e;
         }
     }
 
     /**
-     * Инициализация Log, Search, KCFinder
+     * Initialization Log, Search, KCFinder
      *
      * @return void
      */
@@ -341,8 +339,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         //Получим конфигурацию
         $config = $this->_options;
 
-        //----- Создадим обьект Zend_Log -----
-
+        //----- Create Zend_Log object -----
         $columnMapping = array(
             'ts' => 'timestamp',
             'msg' => 'message',
@@ -353,13 +350,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $countEx = $config['logging']['exeption']['max_rows'];
         $countStat = $config['logging']['statistics']['max_rows'];
 
-        // Получим базу данных
+        // Get DB
         $db = Zend_Registry::get('db');
-        // Установим параметры
+        // Set params
         $params['db'] = $db;
         $params['columnMap'] = $columnMapping;
 
-        // Создадим writer для базы данных
+        // Create writer for DB
         $params['table'] = 'log_msg';
         $params['max_rows'] = $countMsg;
         $writerMsg = new Default_Model_Log($params);
@@ -370,12 +367,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $params['max_rows'] = $countStat;
         $writerStat = new Default_Model_Log($params);
 
-        //Создадим логеры
+        // Create logers
         $logMsg = new Zend_Log($writerMsg);
         $logEx = new Zend_Log($writerEx);
         $logStat = new Zend_Log($writerStat);
 
-        // Добавим новые приоритеты для лога - $logMsg
+        // Adding new priorities for the $logMsg
         $logMsg->addPriority('LOGIN_OK', 8);
         $logMsg->addPriority('LOGIN_ERR', 9);
         $logMsg->addPriority('LOGOUT', 10);
@@ -397,7 +394,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $logMsg->addPriority('ADMIN_ROW_INSERT', 26);
         $logMsg->addPriority('ADMIN_ROW_DELETE', 27);
 
-        // Добавим новые приоритеты для лога - $logStat
+        // Adding new priorities for the $logStat
         $logStat->addPriority('LOGIN_OK', 8);
         $logStat->addPriority('LOGIN_ERR', 9);
         $logStat->addPriority('MAIL_OK', 10);
@@ -428,33 +425,34 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             $logger->addWriter($writer);
         }
 
-        //Запомним экземпляр объекта в реестре
+        // Save to Registry
         Zend_Registry::set("Zend_Log", $logMsg);
         Zend_Registry::set("Zend_LogEx", $logEx);
         Zend_Registry::set("Zend_LogStat", $logStat);
 
-        // Запомним в сессии массив результатов поиска
+        // Remember in the session array of search results
         $Zend_Auth = Zend_Registry::get("Zend_Auth");
         if (!$Zend_Auth->search) {
             $Zend_Auth->search = array();
         }
 
-        //------------ Сконфигурируем поиск по умолчанию -------------
-        // Установим анализатор запросов в кодировке Utf8
+        //------------ Configure default search -------------
+        
+        // Establish a query analyzer in the coding Utf8
         Zend_Search_Lucene_Analysis_Analyzer::setDefault(
                 new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8_CaseInsensitive());
 
 
-        //------ Инициализация файлового менеджера -------------
+        //------ Initialization file manager -------------
         Default_Plugin_SysBox::iniKCFinder();
 
-        //---- Определение времени выполнения скрипта ----
+        //---- Defining script execution time ----
         $infoProfiler = Default_Plugin_SysBox::Translate("Время выполнения") . " Bootstrap_initLog(): ";
         Default_Plugin_SysBox::profilerTime2Registry($_startTime, $infoProfiler);
     }
 
     /**
-     * Инициализация Теста
+     * Initialization test
      *
      * @return void
      */

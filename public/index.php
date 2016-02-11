@@ -6,6 +6,7 @@
  * The entry point into the content management system
  * 
  * @package public
+ * @link     https://github.com/bsa-git/zf-myblog/
  * 
  */
 $_startTime = microtime(1);
