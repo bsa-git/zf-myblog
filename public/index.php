@@ -41,9 +41,6 @@ defined('APPLICATION_PATH') || define('APPLICATION_PATH', realpath(dirname(__FIL
 // Define path to application data directory
 defined('APPLICATION_DATA') || define('APPLICATION_DATA', realpath(dirname(__FILE__) . '/../data'));
 
-// Define path to application temp directory
-//defined('APPLICATION_TEMP') || define('APPLICATION_TEMP', realpath(dirname(__FILE__) . '/../data/tmp'));
-
 // Define path to application base directory
 defined('APPLICATION_BASE') || define('APPLICATION_BASE', realpath(dirname(__FILE__) . '/../'));
 
