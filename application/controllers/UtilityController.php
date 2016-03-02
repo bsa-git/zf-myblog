@@ -3,22 +3,23 @@
 /**
  * BaseController
  *
- * Контроллер - Utility
- * реализует дополнительные ф-ии
+ * Controller - Utility
+ * additional functions
  *
  * @uses       Default_Plugin_BaseController
  * @package    Module-Default
  * @subpackage Controllers
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class UtilityController extends Default_Plugin_BaseController {
 
     /**
-     * Действие - image
-     * 
-     * Отобразить изображение в заданом размере
-     * или в натуральном размере
+     * Action - image
+     * display images in the predetermined size or in the natural size
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /utility/image
      *
      * @return void
@@ -58,11 +59,11 @@ class UtilityController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действия с URL
-     * - проверим на доступность URL
+     * Action - url
+     * check on the availability of URL
      *
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /utility/url
      *
      * @return void
@@ -102,11 +103,9 @@ class UtilityController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действия - Test
-     * 
+     * Action - test
      *
-     *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /utility/test
      *
      * @return void

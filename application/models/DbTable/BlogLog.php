@@ -3,21 +3,24 @@
 /**
  * Default_Model_DbTable_BlogLog
  *
- * Таблица - лога
- * - события на сайте;
- * - статистика сайта;
- * - ошибки
+ * Table - for loging
+ * - log events;
+ * - log statistic;
+ * - log errors
  *
  *
  * @uses       Default_Model_DatabaseObject
  * @package    Module-Default
  * @subpackage Models
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Model_DbTable_BlogLog extends Default_Model_DatabaseObject {
 
     /**
      *
-     * Конфигурация таблицы
+     * Table config
      * @var array
      */
     private $_config = array(
@@ -29,17 +32,17 @@ class Default_Model_DbTable_BlogLog extends Default_Model_DatabaseObject {
 
     /**
      * 
-     * Обьект таблицы доп. информации
+     * Table object for additional information
      * 
      * @var Default_Model_DbTable_BlogPost
      */
     public $profile = null;
 
     /**
-     * Конструктор обьекта таблицы
+     * Constructor
      * 
      * @param Zend_Db_Adapter_Abstract $db
-     * @param string $nameTable // имя таблицы
+     * @param string $nameTable 
      */
     public function __construct($db, $nameTable) {
         $this->_config['db'] = $db;
@@ -52,10 +55,10 @@ class Default_Model_DbTable_BlogLog extends Default_Model_DatabaseObject {
         $this->add('pr_name');
     }
 
-    //================ ОБРАБОТКА СОБЫТИЙ ============
+    //================ HANDLING OF EVENTS ============
 
     /**
-     * Событие перед вставкой записи
+     * Event before inserting the record
      *
      * @return bool
      */
@@ -64,7 +67,7 @@ class Default_Model_DbTable_BlogLog extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Событие после вставки записи
+     * Event after inserting the record
      * 
      * @return bool 
      */
@@ -73,7 +76,7 @@ class Default_Model_DbTable_BlogLog extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Событие после загрузки записи
+     * Event after loaded the record
      *
      */
     protected function postLoad() {
@@ -81,7 +84,7 @@ class Default_Model_DbTable_BlogLog extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Событие после обновления записи
+     * Event after updated the record
      *
      * @return bool
      */
@@ -90,7 +93,7 @@ class Default_Model_DbTable_BlogLog extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Событие перед удалением записи
+     * Event before deleting the record
      *
      * @return bool
      */
@@ -98,13 +101,13 @@ class Default_Model_DbTable_BlogLog extends Default_Model_DatabaseObject {
         return true;
     }
 
-    //=========== РАБОТА С ЗАПИСЬЮ =============
+    //=========== WORKING WITH RECORD =============
 
     /**
-     * Получить обьект лога по его ID
+     * Get log object by its ID
      *
      * @param int $log_id
-     * @return Default_Model_DbTable_BlogLog|bool // Возвращает или обьект Default_Model_DbTable_BlogLog или FALSE
+     * @return Default_Model_DbTable_BlogLog|bool // Return object Default_Model_DbTable_BlogLog or FALSE
      */
     public function loadForLogID($log_id) {
 
@@ -120,11 +123,10 @@ class Default_Model_DbTable_BlogLog extends Default_Model_DatabaseObject {
         return $this->_load($query);
     }
 
-    //============== РАБОТА С НАБОРОМ ЗАПИСЕЙ =================
+    //============== WORKING WITH RECORDS =================
 
     /**
-     * Получить общее кол. записей удовлетворяющих
-     * критерия, заданным в парметре $options
+     * Get the total number of records satisfying the criteria specified in the parameter $options
      * 
      * @param Zend_Db_Adapter_Abstract $db
      * @param string $nameTable
@@ -139,13 +141,12 @@ class Default_Model_DbTable_BlogLog extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить массив записей удовлетворяющих
-     * критерия, заданным в парметре $options
+     * Get the array of records satisfying the criteria specified in the parameter $options
      * 
      * @param Zend_Db_Adapter_Abstract $db
      * @param string $nameTable
      * @param array $options
-     * @return array массив обьектов типа - Default_Model_DbTable_BlogInfo 
+     * @return array  // array object Default_Model_DbTable_BlogInfo type
      */
     public static function GetLogs($db, $nameTable, $options = array()) {
         //------------------
@@ -205,8 +206,7 @@ class Default_Model_DbTable_BlogLog extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить массив данных инф. удовлетворяющих
-     * критериям, заданным в параметре $options
+     * Get the array of records satisfying the criteria specified in the parameter $options
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param string $nameTable
@@ -262,8 +262,7 @@ class Default_Model_DbTable_BlogLog extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить массив ids инф. удовлетворяющих
-     * критериям, заданным в параметре $options
+     * Get the array of ids satisfying the criteria specified in the parameter $options
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param string $nameTable
@@ -311,7 +310,7 @@ class Default_Model_DbTable_BlogLog extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить отсортированные и сгруппированные значения из колонки таблицы
+     * Get sorted and grouped values from table column
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param string $nameTable
@@ -369,11 +368,10 @@ class Default_Model_DbTable_BlogLog extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить запрос удовлетворяющий
-     * критерия, заданным в парметре $options
+     * Get the query satisfying the criteria specified in the parameter $options
      * 
      * @param Zend_Db_Adapter_Abstract $db
-     * @param string $nameTable      // Имя таблицы
+     * @param string $nameTable
      * @param array $options
      * @return Zend_Db_Select 
      */
@@ -414,13 +412,13 @@ class Default_Model_DbTable_BlogLog extends Default_Model_DatabaseObject {
         return $select;
     }
 
-    //------------- ФИЛЬТРАЦИЯ ------------//
+    //------------- FILTER ------------//
 
     /**
-     * Получить обьект Select (Zend_Db_Select) для фильтрации записей в таблице
+     * Get Select object (Zend_Db_Select) for filtering table records
      *
-     * @param Zend_Db_Select $select                 Обьект базы даннх Select
-     * @param array $filter                          Массив данных для фильтра
+     * @param Zend_Db_Select $select
+     * @param array $filter         
      *
      * @return Zend_Db_Select
      */
@@ -447,13 +445,13 @@ class Default_Model_DbTable_BlogLog extends Default_Model_DatabaseObject {
         return $select;
     }
 
-    //------------- СОРТИРОВКА ------------//
+    //------------- SORT ------------//
 
     /**
-     * Получить обьект Select (Zend_Db_Select) для сортировки записей в таблице
+     * Get Select object (Zend_Db_Select) for sorting table records
      *
-     * @param Zend_Db_Select $select                 Обьект базы даннх Select
-     * @param string $order                          Массив данных для фильтра
+     * @param Zend_Db_Select $select
+     * @param string $order         
      *
      * @return Zend_Db_Select
      */
@@ -495,5 +493,3 @@ class Default_Model_DbTable_BlogLog extends Default_Model_DatabaseObject {
         return $select;
     }
 }
-
-?>

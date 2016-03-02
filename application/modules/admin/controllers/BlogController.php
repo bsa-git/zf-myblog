@@ -3,17 +3,20 @@
 /**
  * Admin_BlogController
  *
- * Контроллер - Blog
- * Управление блогом
+ * Controller - Blog
+ * management blog
  *
- * @uses       Default_Plugin_TableGrid
- * @package    Module-Admin (Администрирование сайта)
+ * @uses       Default_Plugin_TableGridController
+ * @package    Module-Admin (administration of site)
  * @subpackage Controllers
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Admin_BlogController extends Default_Plugin_TableGridController {
 
     /**
-     * Инициализация контроллера
+     * Initialization controller
      *
      */
     public function init() {
@@ -22,9 +25,9 @@ class Admin_BlogController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Действие по умолчанию
+     * Action - index
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/blog/index
      * - /admin/blog
      *
@@ -35,10 +38,10 @@ class Admin_BlogController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Действие - posts
-     * Получить список всех записей пользователей
+     * Action - posts
+     * Get a list of all user posts
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/blog/posts
      *
      * @return void
@@ -53,11 +56,10 @@ class Admin_BlogController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Действие rows (получить данные)
-     * по этому действию происходит вывод всех данных
-     * в соответствии с параметрами запроса
+     * Action - rows
+     * get all data according to the request parameters
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/blog/rows
      *
      * @return void
@@ -67,12 +69,11 @@ class Admin_BlogController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Действие data (данные)
-     * по этому действию происходит запрос к данным по определенным
-     * полям таблицы. Затем эти данные помещаются в ComboBox
-     * для удобного редактирования этих полей таблицы
+     * Action - data
+     * get data on certain fields of the table. 
+     * This data placed in the ComboBox, to edit these table fields
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/blog/data
      *
      * @return void
@@ -82,11 +83,10 @@ class Admin_BlogController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Действие validate (проверка значения)
-     * по этому действию происходит проверка соответсвующего значения
-     * параметры значения передаются в параметрах запроса
+     * Action - validate
+     * validate the appropriate value. Parameters values are passed in the query
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/blog/validate
      *
      * @return void
@@ -96,11 +96,10 @@ class Admin_BlogController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Действие save (сохранение данных)
-     * по этому действию происходит сохранение измененных данных
-     * или добавленых данных
+     * Action - save
+     * save the modified data or add new data
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/blog/save
      *
      * @return void
@@ -110,10 +109,10 @@ class Admin_BlogController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Действие delete (удаление данных)
-     * по этому действию происходит удаление данных из базы данных
+     * Action - delete
+     * delete data from the database
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/blog/delete
      *
      * @return void
@@ -123,7 +122,7 @@ class Admin_BlogController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Изменить/Вставить запись таблицы
+     * Update/Insert table row
      *
      * @param array $row
      *
@@ -176,7 +175,7 @@ class Admin_BlogController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Удалить обьект записи таблицы
+     * Delete table row
      *
      * @param array $row
      *
@@ -223,12 +222,10 @@ class Admin_BlogController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Действие search (поиск значения в таблице)
-     * по этому действию происходит поиск строки
-     * в таблице и возвращается номер стр. поиска
-     * если поиск произошел успешно
+     * Action - search
+     * search the row in the table and return the number of row
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/blog/search
      *
      * @return void
@@ -237,13 +234,13 @@ class Admin_BlogController extends Default_Plugin_TableGridController {
         parent::searchAction();
     }
 
-    //=============== РАБОТА С ОТЧЕТАМИ =================//
+    //=============== REPORT =================//
 
     /**
-     * Действие - report
-     * Отчеты по документам
+     * Action - report
+     * create report
      * 
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/blog/report
      *
      * @return void
@@ -254,7 +251,7 @@ class Admin_BlogController extends Default_Plugin_TableGridController {
 
     /**
      * 
-     * Получить данные для отчета
+     * Get report data
      * 
      * @param string $table
      *
@@ -328,9 +325,11 @@ class Admin_BlogController extends Default_Plugin_TableGridController {
         }
         return $arrResultData;
     }
+    
+    //=============== Working with Tables =================//
 
     /**
-     * Получить кол. строк в таблице
+     * Get the number of rows in the table
      *
      * @param array $options
      *
@@ -374,7 +373,7 @@ class Admin_BlogController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Создать обьект записи таблицы
+     * Create a table record object
      *
      * @param array $options
      *
@@ -412,7 +411,7 @@ class Admin_BlogController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Получить записи таблицы
+     * Get a table records
      *
      * @param array $options
      *
@@ -642,12 +641,12 @@ class Admin_BlogController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Получить значения полей в Jason
+     * Get the values of the fields in Json format
      *
      * @param array $fields
-     *  обьект набора полей таблицы -> fields : {}
-     *  который содержит:
-     *    - название поля : присоединенную таблицу, к которой относится это поле
+     *  set the table fields object -> fields : {}
+     *  which contains:
+     *    - the name of the field: the attached table, which relates to the field
      *    -> fieldName : joinTable
      *
      * @return array
@@ -695,9 +694,9 @@ class Admin_BlogController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Получить значения поля
+     * Get the values of a field in a table
      *
-     * @param array $fields
+     * @param array $options
      *
      * @return array
      */
@@ -724,21 +723,18 @@ class Admin_BlogController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Создать форму для проверки значений таблицы
+     * Create a form to validation the values
      *
      * @param array $options
      *
      * @return Default_Form_MyForm
      */
     public function createFormForValidation($options = NULL) {
-//        if(!class_exists('Admin_Form_Blogs')){
-//            require_once APPLICATION_PATH . '/modules/admin/forms/Blogs.php';
-//        }
         return new Admin_Form_Blogs();
     }
 
     /**
-     * Получить отформатированное значение
+     * Get the formatted value
      *
      * @param string $key
      * @param string $value
@@ -763,7 +759,7 @@ class Admin_BlogController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Получить отформатированные строки значений
+     * Get formatted row values
      *
      * @param array $rows
      *
@@ -802,7 +798,7 @@ class Admin_BlogController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Получить отфильтрованные значения
+     * Get the filtered values
      *
      * @param array $rows
      *
@@ -944,7 +940,7 @@ class Admin_BlogController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Проверить строку значений при записи данных
+     * Valid the values of the row when save
      *
      * @param array $row
      *

@@ -3,12 +3,15 @@
 /**
  * Default_Plugin_ArrayBox
  *
- * Класс для работы с массивами
+ * Plugin - for working with arrays
  *
  *
  * @uses
  * @package    Module-Default
  * @subpackage Plugins
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 CLASS Default_Plugin_ArrayBox implements IteratorAggregate, Countable {
 
@@ -18,14 +21,14 @@ CLASS Default_Plugin_ArrayBox implements IteratorAggregate, Countable {
     private $_array = array();
 
     /**
-     * Конструктор
+     * Constructor
      * 
      * 
      * @param array|string|int $a
      * @param string|int $delimiter 
      */
     public function __construct($a = array(), $delimiter = '&') {
-         $this->set($a, $delimiter);
+        $this->set($a, $delimiter);
     }
 
     /**
@@ -34,7 +37,7 @@ CLASS Default_Plugin_ArrayBox implements IteratorAggregate, Countable {
     public function __destruct() {
         unset($this);
     }
-    
+
     /**
      * Returns a parameter by name or the entire array
      *
@@ -370,10 +373,10 @@ CLASS Default_Plugin_ArrayBox implements IteratorAggregate, Countable {
      */
     function min($notZero = false) {
         $array = $this->values()->get();
-        if($notZero){
+        if ($notZero) {
             $min = $this->max();
             $min = $min["value"];
-        }else{
+        } else {
             $min = floatval($array[0]);
         }
         $index = 0;
@@ -432,7 +435,7 @@ CLASS Default_Plugin_ArrayBox implements IteratorAggregate, Countable {
     function mode() { //
         $array = $this->values()->get();
         foreach ($array as $val) {
-            $frequency[$val]++;
+            $frequency[$val] ++;
         }
         $fr = new self($frequency);
         $r = $fr->max();
@@ -527,7 +530,7 @@ CLASS Default_Plugin_ArrayBox implements IteratorAggregate, Countable {
     }
 
     /**
-     * Проверить, присутствует ли в массиве указанный ключ или индекс
+     * Check whether the array specified key or index exists
      * 
      * @param mixed $key
      * @return bool
@@ -538,7 +541,7 @@ CLASS Default_Plugin_ArrayBox implements IteratorAggregate, Countable {
     }
 
     /**
-     * Проверить, присутствует ли в массиве значение
+     * Check whether the value is present in the array
      * 
      * 
      * @param mixed $value
@@ -559,7 +562,7 @@ CLASS Default_Plugin_ArrayBox implements IteratorAggregate, Countable {
         $count = 0;
         //-----------------
         $array = $this->_array;
-        if($notZero){
+        if ($notZero) {
             foreach ($array as $value) {
                 $value = floatval($value);
                 if ($value == 0) {
@@ -567,7 +570,7 @@ CLASS Default_Plugin_ArrayBox implements IteratorAggregate, Countable {
                 }
                 $count++;
             }
-        }else{
+        } else {
             $count = count($array);
         }
         return $count;
@@ -588,7 +591,7 @@ CLASS Default_Plugin_ArrayBox implements IteratorAggregate, Countable {
         }
         return new self($array);
     }
-    
+
     /**
      * Delete the first value in the array or set index
      * 
@@ -616,7 +619,7 @@ CLASS Default_Plugin_ArrayBox implements IteratorAggregate, Countable {
         array_push($array, $values);
         return new self($array);
     }
-    
+
     /**
      * Add value ​​to the first of the array
      * 
@@ -693,7 +696,6 @@ CLASS Default_Plugin_ArrayBox implements IteratorAggregate, Countable {
         return new self($array);
     }
 
-        
     /**
      * Get a slice of the array of values (arrays / objects) on the key
      * and remove duplicate values from the cut, if needed
@@ -714,7 +716,10 @@ CLASS Default_Plugin_ArrayBox implements IteratorAggregate, Countable {
                     $value_ = $key[1];
                     $array[$item[$key_]] = $item[$value_];
                 } else {
-                    $array[] = $item[$key];
+                    $value_ = isset($item[$key]) ? $item[$key] : NULL;
+                    if (!$value_ === NULL) {
+                        $array[] = $value_;
+                    }
                 }
             } elseif (is_object($item)) {
                 if (is_array($key)) {
@@ -732,7 +737,7 @@ CLASS Default_Plugin_ArrayBox implements IteratorAggregate, Countable {
 
         return new self($array);
     }
-    
+
     /*
      * Delete keys and values from the corresponding array of characters
      *
@@ -768,6 +773,7 @@ CLASS Default_Plugin_ArrayBox implements IteratorAggregate, Countable {
      * @param bool $except 
      * @return ArrayBox
      */
+
     function delRows($removals = array("", null,), $forKeys = false, $except = false) {
         $new_array = array();
         $array = $this->_array;
@@ -789,7 +795,7 @@ CLASS Default_Plugin_ArrayBox implements IteratorAggregate, Countable {
     }
 
     /**
-     * Применяет фильтр к массиву ключей, используя функцию обратного вызова 
+     * Apply a filter to the key array using a callback function 
      * 
      * 
      * @param array|string $aCallback // array("class-name", "metod-class") or array("object-link", "metod-object") or "func-name"
@@ -807,7 +813,7 @@ CLASS Default_Plugin_ArrayBox implements IteratorAggregate, Countable {
     }
 
     /**
-     * Применяет фильтр к массиву значений, используя функцию обратного вызова 
+     * Applies a filter to an array of values using a callback function
      * 
      * 
      * @param array|string $aCallback // array("class-name", "metod-class") or array("object-link", "metod-object") or "func-name"
@@ -842,5 +848,3 @@ function cmp_d($a, $b) {
         return 0;
     return ($a > $b) ? -1 : 1;
 }
-
-?>

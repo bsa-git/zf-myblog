@@ -1,34 +1,31 @@
 /**
  * BlogPreview - Class
  *
- * С помощью класса BlogPreview вы можете:
- *  - инициализировать кнопки на панели управления сообщением
- *  - сделать видимыми панель изображений, загрузки и кнопок вывода
- *    содержимого в одельное окно или в отдельныную вкладку
+ * With these class you can:
+ *  - initialize buttons on the control panel of message
+ *  - manage tags
+ *  - display information about the loaded resources (images, video, audio)
  *
  * JavaScript
  *
- * Copyright (c) 2011 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2011 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 BSA.BlogPreview = Class.create({
     
     tagsContainer: null,
     
+    // Object initialization
     initialize : function()
     {
-        // Получим обьекты кнопок управления
+        // Get the objects of control buttons
         var publishButton   = $('status-publish');
         var unpublishButton = $('status-unpublish');
         var deleteButton    = $('status-delete');
         var tagsContainer = $('preview-tags');
 
-        // Определим события для кнопок
+        // Set events for buttons
         if (publishButton) {
             publishButton.observe('click', function(e) {
                 if (!confirm(lb.getMsg('msgPublishBlog')))
@@ -55,12 +52,12 @@ BSA.BlogPreview = Class.create({
             
             this.tagsContainer = tagsContainer;
             
-            // Назначим событие удаления меток
+            // Assign an event to remove tag
             this.tagsContainer.select('ul form').each(function(form) {
                 form.observe('submit', this.onDeleteTagClick.bindAsEventListener(this));
             }.bind(this));
             
-            // Назначим событие добавления меток
+            // Assign an event to add tag
             var input = this.tagsContainer.down('input[type=text]');
             var addForm = input.up('form');
             if(addForm){
@@ -74,7 +71,7 @@ BSA.BlogPreview = Class.create({
 
     },
     
-    //------ Добавление меток --------//
+    //------ Add tag --------//
     
     onAddTagClick : function(e)
     {
@@ -120,7 +117,7 @@ BSA.BlogPreview = Class.create({
         }
     },
     
-    //------------ Удаление меток -----------//
+    //------------ Delete tag -----------//
     
     onDeleteTagClick : function(e)
     {
@@ -173,7 +170,7 @@ BSA.BlogPreview = Class.create({
         }
     },
     
-    //----- Вывод информации ------
+    //----- Get info for upload ------
     setInfo : function() {
         //        var self = this;
         var fileUploaders = scriptInstances.get('FileUploader');
@@ -193,7 +190,7 @@ BSA.BlogPreview = Class.create({
     },
     
     
-    //----- Обработка ошибок ------
+    //----- Handling errors ------
     onFailure : function(message) {
         var msgs;
         if(message.class_message){
@@ -208,10 +205,9 @@ BSA.BlogPreview = Class.create({
     }
 })
 
-// Ф-ия, выполняемая при загрузки окна броузера
-// создаются обьекты класса, экземпляры их
-// заносяться в список экземпляров
-// пр. $H(BlogPreview: [new BlogPreview(), ... ,new BlogPreview()])
+// The function is executed after the download of the browser window
+// are created objects, which are entered in the list of instances
+// ex. $H(BlogPreview: [new BlogPreview(), ... ,new BlogPreview()])
 BSA.BlogPreview.RegRunOnLoad = function() {
     // Получим параметры для создания обьекта
     var params = scriptParams.get('BlogPreview');

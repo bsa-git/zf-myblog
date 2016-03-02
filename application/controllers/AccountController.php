@@ -9,6 +9,8 @@
  * @uses       Default_Plugin_BaseController
  * @package    Module-Default
  * @subpackage Controllers
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
  * @link     https://github.com/bsa-git/zf-myblog/
  */
 class AccountController extends Default_Plugin_BaseController {

@@ -3,7 +3,7 @@
 /**
  * Default_Plugin_FileTree.php
  *
- * tools formanipulating file trees
+ * Plugin - tools formanipulating file trees
  * @author Colin Mckinnon
  *
  * NB manipulating large trees of files can quickly fill up available memory - and
@@ -386,7 +386,7 @@ class Default_Plugin_FileTree {
         $timestamp = $zTime->get(Zend_date::TIMESTAMP);
         $fTime = $zTime->get(Zend_date::ISO_8601);
         $out['mtime'] = $timestamp;
-        $arrDateTime = explode(" ", Default_Plugin_StrBox::getCurrentDateTime($timestamp));
+        $arrDateTime = explode(" ", date('Y-m-d H:i:s', $timestamp));
         $out['sdate'] = $arrDateTime[0];
         $out['stime'] = $arrDateTime[1];
         return $out;
@@ -412,7 +412,7 @@ class Default_Plugin_FileTree {
         $out['exists'] = file_exists($f);
         $out['size'] = filesize($f);
         $out['mtime'] = filemtime($f);
-        $arrDateTime = explode(" ", Default_Plugin_StrBox::getCurrentDateTime());
+        $arrDateTime = explode(" ", date('Y-m-d H:i:s'));
         $out['sdate'] = $arrDateTime[0];
         $out['stime'] = $arrDateTime[1];
 

@@ -3,12 +3,16 @@
 /**
  * Admin_Form_Users
  * 
- * Форма редактирования данных пользователя
+ * Form - users
+ * editing user data
  *
  *
  * @uses       Admin_Form_MyForm
  * @package    Module-Admin
  * @subpackage Forms
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Admin_Form_Users extends Default_Form_MyForm {
     
@@ -24,7 +28,7 @@ class Admin_Form_Users extends Default_Form_MyForm {
     }
     
     /**
-     * Создание формы
+     * Initialization form
      */
     public function init() {
         // Вызываем родительский метод

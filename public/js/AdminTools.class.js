@@ -1,24 +1,20 @@
 /**
- * AdminTools - Class
- *
- * С помощью класса вы можете:
- *  - делать Ajax запрос на восстановление поискового индекса
+ * Class - AdminTools
+ * using the class can:
+ *  - make an Ajax request to restore the search index
  *
  * JavaScript
  *
- * Copyright (c) 2013 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2011 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+ @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 BSA.AdminTools = Class.create({
 
     container : null,
     
-    initialize : function(params)//container, linkContainer
+    // Object initialization
+    initialize : function(params)
     {
         //-----------------------------
         // Контейнер для вывода сообщений пользователей
@@ -83,7 +79,7 @@ BSA.AdminTools = Class.create({
         });
     },
     
-    // Обработка ошибок
+    // Error handling
     onFailure : function(message) {
         var msgs;
         if(message.class_message){
@@ -100,10 +96,9 @@ BSA.AdminTools = Class.create({
     
 });
 
-// Ф-ия, выполняемая при загрузки окна броузера
-// создаются обьекты класса, экземпляры их
-// заносяться в список экземпляров
-// пр. $H(AdminTools: [new AdminTools(param1), ... ,new AdminTools(paramN)])
+// The function is executed after the download of the browser window
+// are created objects, which are entered in the list of instances
+// ex. $H(AdminTools: [new AdminTools(param1), ... ,new AdminTools(paramN)])
 BSA.AdminTools.RegRunOnLoad = function() {
     // Получим параметры для создания обьекта
     var params = scriptParams.get('AdminTools');

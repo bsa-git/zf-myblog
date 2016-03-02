@@ -1,35 +1,30 @@
 /**
- * Paginator - Class
+ * Class - Paginator
  *
- * С помощью класса вы можете:
- *  - делать Ajax запросы переходя по страницам сообщений
- *  - изменять кол. сообщений на странице
- *  - произвольно переходить на заданную страницу
+ * With these class you can:
+ *  - do Ajax requests passing on the page
+ *  - change the number of messages per page
+ *  - move on a given page
  *
  * JavaScript
  *
- * Copyright (c) 2011 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2011 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 BSA.Paginator = Class.create({
 
-    // Контейнер для вывода сообщений пользователей
     container : null,
     container_id : '',
-    // Контейнер для Paginator
     pagerContainer: null,
     pagerContainer_id: '',
     url_mvc: '',
     
-    initialize : function(params)//container, linkContainer
+    // Object initialization
+    initialize : function(params)
     {
         //-----------------------------
-        // // Контейнер для Paginator
+        // Paginator container
         if($('paginator-container')){
             this.pagerContainer = $('paginator-container');
             this.pagerContainer_id = 'paginator-container';
@@ -37,7 +32,7 @@ BSA.Paginator = Class.create({
             return;
         }
         
-        // Контейнер для вывода сообщений пользователей
+        // A container for display user messages
         if($(params.container)){
             this.container_id = params.container;
             this.container = $(params.container);
@@ -45,18 +40,18 @@ BSA.Paginator = Class.create({
             return;
         }
         
-        // Получим url_mvc
+        // Get url_mvc
         this.url_mvc =  lb.getMsg('urlBase') + lb.getMsg('urlMVC');
 
-        // Установим события перемещения по страницам
+        // Establish an event handler navigate pages
         this.pagerContainer.select('a.my-pager-control').each(function(link) {
             link.observe('click', this.onLinkPagerClick.bindAsEventListener(this));
         }.bind(this));
         
-        // Установим события ввода страницы
+        // Establish an event handler of the page input
         $('page-input').observe('keydown', this.keyHandlerPageInput.bindAsEventListener(this));
         
-        // Установим события ввода количества сообщений на странице
+        // Establish an event handler set the number of posts per page
         $('itemCountPerPage').observe('keydown', this.keyHandlerItemCountPerPage.bindAsEventListener(this));
 
     },
@@ -188,10 +183,9 @@ BSA.Paginator = Class.create({
     }
 });
 
-// Ф-ия, выполняемая при загрузки окна броузера
-// создаются обьекты класса, экземпляры их
-// заносяться в список экземпляров
-// пр. $H(Paginator: [new Paginator(param1), ... ,new Paginator(paramN)])
+// The function is executed after the download of the browser window
+// are created objects, which are entered in the list of instances
+// ex. $H(Paginator: [new Paginator(param1), ... ,new Paginator(paramN)])
 BSA.Paginator.RegRunOnLoad = function() {
     // Получим параметры для создания обьекта
     var params = scriptParams.get('Paginator');

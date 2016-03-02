@@ -2,18 +2,21 @@
 /**
  * Default_Model_DbTable_BlogInfoProfile
  * 
- * Таблица - содержимого информации на разных языках
+ * Table - additional information content
  *
  *
  * @uses       Default_Model_Profile
  * @package    Module-Default
  * @subpackage Models
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Model_DbTable_BlogInfoProfile extends Default_Model_Profile {
 
     /**
      * 
-     * Конфигурация таблицы
+     * Table config
      * @var array
      */
     private $_config = array(
@@ -29,7 +32,7 @@ class Default_Model_DbTable_BlogInfoProfile extends Default_Model_Profile {
     );
 
     /**
-     * Конструктор обьекта
+     * Constructor
      * 
      * @param Zend_Db_Adapter_Abstract $db
      * @param int $post_id 
@@ -43,8 +46,7 @@ class Default_Model_DbTable_BlogInfoProfile extends Default_Model_Profile {
     }
 
     /**
-     * Установить фильтр
-     * для ID информации
+     * Set info ID
      * 
      * @param int $info_id 
      */

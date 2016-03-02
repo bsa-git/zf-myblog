@@ -3,7 +3,7 @@
     <head>
         <!-- META INFO -->
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">{* edge, 7,8,9,10 *}
+        <meta http-equiv="X-UA-Compatible" content="IE=8">{* edge, 7,8,9,10 *}
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <link rel="shortcut icon" href="{'/images/system/access.gif'|urlres}">
@@ -27,6 +27,9 @@
         <script type="text/javascript" src="{'/js/BSA.Bootstrap.js'|urlres}"></script>
         <script type="text/javascript" src="{'/js/BSA.System.js'|urlres}"></script>
         <script type="text/javascript" src="{'/js/LangBox.class.js'|urlres}"></script>
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
         
         
         {if $accordion}

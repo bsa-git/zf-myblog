@@ -3,27 +3,29 @@
 /**
  * Default_Form_Filter_HtmlEntities
  * 
- * Фильтр переводящий Html сущности в коды Html сущности
- * пр. (неразрвыный пробел - &nbsp; -> &#160;)
+ * Filter - transforming Html entity in Html code entity
+ * ex. (non-breaking space &nbsp; -> &#160;)
  *
  *
  * @uses       Zend_Filter_Interface
  * @package    Module-Default
  * @subpackage Forms.Filters
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Form_Filter_HtmlEntities implements Zend_Filter_Interface {
 
     /**
-     * Производит фильтрацию в соответствии с назначением фильтра
+     * Performs filtering in accordance with the purpose of the filter
      *
      * @param string $value
      * @return string
      */
     public function filter($value) {
 
-        // Массив символов
         $trans = array(
-            // 24.2  Ссылки-мнемоники для символов ISO 8859-1
+            // 24.2  Entity references for characters ISO 8859-1
             "&nbsp;" => "&#160;",
             "&iexcl;" => "&#161;",
             "&cent;" => "&#162;",

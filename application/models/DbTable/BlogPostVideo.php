@@ -3,18 +3,21 @@
 /**
  * Default_Model_DbTable_BlogPostVideo
  *
- * Таблица - для работы с видео файлами
+ * Table - to work with video files
  *
  *
  * @uses       Default_Model_DatabaseObject
  * @package    Module-Default
  * @subpackage Models
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Model_DbTable_BlogPostVideo extends Default_Model_DatabaseObject {
 
     /**
      *
-     * Конфигурация таблицы
+     * Table config
      * @var array
      */
     private $_config = array(
@@ -31,16 +34,16 @@ class Default_Model_DbTable_BlogPostVideo extends Default_Model_DatabaseObject {
 
     /**
      *
-     * Загруженный файл - путь к файлу
+     * Uploaded file
      *
      * @var string
      */
     protected $_uploadedFile;
 
-    //================ КОНСТРУКТОР КЛАССА ============
+    //============================
 
     /**
-     * Конструктор обьекта таблицы
+     * Constructor
      * 
      * @param Zend_Db_Adapter_Abstract $db
      */
@@ -58,7 +61,7 @@ class Default_Model_DbTable_BlogPostVideo extends Default_Model_DatabaseObject {
     //================ ОБРАБОТКА СОБЫТИЙ ============
 
     /**
-     * Событие перед вставкой записи
+     * Event before inserting the record
      *
      * @return bool
      */
@@ -92,7 +95,7 @@ class Default_Model_DbTable_BlogPostVideo extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Событие после вставки записи
+     * Event after inserting the record
      *
      * @return bool
      */
@@ -115,7 +118,7 @@ class Default_Model_DbTable_BlogPostVideo extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Событие перед удалением записи
+     * Event before deleting the record
      *
      * @return bool
      */
@@ -145,10 +148,10 @@ class Default_Model_DbTable_BlogPostVideo extends Default_Model_DatabaseObject {
         }
     }
 
-    //================ РАБОТА С ФАЙЛАМИ ============
+    //================ WORKING WITH FILES ============
 
     /**
-     * Загрузить данные видео файла для конкретного сообщения
+     * Upload data from video for a particular post
      *
      * @param int $post_id
      * @param int $video_id
@@ -169,8 +172,7 @@ class Default_Model_DbTable_BlogPostVideo extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Проверка загруженного файла
-     * что это файл, что он существует, что его можно читать
+     * Checking the downloaded file that it exists, that it can be read
      *
      * @param string $path
      */
@@ -185,9 +187,8 @@ class Default_Model_DbTable_BlogPostVideo extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить полный путь к файлу
-     * причем имя файла заменяется на его уникальный код ID
-     * из базы данных
+     * Get the full path to the file and the file name is replaced by its unique ID code from DB
+     * 
      * C:/XamppServers3/htdocs/zf-myblog/public/upload/users/user1/files/video/27.mp4
      *
      * @return string
@@ -198,8 +199,7 @@ class Default_Model_DbTable_BlogPostVideo extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить путь хранения видеофайлов для
-     * конкретного пользователя
+     * Get the audio file storage path for a specific user
      * C:/XamppServers3/htdocs/zf-myblog/public/upload/users/user1/files/video
      *
      * @return string
@@ -227,8 +227,8 @@ class Default_Model_DbTable_BlogPostVideo extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить полный URL к ресурсу
-     * пр. http://localhost:8080/zf-myblog/public/upload/users/user1/files/video/10.wmv
+     * Get the full URL to the resource
+     * ex. http://localhost:8080/zf-myblog/public/upload/users/user1/files/video/10.wmv
      *
      * @return string
      */
@@ -237,9 +237,8 @@ class Default_Model_DbTable_BlogPostVideo extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить полный URL к файлу
-     * причем имя файла заменяется на его уникальный код ID из базы данных
-     * пр. /upload/users/user1/files/video/10.wmv
+     * Get the full URL to the file and the file name is replaced by its unique ID code from the database
+     * ex. /upload/users/user1/files/video/10.wmv
      *
      * @return string
      */
@@ -249,9 +248,8 @@ class Default_Model_DbTable_BlogPostVideo extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить URL хранения видеофайлов для
-     * конкретного пользователя
-     * пр. /upload/users/user1/files/video
+     * Get the URL storing video files for a specific user
+     * ex. /upload/users/user1/files/video
      *
      * @return string
      */
@@ -278,9 +276,8 @@ class Default_Model_DbTable_BlogPostVideo extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить URL хранения Flash файлов для
-     * конкретного пользователя
-     * пр. /upload/users/user1/flash
+     * Get the URL storing flash files for a specific user
+     * ex. /upload/users/user1/flash
      *
      * @return string
      */
@@ -307,7 +304,7 @@ class Default_Model_DbTable_BlogPostVideo extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить массив обьектов видео для статьи
+     * Get an array of video objects for post
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -340,7 +337,7 @@ class Default_Model_DbTable_BlogPostVideo extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить массив  видеофайлов для сообщения
+     * Get an array of video for post
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -375,8 +372,7 @@ class Default_Model_DbTable_BlogPostVideo extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить общее кол. записей удовлетворяющих
-     * критерия, заданным в парметре $options
+     * Get the total number of records satisfying the criteria specified in the parameter $options
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -400,5 +396,3 @@ class Default_Model_DbTable_BlogPostVideo extends Default_Model_DatabaseObject {
     }
 
 }
-
-?>

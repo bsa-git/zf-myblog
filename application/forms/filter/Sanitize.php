@@ -3,19 +3,20 @@
 /**
  * Default_Form_Filter_Sanitize
  * 
- * Фильтр очищает от тегов HTML
- * и пробелов спереди и сзади строки
+ * Filter - clears HTML tags and spaces in front and behind the line
  *
  *
  * @uses       Zend_Filter
  * @package    Module-Default
  * @subpackage Forms.Filters
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Form_Filter_Sanitize implements Zend_Filter_Interface
 {
     /**
-     * Массив HTML тегов
-     * которые разрешены HTML кода
+     * An array of HTML tags are Allowed HTML code
      * 
      * @var array 
      */
@@ -66,7 +67,7 @@ class Default_Form_Filter_Sanitize implements Zend_Filter_Interface
     );
 
     /**
-     * Признак использования фильтра тегов
+     * Is filter tags
      *
      * @var bool
      */
@@ -74,7 +75,7 @@ class Default_Form_Filter_Sanitize implements Zend_Filter_Interface
 
 
     /**
-     * Конструктор класса
+     * Constructor
      */
     public function __construct(array $options = NULL) {
         
@@ -84,7 +85,7 @@ class Default_Form_Filter_Sanitize implements Zend_Filter_Interface
     }
     
     /**
-     * Производит фильтрацию в соответствии с назначением фильтра
+     * Performs filtering in accordance with the purpose of the filter
      *
      * @param string $value
      * @return string
@@ -95,16 +96,14 @@ class Default_Form_Filter_Sanitize implements Zend_Filter_Interface
     }
     
      /**
-     * Очистить текст от HTML тегов и javascripts
-     * временная ф-ия
+     * Clear text from HTML tags and javascripts
      *
      * @param string $html
-     * @param array $tags
      * @return string
      */
     protected function cleanHtml($html) {
         $chain = new Zend_Filter();
-        //$this->isFilterTags = $this->getOption('isFilterTags');
+
         if($this->isFilterTags){
             $chain->addFilter(new Zend_Filter_StripTags(self::$tags));
         }

@@ -3,8 +3,8 @@
 /**
  * smarty_function_get_type_value
  *
- * Функция Smarty - get_type_value
- * получить тип переменной:
+ * Function Smarty - get_type_value
+ * get type of a variable:
  * - string;
  * - float;
  * - int;
@@ -13,10 +13,13 @@
  * @uses       
  * @package    Module-Default
  * @subpackage Views.Plugins
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 
 /**
- * Получить тип переменной
+ * Get type of a variable
  * 
  * @param string|int|float|bool $my_value
  * @param Smarty $smarty

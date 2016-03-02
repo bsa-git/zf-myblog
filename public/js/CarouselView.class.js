@@ -1,62 +1,58 @@
 /**
- * CarouselView - Class
+ * Class - CarouselView
  *
- * С помощью класса вы можете:
- *  - обеспечить прокрутку изображений в микро формате
- *  - просмотреть изображение с помощью LightBox
+ * With these class you can:
+ *  - provide scrolling images microformat
+ *  - view the image with LightBox
  *
  * JavaScript
  *
- * Copyright (c) 2011 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2011 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 BSA.CarouselView = Class.create({
     
-    // Параметры инициализации
+    // Initialization parameters
     iniParams: null,
     
-    // Размер элемента
+    // Element size
     elementSize: 150,
     
-    // Обьект карусель
+    // Object of carousel
     carousel: null,
     
-    // Контейнер карусели
+    // Container of carousel
     containerCarousel: '',
     
-    accordion: null,// Аккордион
-    isDownloaded: false, // Признак загрузки изображений
-    actual: false, // Признак состояния аккордиона (открыт или закрыт)
+    accordion: null,// Accordion object
+    isDownloaded: false, // Is uploading images to the page
+    actual: false, // Accordion state (open or closed)
     
-    // Конструктор класса
+    // Object initialization
     initialize : function(params)
     {
         
-        // Определим контейнер для карусели
+        // Set container of carousel
         if(params && $(params.carousel)){
             this.containerCarousel = params.carousel;
         }else{
             return;
         }
         
-        // Определим наличие аккордиона
+        // Is accordion
         if (params.accordion){
             this.accordion = params.accordion;
             this.iniParams = params;
-            // Подпишемся на события в аккордионе
+            // Subscribe to the events in the accordion
             this._subscribeAccordionEvents();
         }else{
-            // Инициализация карусели
+            // Initialization carousel
             this.iniCarousel(params);
         }
     },
     
-    // Инициализация карусели
+    // Initialization carousel
     iniCarousel: function(params) {
         var self = this;
         //---------------------
@@ -112,7 +108,7 @@ BSA.CarouselView = Class.create({
         });
     },
     
-    // Обновление размера карусели
+    // Update carousel size
     updateCarouselSize: function() {
         //Определим обьект контейнера 
         var contentContainer = $('content-container');
@@ -134,9 +130,9 @@ BSA.CarouselView = Class.create({
         $$("#" + this.containerCarousel + " .carousel-container").first().style.width =  (widthCarousel - 70) + "px";
     },
     
-    //========== РАБОТА С АККОРДИОНОМ ===========//
+    //========== ACCORDION ===========//
 
-    // Подпишемся на события в аккордионе
+    // Subscribe to the events in the accordion
     _subscribeAccordionEvents : function() {
         var self = this;
         var indexSection = self.accordion.section;
@@ -169,7 +165,7 @@ BSA.CarouselView = Class.create({
         })
     },
     
-    // Свернуть секцию в аккордионе
+    // Hidden section of the accordion
     onHiddenSectionEvent : function(self, params) {
         var section = params.section.elements.section;
         var hrefSection = section.down('a').readAttribute('href');
@@ -178,7 +174,7 @@ BSA.CarouselView = Class.create({
         }
     },
     
-    // Развернуть секцию в аккордионе
+    // Show section in the accordion
     onShownSectionEvent : function(self, params) {
         var section = params.section.elements.section;
         var hrefSection = section.down('a').readAttribute('href');
@@ -197,10 +193,9 @@ BSA.CarouselView = Class.create({
     }
 })
 
-// Ф-ия, выполняемая при загрузки окна броузера
-// создаются обьекты класса, экземпляры их
-// заносяться в список экземпляров
-// пр. $H(CarouselView: [new CarouselView(param1), ... ,new CarouselView(paramN)])
+// The function is executed after the download of the browser window
+// are created objects, which are entered in the list of instances
+// ex. $H(CarouselView: [new CarouselView(param1), ... ,new CarouselView(paramN)])
 BSA.CarouselView.RegRunOnLoad = function() {
     // Получим параметры для создания обьекта
     var params = scriptParams.get('CarouselView');

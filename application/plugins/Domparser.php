@@ -190,5 +190,3 @@ class Default_Plugin_Domparser {
     }
 
 }
-
-?>

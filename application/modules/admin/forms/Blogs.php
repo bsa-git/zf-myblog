@@ -3,17 +3,21 @@
 /**
  * Admin_Form_Blogs
  * 
- * Форма проверки блогов пользователя
+ * Form - Blogs
+ * Form validation user blogs
  *
  *
  * @uses       Admin_Form_MyForm
  * @package    Module-Admin
  * @subpackage Forms
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Admin_Form_Blogs extends Default_Form_MyForm {
 
     /**
-     * Создание формы
+     * Initialization form
      */
     public function init() {
         // Вызываем родительский метод

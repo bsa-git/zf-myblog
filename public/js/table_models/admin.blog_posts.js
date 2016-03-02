@@ -1,23 +1,17 @@
 /**
- * BSA.iniAdminPosts - Function
- *
- * С помощью этой ф-ии инициализируется структура таблицы блогов 
+ * Function - iniAdminPosts
+ * initialized structure of blogs table
  *
  * JavaScript
  *
- * Copyright (c) 2012 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2012 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 
 BSA.iniAdminPosts = function()
 {
     var self = this;
-    //        var myURL = this.url + '/rows?table='+ this.name +'&rowsByPage=' + this.rowsByPage;
     var myURL = this.url + '/rows';
 
     var tableModel = {
@@ -31,7 +25,7 @@ BSA.iniAdminPosts = function()
             self.updateRequestForSort();
         },
         options : {
-            title: ' ',//lb.getMsg('titleTableBlogs'),
+            title: ' ',
             addSettingBehavior : true,
             addReportMenu : true,
             pager: {
@@ -39,7 +33,6 @@ BSA.iniAdminPosts = function()
             },
             onFailure : function(transport) {
                 BSA.Sys.getJsonResponse(transport, true);
-//                self.onFailure(errText);
             },
             afterRender : function() {
 
@@ -82,10 +75,9 @@ BSA.iniAdminPosts = function()
                             username = item.text;
                         }
                     });
-                    //                        alert(username);
                     var params = {
                         username: username,
-                        password: username, // Для корректной проверки через форму
+                        password: username, 
                         title: row.title,
                         url: row.url,
                         post_id: row.id

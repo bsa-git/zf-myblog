@@ -1,17 +1,12 @@
 /**
- * BSA.iniAdminPostTags - Function
- *
- * С помощью этой ф-ии инициализируется структура таблицы метки блогов
+ * Function - iniAdminPostTags
+  * initialized structure of post tags table
  *
  * JavaScript
  *
- * Copyright (c) 2012 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2012 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 
 BSA.iniAdminPostTags = function()
@@ -30,14 +25,13 @@ BSA.iniAdminPostTags = function()
             self.updateRequestForSort();
         },
         options : {
-            title: ' ',//lb.getMsg('titleTablePostTags'),
+            title: ' ',
             addSettingBehavior : true,
             pager: {
                 pageParameter : 'page'
             },
             onFailure : function(transport) {
                 BSA.Sys.getJsonResponse(transport, true);
-//                self.onFailure(errText);
             },
             afterRender : function() {
 
@@ -67,7 +61,6 @@ BSA.iniAdminPostTags = function()
             },
             toolbar : {
                 elements: [MY.TableGrid.ADD_BTN, MY.TableGrid.DEL_BTN, MY.TableGrid.SAVE_BTN],
-                //                    elements: [MY.TableGrid.SAVE_BTN],
                 onSave: function() {
                     var rowsModified = self.tableGrid.getModifiedRows();
                     var rowsAdded = self.tableGrid.getNewRowsAdded();

@@ -3,41 +3,43 @@
 /**
  * Default_Form_Filter_DeleteBasePathUrl
  * 
- * Фильтр удаляет базовый путь из путей к ресурсам HTML
+ * Filter - removes the base path of the URL to HTML resources
  *
  *
  * @uses       Zend_Filter
  * @package    Module-Default
  * @subpackage Forms.Filters
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Form_Filter_DeleteBasePathUrl implements Zend_Filter_Interface {
 
     /**
-     * Массив HTML тегов
-     * которые нужно корректировать
+     * Array of HTML tags that need to be corrected
      * 
      * @var array 
      */
     static $tags = array(
-        // ссылка
+        // link
         'a' => 'href',
-        // изображение
+        // image
         'img' => 'src',
         // iframe
         'iframe' => 'src',
-        // видео
+        // video
         'param' => 'value',
         'embed' => 'src',
     );
     /**
-     * Признак использования фильтра тегов
+     * Options
      *
      * @var array
      */
     protected $_options;
 
     /**
-     * Конструктор класса
+     * Constructor
      */
     public function __construct(array $options = NULL) {
 
@@ -47,7 +49,7 @@ class Default_Form_Filter_DeleteBasePathUrl implements Zend_Filter_Interface {
     }
 
     /**
-     * Производит фильтрацию в соответствии с назначением фильтра
+     * Performs filtering in accordance with the purpose of the filter
      *
      * @param string $value
      * @return string
@@ -57,10 +59,10 @@ class Default_Form_Filter_DeleteBasePathUrl implements Zend_Filter_Interface {
     }
 
     /**
-     * Удалить базовый путь из путей к ресурсам HTML
+     * Removes the base path of the URL to HTML resources
      *
      * @param string $html
-     * @return string|bool при ошибке преобразования выдается FALSE
+     * @return string|bool If error, then output FALSE
      */
     protected function deleteBasePathUrl($html) {
         //$domHtml
@@ -68,47 +70,36 @@ class Default_Form_Filter_DeleteBasePathUrl implements Zend_Filter_Interface {
         $str_end = '</body>';
         //---------------------------
 
-        // Заменим HTML сущность (не разрывного пробела) на его числовой код
-        // т.к. иначе неверно формируется ХМЛ строка
-//        $html = str_replace('&nbsp;', '&#160;', $html);
-//        $html = str_replace('&mdash;', '&#8212;', $html);
-//        $html = str_replace('&aelig;', '&#230;', $html);
-//        $trans = get_html_translation_table(HTML_ENTITIES);
-//        $html = html_entity_decode($html);
-        //$a = htmlentities($orig);
-
-//        $html = html_entity_decode($html);
         $filtrHtmlEntities = new Default_Form_Filter_HtmlEntities();
         $html = $filtrHtmlEntities->filter($html);
-        // Добавим ХМЛ обертку
         $html = $str_begin . $html . $str_end;
 
-        //Проверка на корректость XML
+        // Check for correct XML
         $domDoc = new DOMDocument('1.0', 'utf-8');
         $success = $domDoc->loadXML($html);
         if(!$success){
             return FALSE;
         }
 
-        // Скорректируем код
+        // Correct code
         $domQuery = new Zend_Dom_Query();
         $domQuery->setDocumentXml($html,"utf-8");
         foreach (self::$tags as $tag => $attr) {
             $results = $domQuery->query($tag);
             if ($results->count()) {
-                foreach ($results as $result) { // переменная $result имеет тип DOMElement
+                foreach ($results as $result) { // $result variable is of DOMElement type 
                     if ($result->hasAttribute($attr)) {
                         $value = $result->getAttribute($attr);
                         $st = new Default_Plugin_String($value);
                         if($st->beginsWith('/')){
-                            // было в виде: /zf-myblog/public/pic/1.gif
-                            // стало в виде: /pic/1.gif
+                            // it was: /zf-myblog/public/pic/1.gif
+                            // it is: /pic/1.gif
                             $baseURL = Default_Plugin_SysBox::getBaseURL();
                             $value = str_replace($baseURL, '', $value);
                             $result->setAttribute($attr, $value);
                         }  else {
-                            // было в виде: https://mysite.com:8080/zf-myblog/public/pic/1.gif
-                            // стало в виде: /pic/1.gif
+                            // it was: https://mysite.com:8080/zf-myblog/public/pic/1.gif
+                            // it is: /pic/1.gif
                             $hostPortBaseURL = Default_Plugin_SysBox::getHostPortBaseURL();
                             $value = str_replace($hostPortBaseURL, '', $value);
                             $result->setAttribute($attr, $value);
@@ -120,10 +111,9 @@ class Default_Form_Filter_DeleteBasePathUrl implements Zend_Filter_Interface {
                 $domQuery->setDocumentXml($html, "utf-8");
             }
         }
-        // Удалим ХМЛ обертку
+
         $html = str_replace($str_begin, '', $html);
         $html = str_replace($str_end, '', $html);
-//        $html = htmlentities($html);
         return $html;
     }
 

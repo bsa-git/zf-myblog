@@ -1,20 +1,15 @@
 /**
- * LangBox - Class
- *
- * Класс для локализации сообщений
+ * Class - LangBox
+ * posts localization
  *
  * JavaScript
  *
- * Copyright (c) 2011 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2011 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 BSA.LangBox = Class.create({
-    // Инициализация обьекта
+    // Object initialization
     initialize : function()
     {
         var id;
@@ -22,18 +17,14 @@ BSA.LangBox = Class.create({
         var pattern;
         var matchResult;
         //------------
-        //Сообщения
-        //this.urlBase = $('base_url').innerHTML;//Базовый путь к ресурсам
-        //this.msgErrorRetrieveDataFromUrl = $('msg-error-retrieve-data-from-url').innerHTML;
-
+        // Messages
         var boxs = Prototype.Selector.select('div.msg-box');
         if(boxs){
             boxs.each(function(box) {
                 box.select('p').each(function(p) {
                     id = p.readAttribute('id').replace(/-/g,'_');
                     msg = p.innerHTML;
-                    // Заменим символы для использования шаблонов - Template
-                    // пр. 'Сообщение #[source] принято!'
+                    // Replace symbols to use templates - Template (ex. 'Post #[source] accepted!')
                     pattern = /#\[[\w]+\]/;
                     matchResult = msg.match(pattern);
                     if(matchResult !== null){
@@ -63,10 +54,9 @@ BSA.LangBox = Class.create({
     }
 })
 
-// Ф-ия, выполняемая при загрузки окна броузера
-// создаются обьекты класса, экземпляры их
-// заносяться в список экземпляров
-// пр. $H(LangBox: [new LangBox(), ... ,new LangBox()])
+// The function is executed after the download of the browser window
+// are created objects, which are entered in the list of instances
+// ex. $H(LangBox: [new LangBox(), ... ,new LangBox()])
 BSA.LangBox.RegRunOnLoad = function() {
 
     lb = new BSA.LangBox();

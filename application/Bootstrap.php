@@ -7,6 +7,9 @@
  *
  * @uses    Zend_Application_Bootstrap_Bootstrap
  * @package Bootstrap
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
@@ -105,7 +108,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             $Zend_Auth->translate_locale = $config['user']['locale'];
         } else {
             $locale = $Zend_Auth->translate_locale;
-            $newLocal = Default_Plugin_SysBox::updateTranslateLocale($locale);
+            $newLocal = Default_Plugin_SysBox::isUpdateTranslateLocale($locale);
             if (!$newLocal === FALSE) {
                 $Zend_Auth->translate_locale = $newLocal;
             }

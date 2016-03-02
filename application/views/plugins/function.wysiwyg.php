@@ -113,11 +113,4 @@ function smarty_function_wysiwyg($params = array(), $smarty) {
 
     $ckeditor->editor($name, $content, $params);
 
-    /**
-     * Инициализация файлового менеджера (KCFinder)
-     * выполняется в классе Bootstrap -> _initSession() -> Default_Plugin_SysBox::iniKCFinder()
-     *
-     */
 }
-
-?>

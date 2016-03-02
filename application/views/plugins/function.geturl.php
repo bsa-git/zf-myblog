@@ -3,16 +3,19 @@
 /**
  * smarty_function_geturl
  *
- * Функция Smarty - geturl
- * получить URL для шаблона
+ * Function Smarty - geturl
+ * get the URL for the template
  *
  * @uses       
  * @package    Module-Default
  * @subpackage Views.Plugins
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 
 /**
- * Получить URL для шаблона
+ * Get the URL for the template
  * 
  * @param array $params
  * @param Smarty $smarty
@@ -31,9 +34,5 @@ function smarty_function_geturl($params, $smarty) {
         $url = $helper->simple($action, $controller);
         $url = rtrim($url, '/');
     }
-
-
     return $url;
 }
-
-?>

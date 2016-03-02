@@ -1,24 +1,20 @@
 /**
- * BSA.Dialogs - обьект диалоговых ф-ий
+ * BSA.Dialogs - Object dialog functions
  *
- * С помощью обьекта вы можете:
- *  - выводить ProgressBar
- *  - выводить сообщения
+ * This object allows:
+ *  - output ProgressBar
+ *  - output messages
  *  
  * JavaScript
  *
- * Copyright (c) 2011 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2011 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 
 BSA.Dialogs = {
     
-    timeout:  0, // Время периода обновления данных в 
+    timeout:  0, // The time period of data update
     intervalID: null,
     
     createOverlay: function(){
@@ -171,7 +167,6 @@ BSA.Dialogs = {
         var strMsg = '';
         var strProgress = '';
         var strCancel = '';
-//        var myBrowser = BSA.Sys.getBrowserType(); 
         //-------------------------
         
         switch(params.type) {

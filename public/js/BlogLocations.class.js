@@ -1,28 +1,22 @@
 /**
- * BlogLocations - Class
+ * Class - BlogLocations
  *
- * С помощью класса вы можете:
- *  - отобразить гео карту
- *  - отображать маркеры на карте
- *  - переходить по геоссылкам на соответствующий маркер и видеть его содержимое
+ * With these class you can:
+ *  - display the geo map
+ *  - display markers on the map
+ *  - navigate through geo links to the appropriate marker and see its contents
  *
  * JavaScript
  *
- * Copyright (c) 2011 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2011 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
-
-//google.load('maps', '2');
 
 BSA.BlogLocations = Class.create({
     url: null,
-    post_id: null, // ID для сообщения
-    user_id: null, // ID для пользователя, создателя сообщения
+    post_id: null, // Post ID
+    user_id: null, // User ID
     location_id: null,
     container: null, // DOM element in which map is shown
     map: null, // The instance of Google Maps
@@ -30,10 +24,11 @@ BSA.BlogLocations = Class.create({
     markers: new Hash(), // holds all markers added to map
 
     markerTemplate: null,
-    accordion: null, // Аккордион
-    isDownloaded: false, // Признак загрузки изображений
-    actual: false, // Признак состояния аккордиона (открыт или закрыт)
-
+    accordion: null, // Accordion
+    isDownloaded: false, // Download sign
+    actual: false, // Sign accordion state (open or closed)
+    
+    // Object initialization
     initialize: function (params)//container, user_id, post_id
     {
 
@@ -78,19 +73,18 @@ BSA.BlogLocations = Class.create({
             Event.observe(s, 'click', this.onGoToLocation.bindAsEventListener(this));
         }.bind(this));
 
-        // Определим наличие аккордиона
+        // Is accordion
         if (params.accordion) {
             this.accordion = params.accordion;
-            // Подпишемся на события в аккордионе
             this._subscribeAccordionEvents();
         } else {
-            // Загрузим карту
+            // Load map
             this.loadMap();
         }
 
 
     },
-    //--------------- Загрузка карты --------------
+    //--------------- Load map --------------
 
     loadMap: function ()
     {
@@ -159,7 +153,7 @@ BSA.BlogLocations = Class.create({
         BSA.Sys.message_clear();
     },
 
-    //---------------- Управление маркерами -----------------
+    //---------------- Management markers -----------------
 
     addMarkerToMap: function (id, lat, lng, desc, cont, details)
     {
@@ -259,10 +253,10 @@ BSA.BlogLocations = Class.create({
             window.clearTimeout(this.idTimeout);
         }.bind(this), 500);
     },
-    //Изменить содержание маркера
+    // Modify marker images
     //
-    // - пр. преобразовать тег <img alt="" src="/upload/users/user1/.thumbs/images/bsa.jpg" style="width: 100px; height: 100px; ">
-    //   в теги -> <a href="/upload/users/user1/images/bsa.jpg"" rel="lightbox[location]">
+    // - ex. modify tag <img alt="" src="/upload/users/user1/.thumbs/images/bsa.jpg" style="width: 100px; height: 100px; ">
+    //   to tag -> <a href="/upload/users/user1/images/bsa.jpg"" rel="lightbox[location]">
     //               <img alt="" src="/upload/users/user1/.thumbs/images/bsa.jpg" style="width: 100px; height: 100px; ">
     //             </a>
     modifyMarkerImages: function ()
@@ -286,8 +280,8 @@ BSA.BlogLocations = Class.create({
             }
         });
     },
-    //Изменить события ссылок содержания маркера
-    // При нажатии на ссылку, должно открываться отдельное окно
+    // Modify marker links
+    // Clicking on the link will open a separate window should
     modifyMarkerLinks: function ()
     {
         // Обьект маркера
@@ -331,7 +325,7 @@ BSA.BlogLocations = Class.create({
             }
         }.bind(this));
     },
-    //-------------- Работа с окнами ---------------
+    //-------------- Windows ---------------
 
     onCloseWinMarker: function (e)
     {
@@ -405,7 +399,7 @@ BSA.BlogLocations = Class.create({
         win.showCenter();
         win.show();
     },
-    //-------------- Дополнительные ф-ии ---------------
+    //-------------- Additional functions ---------------
 
     zoomAndCenterMap: function ()
     {
@@ -449,9 +443,9 @@ BSA.BlogLocations = Class.create({
         this.clickMarker(marker);
 
     },
-    //========== РАБОТА С АККОРДИОНОМ ===========//
+    //========== ACCORDION ===========//
 
-    // Подпишемся на события в аккордионе
+    // Subscribe to the events in the accordion
     _subscribeAccordionEvents: function () {
         var self = this;
         var indexSection = self.accordion.section;
@@ -483,7 +477,7 @@ BSA.BlogLocations = Class.create({
             }
         })
     },
-    // Свернуть секцию в аккордионе
+    // Hidden section of the accordion
     onHiddenSectionEvent: function (self, params) {
         var section = params.section.elements.section;
         var hrefSection = section.down('a').readAttribute('href');
@@ -491,7 +485,7 @@ BSA.BlogLocations = Class.create({
             self.actual = false;
         }
     },
-    // Развернуть секцию в аккордионе
+    // Show section in the accordion
     onShownSectionEvent: function (self, params) {
         var section = params.section.elements.section;
         var hrefSection = section.down('a').readAttribute('href');
@@ -509,10 +503,9 @@ BSA.BlogLocations = Class.create({
     }
 });
 
-// Ф-ия, выполняемая при загрузки окна броузера
-// создаются обьекты класса, экземпляры их
-// заносяться в список экземпляров
-// пр. $H(BlogLocations: [new BlogLocations(param1), ... ,new BlogLocations(paramN)])
+// The function is executed after the download of the browser window
+// are created objects, which are entered in the list of instances
+// ex. $H(BlogLocations: [new BlogLocations(param1), ... ,new BlogLocations(paramN)])
 BSA.BlogLocations.RegRunOnLoad = function () {
     // Получим параметры для создания обьекта
     var params = scriptParams.get('BlogLocations');

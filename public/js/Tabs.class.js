@@ -1,44 +1,39 @@
 /**
- * BSA.Tabs - Обьект управления закладками
+ * Class - Tabs
  *
- * С помощью этого обьекта вы можете:
- *  - организовать работу закладок
+ * With these class you can:
+ *  - organize the work with bookmarks
  *
  * JavaScript
  *
- * Copyright (c) 2011 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2011 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+* @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 
 BSA.Tabs = Class.create({
     
-    tabs: null,             // Контейнер для закладок
-    tabs_id: "",            // ID контейнера для закладок
-    numelems: 0,            // Количество закладок
-    animate: true,          // Признак анимации
-    // Параметры для отдельных закладок: 
-    // animate - "анимация"; opennum - "совместное открытие закладок"
+    tabs: null,             // Container for tabs
+    tabs_id: "",            // Container ID for tabs 
+    numelems: 0,            // Count tabs
+    animate: true,          // Is animate
+
     activate: {},         
     
     /**
-     * Инициализация обьекта
+     * Object initialization
      * 
      * @param object    params
-     *        string    params.id -> контейнер для закладок
-     *        bool      params.animate -> отключить/включить анимацию для всех закладок
-     *        object    params.activate -> параметры для отдельных закладок
-     *        bool      params.activate.animate -> анимация для отдельной закладки
-     *        int       params.activate.opennums -> номеро закладки для одновременного открытия
+     *        string    params.id -> Container for tabs
+     *        bool      params.animate -> enable/disable the animation for all tabs
+     *        object    params.activate -> settings for individual tab
+     *        bool      params.activate.animate -> animation for a separate tab
+     *        int       params.activate.opennums -> tab number for simultaneous opening
      * 
      */
     initialize : function(params)
     {
-        // Определим контейнер
+        // Set container
         if(params && $(params.id)){
             this.tabs_id = params.id;
             this.tabs = $(params.id);
@@ -52,19 +47,19 @@ BSA.Tabs = Class.create({
             return;
         }
         
-        // Получим количество закладок
+        // Get the number of tabs
         this.numelems = this.tabs.down("div.tabsHeader").select("li").size();
         
-        // Получим количество контейнеров с содержимым для закладок
+        // We get the number of containers with the contents of tabs
         var tabsContent = this.tabs.down("div.tabsContent").select("div.tabContent")
         
-        // Проставим ID для закладок и установим события "click"
+        // Set ID for tabs and set the event "click"
         if(this.numelems && tabsContent.size()){
             this.tabs.down("div.tabsHeader").select("a").each(function(tab, index) {
                 var params_animate, animate;
                 var opennums = null;
                 //-------------------
-                // Определим параметры
+                // Params
                 if(this.activate[index+1]){
                     params_animate = (typeof this.activate[index+1].animate !== 'undefined');
                     if(params_animate){
@@ -172,10 +167,9 @@ BSA.Tabs = Class.create({
     }
 })
 
-// Ф-ия, выполняемая при загрузки окна броузера
-// создаются обьекты класса, экземпляры их
-// заносяться в список экземпляров
-// пр. $H(Tabs: [new Tabs(param1), ... ,new Tabs(paramN)])
+// The function is executed after the download of the browser window
+// are created objects, which are entered in the list of instances
+// ex. $H(Tabs: [new Tabs(param1), ... ,new Tabs(paramN)])
 BSA.Tabs.RegRunOnLoad = function() {
     // Получим параметры для создания обьекта
     var params = scriptParams.get('Tabs');

@@ -2,16 +2,16 @@
 /**
  * Admin_IndexController
  *
- * Контроллер - Index
+ * Controller - Index
  *
  * @uses       Default_Plugin_BaseController
- * @package    Module-Admin (Администрирование сайта)
+ * @package    Module-Admin (administration of site)
  * @subpackage Controllers
  */
 class Admin_IndexController extends Default_Plugin_BaseController {
 
      /**
-     * Инициализация контроллера
+     * Initialization controller
      *
      */
     public function init() {
@@ -19,8 +19,8 @@ class Admin_IndexController extends Default_Plugin_BaseController {
     }
     
     /**
-     * Действие - index
-     * отобразим все операции модуля администрирования
+     * Action - index
+     * displays all module operations
      *
      */
     public function indexAction() {
@@ -28,8 +28,8 @@ class Admin_IndexController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - out
-     * выход из модуля администрирования
+     * Action - out
+     * Output from the module
      *
      */
     public function outAction() {

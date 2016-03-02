@@ -3,62 +3,52 @@
 /**
  * Default_Form_AddComment
  * 
- * Форма добавить комментарий пользователя
+ * Form - add user comment 
  *
  *
  * @uses       Default_Form_MyForm
  * @package    Module-Default
  * @subpackage Forms
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Form_AddComment extends Default_Form_MyForm {
     
     /**
-     * Уникальный код сообщения
+     * Post id
      * 
      * @var int
      */
     public $post_id = 0;
     
     /**
-     * Уникальный код автора сообщения
-     * 
-     * @var int
-     */
-//    public $user_id = 0;
-    
-    /**
-     * Логин пользователя
+     * Username
      * 
      * @var string
      */
     public $username = 0;
 
     /**
-     * Конструктор обьекта
+     * Constructor
      *
      * @param Zend_Db_Adapter_Abstract $db
-     * @param int $user_id
+     * @param string $username
      * @param int $post_id
      */
     public function __construct($username,$post_id = 0) {
         $this->username = $username;
         $this->post_id = $post_id;
         
-        // Получим уникальный код автора сообщения
-//        $user = new Default_Model_DbTable_User($this->db);
-//        $user->loadByUsername($username);
-//        $this->user_id = $user->getId();
-        
         parent::__construct();
     }
     
     /**
-     * Создание формы
+     * Initialization form
      */
     public function init() {
-        // Вызываем родительский метод
-        parent::init();
 
+        parent::init();
 
         //---------------- Форма ----------------
         // Указываем action формы

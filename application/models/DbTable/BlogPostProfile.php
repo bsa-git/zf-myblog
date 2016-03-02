@@ -2,18 +2,21 @@
 /**
  * Default_Model_DbTable_BlogPost
  * 
- * Таблица - данных о блогах
+ * Table - to work with post profiles
  *
  *
  * @uses       Default_Model_Profile
  * @package    Module-Default
  * @subpackage Models
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Model_DbTable_BlogPostProfile extends Default_Model_Profile {
 
     /**
      * 
-     * Конфигурация таблицы
+     * Table config
      * @var array
      */
     private $_config = array(
@@ -27,9 +30,11 @@ class Default_Model_DbTable_BlogPostProfile extends Default_Model_Profile {
             'onDelete' => self::CASCADE,
             'onUpdate' => self::CASCADE,)
     );
+    
+    //=====================================
 
     /**
-     * Конструктор обьекта
+     * Constructor
      * 
      * @param Zend_Db_Adapter_Abstract $db
      * @param int $post_id 
@@ -43,7 +48,7 @@ class Default_Model_DbTable_BlogPostProfile extends Default_Model_Profile {
     }
 
     /**
-     * Установить фильтр
+     * Set filter
      * 
      * @param int $post_id 
      */

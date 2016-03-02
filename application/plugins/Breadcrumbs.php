@@ -3,35 +3,36 @@
 /**
  * Default_Plugin_Breadcrumbs
  *
- * Класс создания текущего пути к странице
- * (хлебные крошки)
+ * Plugin - the creation of the current path to the page (breadcrumbs)
  *
  * @uses       
  * @package    Module-Default
  * @subpackage Plugins
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Plugin_Breadcrumbs {
     
     /**
-     * Путь к ресурсу
+     * The path to the resource
      * @var array 
      */
     private $_trail = array();
 
     /**
-     * Добавить шаг в путь доступа к ресурсу
+     * Add a step in the path to a resource
      * 
      * @param string $title
      * @param string $link 
      */
     public function addStep($title, $link = '') {
-        //$title = Zend_Registry::get('Zend_Translate')->_($title);
         $this->_trail[] = array('title' => $title,
             'link' => $link);
     }
 
     /**
-     * Получить массив данных путей к ресурсу
+     * Get path to the resource
      * 
      * @return array 
      */
@@ -40,7 +41,7 @@ class Default_Plugin_Breadcrumbs {
     }
 
     /**
-     * Получить наименование ресурса
+     * Get resource title
      * 
      * @return string 
      */
@@ -52,5 +53,3 @@ class Default_Plugin_Breadcrumbs {
     }
 
 }
-
-?>

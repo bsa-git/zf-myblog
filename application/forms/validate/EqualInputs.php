@@ -3,23 +3,26 @@
 /**
  * Default_Form_Validate_EqualInputs
  * 
- * Валидатор проверяет совпадение двух полей.
+ * Validate - checks match for two fields.
  *
  *
  * @uses       Zend_Validate_Abstract
  * @package    Module-Default
  * @subpackage Forms.Validates
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Form_Validate_EqualInputs extends Zend_Validate_Abstract {
     
     /**
-     * Метка ошибки
+     * Error tag
      * @var const 
      */
     const NOT_EQUAL = 'stringsNotEqual';
     
     /**
-     * Текст ошибки
+     * Error text
      * @var array 
      */
     protected $_messageTemplates = array(
@@ -27,15 +30,15 @@ class Default_Form_Validate_EqualInputs extends Zend_Validate_Abstract {
     );
     
     /**
-     * Название поля, с которым сравниваем
+     * Field name, with which compare
      * @var string 
      */
     protected $_contextKey;
     
     /**
-     * Конструктор валидатора
+     * Constructor
      *
-     * @param string $key Название поля, с которым сравниваем
+     * @param string $key 
      */
     public function __construct($key) {
         $this->_contextKey = $key;
@@ -44,11 +47,13 @@ class Default_Form_Validate_EqualInputs extends Zend_Validate_Abstract {
     
     /**
      * 
-     * Сравнение полей
+     * Compare fields
      * 
-     * Сравнение значения $value с $context[ $this->_contextKey ]
+     * Compare $value with $context[ $this->_contextKey ]
      * 
-     * @param string $value значение которое поддается валидации
+     * @param string $value
+     * @param string $context
+     * @return bool 
      */
     public function isValid($value, $context = null) {
         

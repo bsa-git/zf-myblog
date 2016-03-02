@@ -1,15 +1,15 @@
 <?php
 
 /*
- * Класс - Default_Plugin_HttpBox
+ * Default_Plugin_HttpBox
  * 
-  Удаленный доступ HTTP по URL
- * данный класс выполняет следующие действия:
- * - получение содержимого ресурса по запросу к URL
- * - парсинг, полученного ресурса (Forms, Links ...)
- * - разные виды парсингов: simple(Default_Plugin_SimpleHtmlDom),
+  Send requests to the HTTP server
+ * This class does the following::
+ * - receiving content of the resource upon request to the URL
+ * - parsing the received resource (Forms, Links ...)
+ * - different types of piercings: simple(Default_Plugin_SimpleHtmlDom),
  * phpquery(phpQuery.php), zend(Zend_Dom_Query)
- * - работа с формами, заполнение полей и  submit
+ * - work with forms, filling out the fields and submit
  * 
   $url = 'http://zf-myblog:8080/account/login';
   $http = new Default_Plugin_HttpBox('zend');
@@ -46,12 +46,15 @@
  * @uses       
  * @package    Module-Default
  * @subpackage Plugins
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 
 class Default_Plugin_HttpBox {
 
     /**
-     * Клиент HTTP
+     * Client HTTP
      *
      * @var Zend_Http_Client
      */
@@ -122,18 +125,18 @@ class Default_Plugin_HttpBox {
     public $charset = "utf-8";
 
     /*
-     * Конструктор класса
+     * Constructor
      * 
      * @param string $parserType //simple(Default_Plugin_SimpleHtmlDom), phpquery(phpQuery.php), zend(Zend_Dom_Query)
      * @param array $config
      *  $config["adapter"] = "Zend_Http_Client_Adapter_Proxy" ;socket(default),proxy,curl,test
-     *  $config["maxredirects"] = 5 ;Максимальное количество последующих перенаправлений (0 = ни одного перенаправления)
-     *  $config["timeout"] = 10 ; Таймаут соединения в секундах
-     *  $config["strictredirects"] = false ; Строгое следование спецификации RFC при перенаправлениях 
-     *  $config["useragent"] = "Zend_Http_Client" ; Идентификатор агента пользователя (отправляется в заголовке запроса)
-     *  $config["httpversion"] = 1.1 ; Версия протокола HTTP
-     *  $config["keepalive"] = false ;Включение поддержки соединения keep-alive с сервером - повышает поизводительность.
-     *  $config["headers"]["Referer"]="http://test.com" ; URI ресурса, после которого клиент сделал текущий запрос
+     *  $config["maxredirects"] = 5 ;The maximum number of subsequent redirection (0 = no redirection)
+     *  $config["timeout"] = 10 ; Connection timeout in seconds
+     *  $config["strictredirects"] = false ; Strictly follow the RFC when redirecting
+     *  $config["useragent"] = "Zend_Http_Client" ; User agent identifier string (sent in request headers)
+     *  $config["httpversion"] = 1.1 ; Protocol version HTTP
+     *  $config["keepalive"] = false ;Enable keep-alive connections with the server - improving performance.
+     *  $config["headers"]["Referer"]="http://test.com" ; URI of the resource, after which the customer has made the current request
      *  $config["headers"]["X-Requested-With"]="XMLHttpRequest" ; AJAX запрос 
      * 
      * @param string $url
@@ -143,8 +146,7 @@ class Default_Plugin_HttpBox {
 
     function __construct($parserType, $config = array(), $url = null) {
 
-        // Создадим обьект Zend_Http_Client
-//        $this->client = new Default_Plugin_HttpClientCli($url);
+        // Create Zend_Http_Client object
         $this->client = new Zend_Http_Client($url);
 
         // attach a new cookie jar to your Zend_Http_Client object
@@ -153,12 +155,12 @@ class Default_Plugin_HttpBox {
         // Сохраним последнюю конфигурацию
         $this->last_config = $this->_setConfig($config);
 
-        // Запомним последний URL
+        // Last URL
         if ($url) {
             $this->last_url = $url;
         }
 
-        // Установим тип парсера
+        // Set parser type
         if ($parserType) {
             $this->parserType = $parserType;
         }
@@ -325,7 +327,7 @@ class Default_Plugin_HttpBox {
     }
 
     /**
-     * Получим страницу из файла или из строки
+     * Get page content from a file or from a string
      * 
      * @param string $source
      * @param string $url Url 
@@ -498,7 +500,7 @@ class Default_Plugin_HttpBox {
     }
     
     /**
-     * Проверка является ли URL отладочным
+     * Check whether the URL debugging
      * 
      * @params string $url
      * @return bool 
@@ -546,7 +548,7 @@ class Default_Plugin_HttpBox {
     }
 
     /**
-     * Получить содержание буфера INPUT для PHP
+     * Get the contents of the buffer INPUT for PHP
      * 
      */
     public static function getInputPHP() {

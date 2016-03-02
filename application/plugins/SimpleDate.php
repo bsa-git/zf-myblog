@@ -3,12 +3,15 @@
 /**
  * Default_Plugin_SimpleDate
  *
- * Класс для работы с датами
+ * Plugin - working with Dates
  *
  *
  * @uses
  * @package    Module-Default
  * @subpackage Plugins
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Plugin_SimpleDate {
 
@@ -25,9 +28,9 @@ class Default_Plugin_SimpleDate {
     //
     // Public
     // 
-    // Можно задавать текущую дату если нет параметров
-    // если парамет целое число типа timestamp
-    // или параметр строка в виде YYYY-MM-DD
+    // Set the current date if no parameters 
+    // if the parameter is an integer parameter a timestamp 
+    // or a string in the form YYYY-MM-DD
     //
     public function __construct($todate=FALSE) {
         $this->set($todate);
@@ -127,7 +130,7 @@ class Default_Plugin_SimpleDate {
     }
 
     /**
-     * День недели
+     * Day of the week
      * @return int
      */
     public function day_number() {
@@ -135,7 +138,7 @@ class Default_Plugin_SimpleDate {
     }
 
     /**
-     * День месяца
+     * Day of the month
      * @return int
      */
     public function day_month() {
@@ -248,10 +251,9 @@ class Default_Plugin_SimpleDate {
     }
 
     /**
-     * Получить диапазон дат для
-     * определенного диапазона месяцев
-     * с учетом максимальных дат каждого месяца
-     *
+     * Get a range of dates for a range of months, 
+     * taking into account the maximum date of each month
+     * 
      * @param int $aCountMonth
      * @return array
      */
@@ -288,4 +290,3 @@ class Default_Plugin_SimpleDate {
     }
 
 }
-?>

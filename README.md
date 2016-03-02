@@ -23,11 +23,11 @@ Examples of the application installation are for `OS "Windows"` and web server `
 - You can create slide shows based on `mp3` audio format and the configuration file `json` format `public/upload/users/admin/files/video`
 - For creating and editing a text message using editor [CKEditor](http://ckeditor.com/)
 - To view and listen to video and audio resources used [FlowPlayer](http://flash.flowplayer.org/)
-- To view video [YouTube] (https://www.youtube.com/) uses the class [ProtoTube](http://scripts.downloadroute.com/ProtoTube-f4dbde0a.html)
+- To view video [YouTube](https://www.youtube.com/) uses the class [ProtoTube](http://scripts.downloadroute.com/ProtoTube-f4dbde0a.html)
 - To display geo-coordinates using Google Maps ([JavaScript API V3](https://developers.google.com/maps/documentation/javascript/3.exp/reference))
 - Geo-coordinates, you can place your notes, and more information on the area (photos, reports, etc.)
-- User resource in the form of images, documents, video and audio files can be downloaded and viewed using web file manager [CKFinder] (http://kcfinder.sunhater.com/)
-- Added libraries such as [Zend-Framework 1] (http://framework.zend.com/downloads/latest#ZF1) (this is basic application library), [mPDF] (http://www.mpdf1.com/mpdf/index .php) (to create reports in PDF), [phpQuery] (https://code.google.com/archive/p/phpquery/) (CSS DOM selector). These libraries are located in the `vendor/library`
+- User resource in the form of images, documents, video and audio files can be downloaded and viewed using web file manager [CKFinder](http://kcfinder.sunhater.com/)
+- Added libraries such as [Zend-Framework 1](http://framework.zend.com/downloads/latest#ZF1) (this is basic application library), [mPDF](http://www.mpdf1.com/mpdf/index.php) (to create reports in PDF), [phpQuery](https://code.google.com/archive/p/phpquery/) (CSS DOM selector). These libraries are located in the `library`
 - Also added plug-ins for working with arrays, strings, XML, HTTP, and others `application/plugins`
 - Added site administration module `application/modules/admin`. With this module you can manage registered users, users messages, configure the application, and use a variety of tools
 - With the site administration module, you can view and clear the error logs, reports and statistics. And you can generate reports in HTML and PDF formats

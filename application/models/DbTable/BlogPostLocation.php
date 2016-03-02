@@ -2,18 +2,21 @@
 /**
  * Default_Model_DbTable_BlogPostLocation
  *
- * Таблица - гео информации Google картам
+ *  Table - to work with geo locations
  *
  *
  * @uses       Default_Model_DatabaseObject
  * @package    Module-Default
  * @subpackage Models
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Model_DbTable_BlogPostLocation extends Default_Model_DatabaseObject {
 
     /**
      *
-     * Конфигурация таблицы
+     * Table config
      * @var array
      */
     private $_config = array(
@@ -28,8 +31,10 @@ class Default_Model_DbTable_BlogPostLocation extends Default_Model_DatabaseObjec
             'onUpdate' => self::CASCADE,)
     );
     
+    //=====================================
+    
      /**
-     * Конструктор обьекта таблицы
+     * Constructor
      * 
      * @param Zend_Db_Adapter_Abstract $db
      */
@@ -77,7 +82,7 @@ class Default_Model_DbTable_BlogPostLocation extends Default_Model_DatabaseObjec
     }
 
     /**
-     * Получить массив обьектов координат для сообщения
+     * Get an array of geo location objects for post
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -107,7 +112,7 @@ class Default_Model_DbTable_BlogPostLocation extends Default_Model_DatabaseObjec
     }
 
     /**
-     * Получить массив координат для сообщения
+     * Get an array of geo locations for post
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -137,8 +142,7 @@ class Default_Model_DbTable_BlogPostLocation extends Default_Model_DatabaseObjec
     }
 
     /**
-     * Получить общее кол. записей удовлетворяющих
-     * критерия, заданным в парметре $options
+     * Get the total number of records satisfying the criteria specified in the parameter $options
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -161,5 +165,3 @@ class Default_Model_DbTable_BlogPostLocation extends Default_Model_DatabaseObjec
         return $db->fetchOne($select);
     }
 }
-
-?>

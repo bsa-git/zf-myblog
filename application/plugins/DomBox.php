@@ -1,13 +1,16 @@
 <?php
 
 /*
- * Plugin - Default_Plugin_DomDocumentBox
+ * Default_Plugin_DomDocumentBox
  * 
- * дополнительные ф-ии для работы с классом PHP -> DomDocument
+ * Plugin - functions for the class PHP -> DomDocument
  * 
  * @uses       DOMDocument
  * @package    Module-Default
  * @subpackage Plugins
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 
 class Default_Plugin_DomBox extends DOMDocument {
@@ -29,16 +32,13 @@ class Default_Plugin_DomBox extends DOMDocument {
         'area', 'base', 'basefont', 'br', 'col', 'frame', 'hr', 'img', 'input', 'link', 'meta', 'param'
     );
 
-        
-    //----------- Добавление узлов ---------//
+    //----------- Add node ---------//
 
     /**
-     * appendChilds
+     * Adds a node to parent node and all its child nodes
      *
-     * Добавляет в родительский узел  другой узел со всеми его дочерними узлами
-     *
-     * @param DOMNode $node   // родительский узел
-     * @param DOMNode $appendChild   // другой узел
+     * @param DOMNode $node   // parent node
+     * @param DOMNode $appendChild   // append node
      */
     function appendChilds($node, $appendChild) {
         $cloneChild = $this->importNode($appendChild->cloneNode(false), true);
@@ -49,15 +49,13 @@ class Default_Plugin_DomBox extends DOMDocument {
             }
         }
     }
-    
-    //------------ Удаление узлов --------------//
+
+    //------------ Delete node --------------//
 
     /**
-     * remove_children
+     * Remove all child nodes from the parent node
      * 
-     * Ф-ия удаляет все дочерние узлы из родительского узла $node
-     * 
-     * @param DOMNode $node // родительский узел, из которого будут удалены все дочерние узлы
+     * @param DOMNode $node // parent node
      * 
      * @return void
      */
@@ -71,11 +69,9 @@ class Default_Plugin_DomBox extends DOMDocument {
     }
 
     /**
-     * deleteNode
+     * Remove the child node and all its child nodes
      * 
-     * Ф-ия удаляет дочерний узел $node и все его дочерние узлы
-     * 
-     * @param DOMNode $node // дочерний узел
+     * @param DOMNode $node // child node
      * 
      * @return DOMNode
      */
@@ -87,11 +83,9 @@ class Default_Plugin_DomBox extends DOMDocument {
     }
 
     /**
-     * deleteChildren
+     * Remove all child nodes of the parent node
      * 
-     * Ф-ия удаляет все дочерние узлы из родительского узла $node
-     * 
-     * @param DOMNode $node // родительский узел, из которого будут удалены все дочерние узлы
+     * @param DOMNode $node // parent node
      * 
      * @return void
      */
@@ -101,12 +95,10 @@ class Default_Plugin_DomBox extends DOMDocument {
             $node->removeChild($node->firstChild);
         }
     }
-    
-    //------------ Преобразование документа или узла --------------//
-    
+
+    //------------ Transform a document or node --------------//
+
     /**
-     * saveXHTML
-     *
      * Dumps the internal XML tree back into an XHTML-friendly string.
      *
      * @param DOMNode $node
@@ -141,7 +133,7 @@ class Default_Plugin_DomBox extends DOMDocument {
     /**
      * toArray
      *
-     * Создание массива из DOM документа
+     * Create an array of DOM document
      *
      * @param DOMNode $node
      *         Use this parameter to output only a specific node rather than the entire document.
@@ -208,12 +200,10 @@ class Default_Plugin_DomBox extends DOMDocument {
         return $arResult;
     }
 
-    //------------ Создание HTML из документа --------------//
+    //------------ Create HTML document --------------//
 
     /**
-     * createDocXhtml
-     *
-     * Создать тело и заголовок документа HTML
+     * Create the body and document header HTML
      *
      */
     function createDocXhtml() {
@@ -222,9 +212,7 @@ class Default_Plugin_DomBox extends DOMDocument {
     }
 
     /**
-     * addStyleSheet
-     *
-     * Добавить StyleSheet в массив styles
+     * Add StyleSheet to array styles
      *
      * @param string $url
      * @param string $media
@@ -240,9 +228,7 @@ class Default_Plugin_DomBox extends DOMDocument {
     }
 
     /**
-     * addScript
-     *
-     * Добавить скрипты в массив scripts
+     * Add script to array scripts
      *
      * @param string $url
      * 
@@ -256,9 +242,7 @@ class Default_Plugin_DomBox extends DOMDocument {
     }
 
     /**
-     * addMetaTag
-     *
-     * Добавить мета теги в массив metas
+     * Add meta tags to arrays metas
      *
      * @param string $name
      * @param string $content
@@ -273,9 +257,7 @@ class Default_Plugin_DomBox extends DOMDocument {
     }
 
     /**
-     * setDescription
-     *
-     * Добавить мета тег описание
+     * Add description mata tag
      *
      * @param string $dec
      * 
@@ -286,9 +268,7 @@ class Default_Plugin_DomBox extends DOMDocument {
     }
 
     /**
-     * setKeywords
-     *
-     * Добавить мета тег ключевые слова
+     * Add keywords mata tag
      *
      * @param string $keywords
      * 
@@ -299,9 +279,7 @@ class Default_Plugin_DomBox extends DOMDocument {
     }
 
     /**
-     * assemble
-     *
-     * Создать документ XHTML со всеми его атрибутами
+     * Create an XHTML document with all its attributes
      *
      * 
      * @return string
@@ -338,13 +316,11 @@ class Default_Plugin_DomBox extends DOMDocument {
         $this->appendChild($html);
         return $doctype . $this->saveXML();
     }
-    
-    //------------ Отладочные ф-ии --------------//
-    
+
+    //------------ Debug functions --------------//
+
     /**
-     * dom_dump
-     *
-     * Получить информацию о DOM документе
+     * Get information about the DOM document
      *
      * @param DOMDocument|DOMElement|DOMAttr|DOMNodeList $obj
      * 
@@ -380,5 +356,3 @@ class Default_Plugin_DomBox extends DOMDocument {
     }
 
 }
-
-?>

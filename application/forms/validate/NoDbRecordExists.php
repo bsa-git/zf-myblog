@@ -3,18 +3,21 @@
 /**
  * Default_Form_Validate_NoDbRecordExists
  * 
- * Проверка отсутствия записи в таблице
+ * Validate - check absence for entries in the table
  *
  *
  * @uses       Zend_Validate_Abstract
  * @package    Module-Default
  * @subpackage Forms.Validates
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Form_Validate_NoDbRecordExists extends Zend_Validate_Abstract
 {
 
     /**
-     * Метка ошибки
+     * Error tag
      * @var const 
      */    
     const RECORD_EXISTS = 'dbRecordExists';
@@ -28,30 +31,30 @@ class Default_Form_Validate_NoDbRecordExists extends Zend_Validate_Abstract
     );
 
     /**
-     * Имя таблица в которой будет происходить поиск записи
+     * The table name in which will be searched record
      * @var string
      */    
     protected $_table = null;    
     
     /**
-     * Имя поля по которому будет происходить поиск значения 
+     * The field name for which will be searched for the value 
      * @var string
      */    
     protected $_field = null;    
 
     /**
-     * Используемый адаптер базы данных
+     * Database adapter
      *
      * @var unknown_type
      */    
     protected $_adapter = null;    
        
     /**
-     * Конструктор
+     * Constructor
      * 
-     * @param string $table Имя таблицы
-     * @param string $field Имя поля
-     * @param Zend_Db_Adapter_Abstract $adapter Адаптер базы данных
+     * @param string $table
+     * @param string $field
+     * @param Zend_Db_Adapter_Abstract $adapter
      */
     public function __construct($table, $field, Zend_Db_Adapter_Abstract $adapter = null)
     {
@@ -72,9 +75,9 @@ class Default_Form_Validate_NoDbRecordExists extends Zend_Validate_Abstract
     }
     
     /**
-     * Проверка
+     * Validate
      * 
-     * @param string $value значение которое поддается валидации
+     * @param string $value
      */
     public function isValid($value) 
     {

@@ -3,22 +3,24 @@
 /**
  * Default_Form_Registration
  * 
- * Форма регистрации
+ * Form - user registration
  *
  *
  * @uses       Default_Form_MyForm
  * @package    Module-Default
  * @subpackage Forms
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Form_UserRegistration extends Default_Form_MyForm {
 
     /**
-     * Создание формы
+     * Initialization form
      */
     public function init() {
-        // Вызываем родительский метод
-        parent::init();
 
+        parent::init();
 
         //---------------- Форма ----------------
         // Указываем action формы
@@ -33,8 +35,6 @@ class Default_Form_UserRegistration extends Default_Form_MyForm {
         //$this->setAttrib('class', 'register');
         $this->setAttrib('class', 'myfrm span5');
         $this->setAttrib('id', 'registration-form');
-        
-
 
         //---------------- Username ----------------
         // Text элемент "Имя входа пользователя". Проверяется на алфавитные символы и цифры, а также на длину

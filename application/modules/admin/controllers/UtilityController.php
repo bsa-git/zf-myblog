@@ -3,19 +3,22 @@
 /**
  * Admin_UtilityController
  *
- * Контроллер - Utility
- * реализует дополнительные ф-ии
+ * Controller - Utility
+ * implementing additional functions
  *
  * @uses       Default_Plugin_BaseController
  * @package    Module-Admin
  * @subpackage Controllers
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Admin_UtilityController extends Default_Plugin_BaseController {
 
     /**
-     * Действие - получить пароль пользователя
+     * Action - get user password
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /utility/userpassword
      *
      * @return void

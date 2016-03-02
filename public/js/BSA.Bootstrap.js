@@ -1,33 +1,28 @@
 /**
- * Bootstrap - функции инициализации
+ * Bootstrap - initialization functions
  *
- * С помощью этих функций вы можете:
- *  - зарегистрировать выполнение любой функцию
- *  после загрузки DOM модели
- *  - определить последовательность выполения ф-ий
- *  - определимть ссылку на обьект класса LangBox (локализация сообщений)
- *  - определимть ссылку на список параметров скриптов
- *  - определимть ссылку на список экземпляров обьектов соответствующих классов
+ * With these functions you can:
+ *  - register perform any function after loading the DOM
+ *  - determine the sequence of execution functions
+ *  - define a reference to the class object LangBox (localization of messages)
+ *  - define a link to a list of script parameters
+ *  - define a link to a list of instances of objects of the classes
  *
  * JavaScript
  *
- * Copyright (c) 2011 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2011 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 
-// Ссылка на обьект класса LangBox (локализация сообщений)
+// Reference to the class object LangBox (localization of messages)
 var lb;
-// Список параметров скриптов
+// List script parameters
 var scriptParams = new Hash();
-// Список экземпляров обьектов соответствующих классов
+// List of instances of objects of the classes
 var scriptInstances = new Hash();
 
-// Добавить параметр для скриптов
+// Add parameters for scripts
 function addScriptParams(myclass, params) {
     if (scriptParams.get(myclass)) {
         scriptParams.get(myclass).push(params);
@@ -37,63 +32,47 @@ function addScriptParams(myclass, params) {
 }
 
 /* 
- * runOnLoad.js: переносимый способ регистрации обработчиков события onload.
+ * runOnLoad.js: method of registering an onload event handler.
  *
- * Данный модуль определяет единственную функцию runOnLoad(),
- * выполняющую регистрацию переносимым способом функцийобработчиков,
- * которые могут вызываться только после полной загрузки документа,
- * когда будет доступна стуктура DOM.
+ * This module defines a single function runOnLoad(), 
+ * performs registration functions? 
+ * Handlers that can be called only after a full load a DOM document.
  *
- * Функциям, зарегистрированным с помощью runOnLoad(), не передается ни одного
- * аргумента при вызове. Они вызываются не как методы какоголибо объекта
- * и потому в них не должно использоваться ключевое слово this.
- * Функции, зарегистрированные с помощью runOnLoad(), вызываются
- * в порядке их регистрации. При этом нет никакой возможности отменить
- * регистрацию функции после того, как она передана функции runOnLoad().
- *
- * В старых броузерах, не поддерживающих addEventListener() или attachEvent(),
- * эта функция выполняет регистрацию с использованием свойства window.onload
- * модели DOM уровня 0. Она будет работать некорректно в документах,
- * где установлен атрибут onload в тегах <body> или <frameset>.
  */
 function runOnLoad(f) {
     if (runOnLoad.loaded) {
-        f(); // Если документ уже загружен, просто вызвать f().
+        f(); // If the document is already loaded, cause simply f().
     } else {
-        runOnLoad.funcs.push(f); // Иначе сохранить для вызова позднее
+        runOnLoad.funcs.push(f); // Otherwise, save to call later
     }
 }
-runOnLoad.funcs = []; // Массив функций, которые должны быть вызваны после загрузки документа
-runOnLoad.loaded = false; // Функции еще не запускались.
-// Запускает все зарегистрированные функции в порядке их регистрации.
-// Допускается вызывать runOnLoad.run() более одного раза: повторные
-// вызовы игнорируются. Это позволяет вызывать runOnLoad() из функций
-// инициализации для регистрации других функций.
+runOnLoad.funcs = []; // An array of functions that should be called after the document is loaded
+runOnLoad.loaded = false; // Functions not yet launched.
+// Launches all registered functions in order of their registration.
 runOnLoad.run = function () {
     if (runOnLoad.loaded)
-        return; // Если функция уже запускалась, ничего не делать
+        return; // If the function is already run, do nothing
     for (var i = 0; i < runOnLoad.funcs.length; i++) {
         try {
             runOnLoad.funcs[i]();
         }
-        // Исключение, возникшее в одной из функций,
-        // не должно делать невозможным запуск оставшихся
+        // The exception has arisen in one of the functions that should not make it impossible to run the remaining
         catch (ex) {
-            if (ex instanceof Error) { // Это экземпляр Error или подкласса?
+            if (ex instanceof Error) { // This is an instance or subclass of Error?
                 var message = ex.stack;
-                if(BSA.Sys && BSA.Sys.messagebox_write){
+                if (BSA.Sys && BSA.Sys.messagebox_write) {
                     BSA.Sys.messagebox_write('caution', [message]);
-                }else{
+                } else {
                     alert(message);
                 }
             }
         }
     }
-    runOnLoad.loaded = true; // Запомнить факт запуска.
-    delete runOnLoad.funcs; // Но не запоминать сами функции.
-    delete runOnLoad.run; // И даже забыть о существовании этой функции!
+    runOnLoad.loaded = true; // Remember fact launch.
+    delete runOnLoad.funcs; // But do not remember the functions themselves.
+    delete runOnLoad.run; // And even forgotten the existence of the function!
 };
-// Зарегистрировать метод runOnLoad.run() как обработчик события onload окна
+// Register method run OnLoad.run () as the onload event handler of the window
 if (window.addEventListener) {
     window.addEventListener("load", runOnLoad.run, false);
 } else if (window.attachEvent) {

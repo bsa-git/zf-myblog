@@ -1,76 +1,70 @@
 /**
- * BlogView - Class
+ * Class - BlogView
  *
- * С помощью класса BlogView вы можете:
- *  - изменить картинки, для просмотра с помощью LightBox
- *  - Изменить события ссылок содержания блога
- *    при нажатии на ссылку, должно открываться отдельное окно
+ * With these class you can:
+ *  - edit images, for viewing with LightBox
+ *  - Change events links blog content, 
+ *  when you click on the link must open a separate window
  *
  * JavaScript
  *
- * Copyright (c) 2011 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2011 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 BSA.BlogView = Class.create({
     url_report: null,
     url_params: null,
-    post_id: null, // ID для сообщения
-    user_id: null, // ID для пользователя, создателя сообщения
-    containers: [], // массив контейнеров, с которыми производяться действия
+    post_id: null, // Post ID
+    user_id: null, // User ID
+    containers: [], // an array of containers, which are made actions
     isModifiedEventsMarker: null,
     dialog_info: null,
     local: 'ru',
-    pimp3: null, // Обьект проигрывателя Аудио
-
+    
+    // Object initialization
     initialize: function (params)
     {
         if (params.containers) {
             this.containers = params.containers;
         }
 
-        // Определим язык сайта
+        // Set language
         this.local = lb.getMsg('languageSite');
 
-        // Инициализация кнопки - 'content-in-new-window' 
+        // Initialize button - 'content-in-new-window' 
         var btnShowInWindow = $('content-in-new-window');
         if (btnShowInWindow) {
-            // Покажем иконку
+            // Show icon
             btnShowInWindow.show();
 
-            // Назначим событие - отобразить содержание в отдельном окне
+            // Assign an event - to display the content in a separate window
             btnShowInWindow.observe('click', this.onOpenContentWin.bind(this));
         }
 
-        // Запомним параметры диалога
+        // Open dialog
         if (params.dialog_info) {
             this.dialog_info = params.dialog_info;
 
-            // Откроем диалог
             if (params.dialog_info.open) {
                 BSA.Dialogs.openDialogInfo(params.dialog_info);
             }
         }
 
-        // Инициализация кнопки - 'get-report-pdf'
+        // Initialize button - 'get-report-pdf'
         var btnGetReportPDF = $('get-report-pdf');
         if (btnGetReportPDF) {
-            // Назначим событие - отобразить содержание в отдельном окне
+            // Assign an event - to display the content in a separate window
             btnGetReportPDF.observe('click', this.onGetReportPDF.bindAsEventListener(this));
         }
 
-
-        // Изменим html код картинок и ссылок
+        // Change html code of images and links
         if (this.containers.size()) {
             this.modifyContentImages();
             this.modifyContentLinks();
         }
 
-        // Установим события для инф. помощи
+        // Establish event for the information help
         var listInfoWin = $$('.help-info-win');
         if (listInfoWin) {
             listInfoWin.each(function (aInfoWin) {
@@ -78,7 +72,7 @@ BSA.BlogView = Class.create({
             }.bind(this))
         }
 
-        // Инициализация инф. подсказок
+        // Initialization information hints
         TooltipManager.init("tooltip", {
             url: lb.getMsg('urlBase') + '/admin/info/hint?local=' + this.local,
             options: {
@@ -89,7 +83,7 @@ BSA.BlogView = Class.create({
             hideEffect: Element.hide
         });
 
-        // Инициализация фреймов
+        // Initialization iframes
         this.containers.each(function (container_id) {
             if ($(container_id)) {
                 var iframes = $(container_id).select('iframe');
@@ -99,9 +93,9 @@ BSA.BlogView = Class.create({
                         iframe.writeAttribute('frameborder', 0);
                     }
 
-                    // Перезагрузим страницу если атрибут фрейма 'src' = ""
-                    // эта ошибка появляется у хрома в режиме выхода из редактирования
-                    // при создании фрейма, который загружает страницу из собственного модуля
+                    // Reload this page if the frame attribute 'src' = "". 
+                    // This error appears at the chromium to exit edit mode 
+                    // when you create a frame that loads the page from its own module
                     var src = iframe.readAttribute('src');
                     if (!src) {
                         window.location.reload();
@@ -111,7 +105,7 @@ BSA.BlogView = Class.create({
         })
 
     },
-    //-------------- Работа с информационной помощью ---------------
+    //-------------- Information help ---------------
 
     // Открыть окно с информацией
     onClickInfoWin: function (event) {
@@ -185,13 +179,12 @@ BSA.BlogView = Class.create({
         win.showCenter();
 
     },
-    //-------------- Модификация содержания: изображений, ссылок ---------------
+    //-------------- Modification of content: images, links ---------------
 
-    // Изменить html код картинок, что бы их можно было
-    // просматривать с помощью lightbox.js
+    // Change the html code images, so they can be viewed using lightbox.js
     //
-    // - пр. преобразовать тег <img alt="" src="/upload/users/user1/.thumbs/images/bsa.jpg" style="width: 100px; height: 100px; ">
-    //   в теги -> <a href="/upload/users/user1/images/bsa.jpg"" rel="lightbox[location]">
+    // - ex. tag <img alt="" src="/upload/users/user1/.thumbs/images/bsa.jpg" style="width: 100px; height: 100px; ">
+    //   to tag -> <a href="/upload/users/user1/images/bsa.jpg"" rel="lightbox[location]">
     //               <img alt="" src="/upload/users/user1/.thumbs/images/bsa.jpg" style="width: 100px; height: 100px; ">
     //             </a>
     modifyContentImages: function ()
@@ -224,8 +217,8 @@ BSA.BlogView = Class.create({
             }
         })
     },
-    //Изменить события ссылок содержания блога
-    // При нажатии на ссылку, должно открываться отдельное окно
+    // Change events links blog content. 
+    // Clicking on the link will open a separate window should.
     modifyContentLinks: function ()
     {
         var rel;
@@ -284,7 +277,7 @@ BSA.BlogView = Class.create({
             }
         }.bind(this))
     },
-    //-------------- Работа с отдельным окном для отображения сообщения блога и ссылок URL ---------------
+    //-------------- Windows ---------------
 
     onOpenContentWin: function (event)
     {
@@ -299,10 +292,6 @@ BSA.BlogView = Class.create({
 
         // Отменим поведение по умолчанию
         Event.stop(event);
-
-//        var title = $$('header.title h2 span');
-//        title = title.first();
-//        title = title.innerHTML;
 
         var title = $('title').innerHTML;
         // Создадим обьект окна
@@ -366,7 +355,7 @@ BSA.BlogView = Class.create({
         win.showCenter();
         win.show();
     },
-    //-------------- Работа с отчетами ---------------
+    //-------------- Report ---------------
 
     onGetReportPDF: function (event)
     {
@@ -390,7 +379,7 @@ BSA.BlogView = Class.create({
         //        window.location =  lb.getMsg('urlBase') + this.dialog_info.url_cancel;
 
     },
-    //----- Обработка ошибок ------
+    //----- Handling errors ------
     onFailure: function (message) {
         var msgs;
         if (message.class_message) {
@@ -405,10 +394,9 @@ BSA.BlogView = Class.create({
     }
 });
 
-// Ф-ия, выполняемая при загрузки окна броузера
-// создаются обьекты класса, экземпляры их
-// заносяться в список экземпляров
-// пр. $H(BlogView: [new BlogView(param1), ... ,new BlogView(paramN)])
+// The function is executed after the download of the browser window
+// are created objects, which are entered in the list of instances
+// ex. $H(BlogView: [new BlogView(param1), ... ,new BlogView(paramN)])
 BSA.BlogView.RegRunOnLoad = function () {
     // Получим параметры для создания обьекта
     var params = scriptParams.get('BlogView');

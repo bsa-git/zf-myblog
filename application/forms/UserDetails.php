@@ -3,22 +3,24 @@
 /**
  * Default_Form_UserDetails
  * 
- * Форма редактирования личных данных пользователя
+ * Form - edit the user's personal data
  *
  *
  * @uses       Default_Form_MyForm
  * @package    Module-Default
  * @subpackage Forms
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Form_UserDetails extends Default_Form_MyForm {
 
     /**
-     * Создание формы
+     * Initialization form
      */
     public function init() {
-        // Вызываем родительский метод
-        parent::init();
 
+        parent::init();
 
         //---------------- Форма ----------------
         // Указываем action формы

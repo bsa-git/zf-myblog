@@ -1,56 +1,27 @@
 <?php
 
 /*
-  Access remote site pages submitting forms
- * данный класс выполняет следующие действия:
- * - Удаленный доступ к URL для получения содержимого ресурса;
- * - содержимое ресурса можно открыть с файла или со строки; 
- * - поиск форм; 
- * - установка значений форм;
- * - выполнения submit для формы
- * Пр. для гугла
-    $ini = Zend_Registry::get('config');
-    $parserType = 'phpquery'; // simple, phpquery 
-    $b = new Default_Plugin_PGBrowser($parserType);
-    $filename = $ini['http']['path_cookie_jar'];
-    $proxy_user = $ini['proxy']['user'];
-    $proxy_pass = $ini['proxy']['pass'];
-    $b->setCookie($filename);
-    $b->setProxy("proxy.azot.local", 3128, $proxy_user, $proxy_pass);
-    $page = $b->get('http://www.google.com/');
-    $form = $page->form();
-    $form->set('q', 'foo');
-    $page = $form->submit();
-    $title = $page->title;
- * или для сайта myblog
-  // Получим файл конфигурации
-    $ini = Zend_Registry::get('config');
-    $parserType = 'phpquery'; // simple, phpquery
-    $b = new Default_Plugin_PGBrowser($parserType);
-    $filename = $ini['http']['path_cookie_jar'];
-    $b->setCookie($filename);
-    $page = $b->get('http://zf-myblog:8080/account/login');
-    
-    // Search
-    $elList = $page->search('div.box');
-    if ($parserType == 'simple') {
-        foreach ($elList as $el) {
-            $html = $el->innertext;
-        }
-    }
-    if ($parserType == 'phpquery') {
-        foreach ($elList as $el) {
-            $html = pq($el)->html();
-        }
-    }
-    // Form Submit
-    $form = $page->form();
-    if ($form) {
-        $form->set('username', 'user2');
-        $form->set('password', '222222');
-        $page = $form->submit();
-        $title = $page->title;
-    }
+ * PGBrowser - A 'pretty good' mechanize-like php library for managing cookies and submitting forms.
+ * Website: https://github.com/monkeysuffrage/pgbrowser
+ *
+ * <pre>
+ * require 'pgbrowser.php';
+ * 
+ * $b = new PGBrowser();
+ * $page = $b->get('http://www.google.com/');
+ * echo $page->title;
+ * </pre>
+ * 
+ *
+ * Licensed under The MIT License
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @link http://code.nabla.net/doc/gantry4/class-phpQueryObject.html phpQueryObject
+ * @link http://simplehtmldom.sourceforge.net/manual_api.htm SimpleHtmlDom
+ *
+ * @package PGBrowser
+ * @author P Guardiario <pguardiario@gmail.com>
+ * @version 0.4
  */
 
 class Default_Plugin_PGBrowser {
@@ -390,4 +361,3 @@ class phpUri {
     }
 
 }
-

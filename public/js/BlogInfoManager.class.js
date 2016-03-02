@@ -1,19 +1,15 @@
 /**
- * BlogInfoManager - Class
+ * Class - BlogInfoManager
  *
- * С помощью класса вы можете:
- *  - отобразить инф. помощь для разных языков (en, ru, uk)
- *  - редактировать титл и содержимое инф. помощи
+ * With these class you can:
+ *  - represent information help for different languages (en, ru, uk)
+ *  - edit the title and content of the information help
  *
  * JavaScript
  *
- * Copyright (c) 2011 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2011 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 
 
@@ -30,10 +26,10 @@ BSA.BlogInfoManager = Class.create({
     win:null,
     isSavedContent: false,
 
-    initialize : function(params)//container,  form
-    //initialize : function(container,  form)
+    // Object initialization
+    initialize : function(params)
     {
-        // Получим параметры для обьекта
+        // Obtain parameters for the object
         this.url = lb.getMsg('urlBase') + params.url;
         if (params.container){
             this.container = params.container;
@@ -42,20 +38,20 @@ BSA.BlogInfoManager = Class.create({
             this.accordion = params.accordion;
         }
         
-        // Создадим редактор
+        // Create editor
         this.ckeditor = new BSA.CKEditorHtml();
         
-        // Загрузим форму редактирования
+        // Load the edit form
         this.loadForm();
     },
     
-    //--------------- Установим события для формы --------------
+    //--------------- Establish the events for a form --------------
 
     addEventsObserve : function()
     {
         var self = this;
         //----------------------------
-        // Установим события для кнопок на форме редактирования
+        // Establish the events to the buttons on the edit form
         if($('save_content')){
             Event.observe($('save_content'), 'click', this.onSaveEditContent.bindAsEventListener(this));
         }
@@ -64,7 +60,7 @@ BSA.BlogInfoManager = Class.create({
             Event.observe($('cancel_content'), 'click', this.onCancelEditContent.bindAsEventListener(this));
         }
         
-        // Установим события для кнопок редактирования и закрытия секции аккордиона
+        // Establish the events to edit keys and opening the accordion section
         if($(this.accordion.id)){
             $(this.accordion.id).select('.info-edit-content').each(function(a) {
                 Event.observe(a, 'click', self.onEditContent.bindAsEventListener(self));
@@ -79,14 +75,14 @@ BSA.BlogInfoManager = Class.create({
             });
         }
         
-        // Определим наличие аккордиона
+        // Determine availability of accordion
         if (this.accordion){
-            // Подпишемся на события в аккордионе
+            // Subscribe to the events in the accordion
             this._subscribeAccordionEvents();
         }
     },
 
-    //--------------- Загрузка формы инф. помощи --------------
+    //--------------- Loading form of information help --------------
     
     loadForm : function(params)
     {
@@ -118,7 +114,7 @@ BSA.BlogInfoManager = Class.create({
             BSA.Sys.message_clear();
         }
     },
-    // Загрузим значения инф. помощи
+    // Load the value of information help
     loadInfo : function(params)
     {
 
@@ -164,7 +160,7 @@ BSA.BlogInfoManager = Class.create({
         }
     },
     
-    //------- Сохранение изменения содержимого инф. помощи из редактора --------------
+    //------- Save the changes in information help content from the editor --------------
     
     onCancelEditContent : function(event)
     {
@@ -271,7 +267,7 @@ BSA.BlogInfoManager = Class.create({
         }
     },
     
-    //------- Редактирование названия и содержания инф. помощи --------------
+    //------- Edit the title and content of information help --------------
     
     onInfoClose : function(event)
     {
@@ -392,9 +388,9 @@ BSA.BlogInfoManager = Class.create({
         }
     },
 
-    //-------------- Работа с окнами ---------------
+    //-------------- Working with windows ---------------
 
-    // Открыть содержимое инф. помощи в отдельном окне
+    // Open the contents of the information help in a separate window
     openInfoWin : function(title, values)
     {
         //        var self = this;
@@ -451,9 +447,9 @@ BSA.BlogInfoManager = Class.create({
     },
     
     
-    //========== РАБОТА С АККОРДИОНОМ ===========//
+    //========== ACCORDION ===========//
 
-    // Подпишемся на события в аккордионе
+    // Subscribe to the events in the accordion
     _subscribeAccordionEvents : function() {
         this.boxAccordion.onHiddenSectionEvent.push({
             client: this,
@@ -466,33 +462,19 @@ BSA.BlogInfoManager = Class.create({
         });
     },
     
-    // Свернуть секцию в аккордионе
+    // Hidden section of the accordion
     onHiddenSectionEvent : function(self, params) {
         var section = params.section.elements.section;
         var hrefSection = section.down('a').readAttribute('href');
-    //        if(hrefSection == self.accordion.section){
-    //            self.actual = false;
-    //        }
     },
     
-    // Развернуть секцию в аккордионе
+    // Show section in the accordion
     onShownSectionEvent : function(self, params) {
         var section = params.section.elements.section;
         var hrefSection = section.down('a').readAttribute('href');
-    //        if(hrefSection == self.accordion.section){
-    //            self.actual = true;
-    //            
-    //            // Загрузим изображения на страницу, если они еще не были загружены
-    //            if(! self.isDownloaded){
-    //                self.isDownloaded = true;
-    //                
-    //                // Получим данные о видео файлах
-    ////                self.getPlaylist();
-    //            }
-    //        }
     },
 
-    //----- Обработка ошибок ------
+    //----- Handling errors ------
     onFailure : function(message) {
         var msgs;
         if(message.class_message){
@@ -507,10 +489,9 @@ BSA.BlogInfoManager = Class.create({
     }
 });
 
-// Ф-ия, выполняемая при загрузки окна броузера
-// создаются обьекты класса, экземпляры их
-// заносяться в список экземпляров
-// пр. $H(BlogInfoManager: [new BlogInfoManager(param1), ... ,new BlogInfoManager(paramN)])
+// The function is executed after the download of the browser window
+// are created objects, which are entered in the list of instances
+// ex. $H(BlogInfoManager: [new BlogInfoManager(param1), ... ,new BlogInfoManager(paramN)])
 BSA.BlogInfoManager.RegRunOnLoad = function() {
     // Получим параметры для создания обьекта
     var params = scriptParams.get('BlogInfoManager');

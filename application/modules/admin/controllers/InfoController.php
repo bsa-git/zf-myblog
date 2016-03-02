@@ -3,30 +3,33 @@
 /**
  * Admin_InfoController
  *
- * Контроллер - Info
- * Просмотр и редактирование записей информационной помощи для всего сайта
- * пр. подсказки и инф. окна 
+ * Controller - Info
+ * view and edit information help records
+ * (ex. prompts or information window)
  *
  * @uses       Default_Plugin_TableGrid
- * @package    Module-Admin (Администрирование сайта)
+ * @package    Module-Admin (administration of site)
  * @subpackage Controllers
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Admin_InfoController extends Default_Plugin_TableGridController {
 
     /**
-     * Инициализация контроллера
+     * Initialization controller
      *
      */
     public function init() {
         parent::init();
     }
 
-    //=============== Загрузка шаблона инф. помощи =================//
+    //=============== Loading the template =================//
     /**
-     * Действие - load
-     * Загрузка формы редактирования
+     * Action - load
+     * Download form of editing
      * 
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/info/load
      *
      * @return void
@@ -60,12 +63,12 @@ class Admin_InfoController extends Default_Plugin_TableGridController {
         }
     }
 
-    //=============== Отображение инф. помощи =================//
+    //=============== Display information help =================//
     /**
-     * Действие - view
-     * Отображение инф. помощи в отдельном окне
+     * Action - view
+     * display information help in a separate window
      * 
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/info/view
      *
      * @return void
@@ -109,10 +112,10 @@ class Admin_InfoController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Действие - hint
-     * Отображение инф. помощи в виде всплывающей подсказки
+     * Action - hint
+     * display information help in a tooltip
      * 
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/info/hint
      *
      * @return void
@@ -150,12 +153,12 @@ class Admin_InfoController extends Default_Plugin_TableGridController {
         }
     }
 
-    //=============== Редактирование инф. помощи =================//
+    //=============== Edit information help =================//
     /**
-     * Действие - edit
-     * Редактирование инф. помощи
+     * Action - edit
+     * edit information help
      * 
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/info/edit
      *
      * @return void
@@ -250,13 +253,13 @@ class Admin_InfoController extends Default_Plugin_TableGridController {
         }
     }
 
-    //=============== РАБОТА С ОТЧЕТАМИ =================//
+    //=============== REPORT =================//
 
     /**
-     * Действие - report
-     * Отчеты по документам
+     * Action - report
+     * create report
      * 
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/info/report
      *
      * @return void
@@ -267,7 +270,7 @@ class Admin_InfoController extends Default_Plugin_TableGridController {
 
     /**
      * 
-     * Получить данные для отчета
+     * Get report data
      * 
      * @param string $table
      *
@@ -298,7 +301,6 @@ class Admin_InfoController extends Default_Plugin_TableGridController {
         switch ($table) {
             case 'admin.blog_info':
 
-//                $footer_colspan = 1;
                 // Исключим в отчете некоторые поля
                 $fieldsExcluded = array('actual');
                 $newModelColumns = parent::_excludeFieldsFromReport($fieldsExcluded, $arrData['column_model']);
@@ -335,14 +337,13 @@ class Admin_InfoController extends Default_Plugin_TableGridController {
         return $arrResultData;
     }
 
-    //=============== РАБОТА С ТАБЛИЦЕЙ =================//
+    //=============== Working with Table =================//
 
     /**
-     * Действие rows (получить данные)
-     * по этому действию происходит вывод всех данных
-     * в соответствии с параметрами запроса
+     * Action - rows
+     * get all data in accordance with the request parameters
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/user/rows
      *
      * @return void
@@ -352,12 +353,11 @@ class Admin_InfoController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Действие data (данные)
-     * по этому действию происходит запрос к данным по определенным
-     * полям таблицы. Затем эти данные помещаются в ComboBox
-     * для удобного редактирования этих полей таблицы
+     * Action - data
+     * get data on certain fields of the table. 
+     * This data placed in the ComboBox, to edit these table fields
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/user/data
      *
      * @return void
@@ -367,11 +367,10 @@ class Admin_InfoController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Действие validate (проверка значения)
-     * по этому действию происходит проверка соответсвующего значения
-     * параметры значения передаются в параметрах запроса
+     * Action - validate
+     * check the appropriate value. Parameters values are passed in the query
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/user/validate
      *
      * @return void
@@ -381,11 +380,10 @@ class Admin_InfoController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Действие save (сохранение данных)
-     * по этому действию происходит сохранение измененных данных
-     * или добавленых данных
-     *
-     * Доступ к действию возможем по следующим путям urls:
+     * Action - save
+     * save the modified data or add new data
+     * 
+     * Access to the action is possible in the following paths:
      * - /admin/user/save
      *
      * @return void
@@ -395,10 +393,10 @@ class Admin_InfoController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Действие delete (удаление данных)
-     * по этому действию происходит удаление данных из базы данных
+     * Action - delete
+     * delete data from the database
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/user/delete
      *
      * @return void
@@ -408,7 +406,7 @@ class Admin_InfoController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Изменить/Вставить запись таблицы
+     * Update/Insert table row
      *
      * @param array $row
      *
@@ -434,7 +432,7 @@ class Admin_InfoController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Удалить обьект записи таблицы
+     * Delete table row
      *
      * @param array $row
      *
@@ -453,12 +451,10 @@ class Admin_InfoController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Действие search (поиск значения в таблице)
-     * по этому действию происходит поиск строки
-     * в таблице и возвращается номер стр. поиска
-     * если поиск произошел успешно
+     * Action - search
+     * search the row in the table and return the number of row
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/user/search
      *
      * @return void
@@ -468,7 +464,7 @@ class Admin_InfoController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Получить кол. строк в таблице
+     * Get the number of rows in the table
      *
      * @param array $options
      *
@@ -479,7 +475,7 @@ class Admin_InfoController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Создать обьект записи таблицы
+     * Create a table record object
      *
      * @param array $options
      *
@@ -490,7 +486,7 @@ class Admin_InfoController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Получить записи таблицы
+     * Get a table records
      *
      * @param array $options
      *
@@ -501,7 +497,7 @@ class Admin_InfoController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Получить значения полей в Jason
+     * Get the values of the fields in Json format
      *
      * @param array $fields
      *
@@ -538,7 +534,7 @@ class Admin_InfoController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Получить значения поля
+     * Get the values of a field in a table
      *
      * @param array $fields
      *
@@ -550,7 +546,7 @@ class Admin_InfoController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Создать форму для проверки значений таблицы
+     * Create a form to validation the values
      *
      * @param array $options
      *
@@ -561,9 +557,9 @@ class Admin_InfoController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Проверить значение при записи данных
+     * Valid the values of the row when save
      *
-     * @param array $params
+     * @param array $row
      *
      * @return array
      */
@@ -578,29 +574,8 @@ class Admin_InfoController extends Default_Plugin_TableGridController {
 
         // Проверим редактируем существующую или втавляем новую запись
         if ($row['id']) { // редактируем существующую запись
-//            if ($rowTable->info_key !== $row['info_key']) {
-//                $jsons = array(
-//                    'class_message' => 'warning',
-//                    'messages' => array(
-//                        '<em>' . $this->Translate('Ошибка формы! Неверно введены данные в форму.') . '</em>',
-//                        '<em> ' . $this->Translate('Логин') . ': </em> ' . $this->Translate('Нельзя изменять ключевое значение'))
-//                );
-//            } else {
-//
-//                // Удалим из строки поле "info_key"
-//                foreach ($row as $key => $value) {
-//                    if ($key !== 'info_key') {
-//                        $newRow[$key] = $value;
-//                    }
-//                }
-//                // Проверим строку на валидность
-//                $jsons = $this->_isValidRow($newRow);
-//            }
             // Удалим из строки поле "info_key"
             foreach ($row as $key => $value) {
-//                if ($key !== 'info_key') {
-//                    $newRow[$key] = $value;
-//                }
                 $newRow[$key] = $value;
             }
             // Проверим строку на валидность
@@ -619,7 +594,7 @@ class Admin_InfoController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Получить отформатированное значение
+     * Get formatted values
      *
      * @param string $key
      * @param string $value
@@ -632,7 +607,7 @@ class Admin_InfoController extends Default_Plugin_TableGridController {
     }
 
     /**
-     * Получить отформатированные строки значений
+     * Get formatted row values
      *
      * @param array $rows
      *

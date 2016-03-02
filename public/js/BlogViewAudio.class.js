@@ -1,27 +1,23 @@
 /**
- * BlogAudioManager - Class
- *
- * Класс для управления проигрыванием аудио файлов
+ * Class - BlogAudioManager
+ * management the playback of audio files
  *
  * JavaScript
  *
- * Copyright (c) 2011 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2011 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 BSA.BlogViewAudio = Class.create({
     
     fp: null,// Flowplayer
-    indexStart: 0,// индекс испльзуется чтобы определить первое проигрывание файла
-    indexPause: 0,// индекс испльзуется чтобы определить первое проигрывание файла
-    accordion: null,// Аккордион
-    isDownloaded: false, // Признак загрузки изображений
-    actual: false, // Признак состояния аккордиона (открыт или закрыт)
+    indexStart: 0,// Start index
+    indexPause: 0,// Pause index
+    accordion: null,// Accordion
+    isDownloaded: false, // Is downloaded
+    actual: false, //  Tag accordion state (open or closed)
     
+    // Object initialization
     initialize: function(params) {
 			
         this.options = {
@@ -38,21 +34,21 @@ BSA.BlogViewAudio = Class.create({
 		
         this.container = $(params.container) ? $(params.container) :  $$('body')[0];
         
-        // Установим ссылку на загрузку FlashPlayer с моего сайта как альтернативу
+        // Establish a link to download the Flash Player from my site as an alternative
         BSA.Sys.downloadFlashPlayer($('post-audio'));
         
-        // Назначим обработчик события кнопки "player-close"
+        // Assign button event handler "player-close"
         var divCloseVideo = $('post-audio').down('div.player-close');
         var aCloseVideo = divCloseVideo.down('a');
         aCloseVideo.observe('click', this.onCloseAudio.bindAsEventListener(this));
         
-        // Определим наличие аккордиона
+        // Is accordion
         if (params.accordion){
             this.accordion = params.accordion;
-            // Подпишемся на события в аккордионе
+            // Subscribe to the events in the accordion
             this._subscribeAccordionEvents();
         }else{
-            // Получим данные о аудио файлах
+            // Get information about audio files
             this.getData();	
         }
     },
@@ -253,9 +249,9 @@ BSA.BlogViewAudio = Class.create({
         
     },
     
-    //========== РАБОТА С АККОРДИОНОМ ===========//
+    //========== ACCORDION ===========//
 
-    // Подпишемся на события в аккордионе
+    // Subscribe to the events in the accordion
     _subscribeAccordionEvents : function() {
         var self = this;
         var indexSection = self.accordion.section;
@@ -289,7 +285,7 @@ BSA.BlogViewAudio = Class.create({
         })
     },
     
-    // Свернуть секцию в аккордионе
+    // Hidden section of the accordion
     onHiddenSectionEvent : function(self, params) {
         var section = params.section.elements.section;
         var hrefSection = section.down('a').readAttribute('href');
@@ -299,7 +295,7 @@ BSA.BlogViewAudio = Class.create({
         }
     },
     
-    // Развернуть секцию в аккордионе
+    // Show section in the accordion
     onShownSectionEvent : function(self, params) {
         var section = params.section.elements.section;
         var hrefSection = section.down('a').readAttribute('href');
@@ -318,10 +314,9 @@ BSA.BlogViewAudio = Class.create({
     
 });
 
-// Ф-ия, выполняемая при загрузки окна броузера
-// создаются обьекты класса, экземпляры их
-// заносяться в список экземпляров
-// пр. $H(BlogAudioManager: [new BlogAudioManager(param1), ... ,new BlogAudioManager(paramN)])
+// The function is executed after the download of the browser window
+// are created objects, which are entered in the list of instances
+// ex. $H(BlogViewAudio: [new BlogViewAudio(param1), ... ,new BlogViewAudio(paramN)])
 BSA.BlogViewAudio.RegRunOnLoad = function() {
     // Получим параметры для создания обьекта
     var params = scriptParams.get('BlogViewAudio');

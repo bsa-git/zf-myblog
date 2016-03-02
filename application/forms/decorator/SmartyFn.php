@@ -3,17 +3,20 @@
 /**
  * Default_Form_Decorator_SmartyFn
  * 
- * Декоратор выводит результат Smarty ф-ии
+ * Decorator - Smarty function outputs the result
  *
  *
  * @uses       Zend_Form_Decorator_Abstract
  * @package    Module-Default
  * @subpackage Forms.Decorators
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Form_Decorator_SmartyFn extends Zend_Form_Decorator_Abstract {
 
     /**
-     * Cоздание Smarty ф-ии
+     * Create Smarty function
      *
      * @return string
      */
@@ -24,22 +27,8 @@ class Default_Form_Decorator_SmartyFn extends Zend_Form_Decorator_Abstract {
         $name = $element->getName();
         $label = $element->getLabel();
         if($label){
-            //$label = '<a href="'. $href .'" id="' . $this->getElement()->getName() . '_label">' . $label . '</a>';
             $label = '<dt id="' . $name . '-label"><label class="required">' . $label . ':</label></dt>';
         }
-        
-        //<dt id="username-label"><label for="username" class="required">Имя входа пользователя:</label></dt>
-        //<dd id="username-element2"><input type="text" name="username2" id="username2" value="2222222"></dd>
-        /*{html_select_date prefix='ts_created'
-                          time=$fp->ts_created
-                          start_year=-5
-                          end_year=+5}
-         
-         {html_select_time prefix='ts_created'
-                          time=$fp->ts_created
-                          display_seconds=false
-                          use_24_hours=false}
-         */
         
         switch ($name) {
             case ('html_select_date'):
@@ -71,7 +60,7 @@ class Default_Form_Decorator_SmartyFn extends Zend_Form_Decorator_Abstract {
     }
 
     /**
-     * Рендеринг декоратора
+     * Rendering decorator
      *
      * @param string $content
      * @return string

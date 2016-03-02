@@ -2,16 +2,19 @@
 /**
  * smarty_function_imagefilename
  *
- * Функция Smarty - imagefilename
- * получить файл изображения
+ * Function Smarty - imagefilename
+ * get an image file
  *
  * @uses
  * @package    Module-Default
  * @subpackage Views.Plugins
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 
 /**
- * Получить файл изображения
+ * Get an image file
  *
  * @param array $params
  * @param Smarty $smarty

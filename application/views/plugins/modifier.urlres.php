@@ -3,18 +3,22 @@
 /**
  * smarty_modifier_urlres
  *
- * Модификатор Smarty - url
- * получить URL для ресурса
+ * Modifier Smarty - url
+ * get the URL for the resource
  *
  * @uses       
  * @package    Module-Default
  * @subpackage Views.Plugins
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 
 /**
- * Получить URL для ресурса
+ * Get the URL for the resource
  * 
- * @param string $text
+ * @param string $url_res
+ * @param string $type
  * @return string 
  */
 function smarty_modifier_urlres($url_res, $type = 'normalize') {
@@ -32,5 +36,3 @@ function smarty_modifier_urlres($url_res, $type = 'normalize') {
     }
     return $result;
 }
-
-?>

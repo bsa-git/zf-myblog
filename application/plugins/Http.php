@@ -3,8 +3,9 @@
 // app/Services/My/Http.php
 
 /**
- * Class - Http
- * Sending data Http
+ * Default_Plugin_Http
+ * 
+ * Plugin - send requests to the HTTP server using CURL
  *
  * @category Service
  * @package  app\Services

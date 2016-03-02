@@ -3,24 +3,27 @@
 /**
  * UserController
  *
- * Контроллер - User
- * предназначен для отображения публичной домашней страницы пользователя
+ * Controller - User
+ * for public display the user's home page
  *
  * @uses       Default_Plugin_BaseController
  * @package    Module-Default
  * @subpackage Controllers
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class UserController extends Default_Plugin_BaseController {
 
     /**
-     * Обьект пользователя
+     * User object
      *
      * @var Default_Model_DbTable_User
      */
     protected $user = null;
 
     /**
-     * Событие перед диспетчеризацией
+     * Event before dispatching
      * 
      * @return void 
      */
@@ -71,14 +74,13 @@ class UserController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - index
-     *
-     * Отображаются все сообщения конкретного пользователя 
+     * Action - index
+     * displays all user posts
      * 
      *
      * 
-     * Доступ к действию возможем по следующим путям urls:
-     * шаблон раутера - user/:username/:action/*
+     * Access to the action is possible in the following paths:
+     * router pattern - user/:username/:action/*
      * - /user/user1
      * @return void
      */
@@ -128,9 +130,10 @@ class UserController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Пользователь не нашел действия контроллера
+     * Action - usernotfound
+     * user is not found
      * 
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /user/usernotfound
      *
      * @return void
@@ -146,10 +149,11 @@ class UserController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Просмотр страницы
+     * Action - view
+     * view user post
      * 
-     * Доступ к действию возможем по следующим путям urls:
-     * шаблон роутера - user/:username/view/:url/*
+     * Access to the action is possible in the following paths:
+     * router pattern - user/:username/view/:url/*
      * - /user/user1/view/prosto-fleshka
      * 
      * @return void
@@ -212,9 +216,10 @@ class UserController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Запись не найдена
+     * Action - postnotfound
+     * user post not found
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /user/post-not-found
      *
      * @return void
@@ -229,10 +234,11 @@ class UserController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Архив блога пользователя за месяц
+     * Action - archive
+     * archive user monthly blog
      *
-     * Доступ к действию возможем по следующим путям urls:
-     * шаблон раутера - user/:username/archive/:year/:month/*
+     * Access to the action is possible in the following paths:
+     * router pattern - user/:username/archive/:year/:month/*
      * - /user/user1/archive/2011/07
      *
      * @return void
@@ -296,10 +302,11 @@ class UserController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действия с метками
+     * Action - tag
+     * operations with tags
      *
-     * Доступ к действию возможем по следующим путям urls:
-     * шаблон раутера - user/:username/tag/:tag/*
+     * Access to the action is possible in the following paths:
+     * router pattern - user/:username/tag/:tag/*
      * - /user/user1/tag/reports
      *
      * @return void
@@ -357,19 +364,18 @@ class UserController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действия с новостной лентой пользователя
-     * можно получить все новости пользователя
-     * а можно получить новости только по отдельной метке
+     * Action - feed
+     * actions with the news feed 
+     * user can get all the news 
+     * or the user can receive news only on a separate tag
      *
-     *
-     *
-     * Доступ к действию возможем по следующим путям urls:
-     * шаблон раутера - user/:username/feed/:tag/*
-     * или
-     * шаблон раутера - user/:username/:action/*
+     * Access to the action is possible in the following paths:
+     * router pattern - user/:username/feed/:tag/*
+     * or
+     * router pattern - user/:username/:action/*
      *
      * - /user/user1/feed/reports
-     * или
+     * or
      * - /user/user1/feed
      *
      * @return void
@@ -468,10 +474,11 @@ class UserController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - получить изображения в HTML виде через ajax запрос
+     * Action - images
+     * obtain images via ajax request
      *
-     * Доступ к действию возможем по следующим путям urls:
-     * шаблон раутера - user/:username/post/:post_id/images/*
+     * Access to the action is possible in the following paths:
+     * router pattern - user/:username/post/:post_id/images/*
      * 
      * - /user/user1/post/27/images
      *
@@ -522,7 +529,7 @@ class UserController extends Default_Plugin_BaseController {
                     'class_message' => 'warning',
                     'messages' => array(
                         '<em>' . $this->Translate('Ошибка получения изображений') . '</em>',
-                        Default_Plugin_StrBox::getMessageError($exc)
+                        Default_Plugin_SysBox::getMessageError($exc)
                     )
                 );
                 $this->sendJson($jsons);
@@ -532,11 +539,11 @@ class UserController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действия с аудио данными
-     * получим список файлов mp3 и их описание 
+     * Action - audios
+     * Actions with the audios. Get a list of mp3 files and their descriptions
      *
-     * Доступ к действию возможем по следующим путям urls:
-     * шаблон раутера - user/:username/post/:post_id/audios/*
+     * Access to the action is possible in the following paths:
+     * router pattern - user/:username/post/:post_id/audios/*
      * 
      * - /user/user1/post/27/audios
      *
@@ -569,11 +576,11 @@ class UserController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действия с видео данными
-     * получим список видеофайлов
+     * Action - videos
+     * Actions with the videos. Get a list of videos.
      *
-     * Доступ к действию возможем по следующим путям urls:
-     * шаблон раутера - user/:username/post/:post_id/videos/*
+     * Access to the action is possible in the following paths:
+     * router pattern - user/:username/post/:post_id/videos/*
      * 
      * - /user/user1/post/27/videos
      *
@@ -646,7 +653,7 @@ class UserController extends Default_Plugin_BaseController {
                             'class_message' => 'warning',
                             'messages' => array(
                                 '<em>' . $this->Translate('Ошибка получения видео') . '</em>',
-                                Default_Plugin_StrBox::getMessageError($exc)
+                                Default_Plugin_SysBox::getMessageError($exc)
                             )
                         );
                         $this->sendJson($jsons);
@@ -718,54 +725,12 @@ class UserController extends Default_Plugin_BaseController {
             return;
         }
     }
-
+    
     /**
-     * Получить URL видео для сайта Got-tv.ru
+     * Action - comments
+     * actions for user comments
      *
-     * @param  string $nameVideo
-     * @param  string $urlVideo
-     * @return string|FALSE //url or ERROR
-     */
-    private function _getGodtvURL($nameVideo, $urlVideo) {
-        $result = FALSE;
-        $suffix = '.godtv.ru:85';
-        $config = array();
-        $strBox = new Default_Plugin_String();
-        //-------------------
-        // Получим URL страницы загрузки видео
-        $encodeNameVideo = urlencode($nameVideo);
-        $url = "http://god-tv.ru/" . $encodeNameVideo;
-
-        try {
-            $http = new Default_Plugin_HttpBox($config);
-            $page = $http->get($url);
-            foreach ($page->links() as $link) {
-                $href = $link->getAttribute('href');
-                $strBox->set($href);
-//                if ($strBox->indexOf($suffix) !== FALSE && $strBox->indexOf($urlVideo) !== FALSE) {
-//                    $result = $strBox->get();
-//                }
-                if ($strBox->indexOf($suffix) !== FALSE) {
-                    if ($strBox->indexOf($urlVideo) !== FALSE) {
-                        $result = $strBox->get();
-                    }
-                }
-            }
-
-            if ($result === FALSE) {
-                $html = $page->html;
-            }
-        } catch (Exception $exc) {
-            return FALSE;
-        }
-
-        return $result;
-    }
-
-    /**
-     * Действия с комментариями пользователей
-     *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * шаблон раутера - user/:username/post/:post_id/comments/*
      * 
      * - /user/user1/post/27/comments
@@ -894,12 +859,55 @@ class UserController extends Default_Plugin_BaseController {
                 'class_message' => 'warning',
                 'messages' => array(
                     '<em>' . $this->Translate('Ошибка при добавлении / удалении комментария в блог') . '</em>',
-                    Default_Plugin_StrBox::getMessageError($e)
+                    Default_Plugin_SysBox::getMessageError($e)
                 )
             );
         }
 
         $this->sendJson($json);
+    }
+    
+    /**
+     * Get URL video for Got-tv.ru site
+     *
+     * @param  string $nameVideo
+     * @param  string $urlVideo
+     * @return string|FALSE //url or ERROR
+     */
+    private function _getGodtvURL($nameVideo, $urlVideo) {
+        $result = FALSE;
+        $suffix = '.godtv.ru:85';
+        $config = array();
+        $strBox = new Default_Plugin_String();
+        //-------------------
+        // Получим URL страницы загрузки видео
+        $encodeNameVideo = urlencode($nameVideo);
+        $url = "http://god-tv.ru/" . $encodeNameVideo;
+
+        try {
+            $http = new Default_Plugin_HttpBox($config);
+            $page = $http->get($url);
+            foreach ($page->links() as $link) {
+                $href = $link->getAttribute('href');
+                $strBox->set($href);
+//                if ($strBox->indexOf($suffix) !== FALSE && $strBox->indexOf($urlVideo) !== FALSE) {
+//                    $result = $strBox->get();
+//                }
+                if ($strBox->indexOf($suffix) !== FALSE) {
+                    if ($strBox->indexOf($urlVideo) !== FALSE) {
+                        $result = $strBox->get();
+                    }
+                }
+            }
+
+            if ($result === FALSE) {
+                $html = $page->html;
+            }
+        } catch (Exception $exc) {
+            return FALSE;
+        }
+
+        return $result;
     }
 
 }

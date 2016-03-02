@@ -1,41 +1,38 @@
 /**
- * FileUploader - Class
+ * Class - FileUploader
  *
- * С помощью класса вы можете:
- *  - загружать файлы
- *  - контролировать при загрузке тип, размер файла
- *  - возможна загрузка нескольких файлов через перетаскивание файлов
- *  в определенную область формы
+ * With these class you can:
+ *  - upload files
+ *  - control when loading type and file size
+ *  - can be uploaded multiple files
  *
  * JavaScript
  *
- * Copyright (c) 2011 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2012 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 BSA.FileUploader = Class.create({
     
-    settings: {// Настройки по умолчанию
+    // Default config
+    settings: {
         arrAllowedExtensions: ['jpg', 'jpeg', 'png', 'gif'],
         strAllowedExtensions: 'jpg;jpeg;png;gif',
-        sizeLimit: 1//Размер в мегабайтах
+        sizeLimit: 1// The size in megabytes
     },
-    container: null,// Контейнер
-    container_id: '',// Контейнер ID
-    objectHandler: null,// Обьект обработчика события загрузки файла
-    ajaxAction: '/blogmanager/images',// URL для Ajax запроса
-    ajaxParams: null,// Параметры для Ajax запроса
+    container: null,
+    container_id: '',
+    objectHandler: null,// file upload handler
+    ajaxAction: '/blogmanager/images',// URL for Ajax request
+    ajaxParams: null,// Ajax params
     
+    // Object initialization
     initialize : function(params)
     {
         var hint = '';
         var hintAllowedExtensions = ''; 
         //----------------
-        // Установим контейнер
+        // Set container
         if($(params.container)){
             this.container = $(params.container);
             this.container_id = params.container;
@@ -43,7 +40,7 @@ BSA.FileUploader = Class.create({
             return;
         }
         
-        //Определим настройки 
+        // Set settings
         if(params.settings){
             this.settings = {
                 arrAllowedExtensions:  params.settings.allowedExtensions,
@@ -51,8 +48,8 @@ BSA.FileUploader = Class.create({
                 sizeLimit:  params.settings.sizeLimit,
                 type: (params.settings.type)?params.settings.type.toLowerCase():''
             }
-            // Создадим строку подсказок для допустимых расширений
-            this.settings.arrAllowedExtensions.each(function(extension) {//tooltip
+            // Create a string of hints for valid extensions
+            this.settings.arrAllowedExtensions.each(function(extension) {
                 hint = '<span class="help-hint ajax_allowed-file-extensions-'+ extension +'">'+ extension +'</span>; ';
                 hintAllowedExtensions += hint;
             });
@@ -60,33 +57,33 @@ BSA.FileUploader = Class.create({
         }
         
         
-        // Установим параметры для Ajax запроса
+        // Set Ajax params
         this.ajaxParams = {
             allowedExtensions: this.settings.arrAllowedExtensions.join(';'),
             sizeLimit: 1024 * 1024 * this.settings.sizeLimit
         }
         
-        // Ajax запрос ajaxRequest
+        // Ajax request
         if(params.ajaxRequest){
             
-            this.ajaxAction = params.ajaxRequest.url;// URL для Ajax запроса
-            // Добавим новые занчения параметров, если они есть
+            this.ajaxAction = params.ajaxRequest.url;// URL for Ajax request
+            // Add new parameters
             if(params.ajaxRequest.params){
                 this.ajaxParams = Object.extend(this.ajaxParams, params.ajaxRequest.params);
             }
             
         }
         
-        //Определим обработчик события загрузки
+        // Set file upload handler
         if(params.objectHandler){
             this.objectHandler = scriptInstances.get(params.objectHandler.classObject)[params.objectHandler.indexObject];
         }
         
-        // Инициализация файлового загрузчика
+        // Initialization file uploader
         this.iniFileUploader();
     },
     
-    // Событие перед загрузкой файла
+    // Event before uploading file
     iniFileUploader : function()
     {
         var messages = {
@@ -129,12 +126,11 @@ BSA.FileUploader = Class.create({
         });
     },
 
-    // Событие перед загрузкой файла
     onSubmit : function(id, fileName)
     {
     },
 
-    // Событие после загрузки файла
+    // Event after upload file
     onUploadComplete : function(json)
     {
         BSA.Sys.messagebox_clear();
@@ -168,7 +164,7 @@ BSA.FileUploader = Class.create({
         }
     },
     
-    //----- Обработка ошибок ------
+    //----- ERROR ------
     onFailure : function(message) {
         var msgs;
         if(message.class_message){
@@ -184,10 +180,9 @@ BSA.FileUploader = Class.create({
     
 });
 
-// Ф-ия, выполняемая при загрузки окна броузера
-// создаются обьекты класса, экземпляры их
-// заносяться в список экземпляров
-// пр. $H(FileUploader: [new FileUploader(param1, inst), ... ,new FileUploader(paramN, inst)])
+// The function is executed after the download of the browser window
+// are created objects, which are entered in the list of instances
+// ex. $H(FileUploader: [new FileUploader(param1, inst), ... ,new FileUploader(paramN, inst)])
 BSA.FileUploader.RegRunOnLoad = function() {
     // Получим параметры для создания обьекта
     var params = scriptParams.get('FileUploader');

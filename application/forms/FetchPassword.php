@@ -3,22 +3,24 @@
 /**
  * Default_Form_FetchPassword
  * 
- * Форма для тех, кто забыл паспорт
+ * Form - password recovery
  *
  *
  * @uses       Default_Form_MyForm
  * @package    Module-Default
  * @subpackage Forms
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Form_FetchPassword extends Default_Form_MyForm {
 
     /**
-     * Создание формы
+     * Initialization form
      */
     public function init() {
-        // Вызываем родительский метод
-        parent::init();
 
+        parent::init();
 
         //---------------- Форма ----------------
         // Указываем action формы

@@ -3,18 +3,21 @@
 /**
  * Default_Form_Filter_Translit
  * 
- * Фильтр переводящий строку в транслит.
+ * Filter - converts the string in transliteration.
  *
  *
  * @uses       Zend_Filter_Interface
  * @package    Module-Default
  * @subpackage Forms.Filters
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Form_Filter_Translit implements Zend_Filter_Interface
 {
     
     /**
-     * Производит фильтрацию в соответствии с назначением фильтра
+     * Performs filtering in accordance with the purpose of the filter
      *
      * @param string $value
      * @return string
@@ -22,7 +25,6 @@ class Default_Form_Filter_Translit implements Zend_Filter_Interface
     public function filter($value) 
     {
         
-        // Массив символов
         $letters = array(
 			"а" => "a", "б" => "b", "в" => "v", "г" => "g", "д" => "d", "е" => "e",
 			"ё" => "e", "ж" => "zh", "з" => "z", "и" => "i", "й" => "j", "к" => "k",
@@ -39,7 +41,6 @@ class Default_Form_Filter_Translit implements Zend_Filter_Interface
             
 		);
 		
-		// Проходим по массиву и заменяем каждый символ фильтруемого значения
 		foreach($letters as $letterVal => $letterKey) {
 			$value = str_replace($letterVal, $letterKey, $value);
 		}

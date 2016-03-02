@@ -3,18 +3,20 @@
 /**
  * Default_Model_DbTable_BlogPostAudio
  *
- * Таблица - для работы с музыкальными файлами
+ * Table - to work with audio files
  *
  *
  * @uses       Default_Model_DatabaseObject
  * @package    Module-Default
  * @subpackage Models
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Model_DbTable_BlogPostAudio extends Default_Model_DatabaseObject {
 
     /**
-     *
-     * Конфигурация таблицы
+     * Table config
      * @var array
      */
     private $_config = array(
@@ -30,16 +32,16 @@ class Default_Model_DbTable_BlogPostAudio extends Default_Model_DatabaseObject {
     );
     /**
      *
-     * Загруженный файл - путь к файлу
+     * Uploaded file
      *
      * @var string
      */
     protected $_uploadedFile;
 
-    //================ КОНСТРУКТОР КЛАССА ============
+    //============================
 
     /**
-     * Конструктор обьекта таблицы
+     * Constructor
      * 
      * @param Zend_Db_Adapter_Abstract $db
      */
@@ -54,10 +56,10 @@ class Default_Model_DbTable_BlogPostAudio extends Default_Model_DatabaseObject {
         $this->add('comment', "", self::TYPE_HTML);
     }
 
-    //================ ОБРАБОТКА СОБЫТИЙ ============
+    //================ HANDLING OF EVENTS ============
 
     /**
-     * Событие перед вставкой записи
+     * Event before inserting the record
      *
      * @return bool
      */
@@ -82,7 +84,7 @@ class Default_Model_DbTable_BlogPostAudio extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Событие после вставки записи
+     * Event after inserting the record
      *
      * @return bool
      */
@@ -98,7 +100,7 @@ class Default_Model_DbTable_BlogPostAudio extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Событие перед удалением записи
+     * Event before deleting the record
      *
      * @return bool
      */
@@ -107,10 +109,10 @@ class Default_Model_DbTable_BlogPostAudio extends Default_Model_DatabaseObject {
         return true;
     }
 
-    //================ РАБОТА С ФАЙЛАМИ ============
+    //================ WORKING WITH FILES ============
 
     /**
-     * Загрузить данные муз. файла для конкретного сообщения
+     * Upload data from audio for a particular post
      *
      * @param int $post_id
      * @param int $audio_id
@@ -135,8 +137,7 @@ class Default_Model_DbTable_BlogPostAudio extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Проверка загруженного файла
-     * что это файл, что он существует, что его можно читать
+     * Checking the downloaded file that it exists, that it can be read
      *
      * @param string $path
      */
@@ -151,9 +152,7 @@ class Default_Model_DbTable_BlogPostAudio extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить полный путь к файлу
-     * причем имя файла заменяется на его уникальный код ID
-     * из базы данных
+     * Get the full path to the file and the file name is replaced by its unique ID code from DB
      *
      * @return string
      */
@@ -164,8 +163,7 @@ class Default_Model_DbTable_BlogPostAudio extends Default_Model_DatabaseObject {
 
     
     /**
-     * Получить путь хранения муз. файлов для
-     * конкретного пользователя
+     * Get the audio file storage path for a specific user
      *
      * @return string
      */
@@ -192,7 +190,7 @@ class Default_Model_DbTable_BlogPostAudio extends Default_Model_DatabaseObject {
     }
     
     /**
-     * Получить полный URL к ресурсу
+     * Get the full URL to the resource
      *
      * @return string
      */
@@ -201,9 +199,7 @@ class Default_Model_DbTable_BlogPostAudio extends Default_Model_DatabaseObject {
     }
     
     /**
-     * Получить полный URL к файлу
-     * причем имя файла заменяется на его уникальный код ID
-     * из базы данных
+     * Get the full URL to the file and the file name is replaced by its unique ID code from the database
      *
      * @return string
      */
@@ -213,8 +209,7 @@ class Default_Model_DbTable_BlogPostAudio extends Default_Model_DatabaseObject {
     }
     
     /**
-     * Получить URL хранения муз. файлов для
-     * конкретного пользователя
+     * Get the URL storing audio files for a specific user
      *
      * @return string
      */
@@ -242,7 +237,7 @@ class Default_Model_DbTable_BlogPostAudio extends Default_Model_DatabaseObject {
 
 
     /**
-     * Получить массив обьектов музыки для статьи
+     * Get an array of audio objects for post
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -275,7 +270,7 @@ class Default_Model_DbTable_BlogPostAudio extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить массив муз.файлов для сообщения
+     * Get an array of audio for post
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -310,8 +305,7 @@ class Default_Model_DbTable_BlogPostAudio extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить общее кол. записей удовлетворяющих
-     * критерия, заданным в парметре $options
+     * Get the total number of records satisfying the criteria specified in the parameter $options
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -334,5 +328,3 @@ class Default_Model_DbTable_BlogPostAudio extends Default_Model_DatabaseObject {
         return $db->fetchOne($select);
     }
 }
-
-?>

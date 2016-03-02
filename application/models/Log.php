@@ -3,13 +3,15 @@
 /**
  * Default_Model_Log
  * 
- * класс таблиц логирования
- * log_msg, log_error, log_stst
+ * Model - logging tables (log_msg, log_error, log_stat)
  *
  *
  * @uses       Zend_Log_Writer_Db
  * @package    Module-Default
  * @subpackage Models
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Model_Log extends Zend_Log_Writer_Db {
 
@@ -28,7 +30,7 @@ class Default_Model_Log extends Zend_Log_Writer_Db {
     protected $_table;
 
     /*
-     * Максимальное кол. записей в табл.
+     * The maximum number of rows in the table
      * @var array
      */
     protected $_max_rows = null;
@@ -98,10 +100,9 @@ class Default_Model_Log extends Zend_Log_Writer_Db {
         parent::_write($event);
     }
 
-    //=========== РАБОТА С LOG ==================//
+    //=========== WORKING WITH LOGS ==================//
     /**
-     * toLog
-     * Записать в лог данные
+     * Write data to log
      *
      * @param  Zend_Controller_Request_Abstract $request
      * @return void
@@ -173,5 +174,3 @@ class Default_Model_Log extends Zend_Log_Writer_Db {
     }
 
 }
-
-?>

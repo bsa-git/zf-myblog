@@ -1,28 +1,23 @@
 /**
- * BSA.Sys - обьект системных ф-ий
+ * BSA.Sys - object system functions
  *
- * С помощью обьекта вы можете:
- *  - выводить сообщения и ошибки
- *  - обеспечивает функциональность ProgressBar (индикацию степени выполнения задания)
- *  - назначает события для AJAX запросов и вывод результатов выполнения этих запросов
- *  - Работать с частями адреса URL
+ * This object allows:
+ *  - display messages and errors
+ *  - it provides the functionality of ProgressBar (indicator of the degree of the assignment)
+ *  - assigns events to AJAX requests and display the results of the implementation of these requests
+ *  - work with parts of a URL
  *
  * JavaScript
  *
- * Copyright (c) 2011 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2011 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
-
 
 var BSA = {};
 
 BSA.Sys = {
-    // Глобальные установки
+    // Global Settings
     settings: {
         ieVersion: 0,
         messages: 'messages',
@@ -51,7 +46,7 @@ BSA.Sys = {
             '.odt', '.ods'
         ],
     },
-    // Ф-ия инициализации скрипта
+    // Init script function
     init: function ()
     {
         BSA.Sys.settings.platform = navigator.platform;
@@ -108,7 +103,6 @@ BSA.Sys = {
             Prototype.Browser.IE8 = engine == 8;
             Prototype.Browser.IE9 = engine == 9;
             Prototype.Browser.IE10 = engine == 10;
-//            alert('IEVersion = ' + engine);
         }
 
         // Set user logotype
@@ -144,7 +138,6 @@ BSA.Sys = {
         my_message = '<em>' + msg + ': </em>' + my_message;
         messages.update(my_message);
         messages.show();
-//        new Effect.Highlight(messages);
     },
     err_message_write: function (message)
     {
@@ -170,7 +163,6 @@ BSA.Sys = {
         my_message = '<span style="color: red;font-weight: bold;">' + err + ': </span>' + my_message;
         messages.update(my_message);
         messages.show();
-//        new Effect.Highlight(messages);
     },
     message_clear: function ()
     {
@@ -216,8 +208,6 @@ BSA.Sys = {
         typeMessages = lb.getMsg(key);
         htmlMessages = '<b class="' + class_message + '">' + typeMessages + '</b>';
 
-        //        new Insertion.Top(this.settings.message_items, htmlMessages);
-        //        new Insertion(this.settings.message_items, htmlMessages);
         $('close-message-items').insert({
             after: htmlMessages
         });
@@ -232,7 +222,7 @@ BSA.Sys = {
         $('header').scrollIntoView();
 
     },
-    // Очистим сообщения
+    // Сlear message
     messagebox_clear: function () {
         var classNames = null;
         //---------------------
@@ -253,7 +243,7 @@ BSA.Sys = {
             msgBox.hide();
         }
     },
-    // Очистим сообщения с задержкой
+    // Clear message with delay
     messagebox_delay_clear: function () {
         var msgBox = $(this.settings.message_box);
         var options = {
@@ -266,7 +256,7 @@ BSA.Sys = {
 
         new Effect.Fade(msgBox, options);
     },
-    // Отобразим ошибки в форме
+    // Display errors in the form
     form_errors_write: function (form, element, errors) {
         var htmlErrors = '';
         var formElement = form[element];
@@ -282,7 +272,7 @@ BSA.Sys = {
         htmlErrors = '<ul class="errors">' + htmlErrors + '</ul>';
         new Insertion.After(element, htmlErrors);
     },
-    // Очистим ошибки в форме
+    // Clear error in the form
     form_errors_clear: function (form)
     {
         form.getElementsBySelector('.errors').invoke('remove');
@@ -364,8 +354,8 @@ BSA.Sys = {
             container.down('div.flashplayer-download').innerHTML = message;
         }
     },
-    // Событие ajax запроса при нажатии на элемент
-    // и получении сообщения об результате выполнения запроса
+    // Event ajax request when you click an element 
+    // and receive messages about a query result
     onClickAjaxAction: function (event) {
         Event.stop(event);
         var link = Event.element(event);
@@ -389,12 +379,6 @@ BSA.Sys = {
 
         new Ajax.Request(link.href, options);
     },
-    // Загрузка содержимого IFrame
-    //    onIFrameLoad: function (event)
-    //    {
-    //        Event.stop(event);
-    //        var iFrame = Event.element(event);
-    //    },
 
     getJsonResponse: function (transport, sanitize) {
         var json;
@@ -429,7 +413,7 @@ BSA.Sys = {
         }
         return json;
     },
-    // Обработка ошибок
+    // Error handling
     onFailure: function (message) {
         var msgs;
         if (message.class_message) {
@@ -444,5 +428,5 @@ BSA.Sys = {
     }
 }
 
-// Регистрация ф-ии
+// Registration function
 runOnLoad(BSA.Sys.init);

@@ -3,16 +3,20 @@
 /**
  * smarty_function_getlang
  *
- * Функция Smarty - geturl
- * получить язык сайта
+ * Function Smarty - geturl
+ * get locale
  *
  * @uses       
  * @package    Module-Default
  * @subpackage Views.Plugins
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 
 /**
- * Получить язык сайта
+ * 
+ * Get locale
  * 
  * @param Smarty $smarty
  * @return string 
@@ -20,5 +24,3 @@
 function smarty_function_getlang($smarty) {
     return Default_Plugin_SysBox::getTranslateLocale();
 }
-
-?>

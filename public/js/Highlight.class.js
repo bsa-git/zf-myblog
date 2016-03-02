@@ -1,19 +1,15 @@
 /**
- * Highlight - Class
+ * Class - Highlight
  * syntax highlighting for the Web
  *
  * JavaScript
  *
- * Copyright (c) 2011 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2011 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+* @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 BSA.Highlight = Class.create({
-    // Инициализация обьекта
+    // Object initialization
     initialize: function (params)
     {
         try {
@@ -58,10 +54,9 @@ BSA.Highlight = Class.create({
     }
 });
 
-// Ф-ия, выполняемая при загрузки окна браузера
-// создаются обьекты класса, экземпляры их
-// заносяться в список экземпляров
-// пр. $H(Highlight: [new Highlight(), ... ,new Highlight()])
+// The function is executed after the download of the browser window
+// are created objects, which are entered in the list of instances
+// ex. $H(Highlight: [new Highlight(), ... ,new Highlight()])
 BSA.Highlight.RegRunOnLoad = function () {
     // Получим параметры для создания обьекта
     var params = scriptParams.get('Highlight');

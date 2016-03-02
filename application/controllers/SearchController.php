@@ -3,21 +3,23 @@
 /**
  * SearchController
  *
- * Контроллер - Search
- * управляет поиском информации на сайте
+ * Controller - Search
+ * manages the search for information on the site
  *
  * @uses       Default_Plugin_BaseController
  * @package    Module-Default
  * @subpackage Controllers
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class SearchController extends Default_Plugin_BaseController {
 
     /**
-     * Действие - index
+     * Action - index
+     * search posts for request
      * 
-     * Поиск сообщений по запросу
-     * 
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /search/index
      * - /search/
      * @return void
@@ -160,9 +162,10 @@ class SearchController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Получить предложенный список меток на введенный пользователем запрос
+     * Action - suggestion
+     * get a list of suggested tags to a request entered by the user
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /search/suggestion
      * @return void
      */
@@ -174,9 +177,10 @@ class SearchController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Восстановление поискового индекса
+     * Action - rebuild
+     * rebuild the search index
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /search/rebuild
      * @return void
      */
@@ -254,9 +258,10 @@ class SearchController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Оптимизация поискового индекса
+     * Action - optimize
+     * optimize the search index
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /search/optimize
      * @return void
      */

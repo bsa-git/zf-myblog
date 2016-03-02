@@ -3,24 +3,27 @@
 /**
  * Default_Form_Validate_PostStatus
  * 
- * Проверка статуса сообщения
+ * Validate - post status
  * 
  *
  *
  * @uses       Zend_Validate_Abstract
  * @package    Module-Default
  * @subpackage Forms.Validates
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Form_Validate_PostStatus extends Zend_Validate_Abstract {
     /**
-     * Метка ошибки
+     * Error tag
      * @var const 
      */
     const INVALID = 'poststatusInvalid';
 
 
     /**
-     * Текст ошибки
+     * Error text
      * @var array 
      */
     protected $_messageTemplates = array(
@@ -28,9 +31,9 @@ class Default_Form_Validate_PostStatus extends Zend_Validate_Abstract {
     );
 
     /**
-     * Проверка значения
+     * Validate
      * 
-     * @param string $value значение которое поддается валидации
+     * @param string $value
      */
     public function isValid($value) {
         // Благодаря этому методу значение будет автоматически подставлено в текст ошибки при необходимости

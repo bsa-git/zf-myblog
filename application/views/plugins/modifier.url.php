@@ -3,19 +3,21 @@
 /**
  * smarty_modifier_url
  *
- * Модификатор Smarty - url
- * получить URL для шаблона
+ * Modifier Smarty - url
+ * get the URL for the template
  *
  * @uses       
  * @package    Module-Default
  * @subpackage Views.Plugins
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 
 /**
- * Получить URL для шаблона
+ * Get the URL for the template
  * 
  * @param string $text
- * @param Smarty $smarty
  * @return string 
  */
 function smarty_modifier_url($text) {
@@ -57,5 +59,3 @@ function smarty_modifier_url($text) {
 
     return $url;
 }
-
-?>

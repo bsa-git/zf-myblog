@@ -386,7 +386,7 @@ URL.prototype.UrlExists = function(url)
         status = http_check.status;
         return status != 404;
     } catch (ex) {
-        if (ex instanceof Error) { // Это экземпляр Error или подкласса?
+        if (ex instanceof Error) { 
             return false;
         }
     }

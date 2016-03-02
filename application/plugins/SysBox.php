@@ -3,12 +3,15 @@
 /**
  * Default_Plugin_SysBox
  *
- * Класс для работы с системными задачами
+ * Plugin - system functions
  *
  *
  * @uses
  * @package    Module-Default
  * @subpackage Plugins
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 abstract class Default_Plugin_SysBox {
 
@@ -62,22 +65,39 @@ abstract class Default_Plugin_SysBox {
         "upload_system_flashplayer_win" => "/public/upload/system/flashplayer/win"
     );
 
-    //========================= ERRORS ================================//
-    //Выход из скрипта по ERROR!!!!
-    static function errExit($aErrMsg) {
-        //--------------------------
-        //Заменим все переводы строки на симол решетка #
-        //это нужно для правильной обработки текста ошибки на стороне клиента
-        //$ErrMsg = iconv("Windows-1251", "UTF-8", $aErrMsg);
-        $ErrMsg = str_replace("\n", "#", $aErrMsg);
-        //Выводится признак ошибочной операции и сообщение об ошибке
-        echo "result:=0" . "<br>\n" . "result_msg:=" . $ErrMsg . "<br>\n";
-        //Выход из скрипта
-        exit();
+    //=================== DEBUG FUNCTIONS ===================//
+
+    /**
+     * Print for debug
+     *
+     * @param array|object|xml  $var     //Переменная для печати
+     * @param string  $forceType         //Тип переменной: array, object, xml
+     * @param bool  $bCollapsed          //Признак раскрытия/закрытия узлов значений переменных
+     * @param bool  $isAjax              //Признак Ajax запроса, при этом запускается буфер выходных данных
+     * 
+     */
+    static function printR($var, $forceType = "array", $bCollapsed = false, $isAjax = false) {
+        if ($isAjax) {
+            ob_start();
+        }
+        new Default_Plugin_DBug($var, $forceType, $bCollapsed);
     }
 
-    //=================== ПОЛУЧИТЬ ДАННЫЕ О ПЕРЕМЕННЫХ РНР ===================//
-    //Получить ключи и значения массива $_GET
+    /**
+     * Print for debug
+     *
+     * @param array|object|xml  $var     //Переменная для печати
+     * @param bool  $isAjax              //Признак Ajax запроса, при этом запускается буфер выходных данных
+     * 
+     */
+    static function varDump($var, $isAjax = false) {
+        if ($isAjax) {
+            ob_start();
+        }
+        var_dump($var);
+    }
+
+    // Show keys and values for $_GET
     static function ShowKeyValue_GET() {
         echo "GET:" . "<br />\n";
         foreach ($_GET as $key => $values) {
@@ -85,7 +105,7 @@ abstract class Default_Plugin_SysBox {
         }
     }
 
-    //Получить ключи и значения массива $_POST
+    // Show keys and values for $_POST
     static function ShowKeyValue_POST() {
         echo "POST:" . "<br />\n";
         foreach ($_POST as $key => $values) {
@@ -93,7 +113,7 @@ abstract class Default_Plugin_SysBox {
         }
     }
 
-    //Получить ключи и значения массива $_REQUEST
+    // Show keys and values for $_REQUEST
     static function ShowKeyValue_REQUEST() {
         echo "REQUEST:" . "<br />\n";
         foreach ($_REQUEST as $key => $values) {
@@ -101,7 +121,7 @@ abstract class Default_Plugin_SysBox {
         }
     }
 
-    //Получить ключи и значения массива $_FILES
+    // Show keys and values for $_FILES
     static function ShowKeyValue_FILES() {
         echo "FILES:" . "<br />\n";
         foreach ($_FILES as $key => $values) {
@@ -109,7 +129,7 @@ abstract class Default_Plugin_SysBox {
         }
     }
 
-    //Получить ключи и значения массива $_SERVER
+    // Show keys and values for $_SERVER
     static function ShowKeyValue_SERVER() {
         echo "SERVER:" . "<br />\n";
         foreach ($_SERVER as $key => $values) {
@@ -117,7 +137,7 @@ abstract class Default_Plugin_SysBox {
         }
     }
 
-    //Получить ключи и значения массива всех заголовков в запросе от клиента
+    // Get the keys and values of the array of all headers in the request from the client
     static function getKeyValue_HEADERS() {
         foreach ($_SERVER as $name => $value) {
             if (substr($name, 0, 5) == 'HTTP_') {
@@ -132,11 +152,11 @@ abstract class Default_Plugin_SysBox {
         return $headers;
     }
 
-    //================= ПЕРЕВОДЧИК ===================//
+    //================= TRANSLATE ===================//
     /**
-     * Получить язык перевода
+     * Get the language locale
      *
-     * @return string           //Строка языка перевода: (en, ru, uk)
+     * @return string           //language locale: (en, ru, uk)
      */
     static function getTranslateLocale() {
         $sessZendAuth = Zend_Registry::get("Zend_Auth");
@@ -145,7 +165,7 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * Установить язык перевода
+     * Set the language locale
      * 
      * @param string $aLocale 
      * @return void
@@ -159,12 +179,12 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * Изменить язык перевода, если он отличается от текущего языка
+     * Is update the language locale, if it different from the current language
      *
-     * @param string $locale // существующий язык перевода
-     * @return bool  TRUE - если язык перевода был изменен, ELSE - если нет
+     * @param string $locale // new locale
+     * @return bool  TRUE - else changed locale, ELSE - else no
      */
-    static function updateTranslateLocale($locale) {
+    static function isUpdateTranslateLocale($locale) {
         $arr_query = array();
         $result = false;
         //--------------------
@@ -182,7 +202,7 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * Получить обьект переводчика
+     * Get Zend_Translate
      *
      * @return string
      */
@@ -192,7 +212,7 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * Сделать перевод текста
+     * Translate text
      *
      * @return string
      */
@@ -201,7 +221,7 @@ abstract class Default_Plugin_SysBox {
         return sprintf($text, $param1, $param2, $param3);
     }
 
-    //================= РАБОТА С ФАЙЛАМИ ===================//
+    //================= FILES ===================//
 
     /**
      * Save HTML File
@@ -216,14 +236,12 @@ abstract class Default_Plugin_SysBox {
         file_put_contents($file, $str_file);
     }
 
-    /** Получить массив имен файлов отсортированному по убыванию
+    /**
+     * Get an array of file names sorted in descending order
      *
-     * @param  string $prefix //префикс (начало файла - "my_")
-     * @param  string $dir //директория, где находится файл
+     * @param  string $prefix //prefix (ex. "my_")
+     * @param  string $dir    //the directory where the files are located
      * @return array
-     *
-     * пр. my_20100201.xml;my_20100202.xml;my_20100203.xml -> выберется файл my_20100203.xml
-     * или my1.xml;my3.xml;my5.xml -> выберется файл my_5.xml
      */
     static function getNameFilesSortDesc($prefix, $dir) {
         $arrNameFiles = array();
@@ -307,16 +325,16 @@ abstract class Default_Plugin_SysBox {
                 if (!copy($backupPath, $path)) {
                     throw new Exception("Could not be copied '{$backupPath}' to '{$path}'.");
                 }
-            }  else {
+            } else {
                 throw new Exception("There is no file '{$backupPath}'.");
             }
         }
     }
 
-    //=================== ФАЙЛОВЫЙ МЕНЕЖДЕР ===================//
+    //=================== FILE MANAGER ===================//
 
     /**
-     * Инициализация файлового менеджера (KCFinder)
+     * Initialization File Manager (KCFinder)
      * 
      */
     static function iniKCFinder() {
@@ -340,7 +358,7 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * Создать директорию пользователя для загрузки файлов
+     * Create a user directory for uploading files
      * 
      * @return bool 
      */
@@ -403,7 +421,7 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * Получить директорию пользователя для загрузки файлов
+     * Get the user directory for uploading files
      * 
      * @return string 
      */
@@ -428,8 +446,8 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * Получить директорию пользователя в виде URL
-     * пр. -> /upload/users
+     * Get the user directory as URL
+     * ex. -> /upload/users
      * 
      * @return string  
      */
@@ -453,9 +471,9 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * Удалить директорию пользователя для закрузки файлов
+     * Remove user directory for uploading files
      * 
-     * @param string $patch_dir // Базовая директория Upload для пользователей
+     * @param string $username 
      * @return bool 
      */
     static function deleteUserUploadDir($username) {
@@ -486,15 +504,13 @@ abstract class Default_Plugin_SysBox {
         return $result;
     }
 
-    //=============== РАБОТА С ПРОФАЙЛЕРОМ ====================//
+    //=============== PROFILER ====================//
     /**
-     * profilerSumInfo2Html
-     * Вывод суммарной информации из профайлера базы данных
-     * в формате НТМЛ
+     * Output profiler total information from database to HTML format
      *
      *
-     * @param string $aNameAdapterDB        //Название адаптера базы данных
-     * @return string                       //Выходные данные в НТМЛ формате
+     * @param string $aNameAdapterDB        
+     * @return string                       
      */
     static function profilerDbSumInfo2Html($aNameAdapterDB) {
 
@@ -539,11 +555,10 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * profilerSumTimeQueries
-     * Вывод суммарного времени выполнения всех запросов
+     * Displays the total run time of all queries
      *
-     * @param string $aNameAdapterDB        //Название адаптера базы данных
-     * @return int                         //Cуммарное времени выполнения всех запросов
+     * @param string $aNameAdapterDB        
+     * @return int                         
      */
     static function profilerSumTimeQueries($aNameAdapterDB) {
         $totalTime = 0;
@@ -562,12 +577,10 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * profilerQueriesInfo2Html
-     * Вывод информации по запросам из профайлера базы данных
-     * в формате НТМЛ
+     * Output profiler queries information from database to HTML format
      *
-     * @param string $aNameAdapterDB        //Название адаптера базы данных
-     * @return string                       //Выходные данные в НТМЛ формате
+     * @param string $aNameAdapterDB
+     * @return string               
      */
     static function profilerQueriesInfo2Html($aNameAdapterDB) {
         $strEcho = '';
@@ -600,11 +613,10 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * profilerTime2Registry
-     * Запомнить время выполнения кода в регистре
+     * Remember runtime to register
      *
-     * @param float $aStartTime        //Время начала измерения
-     * @param string $aMessage        //Описание измеряемого участка кода
+     * @param float $aStartTime        //start measuring time
+     * @param string $aMessage         //description of the measured area code
      * @return float
      */
     static function profilerTime2Registry($aStartTime, $aMessage) {
@@ -626,11 +638,10 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * profilerTotalReport2Html
-     * Суммарный отчет времени выполнения запроса
+     * Summary accounting of the query time
      *
-     * @param float $aStartTime        //Время начала измерения
-     * @param float $aNameAdapterDB    //Название адаптера базы данных
+     * @param float $aStartTime        //start measuring time
+     * @param float $aNameAdapterDB    //DB adapter
      * @return string
      */
     static function profilerTotalReport2Html($aStartTime, $aNameAdapterDB) {
@@ -758,9 +769,8 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * Public static method,
-     * Вычисление максимально используемой памяти скриптом
-     * @static
+     * Calculation of the maximum memory used by the script
+     * 
      * @param String $string you should choose the format you want, 'mb'/'kb'/'bytes' default if bytes!
      * @param integer $round set how much numbers you want after Zero, default is 3
      * @return double amount of memory your script consume
@@ -781,9 +791,9 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * Public static method,
-     * Вычисление используемой памяти скриптом
-     * @static
+     * 
+     * Calculating script memory usage
+     * 
      * @param String $string you should choose the format you want, 'mb'/'kb'/'bytes' default if bytes!
      * @param integer $round set how much numbers you want after Zero, default is 3
      * @return double amount of memory your script consume
@@ -803,11 +813,10 @@ abstract class Default_Plugin_SysBox {
         return $result;
     }
 
-    //============== Работа с Zend_Cache ============//
+    //============== CACHE ============//
 
     /**
-     * isCleanCache
-     * Проверка очистки кеша
+     * Is clean cache
      *
      * @return bool
      */
@@ -817,12 +826,10 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * startZendCache_Page
-     * Запустить Cache для frontend = 'Page'
-     * это кеш, с помощью которого можно
-     * кешировать выходные HTML страницы
+     * Start Cache for frontend = 'Page' 
+     * is a cache that can be used to cache the output HTML page
      *
-     * @return bool // TRUE -> попали в кеш, FALSE -> не попали в кеш
+     * @return bool // TRUE -> caught in the cache, FALSE -> not caught in the cache
      */
     static function startZendCache_Page() {
         $result = false;
@@ -973,11 +980,10 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * getCache
-     * Получить обьект Cache с помощью Zend_Cache_Manager
-     * из конфигуратора -> application.ini
+     * Get the Cache object 
+     * using Zend_Cache_Manager configurator -> application.ini
      *
-     * @param string $aNameCache     //Имя кэша в Zend_Cache_Manager
+     * @param string $aNameCache     //cache name in Zend_Cache_Manager
      * @return Zend_Cache
      */
     static function getCache($aNameCache) {
@@ -988,10 +994,10 @@ abstract class Default_Plugin_SysBox {
         return $cache;
     }
 
-    //=========== РАБОТА С URL ==================//
+    //=========== URLS ==================//
 
     /**
-     * Получить URL
+     * Get URL
      *
      * @param array $aParams -> array('controller' => 'utility', 'action' => 'image');
      * @return string
@@ -1004,10 +1010,10 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * Проверить правильность URL
+     * Check valid URL
      *
-     * @param string $aURL //URL
-     * @param bool $allow_unwise //Позволить применять в URL "неумные символы" -> "{", "}", "|", "\", "^", "`" 
+     * @param string $aURL 
+     * @param bool $allow_unwise //Allow to use in a URL "not smart symbols" -> "{", "}", "|", "\", "^", "`" 
      * @return bool
      */
     static function checkValid_URL($aURL, $allow_unwise = false) {
@@ -1017,9 +1023,9 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * Получить URL для ресурса
+     * Get URL for resourse
      * 
-     * @param string $text
+     * @param string $url_res
      * @return string 
      */
     static function getUrlRes($url_res) {
@@ -1037,10 +1043,10 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * Получить URL без базового пути и параметров
-     * как принимает роутер
+     * Get a URL without the base path and parameters, 
+     * as the router receives
      * 
-     * пр. /user/user111/tag/flash
+     * ex. /user/user111/tag/flash
      *
      * @return string
      */
@@ -1066,7 +1072,7 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * Получить URL из серверных параметров
+     * Get URL from the server parameters
      * 
      *
      * @return string
@@ -1097,8 +1103,8 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * Получить базовый путь URL
-     * пр. /zf-myblog/public
+     * Get the base URL path
+     * ex. /zf-myblog/public
      *
      * @return string
      */
@@ -1110,8 +1116,8 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * Получить Host
-     * пр. azot.cherkassy.net
+     * Get Host
+     * ex. azot.cherkassy.net
      *
      * @return string
      */
@@ -1122,8 +1128,8 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * Получить Host
-     * пр. azot.cherkassy.net:8080
+     * Get Host with port
+     * ex. azot.cherkassy.net:8080
      *
      * @return string
      */
@@ -1137,8 +1143,8 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * Получить Port
-     * пр. http://mysite.com:8080/zf-azot_m5/public
+     * Get Port
+     * ex. http://mysite.com:8080/zf-azot_m5/public -> 8080
      *
      * @return string
      */
@@ -1148,10 +1154,9 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * Получить HOST and Port and BaseURL
-     * пр. https://localhost:8080/zf-myblog/public
+     * Get HOST and Port and BaseURL
+     * ex. https://localhost:8080/zf-myblog/public
      *
-     * @param array $aParams
      * @return string
      */
     static function getHostPortBaseURL() {
@@ -1164,8 +1169,8 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * Получить полный путь - URL
-     * пр. http://localhost:8080/zf-myblog/public/user/login
+     * Get full URL path
+     * ex. http://localhost:8080/zf-myblog/public/user/login
      *
      * @param array $aParams
      * @return string
@@ -1180,8 +1185,8 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * Получить полный путь к ресурсу - URL
-     * пр. http://localhost:8080/zf-myblog/public/images/system/PHPLogo.gif
+     * Get the full path to the resource URL
+     * ex. http://localhost:8080/zf-myblog/public/images/system/PHPLogo.gif
      *
      * @param array $aParams
      * @return string
@@ -1192,8 +1197,8 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * Получить полный путь - URL для текущего запроса
-     * пр. http://localhost:8080/zf-myblog/public/user/login?post_id=33&tag_id=123
+     * Get the full path URL for the current request
+     * ex. http://localhost:8080/zf-myblog/public/user/login?post_id=33&tag_id=123
      *
      * @return string
      */
@@ -1213,18 +1218,17 @@ abstract class Default_Plugin_SysBox {
         return "$protocol://$server$port$path$params";
     }
 
-    //=========== СОЗДАНИЕ ПАРОЛЯ ==================  
+    //=========== PASSWORD ==================  
 
     /**
-     * Получить пароль 
-     * характеристики пароля можно задать 
-     * с помощью параметров
+     * Get password password characteristics can be set using parameters
      * 
-     * @param array $aConfig    Default  array('length'		=>	8,
-      'alpha_upper_include'	=>	TRUE,
-      'alpha_lower_include'	=>	TRUE,
-      'number_include'	=>	TRUE,
-      'symbol_include'	=>	TRUE,)
+     * @param array $aConfig    Default  array(
+      'length' => 8,
+      'alpha_upper_include' => TRUE,
+      'alpha_lower_include' => TRUE,
+      'number_include' => TRUE,
+      'symbol_include' => TRUE)
      * 
      * @return string 
      */
@@ -1233,10 +1237,10 @@ abstract class Default_Plugin_SysBox {
         return $password->get_password();
     }
 
-    //=========== РАБОТА С ПОЧТОЙ ==================//
+    //=========== MAIL ==================//
 
     /**
-     * Отправить почту
+     * Send mail
      * 
      * @param array $aMailParams 
      * @return void 
@@ -1313,7 +1317,7 @@ abstract class Default_Plugin_SysBox {
     }
 
     /**
-     * Создать почтовое сообщение
+     * Create mail message
      *
      * @param array $aMailParams
      * @return Zend_Mail
@@ -1367,10 +1371,10 @@ abstract class Default_Plugin_SysBox {
         }
     }
 
-    //=========== РАБОТА С ШАБЛОНИЗАТОРОМ СМАРТИ ==================//
+    //=========== SMARTY ==================//
 
     /**
-     * Создание обьекта для инициализации шаблонизатора Smarty
+     * Create an object to initialize the Smarty template engine
      *
      * @return Default_Plugin_ViewSmarty
      */
@@ -1384,12 +1388,12 @@ abstract class Default_Plugin_SysBox {
         return new Default_Plugin_ViewSmarty($module);
     }
 
-    //=========== ЛОКАЛИЗАЦИЯ САЙТА ==================//
+    //=========== LOCALIZATION ==================//
     /*
-     * Получить параметр для локализации сайта
+     * Get the parameter for the site localization
      *
-     * @param  string $aLanguage - язык перевода (en,ru,uk)
-     * @return string - язык_страна(en -> en_US, ru -> ru_RU, uk -> uk_UA)
+     * @param  string $aLanguage  (en,ru,uk)
+     * @return string  (en -> en_US, ru -> ru_RU, uk -> uk_UA)
      */
     static function getLocalParam($aLanguage) {
 
@@ -1413,12 +1417,12 @@ abstract class Default_Plugin_SysBox {
         return $strParam;
     }
 
-    //=========== ЦВЕТОВАЯ СХЕМА САЙТА ==================//
+    //=========== SCHEME ==================//
     /*
-     * Получить цветовую схему сайта
+     * Get the color scheme of the site
      *
-     * @param  string $aScheme Цветовая схема из конфигурации
-     * @return string  Цветовая схема
+     * @param  string $aScheme The color scheme of the configuration
+     * @return string  
      */
     static function getUserScheme($aScheme) {
         $arr_query = array();
@@ -1435,24 +1439,23 @@ abstract class Default_Plugin_SysBox {
         return $result;
     }
 
-    //=========== Работа с PDF ==================//
+    //=========== PDF ==================//
 
     /*
-     * Преобразовать HTML -> PDF файл
+     * Convert HTML -> PDF file
      *
-     * @param array $params - параметры для преобразования HTML -> PDF
-     *   - report (имя отчета);
-     *   - isCommonFont (признак использования стандартных фонтов);
-     *   - html (html строка);
-     *   - pathStylesheet (путь к файлу CSS)
+     * @param array $params  parameters for conversion HTML -> PDF
+     *   - report (report name);
+     *   - isCommonFont (a sign of the use of standard fonts);
+     *   - html (html string);
+     *   - pathStylesheet (path to the CSS file)
      * @return void
      */
-
     static function mpdfGenerator_Html2PDF($params = array()) {
-
+        $translate = Zend_Registry::get('Zend_Translate');
         //-----------------------------
         if ((!$params['pdfReport']) || (!$params['html'])) {
-            Default_Plugin_StrBox::errUser('ERR_CREATE_PDF_REPORT');
+            throw new Exception($translate->_('ERR_CREATE_PDF_REPORT'));
         }
 
         $mode = '';
@@ -1602,9 +1605,9 @@ abstract class Default_Plugin_SysBox {
     }
 
     /*
-     * Получить URL для файла PDF
+     * Get URL for PDF file
      *
-     * @param  string $report - название отчета для PDF
+     * @param  string $report report name
      * @return string
      */
 
@@ -1616,9 +1619,9 @@ abstract class Default_Plugin_SysBox {
     }
 
     /*
-     * Получить URL для файла PDF
+     * Get full URL for PDF file
      *
-     * @param  string $report - название отчета для PDF
+     * @param  string $report report name
      * @return string
      */
 
@@ -1626,15 +1629,14 @@ abstract class Default_Plugin_SysBox {
         $pdfFile = '/files/mPDF/' . $report . '.pdf';
         // Получим URL сохраненного файла PDF
         $urlFilePDF = self::getUserUploadUrl() . $pdfFile;
-        //self::getUrlRes($urlFilePDF);
         $urlFilePDF = self::getFullURL_Res($urlFilePDF);
         return $urlFilePDF;
     }
 
     /*
-     * Получить путь для файла PDF
+     * Get path for PDF file
      *
-     * @param  string $report - название отчета для PDF
+     * @param  string $report report name
      * @return string
      */
 
@@ -1650,10 +1652,10 @@ abstract class Default_Plugin_SysBox {
         return $dirFilePDF;
     }
 
-    //=========== Информация о броузере ==================//
+    //=========== BROWSER ==================//
 
     /*
-     * Получить информацию о текущем броузере
+     * Get information about the client's browser
      *
      * @return array
      * array(
@@ -1759,13 +1761,12 @@ abstract class Default_Plugin_SysBox {
     }
 
     /*
-     * Проверить информацию о текущем броузере
+     * Compare the type and version of this browser with the required version
      *
-     * @param  string $aBrowsers // Броузеры и их majorver версии пр. "IE;firefox/3"
+     * @param  string $aBrowsers  browser types and majorver versions ("IE;firefox/3")
      * @return bool
      * 
      */
-
     static function checkBrowser($aBrowsers) {
         //-------------------
         if ($aBrowsers) {
@@ -1798,12 +1799,11 @@ abstract class Default_Plugin_SysBox {
     }
 
     /*
-     * Признак использования IE
+     * Is IE
      *
      * @return bool
      * 
      */
-
     static function isIE() {
         $u_agent = $_SERVER['HTTP_USER_AGENT'];
         $ub = False;
@@ -1813,13 +1813,12 @@ abstract class Default_Plugin_SysBox {
         return $ub;
     }
 
-    //=========== Доп. ф-ии ==================//
+    //=========== ADD FUNCTIONS ==================//
 
     /*
-     * Получить информацию о РНР и др. инф. о системе
+     * Get information about PHP and other system information
      *
-     * @param  string $aLanguage - язык перевода (en,ru,uk)
-     * @return string - язык_страна(en -> en_US, ru -> ru_RU, uk -> uk_UA)
+     * @return string 
      */
     static function getPHPInfo() {
         $str_xml_begin = '<?xml version="1.0" encoding="utf-8"?>';
@@ -1891,9 +1890,7 @@ abstract class Default_Plugin_SysBox {
 
                 if ($count_tables > 0) {
                     $count_tables--;
-                } else {
-//                    continue;
-                }
+                } 
 
                 $el->setAttribute('width', '100%');
 
@@ -1912,8 +1909,7 @@ abstract class Default_Plugin_SysBox {
     }
 
     /*
-     * Получить значение в байтах 
-     * из других форматов: гига байт, мега байт, кило байт
+     * Get byte from other formats: gigabytes, mega bytes, kilo bytes
      *
      * @param  string $str
      * @return int
@@ -1931,7 +1927,7 @@ abstract class Default_Plugin_SysBox {
     }
 
     /*
-     * Установить новые значения для ini файла PHP
+     * Set new values for the PHP ini file
      *
      * @param  array $arrParams
      * @return void
@@ -1941,36 +1937,6 @@ abstract class Default_Plugin_SysBox {
         foreach ($arrParams as $key => $value) {
             ini_set($key, $value);
         }
-    }
-
-    /**
-     * Print for debug
-     *
-     * @param array|object|xml  $var     //Переменная для печати
-     * @param string  $forceType         //Тип переменной: array, object, xml
-     * @param bool  $bCollapsed          //Признак раскрытия/закрытия узлов значений переменных
-     * @param bool  $isAjax              //Признак Ajax запроса, при этом запускается буфер выходных данных
-     * 
-     */
-    static function printR($var, $forceType = "array", $bCollapsed = false, $isAjax = false) {
-        if ($isAjax) {
-            ob_start();
-        }
-        new Default_Plugin_DBug($var, $forceType, $bCollapsed);
-    }
-
-    /**
-     * Print for debug
-     *
-     * @param array|object|xml  $var     //Переменная для печати
-     * @param bool  $isAjax              //Признак Ajax запроса, при этом запускается буфер выходных данных
-     * 
-     */
-    static function varDump($var, $isAjax = false) {
-        if ($isAjax) {
-            ob_start();
-        }
-        var_dump($var);
     }
 
     /**
@@ -1996,6 +1962,29 @@ abstract class Default_Plugin_SysBox {
             $key = '';
         }
         return $key;
+    }
+
+    //=========== ERROR ==================//
+
+    /**
+     * Get a message as an error:
+     *  - error message;
+     *  - trace error
+     *
+     * @param Exception $exc
+     *
+     * @return string
+     *
+     */
+    static function getMessageError(Exception $exc) {
+        $message = '<em>Message:</em><br>';
+        $message .= $exc->getMessage() . '<br>';
+        $message .= '<em>Trace Error:</em><br>';
+        $errTraceErr = explode('#', $exc->getTraceAsString());
+        foreach ($errTraceErr as $value) {
+            $message .= $value . '<br>';
+        }
+        return $message;
     }
 
 }

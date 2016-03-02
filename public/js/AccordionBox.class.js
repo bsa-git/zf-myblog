@@ -1,25 +1,20 @@
 /**
- * AccordionBox - Class
- *
- * Класс для управления событиями компонента - Accordion
+ * Class - AccordionBox
+ * event management component - Accordion
  *
  * JavaScript
  *
- * Copyright (c) 2011 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2011 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 BSA.AccordionBox = Class.create({
     
-    id: '', // Контейнер для аккордиона
-    accordion: null, // Сам аккордион
-    options: null, // Опции для создания аккордиона
-    states: null,  // Состояния аккордиона (Какие секции открыты или деактивированы)
-    // Перечень событий 
+    id: '', // Container for accordion
+    accordion: null, // The object of the accordion
+    options: null, // Options for creating accordion
+    states: null,  // Accordion states (which sections are opened or deactivated)
+    // List of events
     events: {
         initializedAccordion: 'initialized',
         clickedAccordion: 'clicked',
@@ -31,7 +26,7 @@ BSA.AccordionBox = Class.create({
         enabledSection: 'enabled'
     },
     
-    //Подписанные события 
+    // Subscribed events
     onInitializedAccordionEvent: [],
     onClickedAccordionEvent: [],
     onDisabledAccordionEvent: [],
@@ -41,7 +36,7 @@ BSA.AccordionBox = Class.create({
     onDisabledSectionEvent: [],
     onEnabledSectionEvent: [],
     
-    // Инициализация обьекта
+    // Object initialization
     initialize : function(params)
     {
         
@@ -89,7 +84,7 @@ BSA.AccordionBox = Class.create({
         }
     },
     
-    // Создание пользовательских событий для аккордиона
+    // Creating a custom event for accordion
     createCustomEvents: function(){
         var self = this;
         var idTimeout;
@@ -242,7 +237,7 @@ BSA.AccordionBox = Class.create({
         });
     },
     
-    // Установим состояние секций для аккордиона
+    //Set state of the sections for accordion
     setStateAccordion: function(states, accordion){
         var section;
         var self = this;
@@ -266,7 +261,7 @@ BSA.AccordionBox = Class.create({
         }
     },
     
-    // Определим существует ли секция в аккордионе с соответствующим индексом
+    // Get accordion section of the index
     getThisSection: function(accordion, index){
         var result = null;
         accordion.sections.each(function(section){
@@ -280,10 +275,9 @@ BSA.AccordionBox = Class.create({
 
 })
 
-// Ф-ия, выполняемая при загрузки окна броузера
-// создаются обьекты класса, экземпляры их
-// заносяться в список экземпляров
-// пр. $H(LangBox: [new LangBox(), ... ,new LangBox()])
+// The function is executed after the download of the browser window
+// are created objects, which are entered in the list of instances
+// ex. $H(AccordionBox: [new AccordionBox(), ... ,new AccordionBox()])
 BSA.AccordionBox.RegRunOnLoad = function() {
     // Получим параметры для создания обьекта
     var params = scriptParams.get('AccordionBox');

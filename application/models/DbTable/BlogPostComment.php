@@ -3,18 +3,20 @@
 /**
  * Default_Model_DbTable_BlogPostComment
  *
- * Таблица - для работы с комментариями пользователей
+ * Table - to work with user comments
  *
  *
  * @uses       Default_Model_DatabaseObject
  * @package    Module-Default
  * @subpackage Models
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Model_DbTable_BlogPostComment extends Default_Model_DatabaseObject {
 
     /**
-     *
-     * Конфигурация таблицы
+     * Table config
      * @var array
      */
     private $_config = array(
@@ -29,17 +31,10 @@ class Default_Model_DbTable_BlogPostComment extends Default_Model_DatabaseObject
             'onUpdate' => self::CASCADE,)
     );
 
-    /**
-     *
-     * Загруженный файл - путь к файлу
-     *
-     * @var string
-     */
-//    protected $_uploadedFile;
-    //================ КОНСТРУКТОР КЛАССА ============
+    //============================
 
     /**
-     * Конструктор обьекта таблицы
+     * Constructor
      * 
      * @param Zend_Db_Adapter_Abstract $db
      */
@@ -53,10 +48,10 @@ class Default_Model_DbTable_BlogPostComment extends Default_Model_DatabaseObject
         $this->add('comment', "", self::TYPE_HTML);
     }
 
-    //================ ОБРАБОТКА СОБЫТИЙ ============
+    //================ HANDLING OF EVENTS ============
 
     /**
-     * Событие перед вставкой записи
+     * Event before inserting the record
      *
      * @return bool
      */
@@ -65,7 +60,7 @@ class Default_Model_DbTable_BlogPostComment extends Default_Model_DatabaseObject
     }
 
     /**
-     * Событие после вставки записи
+     * Event after inserting the record
      *
      * @return bool
      */
@@ -74,7 +69,7 @@ class Default_Model_DbTable_BlogPostComment extends Default_Model_DatabaseObject
     }
 
     /**
-     * Событие перед удалением записи
+     * Event before deleting the record
      *
      * @return bool
      */
@@ -82,10 +77,10 @@ class Default_Model_DbTable_BlogPostComment extends Default_Model_DatabaseObject
         return TRUE;
     }
 
-    //============== РАБОТА С НАБОРОМ ЗАПИСЕЙ =================
+    //============== WORKING WITH RECORDS =================
 
     /**
-     * Загрузить данные комментария для конкретного сообщения
+     * Download comments for specific post
      *
      * @param int $post_id
      * @param int $comment_id
@@ -106,7 +101,7 @@ class Default_Model_DbTable_BlogPostComment extends Default_Model_DatabaseObject
     }
 
     /**
-     * Получить данные для построения дерева комментариев
+     * Get the data to build a tree Comments
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param int $post_id
@@ -223,7 +218,7 @@ class Default_Model_DbTable_BlogPostComment extends Default_Model_DatabaseObject
     }
 
     /**
-     * Получить массив обьектов комментариев для сообщения
+     * Get an array objects of comments for post
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -270,7 +265,7 @@ class Default_Model_DbTable_BlogPostComment extends Default_Model_DatabaseObject
     }
 
     /**
-     * Получить массив  комментариев для сообщения
+     * Get an array of comments for post
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -324,8 +319,7 @@ class Default_Model_DbTable_BlogPostComment extends Default_Model_DatabaseObject
     }
 
     /**
-     * Получить общее кол. записей удовлетворяющих
-     * критерия, заданным в парметре $options
+     * Get the total number of records satisfying the criteria specified in the parameter $options
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -364,5 +358,3 @@ class Default_Model_DbTable_BlogPostComment extends Default_Model_DatabaseObject
     }
 
 }
-
-?>

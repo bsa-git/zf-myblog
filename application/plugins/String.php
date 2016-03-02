@@ -1,8 +1,13 @@
 <?php
 
 /**
+ * Default_Plugin_String
+ * 
+ * Plugin - perform several string manipulation 
+ * 
+ * 
  * @author Azeem Michael
- * The String class represents character strings.
+ * @link http://www.phpclasses.org/package/6993-PHP-Perform-several-string-manipulation-operations.html
  */
 class Default_Plugin_String implements Default_Plugin_ComparableInterface {
 
@@ -12,15 +17,17 @@ class Default_Plugin_String implements Default_Plugin_ComparableInterface {
     private $str;
 
     /**
-     * Тип кодировки по умолчанию - "UTF-8"
+     * Type the default encoding - "UTF-8"
      * 
      * @var string 
      */
     private $encoding = "";
 
     /**
-     * The class Constructor
+     * Constructor
      * @param string $s premitive string to objectify
+     * @param string $encoding
+     * 
      */
     public function __construct($s = '', $encoding = "utf-8") {
         $this->set($s, $encoding);
@@ -73,7 +80,7 @@ class Default_Plugin_String implements Default_Plugin_ComparableInterface {
     }
 
     /**
-     * Преобразуем строку в кодировку - $encoding
+     * Transform encoded string - $encoding
      * 
      * @param string $encoding
      * @return boolean true if the character sequence represented by the argument is
@@ -522,7 +529,7 @@ class Default_Plugin_String implements Default_Plugin_ComparableInterface {
     }
 
     /**
-     * Преобразуем строку в транслит
+     * Convert string to translit
      * 
      * @return String the resulting String object
      */
@@ -554,15 +561,10 @@ class Default_Plugin_String implements Default_Plugin_ComparableInterface {
     }
 
     /**
-     * Функция транслита
      *
-     * Name:     generate_chpu
-     * Purpose:  На входе кириллица, а на выходе предложение на латинской раскладке
+     * Generate chpu (human-friendly URL)
      * 
-     * 
-     * @param string $str
-     * 
-     * @return string
+     * @return String
      */
     function generate_chpu() {
         $str = $this->str;
@@ -599,11 +601,10 @@ class Default_Plugin_String implements Default_Plugin_ComparableInterface {
     }
 
     /**
-     * Разбивает строку на подстроки
-     * Возвращает массив строк, полученных разбиением строки string с 
-     * использованием separator в качестве разделителя. 
-     * Если передан аргумент limit, массив будет содержать максимум limit 
-     * элементов, при этом последний элемент будет содержать остаток строки string. 
+     * Split a string by string Returns an array of strings, 
+     * the divided line string using separator as the separator. 
+     * If given an argument limit, the array will contain a maximum of limit 
+     * elements with the last element of string will contain a residue.
      * 
      * @param string $separator
      * @param int $limit
@@ -634,10 +635,8 @@ class Default_Plugin_String implements Default_Plugin_ComparableInterface {
     }
 
     /**
-     * Функция tolink() принимает в качестве аргумента ваш текст и возвращает 
-     * текст с уже замененными URL на активные ссылки. 
+     * Returns text has replaced the URL to active links.
      * 
-     * @param string $buf
      * @return String the resulting String object
      */
     function tolink() {
@@ -685,5 +684,3 @@ interface Default_Plugin_ComparableInterface {
      */
     public function compareToIgnoreCase(Default_Plugin_ComparableInterface $o);
 }
-
-?>

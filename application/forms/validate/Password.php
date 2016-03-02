@@ -3,29 +3,32 @@
 /**
  * Default_Form_Validate_Password
  * 
- * Проверка пароля
+ * Validate - password
  *
  *
  * @uses       Zend_Validate_Abstract
  * @package    Module-Default
  * @subpackage Forms.Validates
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Form_Validate_Password extends Zend_Validate_Abstract
 {
     /**
-     * Метка ошибки
+     * Error tag
      * @var const 
      */    
     const INVALID = 'passwordInvalid';
 
     /**
-     * Метка ошибки
+     * Error tag
      * @var const 
      */    
     const INVALID_LENGTH = 'passwordBadLength';    
     
     /**
-     * Текст ошибки
+     * Error text
      * @var array 
      */
     protected $_messageTemplates = array(
@@ -34,9 +37,9 @@ class Default_Form_Validate_Password extends Zend_Validate_Abstract
     );
 
     /**
-     * Проверка пароля
+     * Validate
      * 
-     * @param string $value значение которое поддается валидации
+     * @param string $value
      */
     public function isValid($value) 
     {

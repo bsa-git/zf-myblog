@@ -3,17 +3,20 @@
 /**
  * Default_Form_Decorator_AnchorLabel
  * 
- * Декоратор отображения метки в виде ссылки
+ * Decorator - display label as a link
  *
  *
  * @uses       Zend_Form_Decorator_Abstract
  * @package    Module-Default
  * @subpackage Forms.Decorators
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Form_Decorator_AnchorLabel extends Zend_Form_Decorator_Abstract {
 
     /**
-     * Cоздание метки в виде ссылки
+     * Create label as a link
      *
      * @return string
      */
@@ -27,7 +30,7 @@ class Default_Form_Decorator_AnchorLabel extends Zend_Form_Decorator_Abstract {
     }
 
     /**
-     * Рендеринг декоратора
+     * Rendering decorator
      *
      * @param string $content
      * @return string

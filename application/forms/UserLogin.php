@@ -3,18 +3,20 @@
 /**
  * Default_Form_Login
  * 
- * Форма аутенфикации
+ * Form - user login
  *
  *
  * @uses       Default_Form_MyForm
  * @package    Module-Default
  * @subpackage Forms
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Form_UserLogin extends Default_Form_MyForm {
-//class Default_Form_Login extends Zend_Form {
 
     /**
-     * Создание формы
+     * Initialization form
      */
     public function init() {
         // Вызываем родительский метод
@@ -46,7 +48,6 @@ class Default_Form_UserLogin extends Default_Form_MyForm {
             'filters' => array('StringTrim'),
         ));
 
-        //$this->getElement('username')->setDecorators($this->elTableDecorators);
         
         //---------- Пароль пользователя --------------
 
@@ -55,10 +56,6 @@ class Default_Form_UserLogin extends Default_Form_MyForm {
             'required' => true,
         ));
         
-        //$this->getElement('password')->setDecorators($this->elTableDecorators);
-
-
-
         //----------- Скрытый элемент для создания ссылки -----------
         //если пользователь забыл свой пароль
         $forgot_password = new Zend_Form_Element_Hidden('forgot_password', array(
@@ -68,7 +65,6 @@ class Default_Form_UserLogin extends Default_Form_MyForm {
         $forgot_password->clearDecorators();
         
         $forgot_password
-//                ->addDecorator('ViewHelper')
                 ->addDecorator('AnchorLabel', array('href' => $urlForgotPassword));
         
         $this->addElement($forgot_password);
@@ -80,8 +76,6 @@ class Default_Form_UserLogin extends Default_Form_MyForm {
         ));
         
         $this->getElement('send')->setAttrib('class', 'btn btn-primary');
-        
-        //$this->getElement('send')->setDecorators($this->btnTableDecorators); 
 
         //---------------- Группа Авторизационные данные ----------------
         // Группируем элементы

@@ -2,17 +2,20 @@
 /**
  * Admin_ConfigController
  *
- * Контроллер - Config
- * Конфигурирование сайта
+ * Controller - Config
+ * configuring site
  *
  * @uses       Default_Plugin_BaseController
- * @package    Module-Admin (Администрирование сайта)
+ * @package    Module-Admin (administration of site)
  * @subpackage Controllers
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Admin_ConfigController extends Default_Plugin_BaseController {
 
      /**
-     * Инициализация контроллера
+     * Initialization controller
      *
      */
     public function init() {
@@ -21,9 +24,9 @@ class Admin_ConfigController extends Default_Plugin_BaseController {
     }
     
     /**
-     * Действие по умолчанию
+     * Action - index
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/config/index
      * - /admin/config
      *
@@ -33,10 +36,10 @@ class Admin_ConfigController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - langs
-     * конфигурирование языков интерфейса
+     * Action - langs
+     * configuration interface languages
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/config/langs
      *
      * @return void
@@ -48,10 +51,10 @@ class Admin_ConfigController extends Default_Plugin_BaseController {
     }
     
     /**
-     * Действие - modules
-     * настройка модулей
+     * Action - modules
+     * module configuration
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/config/modules
      *
      * @return void
@@ -63,10 +66,10 @@ class Admin_ConfigController extends Default_Plugin_BaseController {
     }
     
     /**
-     * Действие - interface
-     * настройка интерфейса пользователя
+     * Action - interface
+     * user interface customization
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/config/interface
      *
      * @return void

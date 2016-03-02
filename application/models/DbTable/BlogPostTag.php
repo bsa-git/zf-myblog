@@ -2,7 +2,7 @@
 /**
  * Default_Model_DbTable_BlogPostTag
  *
- * Таблица - меток для записей в блоге
+ * Table - to work with tags
  *
  *
  * @uses       Default_Model_DatabaseObject
@@ -13,7 +13,7 @@ class Default_Model_DbTable_BlogPostTag extends Default_Model_DatabaseObject {
 
     /**
      *
-     * Конфигурация таблицы
+     * Table config
      * @var array
      */
     private $_config = array(
@@ -28,8 +28,10 @@ class Default_Model_DbTable_BlogPostTag extends Default_Model_DatabaseObject {
             'onUpdate' => self::CASCADE,)
     );
     
+    //========================================
+    
      /**
-     * Конструктор обьекта таблицы
+     * Constructor
      * 
      * @param Zend_Db_Adapter_Abstract $db
      */
@@ -43,7 +45,7 @@ class Default_Model_DbTable_BlogPostTag extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Загрузить обьект метки для конкретной записи и id метки
+     * Download tag object for a specific post
      *
      * @param int $post_id
      * @param int $tag_id
@@ -69,7 +71,7 @@ class Default_Model_DbTable_BlogPostTag extends Default_Model_DatabaseObject {
 
 
     /**
-     * Получить массив обьектов меток для сообщения
+     * Get an array objects of tags to posts
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -99,7 +101,7 @@ class Default_Model_DbTable_BlogPostTag extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить массив меток для сообщения
+     * Get an array of tags to posts
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -129,8 +131,7 @@ class Default_Model_DbTable_BlogPostTag extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить общее кол. записей удовлетворяющих
-     * критерия, заданным в парметре $options
+     * Get the total number of records satisfying the criteria specified in the parameter $options
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -153,5 +154,3 @@ class Default_Model_DbTable_BlogPostTag extends Default_Model_DatabaseObject {
         return $db->fetchOne($select);
     }
 }
-
-?>

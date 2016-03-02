@@ -3,13 +3,15 @@
 /**
  * Default_Model_Profile
  * 
- * Абстрактный класс таблицы, где 
- * хранится информация об обьекте
+ * Model - abstract table class that stores information about the object
  *
  *
  * @uses       Zend_Db_Table_Abstract
  * @package    Module-Default
  * @subpackage Models
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 abstract class Default_Model_Profile extends Zend_Db_Table_Abstract {
 
@@ -27,7 +29,7 @@ abstract class Default_Model_Profile extends Zend_Db_Table_Abstract {
     protected $_properties = array();
 
     /**
-     * Конструктор класса
+     * Constructor
      * 
      * @param array $config
      * @param array $filters 
@@ -41,7 +43,7 @@ abstract class Default_Model_Profile extends Zend_Db_Table_Abstract {
     }
 
     /**
-     * Загрузить из таблицы записи
+     * Load table records
      *
      *
      * @return void
@@ -68,10 +70,10 @@ abstract class Default_Model_Profile extends Zend_Db_Table_Abstract {
     }
 
     /**
-     * Операция сохранения записи в базе данных
-     * Если запись отсутсвует, то она будет дабавлена
-     * Если запись присутствует, то она будет изменена
-     *
+     * Save the record in the database
+     * If the record is missing, it will be added
+     * If the record is present, it will be changed
+     * 
      * @param bool $useTransactions
      * @return bool
      */
@@ -116,7 +118,7 @@ abstract class Default_Model_Profile extends Zend_Db_Table_Abstract {
     }
 
     /**
-     * Удаление записи из базы данных
+     * Deleting a record from a database
      * 
      * @param  array|string $where SQL WHERE clause(s).
      * @return bool
@@ -132,7 +134,7 @@ abstract class Default_Model_Profile extends Zend_Db_Table_Abstract {
     }
 
     /**
-     * Установить значение поля записи таблицы
+     * Set value for table record field
      *
      * @param string $name
      * @param string $value
@@ -164,7 +166,7 @@ abstract class Default_Model_Profile extends Zend_Db_Table_Abstract {
     }
 
     /**
-     * Установить значение действия для поля записи таблицы
+     * Set value of action for table record field
      *
      * @param string $name поле записи
      * @param string $action действие для поля записи
@@ -179,7 +181,7 @@ abstract class Default_Model_Profile extends Zend_Db_Table_Abstract {
     }
 
     /**
-     * Получить значение действия для поля записи таблицы
+     * Get value of action for table record field
      *
      * @param string $name поле записи
      * @return int
@@ -192,7 +194,7 @@ abstract class Default_Model_Profile extends Zend_Db_Table_Abstract {
     }
 
     /**
-     * Получить значение поля записи таблицы
+     * Get value for table record field
      *
      * @param string $name
      * @return string
@@ -202,8 +204,7 @@ abstract class Default_Model_Profile extends Zend_Db_Table_Abstract {
     }
 
     /**
-     * Определим существует ли поле со значением в таблице
-     * для контретной записи родителя
+     * Whether there is a field with a value in the table for a specific parent record
      *
      * @param string $name
      * @return bool
@@ -231,11 +232,11 @@ abstract class Default_Model_Profile extends Zend_Db_Table_Abstract {
     }
 
     /**
-     * Получить массив обьектов записей таблицы
+     * Get an array objects of table records
      *
      * @param Zend_Db_Adapter_Abstract $db
-     * @param Default_Model_DatabaseObject $class     Класс для раб. с таблицей
-     * @param array $filters                          Массив фильтров
+     * @param Default_Model_DatabaseObject $class     
+     * @param array $filters                          
      * @return array
      */
     public static function BuildMultiple($db, $class, $filters) {
@@ -273,7 +274,7 @@ abstract class Default_Model_Profile extends Zend_Db_Table_Abstract {
     }
 
     /**
-     * Получить массив записей таблицы
+     * Get an array of table records values
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param Default_Model_DatabaseObject $class     Класс для раб. с таблицей
@@ -310,7 +311,7 @@ abstract class Default_Model_Profile extends Zend_Db_Table_Abstract {
     }
 
     /**
-     * Сделать перевод текста
+     * Translate text
      *
      * @return string
      */

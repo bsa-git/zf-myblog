@@ -3,16 +3,16 @@
 /**
  * Error
  * 
- * Ручной обработчик ошибок
+ * Plugin - manual error handler
  * 
- * @author Александр Махомет aka San для http://zendframework.ru
+ * @author Alexander Mahomet aka San для http://zendframework.ru
  */
 class Default_Plugin_Error {
 
     /**
-     * Управление ошибками
+     * Сatch Exception
      *
-     * @param exception $exception Перехватываемое исключение
+     * @param exception $exception
      */
     public static function catchException(Exception $exception) {
         $params = '';

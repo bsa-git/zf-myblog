@@ -3,17 +3,20 @@
 /**
  * Admin_ToolsController
  *
- * Контроллер - Tools
- * Инструменты для обслуживания сайта
+ * Controller - Tools
+ * Tools for the servicing site
  *
  * @uses       Default_Plugin_BaseController
- * @package    Module-Admin (Администрирование сайта)
+ * @package    Module-Admin (administration of site)
  * @subpackage Controllers
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Admin_ToolsController extends Default_Plugin_BaseController {
 
     /**
-     * Инициализация контроллера
+     * Initialization controller
      *
      */
     public function init() {
@@ -22,9 +25,9 @@ class Admin_ToolsController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие по умолчанию
+     * Action - index
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/tools/index
      * - /admin/tools
      *
@@ -35,10 +38,10 @@ class Admin_ToolsController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - backup
-     * создать резервную копию базы данных
+     * Action - backup
+     * create a backup copy of the database
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/tools/backup
      *
      * @return void
@@ -50,10 +53,10 @@ class Admin_ToolsController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - search
-     * поиск на сайте
+     * Action - search
+     * Search on site
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/tools/search
      *
      * @return void
@@ -63,10 +66,10 @@ class Admin_ToolsController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - listinfo
-     * показать cписок информационной помощи
+     * Action - listinfo
+     * show information help
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/tools/listinfo
      *
      * @return void
@@ -76,10 +79,10 @@ class Admin_ToolsController extends Default_Plugin_BaseController {
     }
     
     /**
-     * Действие - loginfo
-     * показать журнал событий
+     * Action - loginfo
+     * show event log
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/tools/loginfo
      *
      * @return void
@@ -89,10 +92,10 @@ class Admin_ToolsController extends Default_Plugin_BaseController {
     }
     
     /**
-     * Действие - errorinfo
-     * показать журнал ошибок
+     * Action - errorinfo
+     * show error log
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/tools/errorinfo
      *
      * @return void
@@ -102,10 +105,11 @@ class Admin_ToolsController extends Default_Plugin_BaseController {
     }
     
     /**
-     * Действие - logstat
+     * Action - logstat
      * показать журнал статистики
+     * show statistics log
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/tools/logstat
      *
      * @return void
@@ -115,10 +119,10 @@ class Admin_ToolsController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - phpinfo
-     * получить информацию о PHP и др. системную инф.
+     * Action - phpinfo
+     * get information about PHP and other system information
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/tools/phpinfo
      *
      * @return void
@@ -151,10 +155,10 @@ class Admin_ToolsController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - pdf
-     * Создать документ PDF с помощью библиотеки - mPDF
+     * Action - pdf
+     * сreate a PDF document using the mPDF library
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/tools/pdf
      *
      * @return void
@@ -225,10 +229,10 @@ class Admin_ToolsController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - profiler
-     * Оценить производительность работы сайта
+     * Action - profiler
+     * evaluation of the performance of the site
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/tools/profiler
      *
      * @return void
@@ -251,10 +255,10 @@ class Admin_ToolsController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - clearhist
-     * Очистить историю отладочных данных
+     * Action - clearhist
+     * clear hist of data debugging
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/tools/clearhist
      *
      * @return void
@@ -287,10 +291,10 @@ class Admin_ToolsController extends Default_Plugin_BaseController {
     }
     
     /**
-     * Действие - clearcache
-     * Очистить кеш
+     * Action - clearcache
+     * clear cache
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/tools/clearcache
      *
      * @return void

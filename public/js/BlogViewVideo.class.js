@@ -1,30 +1,24 @@
 /**
- * BlogViewVideo - Class
+ * Class - BlogViewVideo
  *
- * С помощью класса BlogViewVideo вы можете:
- *  - изменить картинки, для просмотра с помощью LightBox
- *  - Изменить события ссылок содержания блога
- *    при нажатии на ссылку, должно открываться отдельное окно
+ * With these class you can:
+ *  - view video of different formats
  *
  * JavaScript
  *
- * Copyright (c) 2011 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2011 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 BSA.BlogViewVideo = Class.create({
     
     fp: null,// Flowplayer
-    container : null,   // Контейнер для видео
-    url: '',// URL для получения с сервера списка параметров видео 
-    listCheckVideo: new Hash(), // Список, проверенных на доступность видео
+    container : null,   // Container for video
+    url: '',// URL list video params from server
+    listCheckVideo: new Hash(), // List tested for accessibility video
     img: null,
-    li: null, // Контейнер для видео
-    id: 0,    // ID для видео
+    li: null, // Container for video
+    id: 0,    // Video ID
     options_youtube: {	
         overlay: true, // if false embed the video player directly		
         // overlay and preview options
@@ -50,6 +44,7 @@ BSA.BlogViewVideo = Class.create({
     actual: false, // Признак состояния аккордиона (открыт или закрыт)
     isUpdateURL: false,// Признак обновления URL
     
+    // Object initialization
     initialize : function(params)
     {
         if(params.container){
@@ -66,15 +61,14 @@ BSA.BlogViewVideo = Class.create({
         this.container.select('div.video-row').each(function(video){
             var wrap = video.down('a.player');
             var clip_id = wrap.up('div.video-row').readAttribute('id').split('_')[1];
-            // Установим событие нажатия кнопки PLAY
+            // Establish a button click event PLAY
             wrap.observe('click', function() {
-                // Сохраним событие для статистики
+                // Save event for statistics
                 new Ajax.Request(this.url, {
                     parameters : {
                         type_action: 'play',
                         clip_id: clip_id
                     },
-                    // Успешный ответ
                     onSuccess: function(response) {
                         // Получим данные ответа
                         var json = BSA.Sys.getJsonResponse(response, true);
@@ -84,7 +78,7 @@ BSA.BlogViewVideo = Class.create({
                     }
                 });
                 
-                //если вызывается проигрыватель не FlowPlayer 
+                // If call the player does not FlowPlayer
                 if(! wrap.hasClassName('flow-player')){
                     //Очистим сообщение об ошибке
                     BSA.Sys.messagebox_clear();
@@ -98,28 +92,28 @@ BSA.BlogViewVideo = Class.create({
                 }
             }.bind(this))	
             
-            if(wrap.hasClassName('flow-player')){// Установим событие для кнопки "Close"
+            if(wrap.hasClassName('flow-player')){// Establish a button click event "Close"
                 var divCloseVideo = video.down('div.player-close');
                 var aCloseVideo = divCloseVideo.down('a');
                 aCloseVideo.observe('click', this.onCloseVideo.bindAsEventListener(this));
             }
         }.bind(this))
         
-        // Установим ссылку на загрузку FlashPlayer с моего сайта как альтернативу
+        // Establish a link to download the Flash Player from my site as an alternative
         BSA.Sys.downloadFlashPlayer(this.container);
         
-        // Определим наличие аккордиона
+        // Is accordion
         if (params.accordion){
             this.accordion = params.accordion;
-            // Подпишемся на события в аккордионе
+            // Subscribe to the events in the accordion
             this._subscribeAccordionEvents();
         }else{
-            // Получим данные о видео файлах
+            // Get information about video files
             this.getPlaylist();
         }
     },
     
-    // Выравнивание видео посредине
+    // Align the middle of the video
     _setAllignVideo : function(container) {
         var dimensionsContainer = null;
         //----------------------
@@ -137,7 +131,7 @@ BSA.BlogViewVideo = Class.create({
         }
     },
     
-    //============== Работа с видео FlowPlayer =============
+    //============== FlowPlayer =============
     
     getPlaylist:function(){
 	
@@ -191,7 +185,7 @@ BSA.BlogViewVideo = Class.create({
         player.unload();
     },
     
-    //-------------- Clip типа - MP3 -----------------
+    //-------------- Clip type - MP3 -----------------
     
     fpCliptype_mp3: function(itemPlayList){
         // Определим характеристики клипа
@@ -273,7 +267,7 @@ BSA.BlogViewVideo = Class.create({
         }
     },
     
-    //-------------- Создание FlowPlayer -----------------
+    //-------------- Create FlowPlayer -----------------
     
     // Конфигурация клипа
     fpClip: {},
@@ -528,7 +522,7 @@ BSA.BlogViewVideo = Class.create({
     },
 
     
-    //-------------- Работа с видео ProtoTubePlayer ---------------
+    //-------------- ProtoTubePlayer ---------------
     
     buildProtoTubePlayer: function(){
         var self = this;
@@ -565,9 +559,9 @@ BSA.BlogViewVideo = Class.create({
     },
     
     
-    //========== РАБОТА С АККОРДИОНОМ ===========//
+    //========== ACCORDION ===========//
 
-    // Подпишемся на события в аккордионе
+    // Subscribe to the events in the accordion
     _subscribeAccordionEvents : function() {
         var self = this;
         var indexSection = self.accordion.section;
@@ -602,7 +596,7 @@ BSA.BlogViewVideo = Class.create({
         })
     },
     
-    // Свернуть секцию в аккордионе
+    // Hidden section of the accordion
     onHiddenSectionEvent : function(self, params) {
         var section = params.section.elements.section;
         var hrefSection = section.down('a').readAttribute('href');
@@ -611,7 +605,7 @@ BSA.BlogViewVideo = Class.create({
         }
     },
     
-    // Развернуть секцию в аккордионе
+    // Show section in the accordion
     onShownSectionEvent : function(self, params) {
         var section = params.section.elements.section;
         var hrefSection = section.down('a').readAttribute('href');
@@ -628,7 +622,7 @@ BSA.BlogViewVideo = Class.create({
         }
     },
     
-    //----- Обработка ошибок ------
+    //----- Handling errors ------
     onFailure : function(message) {
         var msgs;
         if(message.class_message){
@@ -643,10 +637,9 @@ BSA.BlogViewVideo = Class.create({
     }
 });
 
-// Ф-ия, выполняемая при загрузки окна броузера
-// создаются обьекты класса, экземпляры их
-// заносяться в список экземпляров
-// пр. $H(BlogViewVideo: [new BlogViewVideo(param1), ... ,new BlogViewVideo(paramN)])
+// The function is executed after the download of the browser window
+// are created objects, which are entered in the list of instances
+// ex. $H(BlogViewVideo: [new BlogViewVideo(param1), ... ,new BlogViewVideo(paramN)])
 BSA.BlogViewVideo.RegRunOnLoad = function() {
     // Получим параметры для создания обьекта
     var params = scriptParams.get('BlogViewVideo');

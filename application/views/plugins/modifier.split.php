@@ -2,8 +2,8 @@
 /**
  * smarty_modifier_split
  *
- * Модификатор Smarty - split
- * преобразует строку в массив
+ * Modifier Smarty - split
+ * converts a string to an array
  *
  * @uses       
  * @package    Module-Default
@@ -11,21 +11,21 @@
  */
 
 /**
- * Переводит текст на другой язык
+ * converts a string to an array
  * 
- * @param string $text
- * @param Smarty $smarty
- * @return string 
+ * @param string $source
+ * @param string $delimiter
+ * @param int $limit
+ * 
+ * @return array
  */
-function smarty_modifier_split($source, $pattern=' ', $limit=NULL) {
+function smarty_modifier_split($source, $delimiter=' ', $limit=NULL) {
     $arrSource;
     //----------------- 
     if($limit){
-        $arrSource = explode($pattern, $source, $limit); 
+        $arrSource = explode($delimiter, $source, $limit); 
     }else{
-        $arrSource = explode($pattern, $source); 
+        $arrSource = explode($delimiter, $source); 
     }
     return $arrSource;
 }
-
-?>

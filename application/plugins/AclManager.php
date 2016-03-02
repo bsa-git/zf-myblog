@@ -3,25 +3,27 @@
 /**
  * Default_Controller_Plugins_AclManager
  * 
- * Plugin для контроллера действий
- * Проверяет доступ к ресурсам
+ * Plugin - access to resources check
  *
  *
  * @uses       Zend_Controller_Plugin_Abstract
  * @package    Module-Default
  * @subpackage Controllers.Plugins
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Plugin_AclManager extends Zend_Controller_Plugin_Abstract {
 
     /**
-     * Начальное время
+     * Start time
      *
      * @var float
      */
     protected $_startTimeProfiler = 0;
 
     /**
-     * Список ролей
+     * List of roles
      *
      * @var array
      */
@@ -33,26 +35,22 @@ class Default_Plugin_AclManager extends Zend_Controller_Plugin_Abstract {
     );
 
     /**
-     * Роль пользователя по умолчанию
-     * если не будет аутинфикации пользователя
-     * или роль не будет найдена
+     * Default user role
      *
      * @var string
      */
     private $_defaultRole = 'guest';
 
     /**
-     * Модуль по умолчанию
-     * если не будет определен модуль в запросе
+     * Default Module
      *
      * @var string
      */
     private $_defaultModule = 'default';
 
     /**
-     * Это действие 'login' контроллера 'account',
-     * если не зарегистрированный пользователь не имеет соответствующих
-     * привилегий на этот ресурс
+     * Action 'login' controller 'account', 
+     * if user does not have appropriate privileges on this resource
      *
      * @var array
      */
@@ -61,9 +59,7 @@ class Default_Plugin_AclManager extends Zend_Controller_Plugin_Abstract {
         'controller' => 'account',
         'action' => 'login');
     /**
-     * Это действие 'message' контроллера 'error',
-     * если зарегистрированный пользователь не имеет соответствующих
-     * привилегий на этот ресурс
+     * Action 'message' controller 'error'
      *
      * @var array
      */
@@ -73,8 +69,8 @@ class Default_Plugin_AclManager extends Zend_Controller_Plugin_Abstract {
         'action' => 'message');
 
     /**
-     * Конструктор класса
-     * сдесь мы назначаем роли, ресурсы и привилегии
+     * Constructor
+     * Here we assign roles, resources and privileges
      * 
      * @param Zend_Auth $auth  Обьект идентификации
      */
@@ -194,7 +190,7 @@ class Default_Plugin_AclManager extends Zend_Controller_Plugin_Abstract {
     }
 
     /**
-     * Инициализация шаблонизатора Smarty
+     * Initialization Smarty templating
      *
      * @param string $module
      */
@@ -206,10 +202,8 @@ class Default_Plugin_AclManager extends Zend_Controller_Plugin_Abstract {
         Zend_Controller_Action_HelperBroker::addHelper($vr);
     }
 
-    //-----------------------------
     /**
-     * routeStartup
-     * Событие вызывается до того, как Zend_Controller_Front вызовет маршрутизатор
+     * Event is called before Zend_Controller_Front calls on the router
      *
      * @param Zend_Controller_Request_Abstract $request
      */
@@ -226,9 +220,7 @@ class Default_Plugin_AclManager extends Zend_Controller_Plugin_Abstract {
     }
 
     /**
-     * preDispatch
-     * Событие перед обращением к контроллеру
-     * проверим доступность к ресурсам пользователя
+     * Event before accessing the controller will check the availability to the user's resources
      *
      * @param Zend_Controller_Request_Abstract $request
      */
@@ -327,8 +319,7 @@ class Default_Plugin_AclManager extends Zend_Controller_Plugin_Abstract {
     }
 
     /**
-     * postDispatch
-     * Событие после обращением к контроллеру
+     * Events after the appeal to the controller
      *
      * @param Zend_Controller_Request_Abstract $request
      */
@@ -337,8 +328,7 @@ class Default_Plugin_AclManager extends Zend_Controller_Plugin_Abstract {
     }
 
     /**
-     * preDispatch
-     * Событие вызывается после выхода Zend_Controller_Front из его цикла диспетчеризации.
+     * The event is called after Zend_Controller_Front of its dispatch loop.
      *
      * @param Zend_Controller_Request_Abstract $request
      */

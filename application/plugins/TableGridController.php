@@ -3,24 +3,26 @@
 /**
  * Default_Plugin_TableGridController
  *
- * Контроллер - TableGrid
- * Используется при работе с таблицами MY.TableGrid
+ * Plugin - It is used when working with tables MY.TableGrid
  *
  * @uses       Default_Plugin_BaseController
  * @package    Module-Default
  * @subpackage Plugins
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
 
     /**
-     * _table - название таблицы
+     * table - table name
      *
      * @var string
      */
     protected $_table = '';
 
     /**
-     * Инициализация контроллера
+     * Initialization controller
      *
      */
     public function init() {
@@ -36,9 +38,9 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие rows (получить данные)
-     * по этому действию происходит вывод всех данных
-     * в соответствии с параметрами запроса
+     * Action rows (retrieve data) 
+     * for this action happens withdrawal of all data 
+     * according to the request parameters
      *
      *
      * @return void
@@ -102,17 +104,13 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
                     $jsons['rows'] = array();
                 }
 
-//                ob_start();
-//                Default_Plugin_SysBox::printR($jsons, 'array', false);
-//                var_dump($jsons);
-
                 $this->sendJson($jsons);
             } catch (Exception $exc) {
                 $jsons = array(
                     'class_message' => 'warning',
                     'messages' => array(
                         '<em>' . $this->Translate('Ошибка получения строк таблицы') . '</em>',
-                        Default_Plugin_StrBox::getMessageError($exc)
+                        Default_Plugin_SysBox::getMessageError($exc)
                     )
                 );
                 $this->sendJson($jsons);
@@ -122,10 +120,10 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие data (данные)
-     * по этому действию происходит запрос к данным по определенным
-     * полям таблицы. Затем эти данные помещаются в ComboBox
-     * для удобного редактирования этих полей таблицы
+     * Action data (data) 
+     * for this action is requested for specific fields of the table data. 
+     * These are then placed in the ComboBox 
+     * for easy editing of these fields of the table
      *
      *
      * @return void
@@ -199,7 +197,7 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
                     'class_message' => 'warning',
                     'messages' => array(
                         '<em>' . $this->Translate('Ошибка получения данных по URL') . '</em>',
-                        Default_Plugin_StrBox::getMessageError($exc)
+                        Default_Plugin_SysBox::getMessageError($exc)
                     )
                 );
                 $this->sendJson($jsons);
@@ -209,7 +207,7 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Получить значения поля в Jason
+     * Get the value of a field in Json format
      *
      * @param atring $field
      * @param array $jsons
@@ -237,9 +235,9 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие validate (проверка значения)
-     * по этому действию происходит проверка соответсвующего значения
-     * параметры значения передаются в параметрах запроса
+     * Action validate (check values) 
+     * for this action is checked the corresponding value 
+     * parameters values are passed to the query parameters
      *
      *
      * @return void
@@ -261,7 +259,7 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
                     'class_message' => 'warning',
                     'messages' => array(
                         '<em>' . $this->Translate('Ошибка валидации значения') . '</em>',
-                        Default_Plugin_StrBox::getMessageError($exc)
+                        Default_Plugin_SysBox::getMessageError($exc)
                     )
                 );
                 $this->sendJson($jsons);
@@ -271,11 +269,11 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Проверка значения
+     * Check value
      *
      *
-     * @param array $params     // Параметры проверяемого значения
-     * @return array            // Результат проверки
+     * @param array $params     // Parameters checked value
+     * @return array            
      */
     public function _isValid($params) {
         $jsons = array();
@@ -303,11 +301,12 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Проверка значений строки
+     * Проверка значений строки в таблице
+     * Checking the row values in the table
      *
      *
-     * @param array $row        // Строка со значениями
-     * @return array            // Результат проверки
+     * @param array $row        // Row with values
+     * @return array            
      */
     public function _isValidRow($row) {
         $validRow = array();
@@ -339,9 +338,7 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
 
     /**
      *
-     * Действие save (сохранение данных)
-     * по этому действию происходит сохранение измененных данных
-     * или добавленых данных
+     * Action save (data storage) by this action, the changes of data or add data
      *
      *
      * @return void
@@ -419,7 +416,7 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
                     'class_message' => 'warning',
                     'messages' => array(
                         '<em>' . $this->Translate('Ошибка при сохранении данных') . '</em>',
-                        Default_Plugin_StrBox::getMessageError($exc)
+                        Default_Plugin_SysBox::getMessageError($exc)
                     )
                 );
                 $this->sendJson($jsons);
@@ -429,10 +426,10 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие delete (удаление данных)
-     * по этому действию происходит удаление данных из базы данных
+     * Action delete (delete data) 
+     * on the action of the data is removed from the database
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/user/delete
      *
      * @return void
@@ -482,7 +479,7 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
                     'class_message' => 'warning',
                     'messages' => array(
                         '<em>' . $this->Translate('Ошибка при удалении данных') . '</em>',
-                        Default_Plugin_StrBox::getMessageError($exc)
+                        Default_Plugin_SysBox::getMessageError($exc)
                     )
                 );
                 $this->sendJson($jsons);
@@ -492,7 +489,7 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Загрузить данными обьект записи таблицы
+     * Load the data table record to object $row
      *
      * @param array $row
      * @param int $id
@@ -505,7 +502,7 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Изменить/Вставить запись таблицы
+     * Update/Insert row table
      *
      * @param array $row
      *
@@ -517,7 +514,7 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Удалить обьект записи таблицы
+     * Delete row table object
      *
      * @param array $row
      *
@@ -529,12 +526,12 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие search (поиск значения в таблице)
-     * по этому действию происходит поиск строки
-     * в таблице и возвращается номер стр. поиска
-     * если поиск произошел успешно
+     * Action search (search for values in the table) 
+     * by this action takes place in the search row table and 
+     * returns the number of the search row, 
+     * if the search occurred successfully
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/user/search
      *
      * @return void
@@ -565,7 +562,7 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
                     'class_message' => 'warning',
                     'messages' => array(
                         '<em>' . $this->Translate('Ошибка поиска данных') . '</em>',
-                        Default_Plugin_StrBox::getMessageError($exc)
+                        Default_Plugin_SysBox::getMessageError($exc)
                     )
                 );
                 $this->sendJson($jsons);
@@ -575,7 +572,7 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Получить результат поиска
+     * Get search result
      *
      * @param int $id
      *
@@ -629,7 +626,7 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Сравнить два значения
+     * Compare the two values
      *
      * @param string $compare
      * @param string $value
@@ -666,13 +663,13 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
         return $result;
     }
 
-    //=============== РАБОТА С ОТЧЕТАМИ =================//
+    //=============== REPORT =================//
 
     /**
-     * Действие - report
-     * Отчеты по документам
+     * Action - report
+     * display table data in a report in HTML or PDF format
      * 
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /admin/user/report
      *
      * @return void
@@ -816,7 +813,7 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
                 'class_message' => 'warning',
                 'messages' => array(
                     '<em>' . $this->Translate('Ошибка формирования отчета') . '</em>',
-                    Default_Plugin_StrBox::getMessageError($exc)
+                    Default_Plugin_SysBox::getMessageError($exc)
                 )
             );
             $this->sendJson($jsons);
@@ -825,7 +822,7 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
 
     /**
      * 
-     * Получить данные для отчета
+     * Get report data
      * 
      * @param string $table
      *
@@ -864,8 +861,6 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
             if (isset($params['itemsComboBox'])) {
                 $arrItemsComboBox = Zend_Json::decode($params['itemsComboBox']);
             }
-
-
 
             // Получим опции для запроса
             $count = $this->getCountRowsTable($options);
@@ -926,8 +921,6 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
                     }
                     $arrData['rows'][] = $newRow;
                 }
-
-                //$arrData['rows'] = 
             }
             return $arrData;
         } catch (Exception $exc) {
@@ -937,10 +930,10 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
 
     /**
      * 
-     * Исключить некоторые поля из отчета
+     * Exclude some of the fields from the report
      * 
-     * @param array $fieldsExcluded  // массив колонок для исключения
-     * @param array $modelColumns    // массив всех колонок отчета
+     * @param array $fieldsExcluded  // an array of columns to exclude
+     * @param array $modelColumns    // an array of all columns of the report
      *
      * @return array
      */
@@ -973,14 +966,14 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
 
     /**
      * 
-     * Создание нижнего колонтитула отчета
+     * Creating a report footer
      * 
-     * @param array $modelFooter  // массив параметров 
-     * ключи:
-     * - 'footer_colspan' (кол. обьединенных колонок в таблице)
-     * - 'rows' (массив записей значений для отчета)
-     * - 'column_model' (параметры колонок таблицы)
-     * - 'footers' (параметры нижнего колонтитула, ключ - имя колонки, значение - действие или текстовое выражение)
+     * @param array $modelFooter  // array params 
+     * keys:
+     * - 'footer_colspan' (joint number of columns in the table)
+     * - 'rows' (an array of values for the report records)
+     * - 'column_model' (parameters of table columns)
+     * - 'footers' (options footer, key - the column name value - an act or expression of a text)
      *
      * @return array
      */
@@ -1041,10 +1034,10 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
         return $rows_footer;
     }
 
-    //=============== ДР. Ф-ИИ =================//
+    //=============== ADD FUNCTIONS =================//
 
     /**
-     * Получить кол. строк в таблице
+     * Get count. rows in the table
      *
      * @param array $options
      *
@@ -1055,7 +1048,7 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Создать обьект записи таблицы
+     * Create a table row object
      *
      * @param array $options
      *
@@ -1066,7 +1059,7 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Создать форму для проверки значений таблицы
+     * Create a form to check the values of the table
      *
      * @param array $options
      *
@@ -1077,7 +1070,7 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Получить записи таблицы
+     * Get a table records
      *
      * @param array $options
      *
@@ -1088,7 +1081,7 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Получить значения полей в Jason
+     * Get the values of the fields in Json format
      *
      * @param array $fields
      *
@@ -1099,7 +1092,7 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Получить значения поля
+     * Get the value of a field
      *
      * @param array $fields
      *
@@ -1110,7 +1103,7 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Проверить строку значений при записи данных
+     * Check the values of the row when saving data to the database
      *
      * @param array $row
      *
@@ -1124,7 +1117,7 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Получить отформатированное значение
+     * Get the formatted value
      *
      * @param string $key
      * @param string $value
@@ -1136,7 +1129,7 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Получить отформатированное строку значений
+     * Get formatted row values
      *
      * @param array $rows
      *
@@ -1147,7 +1140,7 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Получить отфильтрованные значения строки
+     * Get filtered values row
      *
      * @param array $rows
      *
@@ -1157,11 +1150,9 @@ class Default_Plugin_TableGridController extends Default_Plugin_BaseController {
         return $rows;
     }
 
-    //=============== ДОП. Ф-ИИ =================//
 
     /**
-     * Обьединение значений двух массивов
-     * с разделителем - пробел
+     * Combining values from the two arrays separator - space
      *
      * @param array $aArrValue1
      * @param array $aArrValue2

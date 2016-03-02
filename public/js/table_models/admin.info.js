@@ -1,17 +1,12 @@
 /**
- * BSA.iniAdminInfo - Function
- *
- * С помощью этой ф-ии инициализируется структура таблицы информационной помощи
+ * Function - iniAdminInfo
+  * initialized structure of info help table
  *
  * JavaScript
  *
- * Copyright (c) 2012 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2012 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 
 BSA.iniAdminInfo = function()
@@ -30,7 +25,7 @@ BSA.iniAdminInfo = function()
             self.updateRequestForSort();
         },
         options : {
-            title: ' ',//lb.getMsg('titleTableBlogs'),
+            title: ' ',
             addSettingBehavior : true,
             addReportMenu : true,
             pager: {

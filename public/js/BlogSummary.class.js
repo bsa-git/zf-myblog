@@ -1,30 +1,27 @@
 /**
- * BlogSummary - Class
+ * Class - BlogSummary
  *
- * С помощью класса вы можете:
- *  - делать Ajax запросы по ссылкам (метки, архивы)
- *  - делать Ajax запросы по поиску данных в сообщениях
+ * With these class you can:
+ *  - do Ajax requests on the links (tags, archives)
+ *  - do Ajax requests to search for data in the posts
  *
  * JavaScript
  *
- * Copyright (c) 2011 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2011 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 BSA.BlogSummary = Class.create({
 
     container : null,
     container_id : '',
     
-    initialize : function(params)//container, linkContainer
+    // Object initialization
+    initialize : function(params)
     {
         var self = this;
         //-----------------------------
-        // Контейнер для вывода сообщений пользователей
+        // Get a container to display user messages
         if($(params.container)){
             this.container_id = params.container;
             this.container = $(params.container);
@@ -41,13 +38,12 @@ BSA.BlogSummary = Class.create({
         $$('form.ajax-links-summary').each(function(form) {
             form.onsubmit = function() {
                 
-                // Если класс елемента не соответвует ID контейнера, то
-                // НЕ делать Ajax запрос 
+                // If the class of element does not match the container ID, then do not Ajax request
                 if(! this.hasClassName(self.container_id)){
                     return true;
                 }
                 
-                // Покажем изображение ожидания загрузки обновления
+                // Show waiting download
                 $('wait-loading').show();
                 
                 var options = {
@@ -117,10 +113,9 @@ BSA.BlogSummary = Class.create({
     }
 });
 
-// Ф-ия, выполняемая при загрузки окна броузера
-// создаются обьекты класса, экземпляры их
-// заносяться в список экземпляров
-// пр. $H(BlogSummary: [new BlogSummary(param1), ... ,new BlogSummary(paramN)])
+// The function is executed after the download of the browser window
+// are created objects, which are entered in the list of instances
+// ex. $H(BlogSummary: [new BlogSummary(param1), ... ,new BlogSummary(paramN)])
 BSA.BlogSummary.RegRunOnLoad = function() {
     // Получим параметры для создания обьекта
     var params = scriptParams.get('BlogSummary');

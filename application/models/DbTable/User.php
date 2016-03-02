@@ -3,18 +3,21 @@
 /**
  * Default_Model_DbTable_User
  * 
- * Таблица - пользователей
+ * Table - users
  *
  *
  * @uses       Default_Model_DatabaseObject
  * @package    Module-Default
  * @subpackage Models
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
 
     /**
      *
-     * Конфигурация таблицы
+     * Table config
      * @var array
      */
     private $_config = array(
@@ -26,7 +29,7 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
 
     /**
      *
-     * Конфигурация пароля
+     * Password config
      * @var array
      */
     private $_config_password = array(
@@ -36,7 +39,7 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
 
     /**
      *
-     * Пользовательские типы
+     * User roles
      * @var array
      */
     static $userTypes = array(
@@ -46,7 +49,7 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
 
     /**
      * 
-     * Массив обьектов сообщений
+     * Array post objects
      * 
      * @var Default_Model_DbTable_BlogPost
      */
@@ -54,21 +57,23 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
 
     /**
      * 
-     * Обьект таблицы информации о пользователе
+     * Object user profile
      * 
      * @var Default_Model_DbTable_UserProfile
      */
     public $profile = null;
 
     /**
-     * Паспорт
+     * New password
      *
      * @var string
      */
     public $_newPassword = null;
 
+    //================================
+    
     /**
-     * Конструктор обьекта таблицы
+     * Constructor
      * 
      * @param Zend_Db_Adapter_Abstract $db
      */
@@ -86,10 +91,10 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
         $this->profile = new Default_Model_DbTable_UserProfile($db);
     }
 
-    //================ ОБРАБОТКА СОБЫТИЙ ============
+    //================ HANDLING OF EVENTS ============
 
     /**
-     * Событие перед вставкой записи
+     * Event before inserting the record
      *
      * @return bool
      */
@@ -107,7 +112,7 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Событие после вставки записи
+     * Event after inserting the record
      * 
      * @return bool 
      */
@@ -122,7 +127,7 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Событие после загрузки записи
+     * Event after loaded the record
      *
      */
     protected function postLoad() {
@@ -131,7 +136,7 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Событие после обновления записи
+     * Event after updated the record
      *
      * @return bool
      */
@@ -141,7 +146,7 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Событие перед удалением записи
+     * Event before deleting the record
      *
      * @return bool
      */
@@ -167,7 +172,7 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Событие после удалением записи
+     * Event after deleting the record
      *
      * @return bool
      */
@@ -177,10 +182,10 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
         return $result;
     }
 
-    //============= ПЕРЕДАЧА ПОЧТЫ ============//
+    //============= MAIL ============//
 
     /**
-     * Подготовка письма регистрации пользователя
+     * Preparation of email for user registration
      * 
      * @param string  $tpl  //Название шаблона письма
      * @return array
@@ -206,7 +211,7 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Создание письма получения нового пароля пользователем
+     * Creating email of the user's new password
      * 
      * @param string  Название шаблона письма
      * @return array
@@ -233,7 +238,7 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Передать почтовое сообщение
+     * Send email
      *
      * @param array $aMail
      */
@@ -249,10 +254,10 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
         ));
     }
 
-    //============== АВТОРИЗАЦИЯ ПОЛЬЗОВАТЕЛЯ ===============
+    //============== USER AUTHENTICATION ===============
 
     /**
-     * Создадим обьект идентификации пользователя
+     * Create a user object identification
      * 
      * @return stdClass 
      */
@@ -282,7 +287,7 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Успешный вход на сайт
+     * Login success
      */
     public function loginSuccess() {
         $this->ts_last_login = time();
@@ -304,7 +309,7 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Ошибка Login
+     * Error login 
      * 
      * @param string $username
      * @param int $code 
@@ -346,10 +351,10 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
         $logStat->login_err($serialized);
     }
 
-    //=================== ПОЛУЧЕНИЕ НОВОГО ПАРОЛЯ ==================
+    //=================== GET NEW PASSWORD ==================
 
     /**
-     * Получить пароль
+     * Fetch password
      * 
      * @return bool 
      */
@@ -375,7 +380,7 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Ф-ия подтверждения нового пароля
+     * Confirm new password
      * 
      * @param string $key
      * @return bool
@@ -410,76 +415,10 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
         return $this->save();
     }
 
-    //================ ДОП. Ф-ИИ ==============
+    //=============== USER DATA =========//
 
     /**
-     * Проверим существует ли пользователь с именем - $aUsername
-     *
-     * @param string $aUsername
-     * @return bool
-     */
-    public function usernameExists($aUsername) {
-        $query = sprintf('select count(*) as num from %s where username = ?', $this->_table, $aUsername);
-//        $query = $this->_getQuery('username_exists', array($aUsername));
-        $result = $this->_db->fetchOne($query);
-
-        return $result > 0;
-    }
-
-    /**
-     * Проверка правильности введеного имени - $aUsername
-     *
-     * @param string $aUsername
-     * @return bool
-     */
-    static public function IsValidUsername($aUsername) {
-        $validator = new Zend_Validate_Alnum();
-        return $validator->isValid($aUsername);
-    }
-
-    /**
-     * Установить свойство
-     *
-     * @param string $name
-     * @param string $value
-     * @return void
-     */
-    public function __set($name, $value) {
-        switch ($name) {
-            case 'password':
-                $value = md5($value);
-                break;
-            case 'user_type':
-                if (!array_key_exists($value, self::$userTypes))
-                    $value = 'member';
-                break;
-        }
-        return parent::__set($name, $value);
-    }
-
-    /**
-     * Получить пользователя по его имени
-     *
-     * @param  string $aUsername      //Имя пользователя (Login)
-     * @return Zend_Db_Table_Row
-     */
-    public function loadByUsername($username) {
-        $username = trim($username);
-        if (strlen($username) == 0)
-            return false;
-
-        $query = sprintf('select %s from %s where username = ?', join(', ', $this->getSelectFields()), $this->_table);
-
-        $query = $this->_db->quoteInto($query, $username);
-
-        return $this->_load($query);
-    }
-
-    //=============== ДАННЫЕ О ПОЛЬЗОВАТЕЛЯХ =========//
-
-    /**
-     * Получить количество обьектов пользователей удовлетворяющих
-     * критериям, заданным в парметре $options
+     * Get the total number of users satisfying the criteria specified in the parameter $options
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -493,8 +432,7 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить массив обьектов пользователей удовлетворяющих
-     * критериям, заданным в парметре $options
+     * Get the array objects of users satisfying the criteria specified in the parameter $options
      * 
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -595,9 +533,7 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить отсортированный массив
-     * в соответствии с параметрами сортировки
-     * в параметрах указано поле сортировки и направление соритировки
+     * Get sorted array profile users in accordance with the collation settings
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -614,8 +550,7 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить массив данных о пользователях удовлетворяющих
-     * критериям, заданным в парметре $options
+     * Get the array of users satisfying the criteria specified in the parameter $options
      * 
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -709,7 +644,7 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить отсортированные и сгруппированные значения из колонки таблицы
+     * Get sorted and grouped values from table column
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -793,8 +728,7 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить запрос удовлетворяющий
-     * критериям, заданным в парметре $options
+     * Get the query satisfying the criteria specified in the parameter $options
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -835,13 +769,13 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
         return $select;
     }
 
-    //------------- ФИЛЬТРАЦИЯ ------------//
+    //------------- FILTER ------------//
 
     /**
-     * Получить обьект Select (Zend_Db_Select) для фильтрации записей в таблице
+     * Get Select object (Zend_Db_Select) for filtering table records
      *
-     * @param Zend_Db_Select $select                 Обьект базы даннх Select
-     * @param array $filter                          Массив данных для фильтра
+     * @param Zend_Db_Select $select
+     * @param array $filter         
      *
      * @return array
      */
@@ -890,13 +824,13 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
         return $select;
     }
 
-    //------------- СОРТИРОВКА ------------//
+    //------------- SORT ------------//
 
     /**
-     * Получить обьект Select (Zend_Db_Select) для сортировки записей в таблице
+     * Get Select object (Zend_Db_Select) for sorting table records
      *
-     * @param Zend_Db_Select $select                 Обьект базы даннх Select
-     * @param string $order                          Массив данных для фильтра
+     * @param Zend_Db_Select $select
+     * @param array $options
      *
      * @return Zend_Db_Select
      */
@@ -948,7 +882,70 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
         $select->order($order);
         return $select;
     }
+    
+    //================ ADDITIONAL FUNCTIONS ==============
+
+    /**
+     * Verify whether there is a user named - $aUsername
+     *
+     * @param string $aUsername
+     * @return bool
+     */
+    public function usernameExists($aUsername) {
+        $query = sprintf('select count(*) as num from %s where username = ?', $this->_table, $aUsername);
+//        $query = $this->_getQuery('username_exists', array($aUsername));
+        $result = $this->_db->fetchOne($query);
+
+        return $result > 0;
+    }
+
+    /**
+     * Validation of the entered name - $aUsername
+     *
+     * @param string $aUsername
+     * @return bool
+     */
+    static public function IsValidUsername($aUsername) {
+        $validator = new Zend_Validate_Alnum();
+        return $validator->isValid($aUsername);
+    }
+
+    /**
+     * Set value
+     *
+     * @param string $name
+     * @param string $value
+     * @return void
+     */
+    public function __set($name, $value) {
+        switch ($name) {
+            case 'password':
+                $value = md5($value);
+                break;
+            case 'user_type':
+                if (!array_key_exists($value, self::$userTypes))
+                    $value = 'member';
+                break;
+        }
+        return parent::__set($name, $value);
+    }
+
+    /**
+     * Get a user by name
+     *
+     * @param  string $aUsername      //Имя пользователя (Login)
+     * @return Zend_Db_Table_Row
+     */
+    public function loadByUsername($username) {
+        $username = trim($username);
+        if (strlen($username) == 0)
+            return false;
+
+        $query = sprintf('select %s from %s where username = ?', join(', ', $this->getSelectFields()), $this->_table);
+
+        $query = $this->_db->quoteInto($query, $username);
+
+        return $this->_load($query);
+    }
 
 }
-
-?>

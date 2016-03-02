@@ -1,7 +1,18 @@
+/**
+ * Class - AjaxForm
+ * Work with the form via Ajax
+ *
+ * JavaScript
+ *
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
+ */
 BSA.AjaxForm = Class.create({
 
     form   : null,
-
+    
+    // Object initialization
     initialize : function(form)
     {
         // Установим контейнер
@@ -66,10 +77,9 @@ BSA.AjaxForm = Class.create({
     }
 });
 
-// Ф-ия, выполняемая при загрузки окна броузера
-// создаются обьекты класса, экземпляры их
-// заносяться в список экземпляров
-// пр. $H(AjaxForm: [new AjaxForm(param1), ... ,new AjaxForm(paramN)])
+// The function is executed after the download of the browser window
+// are created objects, which are entered in the list of instances
+// ex. $H(AjaxForm: [new AjaxForm(param1), ... ,new AjaxForm(paramN)])
 BSA.AjaxForm.RegRunOnLoad = function() {
     // Получим параметры для создания обьекта
     var params = scriptParams.get('AjaxForm');

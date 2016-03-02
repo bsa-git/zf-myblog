@@ -1,20 +1,16 @@
 /**
- * BlogComments - Class
+ * Class - BlogComments
  *
- * С помощью класса BlogComments вы можете:
- *  - добавлять комментарий пользователя
- *  - удалять комментарий пользователя
- *  - отвечать на комментарий пользователя
+ * This class allows:
+ *  - add comment user
+ *  - delete comment user
+ *  - to respond to user comments
  *
  * JavaScript
  *
- * Copyright (c) 2011 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2011 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 BSA.BlogComments = Class.create({
     
@@ -25,6 +21,7 @@ BSA.BlogComments = Class.create({
     type_action: "add",
     replyTemplate: "",
     
+    // Object initialization
     initialize : function(params)
     {
         // Получим контейнер для комментариев
@@ -88,7 +85,7 @@ BSA.BlogComments = Class.create({
         this.replyTemplate = replyTemplate.evaluate(show);
     },
     
-    //------ Добавление/очистка комментария --------//
+    //------ Add/Delete user comment --------//
     
     onCommentClick : function(e)
     {
@@ -194,7 +191,7 @@ BSA.BlogComments = Class.create({
     },
     
         
-    //------------ Ответ на комментарий -----------//
+    //------------ Reply on user comment -----------//
     
     onReplyCommentClick : function(e)
     {
@@ -228,7 +225,7 @@ BSA.BlogComments = Class.create({
         
     },
     
-    //------------ Редактировать комментарий -----------//
+    //------------ Edit user comment -----------//
     
     onEditCommentClick : function(e)
     {
@@ -259,7 +256,7 @@ BSA.BlogComments = Class.create({
     },
 
     
-    //------------ Удаление комментария -----------//
+    //------------ Delete user comment -----------//
     
     onDeleteCommentClick : function(e)
     {
@@ -326,9 +323,8 @@ BSA.BlogComments = Class.create({
         (count > 0)? $("no-comments").hide():$("no-comments").show();
     },
     
-    //-------------- Работа с окнами ---------------
+    //-------------- Working with windows ---------------
 
-    // Открыть окно
     openReplyWin : function(title, values)
     {
         // Удалим окно, если оно есть
@@ -370,7 +366,6 @@ BSA.BlogComments = Class.create({
         this.win.showCenter();
     },
     
-    // Открыть содержимое инф. помощи в отдельном окне
     closeReplyWin : function()
     {
         if(this.win){
@@ -390,7 +385,6 @@ BSA.BlogComments = Class.create({
         }
     },
     
-    //----- Обработка ошибок ------
     onFailure : function(message) {
         var msgs;
         if(message.class_message){
@@ -405,10 +399,9 @@ BSA.BlogComments = Class.create({
     }
 })
 
-// Ф-ия, выполняемая при загрузки окна броузера
-// создаются обьекты класса, экземпляры их
-// заносяться в список экземпляров
-// пр. $H(BlogComments: [new BlogComments(), ... ,new BlogComments()])
+// The function is executed after the download of the browser window
+// are created objects, which are entered in the list of instances
+// ex. $H(BlogComments: [new BlogComments(), ... ,new BlogComments()])
 BSA.BlogComments.RegRunOnLoad = function() {
     // Получим параметры для создания обьекта
     var params = scriptParams.get('BlogComments');

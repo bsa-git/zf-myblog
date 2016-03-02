@@ -31,6 +31,9 @@
         <script type="text/javascript" src="{'/js/BSA.System.js'|urlres}"></script>
         <script type="text/javascript" src="{'/js/LangBox.class.js'|urlres}"></script>
         <script type="text/javascript" src="{'/js/SearchSuggestor.class.js'|urlres}"></script>
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
         
         {* Запомнить параметры скриптов в списке параметров *}
         <script type="text/javascript">

@@ -3,13 +3,15 @@
 /**
  * Default_Form_MyForm
  * 
- * Класс наследник Zend_Form, помогает настроить окружение.
- * Все наши формы будут наследоваться от этого класса.
+ * All our forms will inherit from this class.
  *
  *
  * @uses       Zend_Form
  * @package    Module-Default
  * @subpackage Forms
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Form_MyForm extends Zend_Form {
 
@@ -25,8 +27,8 @@ class Default_Form_MyForm extends Zend_Form {
     }
     
     /**
-     * Декораторы для элемента формы
-     * оформление в виде строки таблицы ([метка] [элемент])
+     * Decorators for the form element
+     * decoration in the form of a table row ([label] [element])
      * 
      * @var array 
      */
@@ -40,8 +42,8 @@ class Default_Form_MyForm extends Zend_Form {
     );
     
     /**
-     * Декораторы формы для отображения метки группы элементов 
-     * оформление в виде строки заголовка таблицы (tag = th)
+     * Decorators form to display the label group elements
+     * decoration as a table heading row (tag = th)
      * 
      * @var array 
      */
@@ -52,8 +54,8 @@ class Default_Form_MyForm extends Zend_Form {
         array(array('row' => 'HtmlTag'), array('tag' => 'tr')),
     );
     /**
-     * Декораторы для кнопки формы
-     * оформление в виде строки таблицы ([] [кнопка])
+     * Decorators for form buttons
+     * decoration in the form of a table row ([] [button])
      * 
      * @var array 
      */
@@ -64,8 +66,8 @@ class Default_Form_MyForm extends Zend_Form {
         array(array('row' => 'HtmlTag'), array('tag' => 'tr')),
     );
     /**
-     * Декораторы для формы
-     * оформление в виде таблицы
+     * Decorators for form
+     * as table decoration
      * 
      * @var array 
      */
@@ -75,19 +77,19 @@ class Default_Form_MyForm extends Zend_Form {
         'Form',
     );
     /**
-     * Язык сайта
+     * Language of site
      *
      * @var string
      */
     protected  $_language = '';
 
     /**
-     * Инициализация формы
+     * Initialization form
      * 
      * return void
      */
     public function init() {
-        // Вызов родительского метода
+
         parent::init();
 
         // Получим объект переводчика
@@ -95,8 +97,8 @@ class Default_Form_MyForm extends Zend_Form {
         // Задаем объект переводчика для формы
         $this->setTranslator($translate);
 
-        /* Задаем префиксы для самописных элементов, валидаторов, фильтров и декораторов.
-          Благодаря этому Zend_Form будет знать где искать наши самописные элементы */
+        /* Specifies the prefix for samopisnyh elements, validators, filters, and decorators.
+          This Zend Form will know where to find our custom items */
 
         $this->addElementPrefixPath('Default_Form_Validate', APPLICATION_PATH . '/forms/validate/', 'validate');
         $this->addElementPrefixPath('Default_Form_Filter', APPLICATION_PATH . '/forms/filter/', 'filter');
@@ -108,10 +110,12 @@ class Default_Form_MyForm extends Zend_Form {
     }
 
     /**
-     * Получить URL
+     * Get URL
      * 
      * @param string $action
      * @param string $controller
+     * @param string $module
+     * @param array $params
      * @return string 
      */
     public function getUrl($action = NULL, $controller = NULL, $module = NULL, array $params = NULL) {
@@ -126,7 +130,7 @@ class Default_Form_MyForm extends Zend_Form {
     }
     
     /**
-     * Получить Route URL
+     * Get Route URL
      * 
      * @param string $route
      * @param array $params
@@ -144,7 +148,7 @@ class Default_Form_MyForm extends Zend_Form {
     }
 
     /**
-     * Сделать перевод текста
+     * Translate text
      *
      * @return string
      */

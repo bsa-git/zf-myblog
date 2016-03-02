@@ -3,18 +3,21 @@
 /**
  * Default_Model_DbTable_BlogPostImage
  *
- * Таблица - для работы с данными об изображениях
+ * Table - to work with images
  *
  *
  * @uses       Default_Model_DatabaseObject
  * @package    Module-Default
  * @subpackage Models
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Model_DbTable_BlogPostImage extends Default_Model_DatabaseObject {
 
     /**
      *
-     * Конфигурация таблицы
+     * Table config
      * @var array
      */
     private $_config = array(
@@ -30,7 +33,7 @@ class Default_Model_DbTable_BlogPostImage extends Default_Model_DatabaseObject {
     );
     /**
      *
-     * Загруженный файл - путь к файлу
+     * Uploaded file
      *
      * @var string
      */
@@ -39,7 +42,7 @@ class Default_Model_DbTable_BlogPostImage extends Default_Model_DatabaseObject {
     //================ КОНСТРУКТОР КЛАССА ============
 
     /**
-     * Конструктор обьекта таблицы
+     * Constructor
      * 
      * @param Zend_Db_Adapter_Abstract $db
      */
@@ -53,10 +56,10 @@ class Default_Model_DbTable_BlogPostImage extends Default_Model_DatabaseObject {
         $this->add('comment');
     }
 
-    //================ ОБРАБОТКА СОБЫТИЙ ============
+    //================ HANDLING OF EVENTS ============
 
     /**
-     * Событие перед вставкой записи
+     * Event before inserting the record
      *
      * @return bool
      */
@@ -81,7 +84,7 @@ class Default_Model_DbTable_BlogPostImage extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Событие после вставки записи
+     * Event after inserting the record
      *
      * @return bool
      */
@@ -97,7 +100,7 @@ class Default_Model_DbTable_BlogPostImage extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Событие перед удалением записи
+     * Event before deleting the record
      *
      * @return bool
      */
@@ -116,10 +119,10 @@ class Default_Model_DbTable_BlogPostImage extends Default_Model_DatabaseObject {
         return true;
     }
 
-    //================ РАБОТА С ИЗОБРАЖЕНИЯМИ ============
+    //================ WORKING WITH RECORD ============
 
     /**
-     * Загрузить данные изображения для конкретного сообщения
+     * Get image data for a specific post
      *
      * @param int $post_id
      * @param int $image_id
@@ -144,8 +147,7 @@ class Default_Model_DbTable_BlogPostImage extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Проверка загруженного файла
-     * что это файл, что он существует, что его можно читать
+     * Checking the downloaded file that it exists, that it can be read
      *
      * @param string $path
      */
@@ -160,8 +162,7 @@ class Default_Model_DbTable_BlogPostImage extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Создаем миниатюру изображения и
-     * получаем путь к этой миниатюре
+     * Create thumbnail image and get path to this miniature
      *
      * @param int $maxW
      * @param int $maxH
@@ -276,9 +277,7 @@ class Default_Model_DbTable_BlogPostImage extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить полный путь к файлу
-     * причем имя файла заменяется на его уникальный код ID
-     * из базы данных
+     * Get the full path to the file and the file name is replaced by its unique ID code from the database
      *
      * @return string
      */
@@ -288,8 +287,7 @@ class Default_Model_DbTable_BlogPostImage extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить URL к изображению по его физическому пути
-     * и имени пользователя
+     * Get the URL to the image by its physical path and name of the user
      *
      * @param string $imagePath
      * @param string $username
@@ -312,7 +310,7 @@ class Default_Model_DbTable_BlogPostImage extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить Hash код для изображения
+     * Get Hash code of the image
      *
      * @param int $id
      * @param int $w
@@ -328,8 +326,7 @@ class Default_Model_DbTable_BlogPostImage extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить путь хранения изображений для
-     * конкретного пользователя
+     * Get image storage path for a specific user
      *
      * @return string
      */
@@ -356,7 +353,7 @@ class Default_Model_DbTable_BlogPostImage extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить путь к файлам миниатюр изображений
+     * Get path to file thumbnails
      *
      * @return string
      */
@@ -382,7 +379,7 @@ class Default_Model_DbTable_BlogPostImage extends Default_Model_DatabaseObject {
     }
     
     /**
-     * Получить URL к файлам миниатюр изображений
+     * Get URL to file thumbnails
      *
      * @return string
      */
@@ -409,8 +406,8 @@ class Default_Model_DbTable_BlogPostImage extends Default_Model_DatabaseObject {
     
        
     /**
-     * Получить полный URL к ресурсу
-     * пр. http://localhost:8080/zf-myblog/public/upload/users/user1/images/10.png
+     * Get the full URL to the resource
+     * ex. http://localhost:8080/zf-myblog/public/upload/users/user1/images/10.png
      *
      * @return string
      */
@@ -419,9 +416,8 @@ class Default_Model_DbTable_BlogPostImage extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить полный URL к файлу
-     * причем имя файла заменяется на его уникальный код ID из базы данных
-     * пр. /upload/users/user1/images/10.png
+     * Get the URL to the resource
+     * ex. /upload/users/user1/images/10.png
      *
      * @return string
      */
@@ -431,9 +427,8 @@ class Default_Model_DbTable_BlogPostImage extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить URL хранения изображений для
-     * конкретного пользователя
-     * пр. /upload/users/user1/images
+     * Get the URL storing images for a specific user
+     * ex. /upload/users/user1/images
      *
      * @return string
      */
@@ -460,7 +455,7 @@ class Default_Model_DbTable_BlogPostImage extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить массив обьектов изображений для статьи
+     * Get an array of image objects for post
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -493,7 +488,7 @@ class Default_Model_DbTable_BlogPostImage extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить массив изображений для сообщения
+     * Get an array of image for post
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -528,8 +523,7 @@ class Default_Model_DbTable_BlogPostImage extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить общее кол. записей удовлетворяющих
-     * критерия, заданным в парметре $options
+     * Get the total number of records satisfying the criteria specified in the parameter $options
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -552,5 +546,3 @@ class Default_Model_DbTable_BlogPostImage extends Default_Model_DatabaseObject {
         return $db->fetchOne($select);
     }
 }
-
-?>

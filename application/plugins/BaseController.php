@@ -1,26 +1,28 @@
 <?php
 
 /**
- * BaseController
+ * Default_Plugin_BaseController
  *
- * Контроллер - Base
- * реализует базовые действия котроллеров
+ * Plugin - it implements basic operations of controllers
  *
  * @uses       Zend_Controller_Action
  * @package    Module-Default
  * @subpackage Plugins
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Plugin_BaseController extends Zend_Controller_Action {
 
     /**
-     * Начальное время
+     * Start time
      *
      * @var float
      */
     protected $_startTimeDispatch = 0;
 
     /**
-     * Адаптер базы данных
+     * Database  adapter
      *
      * @var Zend_Db_Adapter_Abstract
      */
@@ -34,63 +36,63 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
     protected $_flashMessenger = null;
 
     /**
-     * Breadcrumbs - хлебные крошки
+     * Breadcrumbs
      *
      * @var Default_Plugin_Breadcrumbs
      */
     protected $_breadcrumbs = null;
 
     /**
-     * Redirector - перенаправление запросов
+     * Redirector
      *
-     * @var Zend_Controller_Action_Helper_FlashMessenger
+     * @var Zend_Controller_Action_Helper_Redirector
      */
     protected $_redirector = null;
 
     /**
-     * isAjaxRequest - признак наличия Ajax запроса
+     * isAjaxRequest - is Ajax request
      *
      * @var bool
      */
     protected $_isAjaxRequest = false;
 
     /**
-     * identity - обьект идентификации пользователя
+     * identity - user identification object
      *
-     * @var objest
+     * @var object
      */
     protected $_identity = null;
 
     /**
-     * authenticated - признак авторизации пользователя на сайте
+     * authenticated
      *
      * @var bool
      */
     protected $_authenticated = false;
 
     /**
-     * isAdmin - признак авторизации администратора 
+     * isAdmin
      *
      * @var bool
      */
     protected $_isAdmin = false;
 
     /**
-     * isEditor - признак авторизации редактора
+     * isEditor
      *
      * @var bool
      */
     protected $_isEditor = false;
 
     /**
-     * isMember - признак авторизации члена группы
+     * isMember
      *
      * @var bool
      */
     protected $_isMember = false;
 
     /**
-     * isGuest - признак авторизации гостя
+     * isGuest
      *
      * @var bool
      */
@@ -104,124 +106,121 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
     protected $_request = null;
 
     /**
-     * params - параметры запроса
+     * params - request parameters
      *
      * @var array
      */
     protected $_params = null;
 
     /**
-     * zend_version - используемая версия Zend Framework
+     * zend_version
      *
      * @var string
      */
     protected $_zend_version = '';
 
     /**
-     * config - конфигуратор приложения Zend_Cofig
+     * config
      *
      * @var string
      */
     protected $_config = null;
 
     /**
-     * locales - массив локалей для сайта
+     * locales - array of locales for the site
      *
      * @var array
      */
     protected $_locales = null;
 
     /**
-     * _url_mvc - адрес обращения к модулю, контроллеру и действию
-     * пр. /admin/user/news
+     * _url_mvc - url to the module, controller and action
+     * ex. /admin/user/news
      *
      * @var string
      */
     protected $_url_mvc = '';
 
     /**
-     * _sessZendAuth - обьект сессии
+     * _sessZendAuth - session object
      *
      * @var object
      */
     protected $_sessZendAuth = null;
 
     /**
-     * _userAgent - обьект userAgent, который выполнил запрос по HTTP
+     * userAgent
      *
      * @var object
      */
     protected $_userAgent = null;
 
     /**
-     * _serializer - обьект Zend_Serializer
+     * _serializer - Zend_Serializer
      *
-     * @var object
+     * @var Zend_Serializer
      */
     protected $_serializer = null;
 
     /**
-     * _logMsg - обьект Zend_Log
+     * logMsg - message log
      *
-     * @var object
+     * @var Zend_Log
      */
     protected $_logMsg = null;
 
     /**
-     * _logStat - обьект Zend_Log
+     * _logStat - statistic log
      *
-     * @var object
+     * @var Zend_Log
      */
     protected $_logStat = null;
 
     /**
-     * _logEx - обьект Zend_Log
+     * _logEx - error log
      *
-     * @var object
+     * @var Zend_Log
      */
     protected $_logEx = null;
 
     /**
-     * _modules - доступные модули
+     * _modules - available modules
      *
      * @var array
      */
     protected $_modules = null;
 
     /**
-     * _report - режим отчета
-     * выводиться только сообщение, 
-     * без header, footer, left, right
+     * report - report mode
+     * only output message, without header, footer, left, right
      *
      * @var bool
      */
     protected $_report = null;
     
     /**
-     * _isIE - признак того что запрос к сайту был выполнен с IE
+     * isIE
      *
      * @var bool
      */
     protected $_isIE = false;
     
     /**
-     * _isCompatibleBrowser - признак того что 
-     * пользовательский броузер польностью совместим
+     * isCompatibleBrowser - the user's browser is fully compatible
      * 
      * @var bool
      */
     protected $_isCompatibleBrowser = true;
     
     /**
-     * _isForbiddenBrowser - признак того что 
-     * пользовательский броузер запрещен к использованию
+     * isForbiddenBrowser - the user's browser is forbidden to use
      * 
      * @var bool
      */
     protected $_isForbiddenBrowser = false;
 
     /**
-     * _browser - даные о текущем броузере
+     * _browser - information about the current browser
      * 
      * array(
       'userAgent' => $u_agent,
@@ -236,12 +235,12 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
      *
      * @var array
      */
-    protected $_browser = null;//incompatible_browsers
+    protected $_browser = null;
     
     //---------------------------------
 
     /**
-     * Инициализация контроллера
+     * Initialization controller
      */
     function init() {
 
@@ -346,10 +345,10 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
         }
     }
 
-    //============ ОБРАБОТКА СОБЫТИЙ КОТРОЛЛЕРА ==================
+    //============ EVENT HANDLING CONTROLLER ==================
 
     /**
-     * Событие перед диспечерезацией котроллера
+     * Event controller before dispatching
      */
     public function preDispatch() {
 
@@ -389,7 +388,7 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
     }
 
     /**
-     * Событие после диспечерезации контроллера
+     * Events after the controller dispatching
      */
     public function postDispatch() {
         $infoProfiler = '';
@@ -425,9 +424,9 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
         Default_Plugin_SysBox::profilerTime2Registry($this->_startTimeDispatch, $infoProfiler);
     }
 
-    //============ РАБОТА С ОШИБКАМИ/СООБЩЕНИЯМИ В ФОРМАХ ==================
+    //============ ERRORS/MESSAGES IN FORMS ==================
     /**
-     * Получить ошибки формы в виде массива
+     * Get Errors form an array
      * 
      * array( 
      *   'element_name'=> array( 
@@ -470,15 +469,14 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
     }
 
     /**
-     * Получить сообщения об ошибках формы в виде массива
+     * Receive an error message in the form of an array
      * 
-     * array( 
-     *      Ошибка формы! Неверно введены данные в форму.
-     *      Электронная почта : 111' недопустимый адрес электронной почты. Введите его в формате имя@домен
-     *      Защита от спама : Введены не верные символы
+     * ex. array( 
+     *      Error form! Invalid data in the form introduced.
+     *      Email : '111' Invalid e-mail address. Enter it in the format 'name@domain'
+     *      Protection from spam : Introduced invalid characters
      * )
      * @param Zend_Form $form 
-     * @param string $class_message 
      * 
      * @return array 
      */
@@ -513,18 +511,13 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
         if (count($errorMessages) == 0) {
             $errorMessages = NULL;
         }
-//        else {
-//            $errorMessages = array($class_message => $errorMessages);
-//        }
-
         return $errorMessages;
     }
 
     /**
-     * Получить сообщения об ошибках формы в виде строки
+     * Receive an error message in the form of a string
      *
      * @param Zend_Form $form
-     * @param string $class_message
      *
      * @return string
      */
@@ -540,9 +533,9 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
         return $strMessages;
     }
 
-    //********* ДОПОЛНИТЕЛЬНЫЕ Ф-ИИ ****************
+    //********* ADDITIONAL FUNCTIONS ****************
     /**
-     * Получить URL
+     * Get URL
      * 
      * @param string $action
      * @param string $controller
@@ -556,7 +549,7 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
     }
 
     /**
-     * Получить URL для ресурса
+     * Get URL for resource
      * 
      * @param string $text
      * @return string 
@@ -567,10 +560,10 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
     }
 
     /**
-     * Получить нестандартный URL
+     * Get nonstandard URL
      * 
-     * @param array $options // параметры формирования URL
-     * @param string $route  // имя маршрута в роутере
+     * @param array $options // URL parameters
+     * @param string $route  // the router
      * @return string 
      */
     public function getCustomUrl($options, $route = null) {
@@ -581,7 +574,7 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
     }
 
     /**
-     * Сделать перевод текста
+     * Translate text
      *
      * @return string
      */
@@ -591,7 +584,7 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
     }
 
     /**
-     * Передать данные в формате Json
+     * Send data to Json format
      *
      * @param array $data
      */
@@ -633,7 +626,7 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
     }
 
     /**
-     * Передать данные в формате Json
+     * Send json data as HTML format
      *
      * @param array $data
      */
@@ -675,7 +668,7 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
     }
 
     /**
-     * Передать данные в формате text/html
+     * Send data to text/html format
      *
      * @param string $html
      */
@@ -705,11 +698,11 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
     }
 
     /**
-     * Форматировать даты
+     * Format date
      *
-     * @param string|int $data      // Дата
-     * @param string $format        // Выходной формат
-     * @param string $input_format  // Входной формат даты
+     * @param string|int $data      // Date
+     * @param string $format        // Output format
+     * @param string $input_format  // Input format
      *
      * @return string
      */
@@ -723,8 +716,7 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
     }
 
     /**
-     * Получить параметры для запроса
-     * соответствующей страницы в базе данных
+     * Get the parameters for the corresponding page request in the database
      *
      * @param int $count
      *

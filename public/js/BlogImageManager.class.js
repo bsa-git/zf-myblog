@@ -1,39 +1,34 @@
 /**
- * BlogImageManager - Class
+ * Class - BlogImageManager
  *
- * С помощью класса вы можете:
- *  - отображать альбом с изображениями для соответсвующего сообщения
- *  - удалять, сортировать и изменять титл изображения
+ * With these class you can:
+ *  - display album images for the respective post
+ *  - delete, sort, and change the title image
  *
  * JavaScript
  *
- * Copyright (c) 2011 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2011 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 BSA.BlogImageManager = Class.create({
     
-    container_id: '', //ID для контейнера
-    container: null, //Контейнер для изображений
-    deletedImage: '', //Номер изоображения, которое уже было удалено
-    commentedImage: false, //Признак того, что комментарий уже был измеенен, для этого изображения
-    post_id: 0,      // Номер сообщения
-    img: null, // Обьект выбранного изображения
-    type: '', // Тип, изображений (пр. image, audio, video ...)
-    id: '',   // ID выбранного обьекта
-    accordion: null,// Аккордион
-    isDownloadedImages: false, // Признак загрузки изображений на страницу
-    actual: false, // Признак состояния аккордиона (открыт или закрыт)
+    container_id: '', // Container ID
+    container: null, // Container for images
+    deletedImage: '', // The image that has been removed
+    commentedImage: false, // Indication that a comment has already been changed to the image
+    post_id: 0,      // Post ID
+    img: null, // The object of the selected image
+    type: '', // Image type (ex. image, audio, video ...)
+    id: '',   // ID of select object
+    accordion: null,// Accordion object
+    isDownloadedImages: false, // Is uploading images to the page
+    actual: false, // Accordion state (open or closed)
     
+    // Object initialization
     initialize : function(params)
     {
-        
-
-        // Определим контейнер
+        // Get container
         this.container = $(params.container);
         if(this.container){
             this.container_id = params.container;
@@ -47,17 +42,16 @@ BSA.BlogImageManager = Class.create({
         }
             
         
-        // Определим наличие аккордиона
+        // Is accordion
         if (params.accordion){
             this.accordion = params.accordion;
         }else{
-            // Инициализация событий для изображений: удаление, 
-            // порядок расположения, изменение комментария
+            // Initialize event for images: delete, order, change comment
             this.iniEventForImages();
         }
         
         if(this.accordion){
-            // Подпишемся на события в аккордионе
+            // Subscribe to the events in the accordion
             this._subscribeAccordionEvents();
         }
     },
@@ -87,7 +81,7 @@ BSA.BlogImageManager = Class.create({
         Sortable.create(this.container, options);
     },
 
-    //========== ИЗМЕНИМ КОММЕНТАРИЙ К ИЗОБРАЖЕНИЮ ===========//
+    //========== IMAGE COMMENT ===========//
     
     onCommentClick : function(e)
     {
@@ -170,7 +164,7 @@ BSA.BlogImageManager = Class.create({
         BSA.Sys.message_write(lb.getMsg('msgErrCommentImage'));
     },
 
-    //========== УДАЛЕНИЕ ИЗОБРАЖЕНИЯ ===========//
+    //========== DELETE IMAGE ===========//
     
     onDeleteClick : function(e)
     {
@@ -235,7 +229,7 @@ BSA.BlogImageManager = Class.create({
         BSA.Sys.message_write(lb.getMsg('msgErrDeleteImage'));
     },
     
-    //========== СОРТИРОВКА ИЗОБРАЖЕНИЙ ===========//
+    //========== SORT IMAGES ===========//
 
     onSortUpdate : function(draggable)
     {
@@ -255,8 +249,7 @@ BSA.BlogImageManager = Class.create({
         new Ajax.Request(form.action, options);
     },
     
-    //========== Добавить в список новое загруженное изображение ===========//
-    
+    // Add to the list of the new downloaded image
     onAfterUploadFile : function(json)
     {
         var self = this;
@@ -356,7 +349,7 @@ BSA.BlogImageManager = Class.create({
         this._updateAccordionSectionValue(1);
     },
     
-    // Обновим значение секции аккордиона
+    // Update the value of the accordion section
     _updateAccordionSectionValue : function(newValue) {
         var a = $(this.accordion.id).down('a[href=' + this.accordion.section + ']');
         var value = a.innerText;
@@ -366,7 +359,7 @@ BSA.BlogImageManager = Class.create({
         a.innerHTML = a.innerHTML.replace(a.innerText, '') + arrValues[0] + '(' + value + ')';
     },
     
-    // Выравнивание картинки посредине
+    // Align image in the middle
     _setAllignImg : function(type, id) {
         var container = null;
         var dimensionsContainer = null;
@@ -402,9 +395,9 @@ BSA.BlogImageManager = Class.create({
         }
     },
     
-    //========== РАБОТА С АККОРДИОНОМ ===========//
+    //========== ACCORDION ===========//
 
-    // Подпишемся на события в аккордионе
+    // Subscribe to the events in the accordion
     _subscribeAccordionEvents : function() {
         var self = this;
         var indexSection = self.accordion.section;
@@ -439,7 +432,7 @@ BSA.BlogImageManager = Class.create({
         })
     },
     
-    // Свернуть секцию в аккордионе
+    // Hidden section of the accordion
     onHiddenSectionEvent : function(self, params) {
         var section = params.section.elements.section;
         var hrefSection = section.down('a').readAttribute('href');
@@ -448,7 +441,7 @@ BSA.BlogImageManager = Class.create({
         }
     },
     
-    // Развернуть секцию в аккордионе
+    // Show section in the accordion
     onShownSectionEvent : function(self, params) {
         var section = params.section.elements.section;
         var hrefSection = section.down('a').readAttribute('href');
@@ -527,7 +520,7 @@ BSA.BlogImageManager = Class.create({
         BSA.Sys.message_write(lb.getMsg('msgErrDownloadImages'));
     },
     
-    // Обработка ошибок
+    // Handling errors
     onFailure : function(message) {
         var msgs;
         if(message.class_message){
@@ -542,10 +535,9 @@ BSA.BlogImageManager = Class.create({
     }
 });
 
-// Ф-ия, выполняемая при загрузки окна броузера
-// создаются обьекты класса, экземпляры их
-// заносяться в список экземпляров
-// пр. $H(BlogImageManager: [new BlogImageManager(param1), ... ,new BlogImageManager(paramN)])
+// The function is executed after the download of the browser window
+// are created objects, which are entered in the list of instances
+// ex. $H(BlogImageManager: [new BlogImageManager(param1), ... ,new BlogImageManager(paramN)])
 BSA.BlogImageManager.RegRunOnLoad = function() {
     // Получим параметры для создания обьекта
     var params = scriptParams.get('BlogImageManager');

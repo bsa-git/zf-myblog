@@ -3,36 +3,39 @@
 /**
  * Default_Form_BlogPost
  * 
- * Форма блога
+ * Form - blog post
  *
  *
  * @uses       Default_Form_MyForm
  * @package    Module-Default
  * @subpackage Forms
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Form_BlogPost extends Default_Form_MyForm {
 
     /**
-     * Адаптер базы данных
+     * DataBase adapter
      * 
      * @var Zend_Db_Adapter_Abstract
      */
     protected $db = null;
     /**
-     * Обьект пользователя
+     * User
      * 
      * @var Default_Model_DbTable_User
      */
     public $user = null;
     /**
-     * Обьект блога пользователя
+     * Post
      * 
      * @var Default_Model_DbTable_BlogPost
      */
     public $post = null;
 
     /**
-     * Конструктор обьекта
+     * Constructor
      * 
      * @param Zend_Db_Adapter_Abstract $db
      * @param int $user_id
@@ -56,12 +59,11 @@ class Default_Form_BlogPost extends Default_Form_MyForm {
     }
 
     /**
-     * Создание формы
+     * Initialization form
      */
     public function init() {
-        // Вызываем родительский метод
-        parent::init();
 
+        parent::init();
 
         //---------------- Форма ----------------
         // Указываем action формы

@@ -3,23 +3,25 @@
 /**
  * Default_Form_Validate_DbMultipleKey
  * 
- * Проверка отсутствия сложного ключа в таблице
+ * Validate - verify the absence of a key complex in the table
  *
  *
  * @uses       Zend_Validate_Abstract
  * @package    Module-Default
  * @subpackage Forms.Validates
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Form_Validate_DbMultipleKey extends Zend_Validate_Abstract {
     /**
-     * Метка ошибки
+     * Error tag
      * @var const 
      */
-
     const RECORD_EXISTS = 'dbMultipleKeyExists';
 
     /**
-     * Текст ошибки
+     * Error text
      * @var array 
      */
     protected $_messageTemplates = array(
@@ -27,63 +29,62 @@ class Default_Form_Validate_DbMultipleKey extends Zend_Validate_Abstract {
     );
 
     /**
-     * Схема таблицы в которой будет происходить поиск записи
+     * The table scheme in which will be searched record
      * @var string
      */
     protected $_schema = '';
 
     /**
-     * Имя таблица в которой будет происходить поиск записи
+     * The table name in which will be searched record
      * @var string
      */
     protected $_table = null;
 
     /**
-     * Имя поля составного ключа1 по которому будет происходить поиск значения 
+     * Name field composite key1 on which the search will take place values
      * @var string
      */
     protected $_fieldKey1 = null;
 
     /**
-     * Имя поля составного ключа2 по которому будет происходить поиск значения 
+     * Name field composite key2 on which the search will take place values
      * @var string
      */
     protected $_fieldKey2 = null;
 
     /**
-     * Используемый адаптер базы данных
+     * Database adapter
      *
      * @var unknown_type
      */
     protected $_adapter = null;
 
     /**
-     * Уникальный ключ записи
+     * Key ID
      *
      * @var int
      */
     protected $_id = 0;
 
     /**
-     * Значение уникального ключа1 записи
+     * The value of the unique key1 record
      *
      * @var int
      */
     protected $_valueKey1 = null;
 
     /**
-     * Значение уникального ключа2 записи
+     * The value of the unique key2 record
      *
      * @var int
      */
     protected $_valueKey2 = null;
 
     /**
-     * Конструктор
+     * Constructor
      * 
-     * @param array $params  Массив с параметрами
+     * @param array $params
      */
-//    public function __construct($table, $field, Zend_Db_Adapter_Abstract $adapter = null)
     public function __construct($params) {
         $this->_schema = $params['schema'] ? $params['schema'] : '';
         $this->_table = $params['table'];
@@ -105,9 +106,9 @@ class Default_Form_Validate_DbMultipleKey extends Zend_Validate_Abstract {
     }
 
     /**
-     * Проверка
+     * Validate
      * 
-     * @param string $value значение которое поддается валидации
+     * @param string $value
      */
     public function isValid($value) {
 
@@ -130,8 +131,7 @@ class Default_Form_Validate_DbMultipleKey extends Zend_Validate_Abstract {
                             'table' => $this->_table,
                             'field' => $this->_fieldKey1,
                             'exclude' => $clause,
-                            'adapter' => $adapter,
-//                            'schema' => $this->_schema
+                            'adapter' => $adapter
                         )
         );
 
@@ -144,23 +144,6 @@ class Default_Form_Validate_DbMultipleKey extends Zend_Validate_Abstract {
             $this->_error($messageKey);
             return false;
         }
-
-//        $select = $adapter->select()
-//                ->from($this->_table)
-//                ->where($adapter->quoteIdentifier($this->_field) . ' = ?', $value)
-//                ->limit(1)
-//        ;
-//        $stmt = $adapter->query($select);
-//        $result = $stmt->fetch(Zend_Db::FETCH_ASSOC);
-//
-//        if ($result !== false) {
-//            $messageKey = self::RECORD_EXISTS;
-//            $value = $this->_messageTemplates[$messageKey];
-//            $this->_error($messageKey);
-//            return false;
-//        }
-
-        
     }
 
 }

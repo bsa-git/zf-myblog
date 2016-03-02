@@ -1,20 +1,25 @@
 <?php
+
 /**
  * smarty_function_breadcrumbs
  *
- * Функция Smarty - breadcrumbs
- * получить путь к ресурсу в виде (breadcrumbs)
+ * Function Smarty - breadcrumbs
+ * get the path to the resource as (breadcrumbs)
  *
  * @uses       
  * @package    Module-Default
  * @subpackage Views.Plugins
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 
 /**
- * Получить путь к ресурсу в виде (breadcrumbs)
+ * Get the path to the resource as (breadcrumbs)
  * 
  * @param array $params
  * @param Smarty $smarty
+ * 
  * @return string 
  */
 function smarty_function_breadcrumbs($params, $smarty) {
@@ -54,5 +59,3 @@ function smarty_function_breadcrumbs($params, $smarty) {
     // join the links using the specified separator
     return join($params['separator'], $links);
 }
-
-?>

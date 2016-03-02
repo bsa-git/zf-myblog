@@ -3,12 +3,15 @@
 /**
  * ErrorController
  *
- * Контроллер - Error
- * обрабатывает ошибки системы
+ * Controller - Error
+ * it handles system errors
  *
  * @uses       Default_Plugin_BaseController
  * @package    Module-Default
  * @subpackage Controllers
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class ErrorController extends Default_Plugin_BaseController {
 
@@ -22,8 +25,7 @@ class ErrorController extends Default_Plugin_BaseController {
     //------------------------------------------
 
     /**
-     * init
-     * Инициализировать контроллер
+     * Initialization controller
      *
      * @return void
      */
@@ -31,9 +33,7 @@ class ErrorController extends Default_Plugin_BaseController {
 
         parent::init();
 
-        //Зарегистрируем плагин FlashMessenger
         $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
-        //$this->_flashMessenger->setNamespace('Zend_Auth');
         $this->initView();
     }
 
@@ -52,7 +52,7 @@ class ErrorController extends Default_Plugin_BaseController {
 
         $errors = $this->_getParam('error_handler');
 
-        //Получим переменную окружения - (production, testing, development)
+        // Get APPLICATION_ENV - (production, testing, development)
         $this->view->env = APPLICATION_ENV;
 
         if (!$errors) {
@@ -114,8 +114,8 @@ class ErrorController extends Default_Plugin_BaseController {
     }
 
     /**
-     * messageAction()
-     * Действие по отображению сообщений пользователя
+     * Action - message
+     * message display
      *
      * @return void
      */

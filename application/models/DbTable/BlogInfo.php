@@ -3,19 +3,22 @@
 /**
  * Default_Model_DbTable_BlogInfo
  *
- * Таблица - информационной помощи
- * служит для создания вывода информации в окне или в подсказке
+ * Table - info help
+ * It is used to generate output information in a window or in a tooltip
  *
  *
  * @uses       Default_Model_DatabaseObject
  * @package    Module-Default
  * @subpackage Models
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Model_DbTable_BlogInfo extends Default_Model_DatabaseObject {
 
     /**
-     *
-     * Конфигурация таблицы
+     * Table config
+     * 
      * @var array
      */
     private $_config = array(
@@ -27,14 +30,16 @@ class Default_Model_DbTable_BlogInfo extends Default_Model_DatabaseObject {
 
     /**
      * 
-     * Обьект таблицы доп. информации
+     * Table object for additional information
      * 
-     * @var Default_Model_DbTable_BlogPost
+     * @var Default_Model_DbTable_BlogInfoProfile
      */
     public $profile = null;
+    
+    //=========================================
 
     /**
-     * Конструктор обьекта таблицы
+     * Constructor
      * 
      * @param Zend_Db_Adapter_Abstract $db
      */
@@ -49,10 +54,10 @@ class Default_Model_DbTable_BlogInfo extends Default_Model_DatabaseObject {
         $this->profile = new Default_Model_DbTable_BlogInfoProfile($db);
     }
 
-    //================ ОБРАБОТКА СОБЫТИЙ ============
+    //================ HANDLING OF EVENTS ============
 
     /**
-     * Событие перед вставкой записи
+     * Event before inserting the record
      *
      * @return bool
      */
@@ -62,7 +67,7 @@ class Default_Model_DbTable_BlogInfo extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Событие после вставки записи
+     * Event after inserting the record
      * 
      * @return bool 
      */
@@ -80,7 +85,7 @@ class Default_Model_DbTable_BlogInfo extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Событие после загрузки записи
+     * Event after loaded the record
      *
      */
     protected function postLoad() {
@@ -92,7 +97,7 @@ class Default_Model_DbTable_BlogInfo extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Событие после обновления записи
+     * Event after updated the record
      *
      * @return bool
      */
@@ -109,7 +114,7 @@ class Default_Model_DbTable_BlogInfo extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Событие перед удалением записи
+     * Event before deleting the record
      *
      * @return bool
      */
@@ -118,11 +123,10 @@ class Default_Model_DbTable_BlogInfo extends Default_Model_DatabaseObject {
         return true;
     }
 
-    //=========== РАБОТА С ЗАПИСЬЮ =============
+    //=========== WORKING WITH RECORD =============
 
     /**
-     * Получить массив обьектов информационных сообщений
-     * на всех языках
+     * Get an array objects of informational messages in all languages
      *
      * @param string $info_key
      * @return array Default_Model_DbTable_BlogInfo
@@ -141,11 +145,10 @@ class Default_Model_DbTable_BlogInfo extends Default_Model_DatabaseObject {
         return $this->_load($query);
     }
 
-    //============== РАБОТА С НАБОРОМ ЗАПИСЕЙ =================
+    //============== WORKING WITH RECORDS =================
 
     /**
-     * Получить общее кол. записей удовлетворяющих
-     * критерия, заданным в парметре $options
+     * Get the total number of records satisfying the criteria specified in the parameter $options
      * 
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -159,8 +162,7 @@ class Default_Model_DbTable_BlogInfo extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить массив записей удовлетворяющих
-     * критерия, заданным в парметре $options
+     * Get the array of records satisfying the criteria specified in the parameter $options
      * 
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -267,8 +269,7 @@ class Default_Model_DbTable_BlogInfo extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить отсортированный массив
-     * в соответствии с параметрами сортировки
+     * Get sorted array in accordance with the collation settings
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -285,8 +286,7 @@ class Default_Model_DbTable_BlogInfo extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить массив данных инф. удовлетворяющих
-     * критериям, заданным в параметре $options
+     * Get the array of data satisfying the criteria specified in the parameter $options
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -378,8 +378,7 @@ class Default_Model_DbTable_BlogInfo extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить массив ids инф. удовлетворяющих
-     * критериям, заданным в параметре $options
+     * Get the array of ids satisfying the criteria specified in the parameter $options
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -460,7 +459,7 @@ class Default_Model_DbTable_BlogInfo extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить отсортированные и сгруппированные значения из колонки таблицы
+     * Get sorted and grouped values from table column
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -545,8 +544,7 @@ class Default_Model_DbTable_BlogInfo extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить запрос удовлетворяющий
-     * критерия, заданным в парметре $options
+     * Get the query satisfying the criteria specified in the parameter $options
      * 
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -594,13 +592,13 @@ class Default_Model_DbTable_BlogInfo extends Default_Model_DatabaseObject {
         return $select;
     }
 
-    //------------- ФИЛЬТРАЦИЯ ------------//
+    //------------- FILTERS ------------//
 
     /**
-     * Получить обьект Select (Zend_Db_Select) для фильтрации записей в таблице
+     * Get Select object (Zend_Db_Select) for filtering table records
      *
-     * @param Zend_Db_Select $select                 Обьект базы даннх Select
-     * @param array $filter                          Массив данных для фильтра
+     * @param Zend_Db_Select $select        
+     * @param array $filter                 
      *
      * @return Zend_Db_Select
      */
@@ -649,13 +647,13 @@ class Default_Model_DbTable_BlogInfo extends Default_Model_DatabaseObject {
         return $select;
     }
 
-    //------------- СОРТИРОВКА ------------//
+    //------------- SORT ------------//
 
     /**
-     * Получить обьект Select (Zend_Db_Select) для сортировки записей в таблице
+     * Get Select object (Zend_Db_Select) for sorting table records
      *
-     * @param Zend_Db_Select $select                 Обьект базы даннх Select
-     * @param string $order                          Массив данных для фильтра
+     * @param Zend_Db_Select $select                 
+     * @param array $options                          
      *
      * @return Zend_Db_Select
      */
@@ -708,10 +706,10 @@ class Default_Model_DbTable_BlogInfo extends Default_Model_DatabaseObject {
         return $select;
     }
 
-    //============== ДОП. Ф-ИИ ================
+    //============== ADDITIONAL FUNCTIONS ================
 
     /**
-     * Создать уникальный ключ для информационного сообщения
+     * Create a unique key for the information message
      *
      * @param string $title
      * @return string
@@ -773,9 +771,9 @@ class Default_Model_DbTable_BlogInfo extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Фильтрация содержимого информации для разных языков:
-     * - при сохранении удаляет базовый путь в URL ресурсах
-     * - при чтении добавляет базовый путь к URL ресурсам
+     * Content filtering information for different languages:
+     * - when saving removes the base path in the URL resources
+     * - when reading add the base path to the URL resources
      *
      * @param string $type  Возможно 2 значения: 'save' и 'load'
      * @return bool
@@ -851,5 +849,3 @@ class Default_Model_DbTable_BlogInfo extends Default_Model_DatabaseObject {
     }
 
 }
-
-?>

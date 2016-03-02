@@ -3,18 +3,26 @@
 /**
  * Default_Plugin_ViewTemplater
  * 
- * Класс для управления шаблоном Smarty
+ * Plugin - Smarty template management
  *
  *
  * @uses       Zend_View_Abstract 
  * @package    Module-Default
  * @subpackage Plugins
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Plugin_ViewSmarty extends Zend_View_Abstract {
 
     protected $_path;
     protected $_engine;
-
+    
+    /**
+     * Constructor
+     * 
+     * @param string $module
+     */
     public function __construct($module) {
 
         require_once APPLICATION_BASE . '/vendor/smarty/smarty/libs/Smarty.class.php';
@@ -81,5 +89,3 @@ class Default_Plugin_ViewSmarty extends Zend_View_Abstract {
     }
 
 }
-
-?>

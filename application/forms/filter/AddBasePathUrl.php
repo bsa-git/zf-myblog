@@ -3,41 +3,43 @@
 /**
  * Default_Form_Filter_AddBasePathUrl
  * 
- * Фильтр добавляет базовый путь к URL ресурсам HTML
+ * Filter - add the base path to the URL of HTML Resources
  *
  *
  * @uses       Zend_Filter
  * @package    Module-Default
  * @subpackage Forms.Filters
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Form_Filter_AddBasePathUrl implements Zend_Filter_Interface {
 
     /**
-     * Массив HTML тегов
-     * которые нужно корректировать
+     * Array of HTML tags that need to be corrected
      * 
      * @var array 
      */
     static $tags = array(
-        // ссылка
+        // link
         'a' => 'href',
-        // изображение
+        // image
         'img' => 'src',
         // iframe
         'iframe' => 'src',
-        // видео
+        // video
         'param' => 'value',
         'embed' => 'src',
     );
     /**
-     * Признак использования фильтра тегов
+     * Options
      *
      * @var array
      */
     protected $_options;
 
     /**
-     * Конструктор класса
+     * Constructor
      */
     public function __construct(array $options = NULL) {
 
@@ -47,7 +49,7 @@ class Default_Form_Filter_AddBasePathUrl implements Zend_Filter_Interface {
     }
 
     /**
-     * Производит фильтрацию в соответствии с назначением фильтра
+     * Performs filtering in accordance with the purpose of the filter
      *
      * @param string $value
      * @return string
@@ -57,7 +59,7 @@ class Default_Form_Filter_AddBasePathUrl implements Zend_Filter_Interface {
     }
 
     /**
-     * Удалить базовый путь из путей к ресурсам HTML
+     * add the base path to the URL of HTML Resources
      *
      * @param string $html
      * @return string
@@ -70,7 +72,7 @@ class Default_Form_Filter_AddBasePathUrl implements Zend_Filter_Interface {
         $html = str_replace('&nbsp;', '&#160;', $html);
         $html = $str_begin . $html . $str_end;
 
-        //Проверка на корректость XML
+        // Check for correct XML
         $domDoc = new DOMDocument('1.0', 'utf-8');
         $success = $domDoc->loadXML($html);
         if(!$success){
@@ -81,7 +83,7 @@ class Default_Form_Filter_AddBasePathUrl implements Zend_Filter_Interface {
         foreach (self::$tags as $tag => $attr) {
             $results = $domQuery->query($tag);
             if ($results->count()) {
-                foreach ($results as $result) { // переменная $result имеет тип DOMElement
+                foreach ($results as $result) { // $result variable is of DOMElement type 
                     if ($result->hasAttribute($attr)) {
                         $value = $result->getAttribute($attr);
                         $st = new Default_Plugin_String($value);

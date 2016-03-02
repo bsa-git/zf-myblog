@@ -3,12 +3,15 @@
 /**
  * Default_Plugin_FileUploader
  * 
- * Класс для загрузки файлов на сервер
+ * Plugin - upload files
  *
  *
  * @uses       
  * @package    Module-Default
  * @subpackage Plugins
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Plugin_FileUploader {
 
@@ -62,7 +65,6 @@ class Default_Plugin_FileUploader {
         return $val;
     }
 
-    // Определяет вид загрузчика файлов
     static function isFileUploader() {
 
         //------------------
@@ -197,5 +199,3 @@ class qqUploadedFileForm {
     }
 
 }
-
-?>

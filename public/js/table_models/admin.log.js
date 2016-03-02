@@ -1,17 +1,12 @@
 /**
- * BSA.iniAdminLog - Function
- *
- * С помощью этой ф-ии инициализируется структура таблицы
+ * Function - iniAdminLog
+ * initialized structure of log table
  *
  * JavaScript
  *
- * Copyright (c) 2012 Sergei Beskorovainy
- *
- * @author     Sergei Beskorovainy <bs261257@gmail.com>
- * @copyright  2012 Sergei Beskorovainy
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 
 BSA.iniAdminLog = function()
@@ -33,7 +28,7 @@ BSA.iniAdminLog = function()
             self.onFailure(message);
         },
         options : {
-            title: ' ',//lb.getMsg('titleTableBlogs'),
+            title: ' ',
             addSettingBehavior : true,
             addReportMenu : true,
             pager: {
@@ -66,7 +61,6 @@ BSA.iniAdminLog = function()
 
             },
             toolbar : {
-//                elements: [MY.TableGrid.ADD_BTN, MY.TableGrid.DEL_BTN, MY.TableGrid.SAVE_BTN],
                 elements: [MY.TableGrid.DEL_BTN],
                 elements_user: [],
                 elementsReportMenu: ['ReportHTML','ReportPDF'],

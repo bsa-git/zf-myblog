@@ -3,17 +3,20 @@
 /**
  * BlogmanagerController
  *
- * Контроллер - Blogmanager
- * управляет блогами пользователя
+ * Controller - Blogmanager
+ * manages user blog posts
  *
  * @uses       Default_Plugin_BaseController
  * @package    Module-Default
  * @subpackage Controllers
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class BlogmanagerController extends Default_Plugin_BaseController {
 
     /**
-     * Инициализация контроллера
+     * Initialization controller
      *
      */
     public function init() {
@@ -23,12 +26,11 @@ class BlogmanagerController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - index
+     * Action - index
      * 
-     * Перечень всех сообщений автора по месяцам и по меткам
-     * а также сообщения в текущем месяце
+     * A list of all posts of the author by month and labels and posts in the current month
      * 
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /blogmanager/index
      * - /blogmanager/
      * @return void
@@ -117,11 +119,11 @@ class BlogmanagerController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - edit
+     * Action - edit
+     * edit post
      * 
-     * Редактировать сообщение
      * 
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /blogmanager/edit
      *
      * @return void
@@ -215,11 +217,10 @@ class BlogmanagerController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - preview
+     * Action - preview
+     * viewing messages in edit mode
      * 
-     * Просмотр сообщения в режиме редактирования
-     * 
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /blogmanager/preview
      *
      * @return void
@@ -249,11 +250,10 @@ class BlogmanagerController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - setstatus
+     * Action - setstatus
+     * set post ststus
      * 
-     * Установить статус сообщения
-     * 
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /blogmanager/setstatus
      *
      * @return void
@@ -306,11 +306,10 @@ class BlogmanagerController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - tags
+     * Action - tags
+     * add/delete tags
      * 
-     * Добавление/удаление меток
-     * 
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /blogmanager/tags
      *
      * @return void
@@ -370,7 +369,7 @@ class BlogmanagerController extends Default_Plugin_BaseController {
                     'class_message' => 'warning',
                     'messages' => array(
                         '<em>' . $this->Translate('Ошибка при добавлении / удалении метки в блог') . '</em>',
-                        Default_Plugin_StrBox::getMessageError($e)
+                        Default_Plugin_SysBox::getMessageError($e)
                     )
                 );
             } else {
@@ -388,12 +387,10 @@ class BlogmanagerController extends Default_Plugin_BaseController {
     
 
     /**
-     * Действие - images
+     * Action - images
+     * upload/download/ordering images
      * 
-     * 
-     * Загрузка/выгрузка/упорядочивание изображений
-     * 
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /blogmanager/images
      *
      * @return void
@@ -476,7 +473,7 @@ class BlogmanagerController extends Default_Plugin_BaseController {
                     'class_message' => 'warning',
                     'messages' => array(
                         '<em>' . $this->Translate('Ошибка загрузки файла') . '</em>',
-                        Default_Plugin_StrBox::getMessageError($e)
+                        Default_Plugin_SysBox::getMessageError($e)
                     )
                 );
                 if ($fileUploader == 'Iframe') {
@@ -507,7 +504,7 @@ class BlogmanagerController extends Default_Plugin_BaseController {
                         'class_message' => 'warning',
                         'messages' => array(
                             '<em>' . $this->Translate('Ошибка загрузки файла') . '</em>',
-                            Default_Plugin_StrBox::getMessageError($e)
+                            Default_Plugin_SysBox::getMessageError($e)
                         )
                     );
                     if ($fileUploader == 'Iframe') {
@@ -612,11 +609,10 @@ class BlogmanagerController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - audio
+     * Action - audio
+     * upload/download/ordering audio
      * 
-     * Загрузка/выгрузка/упорядочивание файлов музыки
-     * 
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /blogmanager/audio
      *
      * @return void
@@ -662,7 +658,7 @@ class BlogmanagerController extends Default_Plugin_BaseController {
                     'class_message' => 'warning',
                     'messages' => array(
                         '<em>' . $this->Translate('Ошибка загрузки файла') . '</em>',
-                        Default_Plugin_StrBox::getMessageError($e)
+                        Default_Plugin_SysBox::getMessageError($e)
                     )
                 );
                 if ($fileUploader == 'Iframe') {
@@ -707,7 +703,7 @@ class BlogmanagerController extends Default_Plugin_BaseController {
                         'class_message' => 'warning',
                         'messages' => array(
                             '<em>' . $this->Translate('Ошибка загрузки файла') . '</em>',
-                            Default_Plugin_StrBox::getMessageError($e)
+                            Default_Plugin_SysBox::getMessageError($e)
                         )
                     );
                     if ($fileUploader == 'Iframe') {
@@ -806,11 +802,10 @@ class BlogmanagerController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - video
+     * Action - video
+     * upload/download/ordering video
      * 
-     * Загрузка/выгрузка/упорядочивание файлов видео
-     * 
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /blogmanager/video
      *
      * @return void
@@ -858,7 +853,7 @@ class BlogmanagerController extends Default_Plugin_BaseController {
                     'class_message' => 'warning',
                     'messages' => array(
                         '<em>' . $this->Translate('Ошибка загрузки файла') . '</em>',
-                        Default_Plugin_StrBox::getMessageError($e)
+                        Default_Plugin_SysBox::getMessageError($e)
                     )
                 );
                 if ($fileUploader == 'Iframe') {
@@ -912,7 +907,7 @@ class BlogmanagerController extends Default_Plugin_BaseController {
                         'class_message' => 'warning',
                         'messages' => array(
                             '<em>' . $this->Translate('Ошибка загрузки файла') . '</em>',
-                            Default_Plugin_StrBox::getMessageError($e)
+                            Default_Plugin_SysBox::getMessageError($e)
                         )
                     );
                     if ($fileUploader == 'Iframe') {
@@ -973,7 +968,7 @@ class BlogmanagerController extends Default_Plugin_BaseController {
                     'class_message' => 'warning',
                     'messages' => array(
                         '<em>' . $this->Translate('Ошибка загрузки файла') . '</em>',
-                        Default_Plugin_StrBox::getMessageError($e)
+                        Default_Plugin_SysBox::getMessageError($e)
                     )
                 );
                 $this->sendJson($json);
@@ -1072,9 +1067,10 @@ class BlogmanagerController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - загрузка географических точек для сообщения
+     * Action - locations
+     * loading geographic locations for posts
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /blogmanager/locations
      *
      * @return void
@@ -1097,11 +1093,10 @@ class BlogmanagerController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - locationsmanage
-     * 
-     * Управление географическими координатами
+     * Action - locationsmanage
+     * management geographic coordinates
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /blogmanager/locationsmanage
      *
      * @return void
@@ -1342,9 +1337,10 @@ class BlogmanagerController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - плучить географические координаты
+     * Action - getlocations
+     * get geographic coordinates
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /blogmanager/getlocations?user_id=1234&post_id=2345
      *
      * @return void
@@ -1379,9 +1375,10 @@ class BlogmanagerController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действие - получить детальную инф. по географической координате
+     * Action - details
+     * get detailed information for geographical coordinate
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /blogmanager/details?post_id=2345&location_id=1234
      *
      * @return void

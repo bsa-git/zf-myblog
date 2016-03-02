@@ -1,20 +1,16 @@
 /**
- * BlogLocationManager - Class
+ * Class - BlogLocationManager
  *
- * С помощью класса вы можете:
- *  - отобразить гео карту
- *  - создавать и управлять маркерами на карте
- *  - редактировать титл, содержимое и подробное содержимое маркера
+ * With these class you can:
+ *  - display the geo map
+ *  - create and manage the markers on the map
+ *  - edit a title, contents, and the detailed contents of the marker
  *
  * JavaScript
  *
- * Copyright (c) 2011 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2011 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 BSA.BlogLocationManager = Class.create({
     url: null,
@@ -24,14 +20,15 @@ BSA.BlogLocationManager = Class.create({
     map: null, // The instance of Google Maps
     geocoder: null, // Used to look up addresses
 
-    //markers   : $H({}), // holds all markers added to map
     markers: new Hash(), // holds all markers added to map
 
     markerTemplate: null,
     ckeditor: null,
-    inPlaceEditors: new Hash(), // Редакторы описания координаты
+    inPlaceEditors: new Hash(), // The editors describe the coordinates
 
     idTimeout: null,
+    
+    // Object initialization
     initialize: function (params) {
 
         this.markerTemplate = new Template(''
@@ -73,14 +70,13 @@ BSA.BlogLocationManager = Class.create({
 
         this.ckeditor = new BSA.CKEditorHtml();
 
-        //Event.observe(window, 'load', this.loadMap.bind(this));
         this.form.observe('submit', this.onFormSubmit.bindAsEventListener(this));
         Event.observe(this.save_content, 'click', this.onSaveContent.bindAsEventListener(this));
         Event.observe(this.cancel_content, 'click', this.onCancelContent.bindAsEventListener(this));
 
         this.loadMap();
     },
-    //--------------- Загрузка карты --------------
+    //--------------- Load map --------------
 
     loadMap: function ()
     {
@@ -149,8 +145,8 @@ BSA.BlogLocationManager = Class.create({
 
         BSA.Sys.message_clear();
     },
-    //------- Добавление координаты (маркера) --------------
 
+    //------- Add marker --------------
     onFormSubmit: function (e)
     {
         Event.stop(e);
@@ -234,8 +230,8 @@ BSA.BlogLocationManager = Class.create({
 
         this.zoomAndCenterMap();
     },
-    //------- Перемещение координаты (маркера) --------------
-
+    
+    //------- Move marker --------------
     dragComplete: function (marker)
     {
         var point = marker.getPosition();
@@ -307,8 +303,8 @@ BSA.BlogLocationManager = Class.create({
             BSA.Sys.message_write(lb.getMsg('msgErrorMoveLocation'));
         }
     },
-    //------- Удаление координаты (маркера) --------------
-
+    
+    //------- Remove marker --------------
     onRemoveMarker: function (e)
     {
         Event.stop(e);
@@ -340,8 +336,8 @@ BSA.BlogLocationManager = Class.create({
             this.removeMarkerFromMap(json.location_id);
         }
     },
-    //------- Редактирование описания координаты (маркера) --------------
-
+    
+    //------- Edit marker description --------------
     onEditDescription: function (e)
     {
 
@@ -447,8 +443,8 @@ BSA.BlogLocationManager = Class.create({
             BSA.Sys.message_write(json.error);
         }
     },
-    //------- Редактирование координаты (маркера) --------------
-
+    
+    //------- Edit content marker --------------
     onCancelContent: function (e)
     {
         this.ckeditor.removeEditorForAjax('ckeditor_content');
@@ -491,8 +487,7 @@ BSA.BlogLocationManager = Class.create({
 
         new Ajax.Request(this.url, options);
     },
-    //------- Редактирование содержания координаты (маркера) --------------
-
+    
     onEditContent: function (e)
     {
 
@@ -547,8 +542,8 @@ BSA.BlogLocationManager = Class.create({
             BSA.Sys.message_write(json.error);
         }
     },
-    //------- Редактирование подробной инф. координаты (маркера) --------------
-
+    
+    //------- Edit detailed information about the marker --------------
     onEditDetails: function (e)
     {
 
@@ -637,8 +632,8 @@ BSA.BlogLocationManager = Class.create({
             BSA.Sys.message_write(json.error);
         }
     },
-    //---------------- Управление маркерами -----------------
-
+    
+    //---------------- Management markers -----------------
     addMarkerToMap: function (id, lat, lng, desc, cont, correction, details)
     {
         var self = this;
@@ -676,12 +671,6 @@ BSA.BlogLocationManager = Class.create({
             details = '<a href="' + details + '">' + lb.getMsg('msgDetails') + '</a>';
         }
 
-//        var corr = '';
-//        for (var i = 0; i < correction; i++) {
-//            corr += '<br />';
-//        }
-
-
         var html = this.markerTemplate.evaluate({
             'location_id': id,
             'lat': lat,
@@ -693,8 +682,6 @@ BSA.BlogLocationManager = Class.create({
 
         var node = Builder.build(html);
         this.markers.get(id).node = node;
-
-        //var tdContent = $();
 
         // Найдем обьекты
         var location_delete = node.getElementsBySelector('a#delete_' + id)[0];
@@ -773,10 +760,11 @@ BSA.BlogLocationManager = Class.create({
             window.clearTimeout(this.idTimeout);
         }.bind(this), 500);
     },
-    // Изменить содержание маркера
+    
+    // Modify marker images
     //
-    // - пр. преобразовать тег <img alt="" src="/upload/users/user1/.thumbs/images/bsa.jpg" style="width: 100px; height: 100px; ">
-    //   в теги -> <a href="/upload/users/user1/images/bsa.jpg"" rel="lightbox[location]">
+    // - ex. modify tag <img alt="" src="/upload/users/user1/.thumbs/images/bsa.jpg" style="width: 100px; height: 100px; ">
+    //   to tag -> <a href="/upload/users/user1/images/bsa.jpg"" rel="lightbox[location]">
     //               <img alt="" src="/upload/users/user1/.thumbs/images/bsa.jpg" style="width: 100px; height: 100px; ">
     //             </a>
     modifyMarkerImages: function ()
@@ -803,8 +791,9 @@ BSA.BlogLocationManager = Class.create({
             }
         });
     },
-    //Изменить события ссылок содержания маркера
-    // При нажатии на ссылку, должно открываться отдельное окно
+    
+    // Modify marker links
+    // Clicking on the link will open a separate window should
     modifyMarkerLinks: function ()
     {
         // Обьект маркера
@@ -850,8 +839,8 @@ BSA.BlogLocationManager = Class.create({
             }
         }.bind(this));
     },
-    //--------- Коррекция окна отображения информации координаты -----------------
-
+    
+    //--------- Correction display the coordinates information window -----------------
     saveCorrectionInfoWindow: function (correction)
     {
         var options = {
@@ -885,9 +874,9 @@ BSA.BlogLocationManager = Class.create({
         }
     },
 
-    //-------------- Работа с окнами ---------------
+    //-------------- Window ---------------
 
-    // Открыть содержимое координаты в отдельном окне
+    // Open the contents of the coordinates in a separate window
     onOpenViewsWin: function (e)
     {
         Event.stop(e);
@@ -954,8 +943,8 @@ BSA.BlogLocationManager = Class.create({
         win.showCenter();
         win.show();
     },
-    //-------------- Дополнительные ф-ии ---------------
-
+    
+    //-------------- Additional functions ---------------
     zoomAndCenterMap: function ()
     {
         var zoom = 0;
@@ -1021,10 +1010,9 @@ BSA.BlogLocationManager = Class.create({
 
 });
 
-// Ф-ия, выполняемая при загрузки окна броузера
-// создаются обьекты класса, экземпляры их
-// заносяться в список экземпляров
-// пр. $H(BlogLocationManager: [new BlogLocationManager(param1), ... ,new BlogLocationManager(paramN)])
+// The function is executed after the download of the browser window
+// are created objects, which are entered in the list of instances
+// ex. $H(BlogLocationManager: [new BlogLocationManager(param1), ... ,new BlogLocationManager(paramN)])
 BSA.BlogLocationManager.RegRunOnLoad = function () {
     // Получим параметры для создания обьекта
     var params = scriptParams.get('BlogLocationManager');

@@ -3,13 +3,16 @@
 /**
  * Default_Model_DatabaseObject
  * 
- * Abstract class used to easily manipulate data in a database table
+ * Model - Abstract class used to easily manipulate data in a database table
  * via simple load/save/delete methods
  *
  *
  * @uses       Zend_Db_Table_Abstract
  * @package    Module-Default
  * @subpackage Models
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 abstract class Default_Model_DatabaseObject extends Zend_Db_Table_Abstract {
 
@@ -18,28 +21,28 @@ abstract class Default_Model_DatabaseObject extends Zend_Db_Table_Abstract {
     const TYPE_HTML = 3;
 
     /**
-     * _serializer - обьект Zend_Serializer
+     * Serializer - Zend_Serializer object
      *
      * @var object
      */
     protected $_serializer = null;
 
     /**
-     * _logMsg - обьект Zend_Log
+     * logMsg - Zend_Log object
      *
      * @var object
      */
     protected $_logMsg = null;
 
     /**
-     * _logStat - обьект Zend_Log
+     * logStat - Zend_Log object
      *
      * @var object
      */
     protected $_logStat = null;
 
     /**
-     * _logEx - обьект Zend_Log
+     * logEx - Zend_Log object
      *
      * @var object
      */
@@ -56,7 +59,7 @@ abstract class Default_Model_DatabaseObject extends Zend_Db_Table_Abstract {
 
 
     /**
-     * Конструктор класса
+     * Constructor
      *
      * @param array $config
      */
@@ -79,11 +82,10 @@ abstract class Default_Model_DatabaseObject extends Zend_Db_Table_Abstract {
     }
 
     /**
-     * Загрузить из таблицы записи
+     * Load table rows
      *
-     *
-     * @param int $id        Значение поля
-     * @param string $field     Название поля
+     * @param int $id        Field value
+     * @param string $field     Field name
      * @return bool
      */
     public function load($id, $field = null) {
@@ -101,21 +103,21 @@ abstract class Default_Model_DatabaseObject extends Zend_Db_Table_Abstract {
     }
 
     /**
-     * Получим массив полей таблицы
-     * с добавленным префиксом перед названием поля
+     *  Get an array of table fields with the prefix added to the name of the field
      *
      * @param string $prefix
      * @return array
      */
     public function getSelectFields($prefix = '') {
         $fields = array($prefix . $this->_idField);
-        foreach ($this->_properties as $k => $v)
+        foreach ($this->_properties as $k => $v){
             $fields[] = $prefix . $k;
+        }
         return $fields;
     }
 
     /**
-     * Выполнить запрос к базе данных
+     * Run a database query
      *
      * @param string $query
      * @return bool
@@ -123,8 +125,9 @@ abstract class Default_Model_DatabaseObject extends Zend_Db_Table_Abstract {
     protected function _load($query) {
         $result = $this->_db->query($query);
         $row = $result->fetch();
-        if (!$row)
+        if (!$row){
             return false;
+        }
         $this->_init($row);
         $this->postLoad();
         return true;
@@ -132,8 +135,7 @@ abstract class Default_Model_DatabaseObject extends Zend_Db_Table_Abstract {
 
     /**
      *
-     * Инициализация отдельных полей
-     * полученной записи
+     * Initialization of individual fields received record
      *
      * @param array $row
      * @return void
@@ -173,9 +175,9 @@ abstract class Default_Model_DatabaseObject extends Zend_Db_Table_Abstract {
     }
 
     /**
-     * Операция сохранения записи в базе данных
-     * Если запись отсутсвует, то она будет дабавлена
-     * Если запись присутствует, то она будет изменена
+     * Save the record in the database
+     * If the record is missing, it will be added
+     * If the record is present, it will be changed
      *
      * @param bool $useTransactions
      * @return bool
@@ -273,7 +275,7 @@ abstract class Default_Model_DatabaseObject extends Zend_Db_Table_Abstract {
     }
 
     /**
-     * Удаление записи из базы данных
+     * Deleting a record from a database
      *
      * @param bool $useTransactions
      * @return bool
@@ -332,7 +334,7 @@ abstract class Default_Model_DatabaseObject extends Zend_Db_Table_Abstract {
     }
 
     /**
-     * Определим записана ли запись
+     * Determine whether the record exists in the table
      *
      * @return bool
      */
@@ -341,7 +343,7 @@ abstract class Default_Model_DatabaseObject extends Zend_Db_Table_Abstract {
     }
 
     /**
-     * Получить значение _id
+     * Get record id
      *
      * @return int
      */
@@ -350,7 +352,7 @@ abstract class Default_Model_DatabaseObject extends Zend_Db_Table_Abstract {
     }
 
     /**
-     * Получить диспетчер базы данных
+     * Get DB adapter
      *
      * @return Zend_Db_Adapter_Abstract
      */
@@ -359,7 +361,7 @@ abstract class Default_Model_DatabaseObject extends Zend_Db_Table_Abstract {
     }
 
     /**
-     * Установить значение поля записи таблицы
+     * Set value for table record field
      *
      * @param string $name
      * @param string $value
@@ -375,7 +377,7 @@ abstract class Default_Model_DatabaseObject extends Zend_Db_Table_Abstract {
     }
 
     /**
-     * Получить значение поля записи таблицы
+     * Get value for table record field
      *
      * @param string $name
      * @return string
@@ -385,7 +387,7 @@ abstract class Default_Model_DatabaseObject extends Zend_Db_Table_Abstract {
     }
 
     /**
-     * Добавить или изменить значение поля записи таблицы
+     * Add or change the table record field
      *
      * @param string $field
      * @param string $default
@@ -425,14 +427,14 @@ abstract class Default_Model_DatabaseObject extends Zend_Db_Table_Abstract {
         return true;
     }
 
-    //------------- РАБОТА С ОБЬЕКТАМИ ТАБЛИЦЫ ------------//
+    //------------- WORKING WITH OBJECTS TABLE ------------//
 
     /**
-     * Получить массив обьектов записей таблицы
+     * Get an array objects of table records
      *
      * @param Zend_Db_Adapter_Abstract $db
-     * @param Default_Model_DatabaseObject $class     Класс для раб. с таблицей
-     * @param array $data                             Массив записей разных таблиц
+     * @param Default_Model_DatabaseObject $class
+     * @param array $data                        
      * @return array
      */
     public static function BuildMultiple($db, $class, $data) {
@@ -452,12 +454,12 @@ abstract class Default_Model_DatabaseObject extends Zend_Db_Table_Abstract {
     }
 
     /**
-     * Получить массив значений записей таблицы
+     * Get an array of table records values
      *
      * @param Zend_Db_Adapter_Abstract $db
-     * @param Default_Model_DatabaseObject $class     Класс для раб. с таблицей
-     * @param array $data                             Массив записей разных таблиц
-     * @param string $nameTable                       Название таблицы (если один класс используется для разных таблиц)
+     * @param Default_Model_DatabaseObject $class     
+     * @param array $data                             An array of records of different tables
+     * @param string $nameTable                       The name of the table (if one class to of different tables)
      * 
      * @return array
      */
@@ -486,15 +488,14 @@ abstract class Default_Model_DatabaseObject extends Zend_Db_Table_Abstract {
         return $ret;
     }
 
-    //------------- СОРТИРОВКА ------------//
+    //------------- SORTING ------------//
 
     /**
-     * Получить отсортированный массив
-     * в соответствии с параметрами сортировки
-     * в параметрах указано поле сортировки и направление сортировки
+     * Get a sorted array in accordance with the collation settings
+     * the parameters specified sort field and sort direction
      *
      * @param array $rows
-     * @param array $options // где $options = array('sortColumn' => sortColumn, 'ascDescFlg' => ascDescFlg)
+     * @param array $options  array('sortColumn' => sortColumn, 'ascDescFlg' => ascDescFlg)
      * @return array
      */
     public static function GetSortProfiles_Arrays($rows, $options) {
@@ -518,7 +519,7 @@ abstract class Default_Model_DatabaseObject extends Zend_Db_Table_Abstract {
      *
      * @param string $a
      * @param string $b
-     * @return int          // результат сортировки
+     * @return int          // sort results
      */
     static function _SortProfiles($a, $b) {
         $sortColumn = $a->sortColumn;
@@ -541,7 +542,7 @@ abstract class Default_Model_DatabaseObject extends Zend_Db_Table_Abstract {
      *
      * @param string $a
      * @param string $b
-     * @return int          // результат сортировки
+     * @return int          // sort results
      */
     static function _SortProfiles_Arrays($a, $b) {
         $sortColumn = $a['sortColumn'];
@@ -560,7 +561,7 @@ abstract class Default_Model_DatabaseObject extends Zend_Db_Table_Abstract {
     }
 
     /**
-     * Ф-ия сортировки массивов
+     * Array Sort Function
      *
      * @param array $a
      * @param array $b
@@ -571,7 +572,7 @@ abstract class Default_Model_DatabaseObject extends Zend_Db_Table_Abstract {
     }
 
     /**
-     * Ф-ия сортировки массивов
+     * Array Sort Function 2
      *
      * @param array $a
      * @param array $b
@@ -581,10 +582,10 @@ abstract class Default_Model_DatabaseObject extends Zend_Db_Table_Abstract {
         return strcmp($a["value"], $b["value"]);
     }
 
-    //------------- ДОПОЛНИТЕЛЬНЫЕ Ф-ИИ ------------//
+    //------------- ADDITIONAL FUNCTIONS ------------//
 
     /**
-     * Сделать перевод текста
+     * Translate text
      *
      *
      * @return string
@@ -595,9 +596,9 @@ abstract class Default_Model_DatabaseObject extends Zend_Db_Table_Abstract {
     }
 
     /**
-     * Получить превдоним для таблицы в запросе к базе данных
+     * Get an alias for a table in a database query
      *
-     * @param Zend_Db_Select $select                 Обьект базы даннх Select
+     * @param Zend_Db_Select $select                 
      * @param string $table
      *
      * @return string
@@ -617,5 +618,3 @@ abstract class Default_Model_DatabaseObject extends Zend_Db_Table_Abstract {
     }
 
 }
-
-?>

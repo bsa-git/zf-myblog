@@ -1,95 +1,90 @@
 /**
- * MyTableGrid - Class
+ * Class - MyTableGrid
  *
- * С помощью класса вы можете:
- *  - Инициализировать и создавать таблицу грид
- *  - Сортировать колонки
- *  - Редактировать ячейки с помощью разного вида редакторов
- *  - Поддерживает режим Ajax при загрузке, сортировки, редактировании данных
- *  - Возможна предварительная загрузка данных в списки типа ComboBox
- *  - Обеспечивает валидацию редактируемых данных в ячейках таблицы
+ * With these class you can:
+ *  - Initialize and create a grid table
+ *  - Sort columns
+ *  - Edit cells using various kinds of editors
+ *  - Maintain Ajax mode when loading, sorting and editing data
+ *  - Load the data into lists of type ComboBox
+ *  - Validated editable data in table cells
  *
  * JavaScript
  *
- * Copyright (c) 2011 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2011 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 BSA.MyTableGrid = Class.create({
-    tableGrid: null, // Обьект таблицы
-    idGrid: 0, // Номер грида на странице
-    bodyDiv: null, // Элемент в котором содержиться грид
-    boxSearch: null, // ComboBox для поиска
-    idSearch: 0, // Уникальное значение ID, найденой записи
-    boxFilter_fields: null, // ComboBox полей таблицы для фильтра
-    boxFilter_values: null, // ComboBox значений таблицы для фильтра
-    boxFilter_compare: null, // ComboBox сравнения для фильтра
+    tableGrid: null, // Table object
+    idGrid: 0, // Number of grid on the page
+    bodyDiv: null, // Element which contains a Grid
+    boxSearch: null, // ComboBox for find
+    idSearch: 0, // The unique ID value, record found
+    boxFilter_fields: null, // ComboBox - table fields for the filter
+    boxFilter_values: null, // ComboBox - table values for the filter
+    boxFilter_compare: null, // ComboBox - compare for the filter
     itemsFilter_compare: ['=', '>', '>=', '<', '<=', '<>'],
-    filterContainer: null, // Обьект контейнера для фильтра
-    boxFilterContainer: new Hash(), // Массив списков ComboBox для фильтрации
+    filterContainer: null,
+    boxFilterContainer: new Hash(), // Array lists of ComboBox for filter
     paramsFilter: null,
     idTimeout: null,
-    itemsComboBox: new Hash(), // Массив списков для ComboBox полей
-    listError: new Hash(), // Массив ошибок введенных данных пользователя
+    itemsComboBox: new Hash(), // Array lists for ComboBox fields
+    listError: new Hash(), // Error array user input
     master: null,
     slave: null,
     accordion: null,
     actual: false,
-    tooltipContainer: null, // Контейнер для окна подсказки
-    tooltips: [], // Массив номеров полей для которых установлен признак - "tooltip""
-    tooltip: null, // Обьект Tooltip
-    ajaxData: {// Типы получения данных для списков по AJAX
-        dataFilter: 'dataFilter', // данные для списков фильтра
-        dataSearch: 'dataSearch', // данные для списков поиска
-        refKeyTable: 'refKeyTable', // данные для списков организации внешних ключей
-        selfKeyTable: 'selfKeyTable', // данные для списков организации внутренних ключей
-        selfFieldTable: 'selfFieldTable', // данные для списков внутренних полей таблицы
-        customFieldTable: 'customFieldTable' // пользовател данные для списков  внутренних полей таблицы
+    tooltipContainer: null, // Container windows tooltip
+    tooltips: [], // An array of field numbers for which you have a sign - "tooltip"
+    tooltip: null, // Tooltip object
+    ajaxData: {// The types of get data for AJAX lists Типы получения данных для списков по AJAX
+        dataFilter: 'dataFilter', // data for filter lists
+        dataSearch: 'dataSearch', // data for search lists
+        refKeyTable: 'refKeyTable', // data for foreign keys lists
+        selfKeyTable: 'selfKeyTable', // data for internal keys list
+        selfFieldTable: 'selfFieldTable', // data for internal table field list
+        customFieldTable: 'customFieldTable' // custom data for internal fields of the table
     },
-    lastScrollRow: -1, // Последний номер строки при скроллинге
+    lastScrollRow: -1, // Last line number when scrolling
 
-    // Инициализация обьекта
-    //initialize : function(container)
+    // Object initialization
     initialize: function (params)
     {
-        // Установим контейнер
+        // Set container
         if (params && $(params.table.container)) {
             this.container = params.table.container;
         } else {
             return;
         }
 
-        // Получим ф-ию инициализации таблицы
+        // Get a table initialization function
         if (params.table.ini_table) {
             this.ini_table = params.table.ini_table;
         }
 
-        // Инициализация поиска
+        // Initialization search
         if (params.search) {
             this.paramsSearch = params.search;
         }
 
 
-        // Инициализация фильтра
+        // Initialization filter
         if (params.filter) {
             this.paramsFilter = params.filter;
         }
 
 
-        // Установим URL контроллера
+        // Set controller URL
         this.url = lb.getMsg('urlBase') + params.table.url;
 
-        // Установим имя таблицы
+        // Set table name
         this.name = params.table.name;
 
-        // Установим кол. строк в таблице на одной странице
+        // Set the number of rows in the table on a single page
         this.rowsByPage = params.table.rowsByPage;
 
-        // Определим соотношения между таблицами
+        // Define relations between tables
         if (params.table.master) {
             this.master = params.table.master;
         }
@@ -102,38 +97,33 @@ BSA.MyTableGrid = Class.create({
             this.accordion = params.table.accordion;
         }
 
-        // Получим номер грида на странице
-//        if(this.accordion){
-//            this.idGrid = this.accordion.section + 1;
-//        }
-
-        // Установим локализацию колендаря для соответсвующего языка
+        // Establish a calendar for the localization of the respective language
         this._localDateCalendar();
 
-        // Определим будет использоваться окно подсказок
+        // Define whether to use Tooltip?
         if ($('floatTip')) {
             this.tooltipContainer = $('floatTip');
         }
 
         if (this.accordion) {
-            // Подпишемся на события в аккордионе
+            // Subscribe to the events in the accordion
             this._subscribeAccordionEvents();
         } else {
-            // Получим данные по URL или создадим таблицу
+            // We obtain data on the URL or create a table
             if (this.getParamsForAjaxData()) {
                 this.retrieveAjaxData();
             } else {
                 this._createTable();
             }
 
-            // Инициализация подсказок
+            // Initialization tooltip
             if (this.tooltipContainer) {
                 this._iniTooltip();
             }
 
         }
     },
-    // Создание таблицы
+    // Create table
     _createTable: function ()
     {
         var self = this;
@@ -161,12 +151,12 @@ BSA.MyTableGrid = Class.create({
             }.bind(self), 2000);
         }
     },
-    // Инициализация таблицы
+    // Initialization table
     _getTableModel: function ()
     {
         return this.ini_table();
     },
-    // Обработка строк в гриде
+    // Processing rows in the grid
     RowsProcessing: function () {
 
         // Получим bodyDiv для события скроллинга
@@ -186,7 +176,7 @@ BSA.MyTableGrid = Class.create({
             this._syncTooltip();
         }
     },
-    // Синхронизация строк в гриде при прокрутке
+    // Synchronization rows in the grid when scrolling
     _syncScroll: function () {
         // Установим подсказки для грида
         if (this.tooltips.size()) {
@@ -195,9 +185,9 @@ BSA.MyTableGrid = Class.create({
             this._syncTooltip.bind(this).defer();
         }
     },
-    //--------- СОХРАНЕНИЕ ИЗМЕНЕННЫХ/ДОБАВЛЕННЫХ ЗНАЧЕНИЙ ---------------//
+    //--------- Tooltip ---------------//
 
-    // Инициализация подсказок для грида
+    // Initialization tooltips for grid
     _iniTooltip: function () {
         var tooltips = [];
         //---------------------
@@ -225,7 +215,7 @@ BSA.MyTableGrid = Class.create({
             this.tooltips = tooltips;
         }
     },
-    // Установка подсказок для грида
+    // Synchronization tooltips
     _syncTooltip: function () {
 
         var rowsCount = this.bodyDiv.select("tr.mtgRow" + this.idGrid).size();
@@ -248,9 +238,9 @@ BSA.MyTableGrid = Class.create({
 
         this.lastScrollRow = rowsCount - 1;
     },
-    //--------- СОХРАНЕНИЕ ИЗМЕНЕННЫХ/ДОБАВЛЕННЫХ ЗНАЧЕНИЙ ---------------//
+    //--------- Saving changes/addition values ---------------//
 
-    // Сохранить измененные значения
+    // Save values
     onSaveValues: function (type) {
         var self = this;
         var rows;
@@ -384,8 +374,7 @@ BSA.MyTableGrid = Class.create({
             }
         });
     },
-    // Получить (подготовить) строки для сохранения
-    // передать правильные значения для ComboBox
+    // Get (prepare) the rows to save. Send the correct values for the ComboBox
     _getRowsForSave: function (rows) {
         var self = this;
         var keys;
@@ -427,9 +416,8 @@ BSA.MyTableGrid = Class.create({
         });
         return resultRows;
     },
-    //--------- УДАЛЕНИЕ СТРОКИ ---------------//
+    //--------- Delete values ---------------//
 
-    // Сохранить измененные значения
     onDeleteValues: function () {
 
         var self = this;
@@ -480,7 +468,7 @@ BSA.MyTableGrid = Class.create({
                 try {
 
                     // Проверим есть ли ошибки
-                    if (! json.class_message) {// OK
+                    if (!json.class_message) {// OK
 
                         BSA.Sys.message_write(json.result);
 
@@ -525,9 +513,9 @@ BSA.MyTableGrid = Class.create({
             }
         });
     },
-    //--------- РАБОТА С ОТЧЕТАМИ ---------------//
+    //--------- Report ---------------//
 
-    // Создать отчет в PDF
+    // Create PDF report
     onReportPDF: function () {
 
         //        Event.stop(event);
@@ -553,7 +541,7 @@ BSA.MyTableGrid = Class.create({
                     // Получим данные ответа
                     var json = BSA.Sys.getJsonResponse(response, true);
 
-                    if (! json.class_message) {// OK
+                    if (!json.class_message) {// OK
                         BSA.Sys.message_write(json.result);
 
                         var winDimensions = document.viewport.getDimensions();
@@ -587,7 +575,7 @@ BSA.MyTableGrid = Class.create({
             }
         });
     },
-    // Создать отчет в HTML
+    // Create HTML report
     onReportHTML: function () {
 
         var self = this;
@@ -609,7 +597,7 @@ BSA.MyTableGrid = Class.create({
                     var json = BSA.Sys.getJsonResponse(response, true);
 
                     // Проверим есть ли ошибки
-                    if (! json.class_message) {// OK
+                    if (!json.class_message) {// OK
                         BSA.Sys.message_write(json.result);
                         var winDimensions = document.viewport.getDimensions();
                         var params = "width=" + (winDimensions.width - 20) + ",height=" + winDimensions.height + ",resizable=yes";
@@ -646,7 +634,7 @@ BSA.MyTableGrid = Class.create({
             }
         });
     },
-    // Получить обьект параметров для отчета
+    // Get the object parameters for the report
     _getParamsForReport: function (type) {
         var tg = this.tableGrid;
         var rp = {};
@@ -728,9 +716,7 @@ BSA.MyTableGrid = Class.create({
 
         return rp;
     },
-    //--------- ПРОВЕРКА ВВЕДЕННОГО ЗНАЧЕНИЯ ---------------//
-
-    // Проверить значение
+    //--------- Validate value ---------------//
     _validateValue: function (params) {
         var self = this;
         var isModifiedCell = false;
@@ -808,10 +794,6 @@ BSA.MyTableGrid = Class.create({
                 currentCell: currentCell // Сохраняем для сохранения события нажатия Enter
             });
             return;
-            // Если значение первый раз пустое = "", то проверку не будем делать
-            //            if(! params.value){
-            //                return;
-            //            }
         }
 
         // Инициализация Ajax запроса
@@ -873,7 +855,7 @@ BSA.MyTableGrid = Class.create({
             }
         });
     },
-    // Проверить значение без Ajax
+    // Validate value without Ajax
     _validateValueNoAjax: function (params) {
         var self = this;
         var result;
@@ -958,7 +940,7 @@ BSA.MyTableGrid = Class.create({
             //            }
         }
     },
-    // Проверим требуется ли значение?
+    // Verify whether a value is required?
     _checkRequiredValue: function (column_id, value) {
         var result = {};
         var objColumn = this._getColumnObj(column_id);
@@ -984,7 +966,7 @@ BSA.MyTableGrid = Class.create({
         }
         return result;
     },
-    // Проверим значение
+    // Is valid value?
     _isValid: function (params) {
         var self = this;
         var keys;
@@ -1063,11 +1045,10 @@ BSA.MyTableGrid = Class.create({
         return result;
     },
     /**
-     * Ф-ия обработки события при нажатии кнопки клавиатуры - Enter
-     * эта ф-ия выполняет валидацию значения
-     * введенного в ячейку таблицы
+     * Event by pressing the buttons on the keypad - Enter. 
+     * This function validates the value entered into a table cell
      *
-     * @param Event event // событие при нажатии кнопки
+     * @param Event event
      */
     _onKeyPressEnter: function (event) {
 
@@ -1086,11 +1067,10 @@ BSA.MyTableGrid = Class.create({
         this._validateValue(params);
     },
     /**
-     * Ф-ия обработки события при нажатии кнопки клавиатуры - Enter
-     * эта ф-ия выполняет валидацию значения
-     * введенного в ячейку таблицы без Ajax
+     * Event by pressing the buttons on the keypad - Enter. 
+     * This function validates the value entered into a table cell without Ajax
      *
-     * @param Event event // событие при нажатии кнопки
+     * @param Event event 
      */
     _onKeyPressEnterNoAjax: function (event) {
 
@@ -1108,7 +1088,7 @@ BSA.MyTableGrid = Class.create({
     },
     //---------- AJAX DATA ------- //
 
-    // Получить данные по URL
+    // Get data at URL
     retrieveAjaxData: function (type) {
         var self = this;
         var params = this.getParamsForAjaxData(type);
@@ -1133,7 +1113,7 @@ BSA.MyTableGrid = Class.create({
                 try {
 
                     // Проверим есть ли ошибки
-                    if (! json.class_message) {// OK
+                    if (!json.class_message) {// OK
                         // Сохраним полученные данные в свойствах обьекта
                         var params = self.getParamsForAjaxData(type);
                         var fields = Object.keys(params.fields);
@@ -1182,13 +1162,13 @@ BSA.MyTableGrid = Class.create({
             }
         });
     },
-    // Получить обьект параметров для AjaxData
-    // это обьект, который содержит:
-    // - имя таблицы -> table : "admin.posts",
-    // - тип запроса к данным -> type : "table",
-    // - обьект набора полей таблицы -> fields : {}
-    // который содержит:
-    // - название поля : присоединенную таблицу, к которой относится это поле
+    // Get the parameter object for Ajax Data
+    // This object contains:
+    // - table name -> table : "admin.posts",
+    // - type of query data -> type : "table",
+    // - set the table fields object -> fields : {}
+    // which contains:
+    // - field name : attached table, which refers to this field
     //  -> fieldName : joinTable
     getParamsForAjaxData: function (type) {
         //var self = this;
@@ -1251,9 +1231,9 @@ BSA.MyTableGrid = Class.create({
         }
         return params;
     },
-    //---------- ПОИСК ------- //
+    //---------- Find ------- //
 
-    // Инициализация поиска
+    // Initialization search
     _iniSearch: function (params)
     {
         var self = this;
@@ -1276,7 +1256,7 @@ BSA.MyTableGrid = Class.create({
 
         })
     },
-    // Получить обьект параметров для поиска
+    // Initialization search box
     _iniSearchBox: function () {
         var self = this;
         var boxSearch = null;
@@ -1295,14 +1275,14 @@ BSA.MyTableGrid = Class.create({
             self.boxSearch = boxSearch;
         }
     },
-    // Получить обьект параметров для поиска
-    // это обьект, который содержит:
-    // - имя таблицы -> table : "admin.posts",
-    // - тип запроса к данным -> type : "search",
-    // - обьект набора полей таблицы -> fields : {}
-    // который содержит:
-    //    название поля : присоединенную таблицу, к которой относится это поле -> fieldName : joinTable
-    // - фильтр для таблицы (структура фильтра описана в ф-ии получения парам. фильтра) -> filter : {}
+    // Get the parameter the object to search
+    // This object contains:
+    // - table name -> table : "admin.posts",
+    // - type of query data -> type : "search",
+    // - set the table fields object -> fields : {}
+    // which contains:
+    // - field name : attached table, which refers to this field  -> fieldName : joinTable
+    // filter for table (filter structure is described in the function for receiving filter parameter) -> filter : {} 
     _getParamsForSearch: function () {
         var self = this;
         var fields = {};
@@ -1329,7 +1309,7 @@ BSA.MyTableGrid = Class.create({
         }
         return params;
     },
-    // Получить параметры запроса для поиска по событию - onSearchClick
+    // Get the request parameters for the event - onSearchClick
     _getParamsForSearchClick: function () {
         var searchParameters = {};
         var value_id = 0;
@@ -1398,12 +1378,12 @@ BSA.MyTableGrid = Class.create({
             onSuccess: function (response) {
 
                 try {
-                    
+
                     var json = BSA.Sys.getJsonResponse(response, true);
-                    
+
                     // Проверим есть ли ошибки
-                    if (! json.class_message) {// OK
-                        
+                    if (!json.class_message) {// OK
+
                         BSA.Sys.message_write(json.result);
 
                         // Установим ID найденой записи
@@ -1436,9 +1416,9 @@ BSA.MyTableGrid = Class.create({
         });
 
     },
-    //---------- ФИЛЬТР ------- //
+    //---------- Filter ------- //
 
-    // Первоначальная инициализация фильтра
+    // The initial filter initialization
     _iniFilter: function (params)
     {
         var self = this;
@@ -1481,7 +1461,7 @@ BSA.MyTableGrid = Class.create({
             reset.observe('click', self.onFilterResetClick.bindAsEventListener(self));
         }
     },
-    // Инициализация фильтра для ID
+    // Filter initialization for ID
     _iniFilterForID: function (id)
     {
         var self = this;
@@ -1682,7 +1662,7 @@ BSA.MyTableGrid = Class.create({
         //            pair.value[idFilter_compare] = boxFilter_compare;
         self.boxFilterContainer.get(id)[idFilter_compare] = boxFilter_compare;
     },
-    // Получить обьект параметров для фильтра
+    // Get params for filter
     _getParamsForFilter: function (type, boxFilter) {
         var self = this;
         var refMap;
@@ -1862,7 +1842,7 @@ BSA.MyTableGrid = Class.create({
         }
         return null;
     },
-    // Обработчик события выполнить фильтр для таблицы
+    // Perform data filtering table
     onFilterOkClick: function (event) {
         Event.stop(event);
         var ajax_params = this._getParamsForFilter('filter');
@@ -1890,7 +1870,7 @@ BSA.MyTableGrid = Class.create({
         }
 
     },
-    // Обработчик события выполнить очистку фильтра для таблицы
+    // Clean the filter for table
     onFilterResetClick: function (event) {
 
         var boxFilterContainer;
@@ -1912,9 +1892,9 @@ BSA.MyTableGrid = Class.create({
             pair.value['compare-input-' + pair.key].oldElementValue = '';
         })
     },
-    //=========== СОРТИРОВКА ===========//
+    //=========== Sort ===========//
 
-    // Обновить обьект запроса для сортировки
+    // Update request for sorting
     updateRequestForSort: function () {
         var objColumn;
         var refMap;
@@ -1948,7 +1928,7 @@ BSA.MyTableGrid = Class.create({
             tg.request['joinTableForSort'] = joinTable;
         }
     },
-    // Получить название таблицы для сортировки, если она есть
+    // Get the name of the table
     _getJoinTableForSort: function () {
         var objColumn;
         var refMap;
@@ -1975,9 +1955,9 @@ BSA.MyTableGrid = Class.create({
         }
         return joinTable;
     },
-    //=========== РАБОТА С ДАТАМИ ===========//
+    //=========== Date ===========//
 
-    // Получить дату в формате ISO_8601 (yyyy-MM-dd)
+    // Get the date in the format ISO_8601 (yyyy-MM-dd)
     _getDate: function (date, format) {
         var value;
         if (date) {
@@ -1987,12 +1967,13 @@ BSA.MyTableGrid = Class.create({
         }
         return value;
     },
-    // Получить дату из формата UNIX (число секунд от 1970-01-01)
+    
+    // Get date from the UNIX format
     _getDateFromUnix: function (timestamp, format) {
         var d = new Date(timestamp * 1000);
         return d.format(format);
     },
-    // Получить локализованный формат даты
+    // Get localized date format
     _getDateLocalFormat: function (onlyDate) {
         var format = '';
         switch (lb.getMsg('languageSite')) {
@@ -2016,7 +1997,7 @@ BSA.MyTableGrid = Class.create({
 
         return format;
     },
-    // Локализация календаря
+    // Calendar localization
     _localDateCalendar: function () {
         Date.MONTH_NAMES = $w(i18n.getMessage('date.month.names'));
         Date.MONTH_ABBREVIATIONS = $w(i18n.getMessage('date.month.abbreviations'));
@@ -2025,9 +2006,9 @@ BSA.MyTableGrid = Class.create({
         Date.WEEK_DAYS = $w(i18n.getMessage('date.week.days'));
         Date.FIRST_DAY_OF_WEEK = 1;
     },
-    //============== СИНХРОНИЗАЦИЯ ПОДЧИНЕННЫХ ТАБЛИЦ ===========//
+    //============== Synchronization slave tables ===========//
 
-    // Обновить списки данных и сами подчиненные таблицы
+    // Update data lists for slave tables
     _updateDataForSlaves: function (master) {
         if (master === null) {
             return
@@ -2051,7 +2032,7 @@ BSA.MyTableGrid = Class.create({
             }
         })
     },
-    // Обновить фильтр в подчиненных таблицах из таблицы мастера
+    // Update filter in slave tables from the master table
     _updateFilterForSlaves: function (master, filter) {
         if (master === null) {
             return;
@@ -2072,7 +2053,7 @@ BSA.MyTableGrid = Class.create({
             }
         })
     },
-    // Обновить фильтр в подчиненной таблице из таблицы мастера
+    // Update filter in slave table from the master table
     _updateFilterForSlave: function (slave) {
         if (slave === null) {
             return;
@@ -2086,9 +2067,9 @@ BSA.MyTableGrid = Class.create({
             }
         })
     },
-    //============== РАБОТА СО СПИСКАМИ ===========//
+    //============== ComboBox ===========//
 
-    // Обновить списки в ComboBox
+    // Update list in the ComboBox
     _updateItemsForComboBox: function () {
         var editor;
         var id = '';
@@ -2108,8 +2089,8 @@ BSA.MyTableGrid = Class.create({
             }
         }
     },
-    // Преобразуем данные, полученные через Ajax
-    // в зависимости от типа получаемых данных
+    // Transform the data received through Ajax 
+    // depending on the type of the data
     _prepAjaxData: function (column_id, listAjaxData) {
         var typeAjaxData;
         var newList = [];
@@ -2137,7 +2118,7 @@ BSA.MyTableGrid = Class.create({
         }
 
     },
-    // Получить значение (value) для ComboBox
+    // Get value for ComboBox
     _getValueForComboBox: function (params) {
         var newValue = '';
         var objColumn;
@@ -2173,9 +2154,9 @@ BSA.MyTableGrid = Class.create({
             return myParams.value;
         }
     },
-    //========== РАБОТА С ТАБЛИЦЕЙ ===========//
+    //========== Table ===========//
 
-    // Получить обьект колонки из columnModel по ID колонки
+    // Get column object from columnModel by ID column
     _getColumnObj: function (column_id) {
         var cm = this._getTableModel().columnModel;
         var id = '';
@@ -2203,7 +2184,7 @@ BSA.MyTableGrid = Class.create({
         }
         return null;
     },
-    // Поиск элемента DOM по колонке -> id и значению (пр. id=21)
+    // Search the DOM element for a column -> id and value (ex. id=21)
     _getCellElementAtValue: function (id, value) {
         var rowIndex = -1;
         var y = 0;
@@ -2220,7 +2201,7 @@ BSA.MyTableGrid = Class.create({
             return null;
         }
     },
-    // Повторное отображение таблицы
+    // Re-mapping table
     reViewTable: function (page) {
         // Отобразим измененную таблицу на текущей странице
         if (page === undefined) {
@@ -2229,9 +2210,9 @@ BSA.MyTableGrid = Class.create({
         }
         this.tableGrid._retrieveDataFromUrl(page, false);
     },
-    //========== РАБОТА С АККОРДИОНОМ ===========//
+    //========== ACCORDION ===========//
 
-    // Подпишемся на события в аккордионе
+    // Subscribe to the events in the accordion
     _subscribeAccordionEvents: function () {
         var indexSection = this.accordion.section;
         var section;
@@ -2262,7 +2243,7 @@ BSA.MyTableGrid = Class.create({
             }
         }.bind(this))
     },
-    // Свернуть секцию в аккордионе
+    // Hidden section of the accordion
     onHiddenSectionEvent: function (self, params) {
         var section = params.section.elements.section;
         var hrefSection = section.down('a').readAttribute('href');
@@ -2270,7 +2251,7 @@ BSA.MyTableGrid = Class.create({
             self.actual = false;
         }
     },
-    // Развернуть секцию в аккордионе
+    // Show section in the accordion
     onShownSectionEvent: function (self, params) {
         var section = params.section.elements.section;
         var hrefSection = section.down('a').readAttribute('href');
@@ -2292,14 +2273,7 @@ BSA.MyTableGrid = Class.create({
                     self.retrieveAjaxData();
                 } else {
                     self._createTable();
-
-                    // Обновим список для поиска значений в таблице
-//                    if (this.boxSearch) {
-//                        this.boxSearch.options.items = null;
-//                        this.boxSearch.getAllChoices();
-//                    }
                 }
-
                 // Инициализация подсказок
                 if (self.tooltipContainer) {
                     self._iniTooltip();//.bind(self);
@@ -2307,7 +2281,7 @@ BSA.MyTableGrid = Class.create({
             }
         }
     },
-    //---------- ДОП. Ф-ИИ ------- //
+    //---------- Additional functions ------- //
 
     _toggleProgressBarOverlay: function (text) {
         var etalon = 15;
@@ -2340,9 +2314,8 @@ BSA.MyTableGrid = Class.create({
             });
         }
     },
-    //---------- ОБРАБОТКА ОШИБОК ------- //
+    //---------- ERRORS ------- //
 
-    // Очистить список ошибок
     _clearListErrors: function () {
         var self = this;
         //Очистим сообщение об ошибке
@@ -2353,7 +2326,7 @@ BSA.MyTableGrid = Class.create({
             self.listError.unset(err.key);
         });
     },
-    // Обработка ошибок
+
     onFailure: function (message) {
         var msgs;
         if (message.class_message) {
@@ -2369,10 +2342,9 @@ BSA.MyTableGrid = Class.create({
 
 });
 
-// Ф-ия, выполняемая при загрузки окна броузера
-// создаются обьекты класса, экземпляры их
-// заносяться в список экземпляров
-// пр. $H(MyTableGrid: [new MyTableGrid(param1), ... ,new MyTableGrid(paramN)])
+// The function is executed after the download of the browser window
+// are created objects, which are entered in the list of instances
+// ex. $H(MyTableGrid: [new MyTableGrid(param1), ... ,new MyTableGrid(paramN)])
 BSA.MyTableGrid.RegRunOnLoad = function () {
     // Получим параметры для создания обьекта
     var params = scriptParams.get('MyTableGrid');

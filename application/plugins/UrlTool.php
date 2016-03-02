@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Default_Plugin_UrlTool Class:
+ * Default_Plugin_UrlTool
  * A class to parse, validate, encode, and check url status.
  *
  * @version 1.1

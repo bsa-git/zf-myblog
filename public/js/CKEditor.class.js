@@ -1,21 +1,17 @@
 /**
- * CKEditorHtml - Class
+ * Class - CKEditorHtml
  *
- * С помощью класса вы можете:
- *  - создать редактор для Textarea
- *  - создать редактор для Ajax
- *  - устанавливать и получать содержимое редактора
- *  - выполнять команды редактора
+ * With these class you can:
+ *  - create an editor for Textarea
+ *  - create an editor for Ajax
+ *  - set and retrieve the contents of the editor
+ *  - execute command editor
  *
  * JavaScript
  *
- * Copyright (c) 2011 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2011 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 
 BSA.CKEditorHtml = Class.create({
@@ -189,14 +185,15 @@ BSA.CKEditorHtml = Class.create({
     type: "textarea",// Тип обновления редактора: textarea, ajax
     html: null,
     config: {},
-
+    
+    // Object initialization
     initialize : function(params)
     {
         
-        // Установим конфигурацию по умолчанию
-        this.config.language = lb.getMsg('languageSite');//Язык сайта
+        // Set the default configuration
+        this.config.language = lb.getMsg('languageSite');
         
-        // Подключим загрузчик файлов
+        // Connect the boot files
         this.config.filebrowserBrowseUrl = lb.getMsg('urlRes') + '/js/kcfinder/browse.php?type=files';
         this.config.filebrowserImageBrowseUrl = lb.getMsg('urlRes') + '/js/kcfinder/browse.php?type=images';
         this.config.filebrowserFlashBrowseUrl = lb.getMsg('urlRes') + '/js/kcfinder/browse.php?type=flash';
@@ -204,7 +201,7 @@ BSA.CKEditorHtml = Class.create({
         this.config.filebrowserImageUploadUrl = lb.getMsg('urlRes') + '/js/kcfinder/upload.php?type=images';
         this.config.filebrowserFlashUploadUrl = lb.getMsg('urlRes') + '/js/kcfinder/upload.php?type=flash';
         
-        // Если есть параметры, то создадим редактор
+        // If there are parameters that create the Editor
         if(params){
             if($(params.container) && params.config){
                 this.container = params.container;
@@ -220,7 +217,7 @@ BSA.CKEditorHtml = Class.create({
         }
     },
     
-    // Проверить существует ли редактор для данного контейнера
+    // Check whether there is an editor for the container
     isEditor: function(container)
     {
         var result = false;
@@ -230,7 +227,7 @@ BSA.CKEditorHtml = Class.create({
         return result;
     },
 
-    // Создать редактор для AJAX
+    // Create editor for AJAX
     createEditorForAjax: function(container, config, html)
     {
         if ( this.editors[container] )
@@ -247,7 +244,8 @@ BSA.CKEditorHtml = Class.create({
 
         this.editors[container] = CKEDITOR.appendTo( container, this.config, html );
     },
-
+    
+    // Remove editor for AJAX
     removeEditorForAjax: function(container){
         if (! this.editors[container] )
             return;
@@ -265,7 +263,7 @@ BSA.CKEditorHtml = Class.create({
         this.editors[container] = null;
     },
 
-    // Создать редактор для Textarea
+    // Create editor for Textarea
     createEditorForTextarea: function(container, config)
     {
         if ( this.editors[container] )
@@ -281,7 +279,8 @@ BSA.CKEditorHtml = Class.create({
         Object.extend(this.config, config);
         this.editors[container] = CKEDITOR.replace( container, this.config );
     },
-
+    
+    // Insert HTML
     InsertHTML: function(container, html)
     {
         if (! this.editors[container] )
@@ -301,6 +300,7 @@ BSA.CKEditorHtml = Class.create({
             alert( 'You must be in WYSIWYG mode!' );
     },
 
+    // Insert text
     InsertText: function(container, text)
     {
         if (! this.editors[container] )
@@ -388,10 +388,9 @@ BSA.CKEditorHtml = Class.create({
     }
 })
 
-// Ф-ия, выполняемая при загрузки окна броузера
-// создаются обьекты класса, экземпляры их
-// заносяться в список экземпляров
-// пр. $H(CKEditorHtml: [new CKEditorHtml(param1), ... ,new CKEditorHtml(paramN)])
+// The function is executed after the download of the browser window
+// are created objects, which are entered in the list of instances
+// ex. $H(CKEditorHtml: [new CKEditorHtml(param1), ... ,new CKEditorHtml(paramN)])
 BSA.CKEditorHtml.RegRunOnLoad = function() {
     // Получим параметры для создания обьекта
     var params = scriptParams.get('CKEditorHtml');

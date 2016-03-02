@@ -3,18 +3,20 @@
 /**
  * Default_Model_DbTable_BlogPost
  * 
- * Таблица - блогов
+ * Table - blog posts
  *
  *
  * @uses       Default_Model_DatabaseObject
  * @package    Module-Default
  * @subpackage Models
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
 
     /**
-     *
-     * Конфигурация таблицы
+     * Table config
      * @var array
      */
     private $_config = array(
@@ -31,15 +33,15 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
 
     /**
      * 
-     * Обьект таблицы информации о блоге
+     * Table object for additional information
      * 
-     * @var Default_Model_DbTable_BlogPost
+     * @var Default_Model_DbTable_BlogPostProfile
      */
     public $profile = null;
 
     /**
      *
-     * Массив обьектов изображений
+     * Array image objects
      *
      * @var Default_Model_DbTable_BlogPostImage
      */
@@ -47,7 +49,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
 
     /**
      *
-     * Массив обьектов аудио
+     * Array audio objects
      *
      * @var Default_Model_DbTable_BlogPostAudio
      */
@@ -55,7 +57,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
 
     /**
      *
-     * Массив обьектов видео
+     * Array video objects
      *
      * @var Default_Model_DbTable_BlogPostVideo
      */
@@ -63,7 +65,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
 
     /**
      *
-     * Массив координат месторасположения
+     * Array location objects
      *
      * @var Default_Model_DbTable_BlogPostLocation
      */
@@ -71,27 +73,27 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     
     /**
      *
-     * Массив комментариев
+     * Array comments objects
      *
      * @var Default_Model_DbTable_BlogPostComment
      */
     public $comments = array();
 
     /**
-     * Константа - статус блога (черновой)
+     * const - post status (draft)
      */
 
     const STATUS_DRAFT = 'D';
 
     /**
-     * Константа - статус блога (опубликованный)
+     * const - post status (live)
      */
     const STATUS_LIVE = 'L';
 
-    //================ КОНСТРУКТОР КЛАССА ============
+    //============================
 
     /**
-     * Конструктор обьекта таблицы
+     * Constructor
      * 
      * @param Zend_Db_Adapter_Abstract $db
      */
@@ -108,10 +110,10 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
         $this->profile = new Default_Model_DbTable_BlogPostProfile($db);
     }
 
-    //================ ОБРАБОТКА СОБЫТИЙ ============
+    //================ HANDLING OF EVENTS ============
 
     /**
-     * Событие перед вставкой записи
+     * Event before inserting the record
      *
      * @return bool
      */
@@ -121,7 +123,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Событие после вставки записи
+     * Event after inserting the record
      * 
      * @return bool 
      */
@@ -140,7 +142,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Событие после загрузки записи
+     * Event after loaded the record
      *
      */
     protected function postLoad() {
@@ -170,7 +172,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Событие после обновления записи
+     * Event after updated the record
      *
      * @return bool
      */
@@ -188,7 +190,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Событие перед удалением записи
+     * Event before deleting the record
      *
      * @return bool
      */
@@ -238,7 +240,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Событие после удалением записи
+     * Event after deleting the record
      *
      * @return bool
      */
@@ -247,10 +249,10 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
         return TRUE;
     }
 
-    //=========== РАБОТА С ЗАПИСЬЮ БЛОГА =============
+    //=========== WORKING WITH RECORD =============
 
     /**
-     * Получить конкретную запись для конкретного пользователя
+     * Get specific record for a specific user
      * 
      * @param int $user_id
      * @param int $post_id
@@ -270,7 +272,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить конкретную запись для его ID
+     * Get specific record for his ID
      * 
      * @param int $post_id
      * @return bool 
@@ -288,8 +290,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить конкретную запись для конкретного пользователя
-     * по его адресу url
+     * Get specific record for a specific user for his address URL
      * 
      * @param int $user_id
      * @param string $url
@@ -312,7 +313,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Опубликуем запись в блоге
+     * Publish a blog post
      */
     public function sendLive() {
         if ($this->status != self::STATUS_LIVE) {
@@ -322,7 +323,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Определим опубликована ли запись в блоге?
+     * Define whether published a blog post?
      * 
      * @return bool
      */
@@ -331,16 +332,16 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Установить режим черновика для записи блога
+     * Set a draft mode for blog posts
      */
     public function sendBackToDraft() {
         $this->status = self::STATUS_DRAFT;
     }
 
-    //=============== РАБОТА С МЕТКАМИ КАТЕГОРИЙ ЗАПИСЕЙ БЛОГА ==========
+    //=============== WORKING WITH TAGS ==========
 
     /**
-     * Получение всех меток для заданой записи блога
+     * Obtaining all tags for a blog post
      * 
      * @return array
      */
@@ -357,7 +358,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получение всех обозначений меток для заданой записи блога
+     * Get all labels tags for the desired blog post
      *
      * @return array
      */
@@ -374,7 +375,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получение всех обозначений меток для заданой записи блога
+     * Get all labels and tags for the desired blog post
      *
      * @return array
      */
@@ -390,8 +391,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получение обозначения для данной метки
-     * и для заданой записи блога
+     * Get label for desired tag
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @return array
@@ -409,7 +409,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Определим, есть ли метка $tag у заданной записи блога
+     * Determine whether tag at a given blog post
      *
      * @param string $tag
      * @return bool
@@ -427,7 +427,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Добавление одной или нескольких меток к записи блога
+     * Adding one or more tags to a blog post
      *
      * @param array $tags
      * @return bool
@@ -477,7 +477,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Удаление одной или нескольких меток из записи блога
+     * Deleting one or more tags from a blog post
      *
      * @param array $tags
      * @return bool
@@ -512,7 +512,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Удаление всех меток из записи блога
+     * Deleting all tags from a blog post
      *
      * @return bool
      */
@@ -529,11 +529,11 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить предложенный список меток на введенный пользователем запрос
+     * Get a list of suggested tags to a request entered by the user
      * 
      * @param Zend_Db_Adapter_Abstract $db
-     * @param string $partialTag //Введенный пользователем запрос
-     * @param int $limit // Количество полученных записей
+     * @param string $partialTag //request entered by the user
+     * @param int $limit // count records
      * @return array 
      */
     public static function GetTagSuggestions($db, $partialTag, $limit = 0) {
@@ -559,11 +559,10 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
         return $db->fetchCol($select);
     }
 
-    //============== РАБОТА С НАБОРОМ ЗАПИСЕЙ В БЛОГЕ =================
+    //============== WORKING WITH RECORDS =================
 
     /**
-     * Получить общее кол. записей 
-     * сгруппированных для тегов, для конкретного пользователя
+     * Get the total number of records grouped for tags for a specific user
      * 
      * @param Zend_Db_Adapter_Abstract $db
      * @param int $user_id
@@ -651,8 +650,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить общее кол. записей удовлетворяющих
-     * критерия, заданным в парметре $options
+     * Get the total number of records satisfying the criteria specified in the parameter $options
      * 
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -666,8 +664,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить массив записей удовлетворяющих
-     * критерия, заданным в парметре $options
+     * Get the array of records satisfying the criteria specified in the parameter $options
      * 
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -808,20 +805,17 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить массив записей удовлетворяющих
-     * критериям, заданным в парметре $options 
-     * c помощью Zend_Paginator и массив страниц
+     * Get the array of records satisfying the criteria specified in the parameter $options using Zend_Paginator
      * 
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
-     * @return array массив обьектов типа - Default_Model_DbTable_BlogPost 
+     * @return array  Default_Model_DbTable_BlogPost objects
      */
     public static function GetPaginatorPosts($db, $options = array()) {
         $arrResult = array();
         $_config = Zend_Registry::get('config');
         $itemCountPerPage = (int) $_config['paginator']['itemCountPerPage'];
         $pagesInRange = (int) $_config['paginator']['pagesInRange'];
-//        $cacheEnabled = (bool) $_config['paginator']['cacheEnabled'];
         //---------------------------------------------------------
         // инициализация опций
         $defaults = array(
@@ -947,10 +941,6 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
         $comments = Default_Model_DbTable_BlogPostComment::GetComments($db, $options);
 
         foreach ($comments as $comment) {
-//            $post_id = $comment->post_id;
-//            $comment_id = $comment->getId();
-//            $post = $posts[$post_id];
-//            $post->comments[$comment_id] = $comment;
             $posts[$comment->post_id]->comments[$comment->getId()] = $comment;
         }
 
@@ -960,8 +950,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить отсортированный массив
-     * в соответствии с параметрами сортировки
+     * Get sorted array profile posts in accordance with the collation settings
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -978,8 +967,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить массив данных о сообщениях удовлетворяющих
-     * критериям, заданным в параметре $options
+     * Get the array of posts satisfying the criteria specified in the parameter $options
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -1150,8 +1138,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить массив ids сообщений удовлетворяющих
-     * критериям, заданным в параметре $options
+     * Get the array of ids satisfying the criteria specified in the parameter $options
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -1232,9 +1219,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить количество записей для каждого месяца 
-     * в диапазоне дат удовлетворяющих
-     * критерия, заданным в парметре $options
+     * Get the number of records for each month within a date range satisfying the criteria specified in the parameter $options
      * 
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -1304,7 +1289,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить отсортированные и сгруппированные значения из колонки таблицы
+     * Get sorted and grouped values from table column
      *
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -1390,8 +1375,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить запрос удовлетворяющий
-     * критерия, заданным в парметре $options
+     * Get the query satisfying the criteria specified in the parameter $options
      * 
      * @param Zend_Db_Adapter_Abstract $db
      * @param array $options
@@ -1470,13 +1454,13 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
         return $select;
     }
 
-    //------------- ФИЛЬТРАЦИЯ ------------//
+    //------------- FILTER ------------//
 
     /**
-     * Получить обьект Select (Zend_Db_Select) для фильтрации записей в таблице
+     * Get Select object (Zend_Db_Select) for filtering table records
      *
-     * @param Zend_Db_Select $select                 Обьект базы даннх Select
-     * @param array $filter                          Массив данных для фильтра
+     * @param Zend_Db_Select $select
+     * @param array $filter         
      *
      * @return Zend_Db_Select
      */
@@ -1653,13 +1637,13 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
         return $select;
     }
 
-    //------------- СОРТИРОВКА ------------//
+    //------------- SORT ------------//
 
     /**
-     * Получить обьект Select (Zend_Db_Select) для сортировки записей в таблице
+     * Get Select object (Zend_Db_Select) for sorting table records
      *
-     * @param Zend_Db_Select $select                 Обьект базы даннх Select
-     * @param string $order                          Массив данных для фильтра
+     * @param Zend_Db_Select $select
+     * @param string $order         
      *
      * @return Zend_Db_Select
      */
@@ -1745,10 +1729,10 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
         return $select;
     }
 
-    //============== РАБОТА С ИЗОБРАЖЕНИЯМИ ================
+    //============== WORKING WITH IMAGES ================
 
     /**
-     * Установить порядок изображений
+     * Set order of images
      *
      * @param array $order
      * @return void
@@ -1779,10 +1763,10 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
         }
     }
 
-    //============== РАБОТА С МУЗЫКАЛЬНЫМИ ФАЙЛАМИ ================
+    //============== WORKING WITH AUDIO ================
 
     /**
-     * Установить порядок музыкальных файлов
+     * Set order of audios
      *
      * @param array $order
      * @return void
@@ -1813,10 +1797,10 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
         }
     }
 
-    //============== РАБОТА С ВИДЕО ФАЙЛАМИ ================
+    //============== WORKING WITH VIDEO ================
 
     /**
-     * Установить порядок видеофайлов
+     * Set order of videos
      *
      * @param array $order
      * @return void
@@ -1847,10 +1831,11 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
         }
     }
     
-    //============== РАБОТА С КОММЕНТАРИЯМИ ================
+    //============== WORKING WITH COMMENTS ================
 
     /**
-     * Получить данные для построения дерева комментариев
+     * Get the data to build a tree Comments
+     * 
      *
      * @return array
      */
@@ -1859,7 +1844,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
     
     /**
-     * Проверить есть ли комментарии для данного сообщения
+     * Check whether there is comments for this message
      *
      * @return bool
      */
@@ -1870,7 +1855,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
     
     /**
-     * Получить количество комментариев для данного сообщения
+     * Get the number of comments to this post
      *
      * @return bool
      */
@@ -1880,10 +1865,10 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
             ));
     }
 
-    //============== ПОЛНОТЕКСТОВЫЙ ПОИСК ================//
+    //============== FULL-TEXT SEARCH ================//
 
     /**
-     * Создание и получение индексированого документа
+     * Creating and getting indexed document
      *
      * @return Zend_Search_Lucene_Document
      */
@@ -1909,7 +1894,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Получить путь к поисковому указателю
+     * Get the path to the search index
      *
      * @return string
      */
@@ -1922,7 +1907,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Добавить документ в поисковый указатель
+     * Add the document in the search index
      *
      * @return void
      */
@@ -1955,7 +1940,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Удалить документ из поискового указателя
+     * Remove the document from the search index
      *
      * @return void
      */
@@ -1979,7 +1964,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Создание нового поискового указателя
+     * To create a new search index
      *
      */
     public static function RebuildIndex() {
@@ -2000,10 +1985,10 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
         }
     }
 
-    //============== ДОП. Ф-ИИ ================
+    //============== ADDITIONAL FUNCTIONS ================
 
     /**
-     * Создать уникальный URL для вызоыва статьи блога
+     * Create a unique URL to get the blog post
      *
      * @param string $title
      * @return string
@@ -2066,8 +2051,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Создать метку (транслит) из заданого русского обозначения
-     * пригодную для использования в URL
+     * Create a label (transliteration) of given Russian notation suitable for use in the URL
      *
      * @param string $label
      * @return string
@@ -2111,7 +2095,7 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Обрезание строки
+     * Circumcision line
      *
      * @param int $length
      * @return string
@@ -2131,11 +2115,11 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
     /**
-     * Фильтрация содержимого блога:
-     * - при сохранении удаляет базовый путь в URL ресурсах
-     * - при чтении добавляет базовый путь к URL ресурсов
-     *
-     * @param string $action  Возможно 2 значения: 'save' и 'load'
+     * Content filtering information for blog post:
+     * - when saving removes the base path in the URL resources
+     * - when reading add the base path to the URL resources
+     * 
+     * @param string $action  Maybe two values: 'save' and 'load'
      * @return bool
      */
     protected function filterContent($action) {
@@ -2181,5 +2165,3 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
     }
 
 }
-
-?>

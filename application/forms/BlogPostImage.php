@@ -3,27 +3,29 @@
 /**
  * Default_Form_BlogPostImage
  * 
- * Форма для загрузки изображений
+ * Form - load images
  *
  *
  * @uses       Default_Form_MyForm
  * @package    Module-Default
  * @subpackage Forms
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Form_BlogPostImage extends Default_Form_MyForm {
 
     /**
-     * Номер сообщения
+     * Post id
      * 
      * @var int
      */
     public $post_id = 0;
 
     /**
-     * Конструктор обьекта
+     * Constructor
      *
      * @param Zend_Db_Adapter_Abstract $db
-     * @param int $user_id
      * @param int $post_id
      */
     public function __construct($post_id = 0) {
@@ -32,10 +34,10 @@ class Default_Form_BlogPostImage extends Default_Form_MyForm {
     }
 
     /**
-     * Создание формы
+     * Initialization form
      */
     public function init() {
-        // Вызываем родительский метод
+
         parent::init();
 
 

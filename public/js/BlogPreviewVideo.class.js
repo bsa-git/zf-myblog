@@ -1,34 +1,31 @@
 /**
- * BlogPreviewVideo - Class
+ * Class - BlogPreviewVideo
  *
- * С помощью класса BlogPreviewVideo вы можете:
- *  - обработать введенный URL видео
- *  - получить доп. информацию о видео ресурсе
- *  - добавить изображение введенного видео ресурса в статью
- *  - обработать форму для ввода доп. инф. вручную для видео
+ * With these class you can:
+ *  - process the video URL you entered
+ *  - get more information about the video resource
+ *  - add an image inputted video resource
+ *  - process the form to enter details manually for video
  *
  * JavaScript
  *
- * Copyright (c) 2011 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2011 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+* @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 BSA.BlogPreviewVideo = Class.create({
     
-    container_video: null, // Контейнер для видео
-    container_upload: null, // Контейнер для загрузки видео
-    form_upload: null, // Форма для загрузки видео
-    post_id: 0,// Уникальный код сообщения
-    objectHandler: null,// Обьект обработчика события загрузки файла
-    allowedExtensions: null,//допустимые расширения файлов для видео
+    container_video: null, // Video container
+    container_upload: null, // Video container for upload
+    form_upload: null, // form for upload video
+    post_id: 0,// Post ID
+    objectHandler: null,
+    allowedExtensions: null,// Allowed file extensions for video
     
+    // Object initialization
     initialize : function(params)
     {
-        // Установим контейнеры
+        // Set containers
         if($(params.container_video) && $(params.container_upload)){
             this.container_video = $(params.container_video);
             this.container_upload = $(params.container_upload);
@@ -36,19 +33,19 @@ BSA.BlogPreviewVideo = Class.create({
             return
         }
         
-        // Определим уникальный код сообщения
+        // Set post ID
         if(params.post_id){
             this.post_id = params.post_id;
         }else{
             return
         }
         
-        // Определим допустимые расширения файлов видео
+        // Get permissible extension of video files
         if(this.container_upload){//video-uploader   upload-video
             var container_id = params.container_upload.split('-')[1] + '-uploader';
             var fileUploaders = scriptInstances.get('FileUploader');
             fileUploaders.each(function(fileUploader) {
-                // Получим инф. о загрузчиках файлов (размер и расширения файлов)
+                // Get information on the download file (size and file extensions)
                 if(fileUploader.container_id == container_id){
                     this.allowedExtensions = fileUploader.settings.arrAllowedExtensions;
                     return;
@@ -56,7 +53,7 @@ BSA.BlogPreviewVideo = Class.create({
             }.bind(this));
         }
         
-        //Определим обработчик события после загрузки URL видео
+        // Establish an event handler after loading the video URL
         var objectHandlers = scriptInstances.get('BlogImageManager');
         for(var i = 0; i < objectHandlers.length; i++){
             //post-video container_id
@@ -65,16 +62,16 @@ BSA.BlogPreviewVideo = Class.create({
             }
         }
 
-        // Установим события ввода URL видео
+        // Establish the input event video URL
         this.iniBlogPreviewVideo();
         
         
-    // ВНИМАНИЕ!!!!
-    // Все операции по View делает скрипт - BlogView.class.js
+    // ATTENTION!!!!
+    // All view operations does script - BlogView.class.js
         
     },
     
-    // Инициализация формы добавления видео файлов
+    // Initialize the form of adding video files
     iniBlogPreviewVideo : function()
     {
         var form = this.container_upload.down('form');
@@ -85,7 +82,7 @@ BSA.BlogPreviewVideo = Class.create({
     },
     
     
-    // Ввести видео в виде URL адреса
+    // Enter the video in the form of a URL
     onInputUrlClick : function(e)
     {
         var self = this;
@@ -165,7 +162,7 @@ BSA.BlogPreviewVideo = Class.create({
         });
     },
     
-    // Получить тип видео
+    // Get information about the video
     getInfoVideo : function(url) {
         
         var infoVideo = {};
@@ -221,7 +218,7 @@ BSA.BlogPreviewVideo = Class.create({
         return  infoVideo;
     },
     
-    //----- Обработка ошибок ------
+    //----- Handling errors ------
     onFailure : function(message) {
         var msgs;
         if(message.class_message){
@@ -236,10 +233,9 @@ BSA.BlogPreviewVideo = Class.create({
     }
 })
 
-// Ф-ия, выполняемая при загрузки окна броузера
-// создаются обьекты класса, экземпляры их
-// заносяться в список экземпляров
-// пр. $H(BlogPreviewVideo: [new BlogPreviewVideo(), ... ,new BlogPreviewVideo()])
+// The function is executed after the download of the browser window
+// are created objects, which are entered in the list of instances
+// ex. $H(BlogPreviewVideo: [new BlogPreviewVideo(), ... ,new BlogPreviewVideo()])
 BSA.BlogPreviewVideo.RegRunOnLoad = function() {
     // Получим параметры для создания обьекта
     var params = scriptParams.get('BlogPreviewVideo');

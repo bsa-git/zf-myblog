@@ -3,16 +3,19 @@
 /**
  * IndexController
  *
- * Контроллер - Index
+ * Controller - Index
  *
  * @uses       Default_Plugin_BaseController
  * @package    Module-Default
  * @subpackage Controllers
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class IndexController extends Default_Plugin_BaseController {
 
     /**
-     * Инициализация контроллера
+     * Initialization controller
      *
      */
     public function init() {
@@ -21,10 +24,13 @@ class IndexController extends Default_Plugin_BaseController {
 
     /**
      * 
-     * Действеие - index
+     * Action - index
      * выводятся сообщения для всех авторов 
      * 
-     * 
+     * Access to the action is possible in the following paths:
+     *   /
+     * index/
+     * index/index
      */
     public function indexAction() {
 
@@ -80,14 +86,11 @@ class IndexController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действеие - tag
-     * выводяться сообщения с соответствующей меткой
-     * для всех авторов 
+     * Action - tag
+     * displays messages which are marked this tag for all authors
      * 
-     *
-     *
-     * Доступ к действию возможем по следующим путям urls:
-     * шаблон раутера - user/all/tag/:tag/*
+     * Access to the action is possible in the following paths:
+     * router pattern - user/all/tag/:tag/*
      * - /user/all/tag/reports
      *
      * @return void
@@ -160,19 +163,16 @@ class IndexController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Действия с новостной лентой пользователя
-     * можно получить все новости пользователя
-     * а можно получить новости только по отдельной метке
+     * Action - feed 
+     * actions with news user tape 
+     * you can get all the news 
+     * and the user can receive news only on a separate tag
      *
-     *
-     *
-     * Доступ к действию возможем по следующим путям urls:
-     * шаблон раутера - user/all/feed/:tag/*
-     * или
-     * шаблон раутера - :controller/:action/*
+     * Access to the action is possible in the following paths:
+     * router pattern - user/all/feed/:tag/* or controller/:action/*
      *
      * - /user/all/feed/reports
-     * или
+     * or
      * - /index/feed
      *
      * @return void
@@ -282,9 +282,10 @@ class IndexController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Покажем модули сайта
+     * Action - modules
+     * show site modules
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /index/modules
      *
      * @return void
@@ -294,9 +295,11 @@ class IndexController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Краткое описание продукта
+     * 
+     * Action - readme
+     * short product description
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /index/readme
      *
      * @return void
@@ -309,9 +312,10 @@ class IndexController extends Default_Plugin_BaseController {
     }
 
     /**
-     * Лицензия на продукт
+     * Action - license
+     * product license
      *
-     * Доступ к действию возможем по следующим путям urls:
+     * Access to the action is possible in the following paths:
      * - /index/license
      *
      * @return void

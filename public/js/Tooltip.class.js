@@ -1,28 +1,25 @@
 /**
- * BSA.Tooltip - Class
+ * Class - Tooltip
  *
- * Класс для отображения всплывающих подсказок
+ * With these class you can:
+ *  - display tooltips
  *
  * JavaScript
  *
- * Copyright (c) 2011 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2011 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 
 BSA.Tooltip = Class.create({
     
-    widthTip: null,  // Ширина окна подсказки
-    floatTip: null,  // Элемент контейнера подсказки
-    cursorX: 0,      // Положение курсора Х   
-    cursorY: 0,      // Положение курсора Y
-    isIFrame: false, // Открытие URL в IFrame
+    widthTip: null,  // The width of the window for tooltip
+    floatTip: null,  // Element of the tooltip container
+    cursorX: 0,      // The cursor position Х   
+    cursorY: 0,      // The cursor position Y
+    isIFrame: false, // Sign opening the URL in IFrame
     
-    // Инициализация обьекта
+    // Object initialization
     initialize : function(width)
     {
         if($("floatTip")){
@@ -35,16 +32,15 @@ BSA.Tooltip = Class.create({
             this.widthTip = width;
         }
         
-        // Определим признак открытия URL в фрейме
+        // Sign opening the URL in IFrame
         var urlGet = BSA.Sys.jGet(window.location.href);
         if(urlGet.ajax){
             this.isIFrame = urlGet.ajax == "post";
-        //            alert("ajax == post");
         }
         
         
     },
-    // Определим положение окна подсказки
+    // The position of the window tooltip
     Move: function(e) {
         var x,y;
         
@@ -125,7 +121,7 @@ BSA.Tooltip = Class.create({
         }
     },
     
-    // Покажем окно подсказки
+    // View tooltip
     View: function(event, str, element) {
         var tipWidth, elSize, strSize;
         var isView = !str.empty() && !str.blank();
@@ -158,7 +154,7 @@ BSA.Tooltip = Class.create({
         }
     },
     
-    // Скроем окно подсказки
+    // Hide tooltip
     Hide: function(event, element) {
         var isHide = true;
         //-------------------

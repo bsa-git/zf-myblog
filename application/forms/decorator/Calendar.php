@@ -3,19 +3,21 @@
 /**
  * Default_Form_Decorator_Calendar
  * 
- * Декоратор отображения javascript календаря
+ * Decorator -  javascript calendar display
  *
  *
  * @uses       Zend_Form_Decorator_Abstract
  * @package    Module-Default
  * @subpackage Forms.Decorators
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 class Default_Form_Decorator_Calendar extends Zend_Form_Decorator_Abstract {
 
     /**
-     * Получение строк подключения Javacript и CSS для календаря
-     * Статическая переменная $jsAndCss отвечает за то, чтобу подключение
-     * осуществлялось только один раз
+     * Getting the connection string Javascript and CSS to calendar.
+     * A static variable $jsOnCss is responsible for the connection to only once.
      *
      * @return string
      */
@@ -39,7 +41,7 @@ class Default_Form_Decorator_Calendar extends Zend_Form_Decorator_Abstract {
     }
 
     /**
-     * Получение кода ссылки и изображения каледаря. Настройка календаря
+     * Getting the code reference and the calendar image. Configure calendar.
      *
      * @return string
      */

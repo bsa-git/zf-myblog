@@ -4,12 +4,8 @@
  *
  * Type:     modifier<br>
  * Name:     dt_format<br>
- * Purpose:  форматирует дату-время с помощью Zend_Date<br>
- * Input:<br>
- *         - string: входные дата/время 
- *         - format: тип форматирования
- *         - $input_format: формат входных дата/время
- * @author   Бескоровайный Сергей
+ * Purpose:  date-time format using Zend_Date<br>
+ * 
  * @param string $date
  * @param string $format
  * @param string $input_format
@@ -17,6 +13,9 @@
  * 
  * @package    Module-Default
  * @subpackage Views.Plugins
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 function smarty_modifier_dt_format($date = null, $format = Zend_Date::DATE_MEDIUM, $input_format = Zend_Date::ISO_8601)
 {
@@ -24,7 +23,3 @@ function smarty_modifier_dt_format($date = null, $format = Zend_Date::DATE_MEDIU
     $dtFormat = $date->get($format);
     return $dtFormat;
 }
-
-/* vim: set expandtab: */
-
-?>

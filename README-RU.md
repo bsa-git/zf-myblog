@@ -24,7 +24,7 @@
 - для отображения гео-координат используются Google карты ([JavaScript API V3](https://developers.google.com/maps/documentation/javascript/3.exp/reference));
 - в гео-координатах можно размещать свои заметки и более подробную информацию о местности (фотографии, отчеты и т.д.);
 - ресурсы пользователя в виде изображений, документов, видео и аудио файлов можно загружать и просматривать с помощью веб файлового менеджера [CKFinder](http://kcfinder.sunhater.com/);
-- добавлены библиотеки такие как [Zend-Framework 1](http://framework.zend.com/downloads/latest#ZF1) (основная библиотека приложения), [mPDF](http://www.mpdf1.com/mpdf/index.php) (для создания отчетов в формате PDF), [phpQuery](https://code.google.com/archive/p/phpquery/) (CSS DOM селектор). Эти библиотеки находятся в папке `vendor/library`;
+- добавлены библиотеки такие как [Zend-Framework 1](http://framework.zend.com/downloads/latest#ZF1) (основная библиотека приложения), [mPDF](http://www.mpdf1.com/mpdf/index.php) (для создания отчетов в формате PDF), [phpQuery](https://code.google.com/archive/p/phpquery/) (CSS DOM селектор). Эти библиотеки находятся в папке `library`;
 - также добавлены плагины для работы с массивами, строками, XML, HTTP и др. `application/plugins`;
 - добавлен модуль администрирования сайта `application/modules/admin`. С помощью этого модуля можно управлять зарегистрированными пользователями, сообщениями пользователей, конфигурировать приложение, а также использовать различные инструменты;
 - в модуле администрирования сайта можно просматривать и очищать логи ошибок, сообщений и статистики. А также можно создавать отчеты в HTML и PDF форматах;

@@ -1,24 +1,19 @@
 /**
- * BSA.Utilities - обьект ф-ий
+ * BSA.Utilities - object utilities
  *
- * С помощью обьекта вы можете:
- *  - Обратиться к редактированию сообщений 
- *    под именем зарегистрированного пользователя
+ * This object allows:
+ *  - Refer to edit messages under the name of the registered user
  *
  * JavaScript
  *
- * Copyright (c) 2011 Бескоровайный Сергей
- *
- * @author     Бескоровайный Сергей <bs261257@gmail.com>
- * @copyright  2011 Бескоровайный Сергей
- * @license    BSD
- * @version    1.00.00
- * @link       http://my-site.com/web
+ * @author   Sergii Beskorovainyi <bsa2657@yandex.ru>
+ * @license  MIT <http://www.opensource.org/licenses/mit-license.php>
+ * @link     https://github.com/bsa-git/zf-myblog/
  */
 
 BSA.Utilities = {
     
-    // Получить пароль для входа на сайт
+    // Get the password to access the site
     loginUserToEditMessage: function(params)
     {
         var self = this;
@@ -208,7 +203,7 @@ BSA.Utilities = {
         return dec;
     },
     
-    // Обработка ошибок
+    // Error handling
     onFailure : function(message) {
         var msgs;
         if(message.class_message){
