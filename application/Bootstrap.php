@@ -285,7 +285,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $this->bootstrap('view');
         //!!!! Initialization Smarty. It is performed in the class - Default_Plugin_AclManager
         //---- Defining script execution time ----
-        $infoProfiler = "Время выполнения" . " Bootstrap_initViews(): ";
+        $infoProfiler = Default_Plugin_SysBox::Translate("Время выполнения") . " Bootstrap_initViews(): ";
         Default_Plugin_SysBox::profilerTime2Registry($_startTime, $infoProfiler);
     }
 

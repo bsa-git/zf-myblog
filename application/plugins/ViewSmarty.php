@@ -40,7 +40,7 @@ class Default_Plugin_ViewSmarty extends Zend_View_Abstract {
 
         // Установим путь к директории компиляции шаблонов
         // в зависимости от модуля
-        $this->_engine->compile_dir = APPLICATION_TEMP . '/templates_c/' . $module . '/';
+        $this->_engine->compile_dir = APPLICATION_DATA . '/tmp/templates_c/' . $module . '/';
 
         // Установим путь к кешам шаблонов
         // в зависимости от модуля
