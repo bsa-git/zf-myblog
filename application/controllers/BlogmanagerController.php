@@ -39,14 +39,14 @@ class BlogmanagerController extends Default_Plugin_BaseController {
 
         $request = $this->getRequest();
         $params = $request->getParams();
-        $itemCountPerPage = isset($params['itemCountPerPage'])? $params['itemCountPerPage']:0;
-        $page = isset($params['page'])? $params['page']:0;
+        $itemCountPerPage = isset($params['itemCountPerPage']) ? $params['itemCountPerPage'] : 0;
+        $page = isset($params['page']) ? $params['page'] : 0;
 
         // Получим  url MVC
         $urlMVC = $this->_url_mvc;
 
         // initialize the tag
-        $tag = isset($params['tag'])? $params['tag']:'';
+        $tag = isset($params['tag']) ? $params['tag'] : '';
         if ($tag) {
             $options = array(
                 'user_id' => $this->_identity->user_id,
@@ -65,7 +65,7 @@ class BlogmanagerController extends Default_Plugin_BaseController {
         } else {
 
             // initialize the month
-            $month = isset($params['month'])? $params['month']: '';
+            $month = isset($params['month']) ? $params['month'] : '';
             if ($month && preg_match('/^(\d{4})-(\d{2})$/', $month, $matches)) {
                 $y = $matches[1];
                 $m = max(1, min(12, $matches[2]));
@@ -103,8 +103,8 @@ class BlogmanagerController extends Default_Plugin_BaseController {
 
         // retrieve the blog posts
         $arrData = Default_Model_DbTable_BlogPost::GetPaginatorPosts($this->db, $options);
-        $recentPosts = isset($arrData['items'])? $arrData['items']: array();
-        $pages = isset($arrData['pages'])? $arrData['pages']:0;
+        $recentPosts = isset($arrData['items']) ? $arrData['items'] : array();
+        $pages = isset($arrData['pages']) ? $arrData['pages'] : 0;
 
         // get the total number of posts for this user
         $totalPosts = Default_Model_DbTable_BlogPost::GetPostsCount(
@@ -133,9 +133,7 @@ class BlogmanagerController extends Default_Plugin_BaseController {
         $post_id = (int) $request->getQuery('id');
         $username = $this->_identity->username;
 
-        $formBlogPost = new Default_Form_BlogPost($this->db,
-                        $this->_identity->user_id,
-                        $post_id);
+        $formBlogPost = new Default_Form_BlogPost($this->db, $this->_identity->user_id, $post_id);
 
 
 
@@ -240,8 +238,9 @@ class BlogmanagerController extends Default_Plugin_BaseController {
             $this->view->class_message = $request->getQuery('class_message');
             $this->view->message = $request->getQuery('message');
         }
-
-        $content = $post->profile->content;
+        
+        // Set PHP config
+        Default_Plugin_FileUploader::iniSetConfig_PHP(array('image', 'audio', 'video'));
 
         $this->_breadcrumbs->addStep($this->Translate('Просмотр сообщения') . ': ' . $post->profile->title);
 
@@ -383,8 +382,6 @@ class BlogmanagerController extends Default_Plugin_BaseController {
             $this->_redirect('/blogmanager/preview' . '?id=' . $post->getId());
         }
     }
-
-    
 
     /**
      * Action - images
@@ -547,8 +544,7 @@ class BlogmanagerController extends Default_Plugin_BaseController {
                         'image_id' => $image_id,
                         'count_images' => $count_images
                     );
-                }
-                else
+                } else
                     $this->_flashMessenger->addMessage($this->Translate('Изображение удалено'));
             }
         } else if ($request->getPost('comment_update')) {
@@ -566,8 +562,7 @@ class BlogmanagerController extends Default_Plugin_BaseController {
                         'title' => '',
                         'comment' => $image->comment
                     );
-                }
-                else
+                } else
                     $this->_flashMessenger->addMessage($this->Translate('Комментарий к изображению обновился'));
             }
         }else if ($request->getPost('download_images')) {// Загрузим изображения в виде HTML на страницу
@@ -1395,7 +1390,7 @@ class BlogmanagerController extends Default_Plugin_BaseController {
             $details = $this->Translate('Ошибка получения подробной информации по географической координате');
             $details = '<div class="error">' . $details . '</div>';
         }
-        
+
         $this->view->details = $details;
     }
 

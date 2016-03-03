@@ -62,7 +62,7 @@
     // Загрузчик файлов 
     addScriptParams('FileUploader', {ldelim}
         container: 'images-uploader',
-        settings: {ldelim}allowedExtensions: ['jpg', 'jpeg', 'png', 'gif'],sizeLimit: 1{rdelim},
+        settings: {ldelim}allowedExtensions: {$config.uploader.image.extensions}, sizeLimit: {$config.uploader.image.maxsize}{rdelim},
         objectHandler: {ldelim}classObject:'BlogImageManager', indexObject:0{rdelim},
         ajaxRequest:{ldelim}url: '/blogmanager/images', params:{ldelim}id:{$post->getId()}{rdelim}{rdelim}
     {rdelim});
@@ -72,7 +72,7 @@
     // Загрузчик файлов 
     addScriptParams('FileUploader', {ldelim}
         container: 'audio-uploader',
-        settings: {ldelim}allowedExtensions: ['mp3'],sizeLimit: 10{rdelim},
+        settings: {ldelim}allowedExtensions: {$config.uploader.audio.extensions}, sizeLimit: {$config.uploader.audio.maxsize}{rdelim},
         objectHandler: {ldelim}classObject:'BlogImageManager', indexObject:1{rdelim},
         ajaxRequest:{ldelim}url: '/blogmanager/audio', params:{ldelim}id:{$post->getId()}{rdelim}{rdelim}
     {rdelim});
@@ -82,7 +82,7 @@
     // Загрузчик файлов 
     addScriptParams('FileUploader', {ldelim}
         container: 'video-uploader',
-        settings: {ldelim}allowedExtensions: ['mp3','swf','flv','mov','mp4','m4v','f4v','wmv'], sizeLimit: 500, type: 'IFrame'{rdelim},
+        settings: {ldelim}allowedExtensions: {$config.uploader.video.extensions}, sizeLimit: {$config.uploader.video.maxsize}, type: 'IFrame'{rdelim},
         objectHandler: {ldelim}classObject:'BlogImageManager', indexObject:2{rdelim},
         ajaxRequest:{ldelim}url: '/blogmanager/video', params:{ldelim}id:{$post->getId()}{rdelim}{rdelim}
     {rdelim});

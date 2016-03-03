@@ -41,16 +41,11 @@ class Default_Plugin_FileUploader {
         $uploadSize = $this->toBytes(ini_get('upload_max_filesize'));
 
         if ($postSize < $this->sizeLimit || $uploadSize < $this->sizeLimit) {
-            
+
             $size = max(1, $this->sizeLimit / 1024 / 1024) . 'M';
-//                $size = max(1, $sizeLimit / 1024 / 1024);
-//                ini_set('post_max_size', $size . 'M');
-//                ini_set('upload_max_filesize', $size . 'M');
-//                ini_set('memory_limit', ($size * 3) . 'M');
-                    
+
             $errMsg = Default_Plugin_SysBox::Translate('увеличить значения в PHP переменных - post_max_size и upload_max_filesize до размера - ');
             throw new Exception($errMsg . $size);
-            //die("{'error':'$errMsg $size'}");
         }
     }
 
@@ -77,7 +72,41 @@ class Default_Plugin_FileUploader {
         }
         return $result;
     }
-    
+
+    /*
+     * Set new values for the PHP ini file
+     *
+     * @param  array $arrParams
+     * @return void
+     */
+
+    static function iniSetConfig_PHP($arrResourse) {
+        $sizeLimit = 0;
+        $post_max_size = (int) ini_get('post_max_size');
+        $upload_max_filesize = (int)  ini_get('upload_max_filesize');
+        $memory_limit = (int) ini_get('memory_limit');
+        //--------------------
+        $config = Zend_Registry::get('config'); // uploader.image.maxsize
+        // Find max sizeLimit for resourses
+        foreach ($arrResourse as $resourse) {
+            $maxsize = (int) $config['uploader'][$resourse]['maxsize'];
+            $sizeLimit = ($maxsize > $sizeLimit) ? $maxsize : $sizeLimit;
+        }
+        if ($sizeLimit > $post_max_size) {
+            // No set with this function (http://php.net/manual/ru/configuration.changes.modes.php)
+            ini_set('post_max_size', $sizeLimit . 'M'); // Default=8M 
+            $post_max_size = (int) ini_get('post_max_size');
+        }
+        // No set with this function (http://php.net/manual/ru/configuration.changes.modes.php)
+        if ($sizeLimit > $upload_max_filesize) {
+            ini_set('upload_max_filesize', $sizeLimit . 'M'); // Default=2M
+            $upload_max_filesize = (int)  ini_get('upload_max_filesize');
+        }
+        if ($sizeLimit > $memory_limit) {
+            ini_set('memory_limit', ($sizeLimit + $memory_limit) . 'M'); // Default=128M
+            $memory_limit = (int) ini_get('memory_limit');
+        }
+    }
 
     /**
      * Returns array('success'=>true) or array('error'=>'error message')
@@ -145,7 +174,7 @@ class qqUploadedFileXhr {
         $temp = tmpfile();
         $realSize = stream_copy_to_stream($input, $temp);
         fclose($input);
-        
+
         $getSize = $this->getSize();
 
         if ($realSize != $getSize) {

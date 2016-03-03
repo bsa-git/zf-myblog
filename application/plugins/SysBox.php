@@ -1938,6 +1938,19 @@ abstract class Default_Plugin_SysBox {
             ini_set($key, $value);
         }
     }
+    
+    /*
+     * Gets the value of a configuration option
+     *
+     * @param  string $varname
+     * @return string|false Returns the value of the configuration option as a string on success, 
+     * or an empty string for null values. 
+     * Returns FALSE if the configuration option doesn't exist.
+     */
+
+    static function iniGetConfig_PHP($varname) {
+        return ini_get($varname);
+    }
 
     /**
      * Get key for google maps
