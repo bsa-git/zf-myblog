@@ -107,80 +107,79 @@ class Default_Model_DbTable_BlogPostComment extends Default_Model_DatabaseObject
      * @param int $post_id
      * @return array
      */
-    public static function getTreeComments($db, $user_id, $params ) {
+    public static function getTreeComments($db, $user_id, $params) {
         $sortcomm = array();
         $newComments = array();
         //-----------------------------------------
         
-        //------ Добавим некоторые поля в записи комментариев ------
-        
         // Получим комментарии
-//        $options = array('post_id' => $post_id);
         $comments = self::GetComments_Array($db, $params);
-        
+
         // Получим не повторяющийся массив Ids пользователей
         $arrBox = new Default_Plugin_ArrayBox($comments);
-        if($arrBox->count() == 0){
+        if ($arrBox->count() == 0) {
             return $sortcomm;
         }
-        
+
         $arrUser_ids = $arrBox->slice('user_id', TRUE);
-        
+
         // Добавим в массив Ids пользователей id автора, если его там нет
-        if(! $arrUser_ids->isValue($user_id)){
+        if (!$arrUser_ids->isValue($user_id)) {
             $arrUser_ids = $arrUser_ids->push($user_id);
         }
         $arrUser_ids = $arrUser_ids->get();
-        
+
         // Получим массив пользователей из их Ids
         $options = array('user_id' => $arrUser_ids);
         $users = Default_Model_DbTable_User::GetUsers($db, $options);
 
 
         foreach ($comments as $comment) {
-            $user = $users[$comment['user_id']];
-            
-            // Установим имя пользователя
-            $comment['username'] = $user->username;
+            if (isset($comment['user_id']) && isset($users[$comment['user_id']])) {
+                $user = $users[$comment['user_id']];
 
-            // Установим дату создания комментария
-            $date = new Zend_Date($comment['ts'], 'U');
-            $dtFormat = $date->get('dd MMMM YYYY, HH:mm');
-            $comment['date'] = $dtFormat;
+                // Установим имя пользователя
+                $comment['username'] = $user->username;
 
-            // Установим признак авторства
-            $isAutor = ($user_id == $comment['user_id']);
-            $comment['is_autor'] = $isAutor;
+                // Установим дату создания комментария
+                $date = new Zend_Date($comment['ts'], 'U');
+                $dtFormat = $date->get('dd MMMM YYYY, HH:mm');
+                $comment['date'] = $dtFormat;
 
-            // Установим изображение пользователя
-            if ($user->profile->user_img) {
-                $user_img = $user->profile->user_img;
-            } else {
-                if ($comment['is_autor']) {
-                    $user_img = "/images/system/user_new.png";
+                // Установим признак авторства
+                $isAutor = ($user_id == $comment['user_id']);
+                $comment['is_autor'] = $isAutor;
+
+                // Установим изображение пользователя
+                if ($user->profile->user_img) {
+                    $user_img = $user->profile->user_img;
                 } else {
-                    if ($user->profile->sex) {
-                        if ($user->profile->sex == 'male') {
-                            $user_img = "/images/system/user_male.png";
-                        } else {
-                            $user_img = "/images/system/user_female.png";
-                        }
+                    if ($comment['is_autor']) {
+                        $user_img = "/images/system/user_new.png";
                     } else {
-                        $user_img = "/images/system/user_message.png";
+                        if ($user->profile->sex) {
+                            if ($user->profile->sex == 'male') {
+                                $user_img = "/images/system/user_male.png";
+                            } else {
+                                $user_img = "/images/system/user_female.png";
+                            }
+                        } else {
+                            $user_img = "/images/system/user_message.png";
+                        }
                     }
                 }
-            }
-            $comment['user_img'] = $user_img;
+                $comment['user_img'] = $user_img;
 
-            // Установим URL пользователя
-            $comment['user_url'] = "/user/{$user->username}";
-            
-            // Добавим в новый массив
-            $newComments[] = $comment;
+                // Установим URL пользователя
+                $comment['user_url'] = "/user/{$user->username}";
+
+                // Добавим в новый массив
+                $newComments[] = $comment;
+            }
         }
 
         //------ Создадим дерево комментариев ------
-        
+
         if (count($newComments) > 0) {
             // subcomments
             foreach ($newComments as $item) {
@@ -300,7 +299,7 @@ class Default_Model_DbTable_BlogPostComment extends Default_Model_DatabaseObject
         // filter results on specified reply ids (if any)
         if (count($options['reply_id']) > 0)
             $select->where('c.reply_id in (?)', $options['reply_id']);
-        
+
         // filter results on specified id ids (if any)
         if (count($options['comment_id']) > 0)
             $select->where('c.id in (?)', $options['comment_id']);

@@ -42,7 +42,7 @@
 
 ### Развертывание
 
-1. Клонировать [zf-myblog](https://github.com/alvk4r/silex-enhanced) проект с помощью git.
+1. Клонировать [zf-myblog](https://github.com/bsa-git/zf-myblog) проект с помощью git.
 2. Выполнить `composer install`.
 3. Для работы приложения необходимо установить последнюю версию библиотеки `Zend-Framework 1` в папку `library/Zend`. Последняя версия библиотеки может быть загружена - [здесь](http://framework.zend.com/downloads/latest#ZF1). 
 4. Для формирования отчетов в формате `PDF` можно установить последнюю версию библиотеки  `mPDF` в папку `library/mPDF`. Последняя версия библиотеки может быть загружена - [здесь](http://www.mpdf1.com/mpdf/index.php?page=Download). 

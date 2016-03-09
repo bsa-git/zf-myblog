@@ -717,7 +717,7 @@ CLASS Default_Plugin_ArrayBox implements IteratorAggregate, Countable {
                     $array[$item[$key_]] = $item[$value_];
                 } else {
                     $value_ = isset($item[$key]) ? $item[$key] : NULL;
-                    if (!$value_ === NULL) {
+                    if (! ($value_ === NULL)) {
                         $array[] = $value_;
                     }
                 }

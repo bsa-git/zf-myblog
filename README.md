@@ -43,7 +43,7 @@ Examples of the application installation are for `OS "Windows"` and web server `
 
 ### Deploying
 
-1. Clone [zf-myblog](https://github.com/bsa-git/silex-mvc) project with git.
+1. Clone [zf-myblog](https://github.com/bsa-git/zf-myblog) project with git.
 2. Run `composer install`.
 3. The application must install the latest version of the library `Zend-Framework 1` in the folder `library/Zend`. The latest version of the library can be downloaded - [here](http://framework.zend.com/downloads/latest#ZF1).
 4. To generate reports in the format `PDF` can install the latest version of the library `mPDF` in the folder `library/mPDF`. The latest version of the library can be downloaded - [here](http://www.mpdf1.com/mpdf/index.php?page=Download).
