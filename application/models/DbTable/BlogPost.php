@@ -232,6 +232,14 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
                 return FALSE;
             }
         }
+        
+        // Удалим все комментарии
+        foreach ($this->comments as $comment) {
+            $result = $comment->delete(false);
+            if (!$result) {
+                return FALSE;
+            }
+        }
 
         // Удалим профайл сообщения
         $result = $this->profile->delete();
