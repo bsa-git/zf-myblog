@@ -197,21 +197,21 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
      * @var bool
      */
     protected $_report = null;
-    
+
     /**
      * isIE
      *
      * @var bool
      */
     protected $_isIE = false;
-    
+
     /**
      * isCompatibleBrowser - the user's browser is fully compatible
      * 
      * @var bool
      */
     protected $_isCompatibleBrowser = true;
-    
+
     /**
      * isForbiddenBrowser - the user's browser is forbidden to use
      * 
@@ -228,7 +228,7 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
       'short_name' => $ub,
       'version' => $version,
       'majorver' => $majorver,
-      'minorver' => $minorver,  
+      'minorver' => $minorver,
       'platform' => $platform,
       'pattern' => $pattern
       );
@@ -236,7 +236,7 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
      * @var array
      */
     protected $_browser = null;
-    
+
     //---------------------------------
 
     /**
@@ -252,7 +252,7 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
 
         // Get cofig
         $config = Zend_Registry::get('config');
-        
+
         //$request->
         //Получим адаптер базы данных
         $this->db = Zend_Registry::get('db');
@@ -302,7 +302,7 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
         $bootstrap = $this->getInvokeArg('bootstrap');
         $this->_userAgent = $bootstrap->getResource('useragent');
         $this->view->userAgent = $this->_userAgent;
-        
+
         // Определим текущий броузер
         $this->_isIE = Default_Plugin_SysBox::isIE();
         $this->view->isIE = $this->_isIE;
@@ -310,9 +310,9 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
         $this->view->browser = $this->_browser;
         $this->_isCompatibleBrowser = Default_Plugin_SysBox::checkBrowser($config['user']['incompatible_browsers']);
         $this->view->isCompatibleBrowser = $this->_isCompatibleBrowser;
-        $this->_isForbiddenBrowser = ! Default_Plugin_SysBox::checkBrowser($config['user']['forbidden_browsers']);
+        $this->_isForbiddenBrowser = !Default_Plugin_SysBox::checkBrowser($config['user']['forbidden_browsers']);
         $this->view->isForbiddenBrowser = $this->_isForbiddenBrowser;
-        
+
         //Создадим обьект Redirector
         $this->_redirector = $this->_helper->getHelper('Redirector');
 
@@ -338,9 +338,9 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
         $this->view->scheme = $Zend_Auth->user_scheme;
         $this->view->user_main_name = trim($config['user']['main']['name']);
         $this->view->logo_url = trim($config['user']['main']['logo_url']);
-        
+
         // Check forbidden browser
-        if($this->_isForbiddenBrowser){
+        if ($this->_isForbiddenBrowser) {
             Default_Plugin_Error::catchException(new Zend_Exception($this->Translate('Данная версия браузера запрещена к использованию! Установите более новую версию браузера.'), 403));
         }
     }
@@ -743,13 +743,13 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
         }
 
         // Определим вызываемую страницу
-        $page = isset($params['page'])? $params['page']:1;
+        $page = isset($params['page']) ? $params['page'] : 1;
 
         // Определим направление сортировки
-        $ascDescFlg = isset($params['ascDescFlg'])? $params['ascDescFlg']:'ASC';
+        $ascDescFlg = isset($params['ascDescFlg']) ? $params['ascDescFlg'] : 'ASC';
 
         // Определим колонку по которой будем сортировать
-        $sort = isset($params['sortColumn'])? $params['sortColumn']:'';
+        $sort = isset($params['sortColumn']) ? $params['sortColumn'] : '';
         if ($sort && $sort !== '_nn_') {
             $sort = $sort . ' ' . $ascDescFlg;
             $options['order'] = $sort;
@@ -760,7 +760,7 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
 
         // Определим таблицу, которую нужно
         // присоединить для сортировки
-        $joinTableForSort = isset($params['joinTableForSort'])? $params['joinTableForSort']:'';
+        $joinTableForSort = isset($params['joinTableForSort']) ? $params['joinTableForSort'] : '';
 
         $numberOfPages = 0;
         $from = 0;
@@ -809,11 +809,12 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
     public function getMarkdown($params) {
         $arBox = new Default_Plugin_ArrayBox();
         $strBox = new Default_Plugin_String();
-        $filename = isset($params['filename'])? $params['filename']:'';
-        $strFile = isset($params['content'])? $params['content']:'';
-        $type = isset($params['type'])? $params['type']:'github'; //Type of Markdown: traditional, github, extra
+        $filename = isset($params['filename']) ? $params['filename'] : '';
+        $strFile = isset($params['content']) ? $params['content'] : '';
+        $type = isset($params['type']) ? $params['type'] : 'github'; //Type of Markdown: traditional, github, extra
         $title = '';
         $locale = Default_Plugin_SysBox::getTranslateLocale();
+        $locale = $locale == 'uk' ? 'ru' : $locale;
         $title = "";
         $filename = trim($filename);
         $filename = str_replace('\\', '/', $filename);
@@ -844,7 +845,6 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
 
                 // Get file name
                 $filename = APPLICATION_TEMPLATES . "/{$this->_params['controller']}/{$filename}";
-                //$_params
 
                 if (!is_file($filename)) {
                     throw new Exception("File '{$filename}' does not exist.");
