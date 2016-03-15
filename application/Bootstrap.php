@@ -46,6 +46,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $config = $this->_options;
         Zend_Registry::set('config', $config);
 
+        //------- Copy users upload dir ------------
+        Default_Plugin_SysBox::copyUsersUploadDir();
+
         //----------------- Set session ---------------
         // Start session
         Zend_Session::start();
@@ -303,8 +306,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         try {
             
             //------- Copy the database, if needed ------------
-            $dbname = $this->_options['resources']['db']['params']['dbname'];
-            Default_Plugin_SysBox::copyDataBase($dbname);
+            Default_Plugin_SysBox::copyDataBase();
             
             // Get parameters for the database connection
             $arrParam = $this->_options['resources']['db']['params'];

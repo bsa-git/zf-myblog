@@ -116,6 +116,16 @@ class Default_Plugin_FileBox {
         return true;
     }
 
+    /** Returns trailing name component of path
+     * @param string $path A path.
+     * @param bool $suffix If the name component ends in suffix this will also be cut off.
+     * @return string 
+     */
+    static function getBaseName($path, $suffix = '') {
+        $path = Default_Plugin_PathBox::normalize($path);
+        return basename($path, $suffix) ;
+    }
+    
     /** Get the extension from filename
      * @param string $filename
      * @param bool $toLower

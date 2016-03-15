@@ -602,7 +602,7 @@ class Default_Plugin_FileTree {
      */
     public function writeTo($otherTree) {
         $otherTree = $this->fixupRoot($otherTree);
-        if (!$this->canWriteTo($otherTree)) {
+        if (!$otherTree || !$this->canWriteTo($otherTree)) {
             return false;
         }
         foreach ($this->data as $k => $f) {
@@ -680,7 +680,7 @@ class Default_Plugin_FileTree {
             $this->data[$effPath]['can_w'] = true;
             return true;
         }
-        if ($this->data['type'] == 'o') {
+        if (isset($this->data['type']) && $this->data['type'] == 'o') {
             // not going to try to deal with links, devices, sockets
             $this->error = "Can only process files and directories";
             $this->data[$effPath]['can_w'] = false;

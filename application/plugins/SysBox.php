@@ -58,11 +58,11 @@ abstract class Default_Plugin_SysBox {
         "tmp_templates_admin" => "/data/tmp/templates_c/admin",
         "tmp_templates_default" => "/data/tmp/templates_c/default",
         "tmp_templates_hr" => "/data/tmp/templates_c/hr",
-        "public_upload" => "/public/upload",
-        "upload_users" => "/public/upload/users",
-        "upload_system" => "/public/upload/system",
-        "upload_system_flashplayer" => "/public/upload/system/flashplayer",
-        "upload_system_flashplayer_win" => "/public/upload/system/flashplayer/win"
+//        "public_upload" => "/public/upload",
+//        "upload_users" => "/public/upload/users",
+//        "upload_system" => "/public/upload/system",
+//        "upload_system_flashplayer" => "/public/upload/system/flashplayer",
+//        "upload_system_flashplayer_win" => "/public/upload/system/flashplayer/win"
     );
 
     //=================== DEBUG FUNCTIONS ===================//
@@ -314,19 +314,22 @@ abstract class Default_Plugin_SysBox {
     /**
      *  Copy data base
      * 
-     * @param  string $path
      */
-    static function copyDataBase($path) {
-        if (!is_file($path)) {
-            $arrPath = explode('/', $path);
-            $file = $arrPath[count($arrPath) - 1];
-            $backupPath = str_replace("db/{$file}", '', $path) . "backup/{$file}";
-            if (is_file($backupPath)) {
-                if (!copy($backupPath, $path)) {
-                    throw new Exception("Could not be copied '{$backupPath}' to '{$path}'.");
+    static function copyDataBase() {
+        $config = Zend_Registry::get('config');
+        $dbDest = $config['resources']['db']['params']['dbname'];
+        $dbDest = Default_Plugin_PathBox::normalize($dbDest);
+        $dbName = Default_Plugin_FileBox::getBaseName($dbDest);
+        $dbSource = $config['paths']['backup']['dir'] . "/db/{$dbName}";
+        $dbSource = Default_Plugin_PathBox::normalize($dbSource);
+        //------------------------------------------------------
+        if (!is_file($dbDest)) {
+            if (is_file($dbSource)) {
+                if (!copy($dbSource, $dbDest)) {
+                    throw new Exception("Could not be copied '{$dbSource}' to '{$dbDest}'.");
                 }
             } else {
-                throw new Exception("There is no file '{$backupPath}'.");
+                throw new Exception("There is no file '{$dbSource}'.");
             }
         }
     }
@@ -503,6 +506,38 @@ abstract class Default_Plugin_SysBox {
             $result = TRUE;
         }
         return $result;
+    }
+
+    /**
+     * Copy user directory for uploading files
+     * 
+     * @param string $username 
+     * @return bool 
+     */
+    static function copyUsersUploadDir() {
+        $config = Zend_Registry::get('config');
+        $patchSource = $config['paths']['backup']['dir'] . '/upload';
+        $patchSource = Default_Plugin_PathBox::normalize($patchSource);
+        $patchDest = APPLICATION_PUBLIC . '/upload';
+        $patchDest = Default_Plugin_PathBox::normalize($patchDest);
+        //-------------------------
+        if (!is_dir($patchDest)) {
+            if(!mkdir($patchDest)){
+                throw new Exception("Failed to create folders...'{$patchDest}'.");
+            }
+            if (is_dir($patchSource)) {
+                // Get the FileTree object
+                $ft = new Default_Plugin_FileTree($patchSource);
+                // Create tree of files
+                $ft->readTree();
+                // Copy the current fileset to another location
+                if($ft->writeTo($patchDest) === FALSE){
+                    throw new Exception("Could not be copied '{$patchSource}' to '{$patchDest}'.");
+                }
+            } else {
+                throw new Exception("There is no this dir '{$patchSource}'.");
+            }
+        }
     }
 
     //=============== PROFILER ====================//
@@ -1769,6 +1804,7 @@ abstract class Default_Plugin_SysBox {
      * @return bool
      * 
      */
+
     static function checkBrowser($aBrowsers) {
         //-------------------
         if ($aBrowsers) {
@@ -1806,6 +1842,7 @@ abstract class Default_Plugin_SysBox {
      * @return bool
      * 
      */
+
     static function isIE() {
         $u_agent = $_SERVER['HTTP_USER_AGENT'];
         $ub = False;
@@ -1892,7 +1929,7 @@ abstract class Default_Plugin_SysBox {
 
                 if ($count_tables > 0) {
                     $count_tables--;
-                } 
+                }
 
                 $el->setAttribute('width', '100%');
 
@@ -1940,7 +1977,7 @@ abstract class Default_Plugin_SysBox {
             ini_set($key, $value);
         }
     }
-    
+
     /*
      * Gets the value of a configuration option
      *
