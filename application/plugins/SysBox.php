@@ -352,6 +352,7 @@ abstract class Default_Plugin_SysBox {
             $_SESSION['KCFINDER']['disabled'] = FALSE;
             $_SESSION['KCFINDER']['uploadURL'] = $uploadURL;
             $_SESSION['KCFINDER']['uploadDir'] = "";
+            $_SESSION['KCFINDER']['cookieDomain'] = self::getHttpHost();
         } else {
             unset($_SESSION['KCFINDER']);
         }
@@ -1124,7 +1125,8 @@ abstract class Default_Plugin_SysBox {
     static function getHttpHost() {
         $request = new Zend_Controller_Request_Http();
         $httpHost = $request->getHttpHost();
-        return $httpHost;
+        $arr = explode(':', $httpHost);
+        return $arr[0];
     }
 
     /**

@@ -227,7 +227,7 @@ return array(
     'Не установлена библиотека mPDF' => 'Not installed the library Zend Framework 1. The library should be placed in a folder \'%s\'. The latest version of the library can be downloaded at - <a href="%s" target=_blank"">here</a><br />',
     
     //----------- Текст для перевода -------------
-    'developer_copyright' => '© 2006 - 2015 by Sergei Beskorovainyi. All rights reserved.',
+    'developer_copyright' => '© 2013 - 2015 by Sergei Beskorovainyi. All rights reserved.',
     'developer_name' => 'Sergei',
     'developer_surname' => 'Beskorovainyi',
     'Автор' => 'Author',

@@ -26,6 +26,17 @@ body {
 
 }
 
+a {color:#fff;text-decoration:underline;outline:none}
+a:hover {text-decoration:none}
+a:visited { color:#fff;text-decoration:underline;outline:none }
+
+h1 {font:36px "Times New Roman", Times, serif;color:#fff;line-height:36px;padding:3px 0 14px 0;letter-spacing:-1px}
+h2 {font:28px "Times New Roman", Times, serif;color:#fff;line-height:36px;padding:3px 0 14px 0;letter-spacing:-1px}
+h3 {font:20px "Times New Roman", Times, serif;color:#fff;line-height:36px;padding:3px 0 14px 0;letter-spacing:-1px}
+p {padding-bottom:18px}
+
+
+
 /* footer */
 footer {
     height:38px;
@@ -84,15 +95,6 @@ footer a {color:#f8f9fb}
 #footer li.active a {
     color: #CCC !important;
 }
-
-a {color:#fff;text-decoration:underline;outline:none}
-a:hover {text-decoration:none}
-
-h1 {font:36px "Times New Roman", Times, serif;color:#fff;line-height:36px;padding:3px 0 14px 0;letter-spacing:-1px}
-h2 {font:28px "Times New Roman", Times, serif;color:#fff;line-height:36px;padding:3px 0 14px 0;letter-spacing:-1px}
-h3 {font:20px "Times New Roman", Times, serif;color:#fff;line-height:36px;padding:3px 0 14px 0;letter-spacing:-1px}
-p {padding-bottom:18px}
-
 
 /* header */
 #header {
