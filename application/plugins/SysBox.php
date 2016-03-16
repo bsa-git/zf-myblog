@@ -325,7 +325,9 @@ abstract class Default_Plugin_SysBox {
         //------------------------------------------------------
         if (!is_file($dbDest)) {
             if (is_file($dbSource)) {
-                if (!copy($dbSource, $dbDest)) {
+                if (copy($dbSource, $dbDest)) { // Copy source to destination
+                    unlink($dbSource);// Delete this source
+                }else{
                     throw new Exception("Could not be copied '{$dbSource}' to '{$dbDest}'.");
                 }
             } else {
@@ -533,6 +535,8 @@ abstract class Default_Plugin_SysBox {
                 // Copy the current fileset to another location
                 if($ft->writeTo($patchDest) === FALSE){
                     throw new Exception("Could not be copied '{$patchSource}' to '{$patchDest}'.");
+                }  else {
+                    $ft->delFiles();// Delete this source
                 }
             } else {
                 throw new Exception("There is no this dir '{$patchSource}'.");
