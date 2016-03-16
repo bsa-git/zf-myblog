@@ -38,8 +38,8 @@ Examples of the application installation are for `OS "Windows"` and web server `
 ### Prerequisites
 
 - [PHP](http://php.net) version >= 5.4
-- Apache2, Nginx web server or similar
-- Composer
+- [Apache2](https://httpd.apache.org/download.cgi), [Nginx](http://nginx.org/en/) web server or similar
+- [Composer](https://getcomposer.org/)
 
 ### Deploying
 
