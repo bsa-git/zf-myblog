@@ -104,7 +104,7 @@ class Default_Form_BlogPost extends Default_Form_MyForm {
         }
 
         //---------------- Дата создания записи в блоге ----------------
-        // Элемент "Дата рождения". Элемент содержит нестандартный декоратор - javascript календарь
+        // Элемент "Дата создания". Элемент содержит нестандартный декоратор - javascript календарь
         $elDatePost = new Zend_Form_Element_Text('ts_created', array(
                     'label' => 'Дата создания',
                     'maxlength' => '10',
@@ -128,9 +128,12 @@ class Default_Form_BlogPost extends Default_Form_MyForm {
         $this->addElement($elDatePost);
 
         //Установим дату по умолчанию
-        $tsCreated = $this->post->ts_created;
-        $sd = new Default_Plugin_SimpleDate($tsCreated);
-        $this->setDefault('ts_created', $sd->to_display_date());
+//        $tsCreated = $this->post->ts_created;
+        
+        $locale = Default_Plugin_SysBox::getTranslateLocale();
+        $format = Default_Plugin_SimpleDate::get_format_display_date($locale);
+        $sd = new Default_Plugin_SimpleDate($this->post->ts_created);
+        $this->setDefault('ts_created', $sd->to_display_date($format));
         
         //---------- Добавим элемент описания сообщения в блоге ------------
         

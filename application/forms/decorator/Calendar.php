@@ -48,7 +48,9 @@ class Default_Form_Decorator_Calendar extends Zend_Form_Decorator_Abstract {
     private function _getCalendarLink() {
         $request = new Zend_Controller_Request_Http();
         $basePath = $request->getBasePath();
-
+        $locale = Default_Plugin_SysBox::getTranslateLocale();
+        $dateFormat = ($locale == 'en') ? '%m.%d.%Y': '%d.%m.%Y';
+        //--------------------------
         $calendarLink = '
             <a href="#" id="' . $this->getElement()->getName() . '_calendar">' .
                 '<img class="calendar-image" src = "' . Default_Plugin_SysBox::getUrlRes('/js/calendar/calendar.gif') . '">
@@ -58,7 +60,7 @@ class Default_Form_Decorator_Calendar extends Zend_Form_Decorator_Abstract {
                 Calendar.setup(
                   {
                     inputField  : "' . $this->getElement()->getName() . '",
-                    ifFormat    : "%d.%m.%Y",
+                    ifFormat    : "' . $dateFormat . '",
                     button      : "' . $this->getElement()->getName() . '_calendar",
                     firstDay    : 1
                   }

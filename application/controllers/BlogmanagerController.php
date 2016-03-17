@@ -143,10 +143,15 @@ class BlogmanagerController extends Default_Plugin_BaseController {
             // Проверяем на валидность поля формы
             $result = $formBlogPost->isValid($this->_getAllParams());
             if ($result) {
-                //Получим время создания сообщения
-                $arrDate = explode('.', $formBlogPost->getValue('ts_created'));
-                $sd = new Default_Plugin_SimpleDate($arrDate[2] . '-' . $arrDate[1] . '-' . $arrDate[0]);
-                $formBlogPost->post->ts_created = $sd->to_unix();
+                
+                // Get locale
+                $locale = Default_Plugin_SysBox::getTranslateLocale();
+                // Get timestamp
+                $post_created = $formBlogPost->getValue('ts_created');
+                $zDate = new Zend_Date($post_created, null, $locale);
+                $timestamp = $zDate->get(Zend_date::TIMESTAMP);
+                // Set post 'ts_created' to timestamp
+                $formBlogPost->post->ts_created = $timestamp;
                 //Получим заголовок сообщения
                 $formBlogPost->post->profile->title = $formBlogPost->getValue('title');
                 //Получим краткое описание сообщения
@@ -238,7 +243,7 @@ class BlogmanagerController extends Default_Plugin_BaseController {
             $this->view->class_message = $request->getQuery('class_message');
             $this->view->message = $request->getQuery('message');
         }
-        
+
         // Set PHP config
         Default_Plugin_FileUploader::iniSetConfig_PHP(array('image', 'audio', 'video'));
 

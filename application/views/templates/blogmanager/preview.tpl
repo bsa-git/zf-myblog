@@ -113,10 +113,6 @@
     <div class="preview-status">
         <input type="hidden" name="id" value="{$post->getId()}" />
     {if $post->isLive()}
-        {*<div class="status live">
-            <br />
-            <p class="lead">{'Это сообщение опубликовано на вашем блоге. Чтобы снять с публикации сообщение нажмите кнопку <strong>Снять с публикации</strong>, которая расположена ниже.'|translate}</p>
-        </div>*}
         <div class="alert alert-block alert-success">
             <p class="lead"><strong>{'Поздравляем'|translate}!</strong><br />
             {'Это сообщение опубликовано на вашем блоге. Чтобы снять с публикации сообщение нажмите кнопку <strong>Снять с публикации</strong>, которая расположена ниже.'|translate}</p>
@@ -130,10 +126,6 @@
                     name="delete" id="status-delete" />
         </div>
     {else}
-        {*<div class="status draft">
-            <br />
-            <p class="lead">{'Это сообщение еще не опубликовано на вашем блоге. Чтобы опубликовать его на вашем блоге, нажмите кнопку <strong>Опубликовать</strong>, расположенную ниже.'|translate}</p>
-        </div>*}
         <div class="alert alert-block">
             <p class="lead"><strong>{'Внимание'|translate}!</strong><br />
             {'Это сообщение еще не опубликовано на вашем блоге. Чтобы опубликовать его на вашем блоге, нажмите кнопку <strong>Опубликовать</strong>, расположенную ниже.'|translate}</p>

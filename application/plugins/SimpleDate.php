@@ -24,7 +24,6 @@ class Default_Plugin_SimpleDate {
     private $daynum_full = array("Sunday" => 0, "Monday" => 1, "Tuesday" => 2, "Wednesday" => 3, "Thurday" => 4, "Friday" => 5, "Saturday" => 6);
 
     //-------------------------------------------------
-    
     //
     // Public
     // 
@@ -32,35 +31,35 @@ class Default_Plugin_SimpleDate {
     // if the parameter is an integer parameter a timestamp 
     // or a string in the form YYYY-MM-DD
     //
-    public function __construct($todate=FALSE) {
+    public function __construct($todate = FALSE) {
         $this->set($todate);
     }
 
     // get / set
-    public function set($todate=FALSE) {
+    public function set($todate = FALSE) {
         $this->date = $this->default_value($todate, date('Y-m-d'));
         $this->make_valid();
     }
 
-    public function get($todate=FALSE) {
+    public function get($todate = FALSE) {
         return $this->date;
     }
-    
+
     // namespace UniXolutions\date
     // simple, helper funcs
-    private function default_value($val='', $def_val='') {
-        if(strlen($val) < 1){
+    private function default_value($val = '', $def_val = '') {
+        if (strlen($val) < 1) {
             $val = $def_val;
-        }  else {
-            if(is_integer($val)){
-               $val = date('Y-m-d', $val);
+        } else {
+            if (is_integer($val)) {
+                $val = date('Y-m-d', $val);
             }
         }
         //return ((strlen($val) < 1) ? $def_val : $val);
         return $val;
     }
 
-    private function bool_value($val='') {
+    private function bool_value($val = '') {
         $v = strtoupper($this->default_value($val, 'off'));
         if ($v == 'OFF' || $v == 'NO')
             return 0;
@@ -81,10 +80,12 @@ class Default_Plugin_SimpleDate {
         if ($dt < 1)
             $dt = 1;
         if ($mt < 1)
-            $mt = 1; if ($mt > 12)
+            $mt = 1;
+        if ($mt > 12)
             $mt = 12;
         if ($yr < 1)
-            $yr = 1; if ($yr > 9999)
+            $yr = 1;
+        if ($yr > 9999)
             $yr = 9999;
         if ($mt == 2) {
             if ($this->isleap()) {
@@ -217,8 +218,10 @@ class Default_Plugin_SimpleDate {
     public function date_end_of_month() {
         list($y, $m, $d) = explode("-", $this->date);
         if ($m == 2 && $this->isleap())
-            $d = 29; else
-            $d=$this->mdays[(int) $m]; return new SimpleDate(sprintf("%04d-%02d-%02d", $y, $m, $d));
+            $d = 29;
+        else
+            $d = $this->mdays[(int) $m];
+        return new SimpleDate(sprintf("%04d-%02d-%02d", $y, $m, $d));
     }
 
     public function date_last_dayname_of_month($dayname) {
@@ -245,9 +248,22 @@ class Default_Plugin_SimpleDate {
         return $dt->add_days($days);
     }
 
-    // display
-    public function to_display_date() {
-        return date('d.m.Y', $this->to_unix());
+    /**
+     * Display formatted date
+     * @param string $format
+     * @return string
+     */
+    public function to_display_date($format = 'Y-m-d') {
+        return date($format, $this->to_unix());
+    }
+
+    /**
+     * Get format ('m.d.Y' or 'd.m.Y') for display date
+     * @param string $locale
+     * @return string
+     */
+    static function get_format_display_date($locale = 'en') {
+        return ($locale == 'en') ? 'm.d.Y' : 'd.m.Y';
     }
 
     /**
