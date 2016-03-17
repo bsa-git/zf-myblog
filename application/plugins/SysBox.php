@@ -1076,8 +1076,7 @@ abstract class Default_Plugin_SysBox {
         $url = rtrim($url, '/');
 
         if ($url_res) {
-            $url .= '/';
-            $url .= $url_res;
+            $url .= "/{$url_res}";
         }
         return $url;
     }

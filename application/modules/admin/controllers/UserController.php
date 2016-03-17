@@ -196,6 +196,8 @@ class Admin_UserController extends Default_Plugin_TableGridController {
         $arrData = parent::_getReportData($table);
 
         // Установим параметры PDF
+        $url_logo_report = Default_Plugin_SysBox::getFullURL_Res('/images/system/users48x48.png');
+//        echo $url_logo_report . '<br>';
         $arrResultData['pdf']['logo_report'] = Default_Plugin_SysBox::getFullURL_Res('/images/system/users48x48.png');
         $arrResultData['pdf']['title_report'] = $this->Translate('Пользователи сайта');
         $arrResultData['pdf']['pageFormat'] = 'A4';
