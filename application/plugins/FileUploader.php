@@ -93,15 +93,16 @@ class Default_Plugin_FileUploader {
             $sizeLimit = ($maxsize > $sizeLimit) ? $maxsize : $sizeLimit;
         }
         if ($sizeLimit > $post_max_size) {
-            // No set with this function (http://php.net/manual/ru/configuration.changes.modes.php)
+            // No set with this function ( http://php.net/manual/ru/configuration.changes.modes.php )
             ini_set('post_max_size', $sizeLimit . 'M'); // Default=8M 
             $post_max_size = (int) ini_get('post_max_size');
         }
-        // No set with this function (http://php.net/manual/ru/configuration.changes.modes.php)
+        // No set with this function ( http://php.net/manual/ru/configuration.changes.modes.php )
         if ($sizeLimit > $upload_max_filesize) {
             ini_set('upload_max_filesize', $sizeLimit . 'M'); // Default=2M
             $upload_max_filesize = (int)  ini_get('upload_max_filesize');
         }
+        // List of php.ini directives ( http://php.net/manual/en/ini.list.php )
         if ($sizeLimit > $memory_limit) {
             ini_set('memory_limit', ($sizeLimit + $memory_limit) . 'M'); // Default=128M
             $memory_limit = (int) ini_get('memory_limit');
