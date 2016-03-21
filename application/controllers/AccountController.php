@@ -517,17 +517,20 @@ class AccountController extends Default_Plugin_BaseController {
                 $user->profile->last_name = $formUserDetails->getValue('last_name');
                 $user->profile->email = $formUserDetails->getValue('email');
 
-                //Настройки профиля
-                $user->profile->num_posts = $formUserDetails->getValue('num_posts');
-                $user->profile->blog_public = $formUserDetails->getValue('blog_public');
+                if (!$this->_isCommentator) {
+                    //Настройки профиля
+                    $user->profile->num_posts = $formUserDetails->getValue('num_posts');
+                    $user->profile->blog_public = $formUserDetails->getValue('blog_public');
 
-                //Публичные данные пользователя
-                $user->profile->public_first_name = $formUserDetails->getValue('public_first_name');
-                $user->profile->public_last_name = $formUserDetails->getValue('public_last_name');
-                $user->profile->public_email = $formUserDetails->getValue('public_email');
-                $user->profile->public_home_phone = $formUserDetails->getValue('public_home_phone');
-                $user->profile->public_work_phone = $formUserDetails->getValue('public_work_phone');
-                $user->profile->public_mobile_phone = $formUserDetails->getValue('public_mobile_phone');
+                    //Публичные данные пользователя
+                    $user->profile->public_first_name = $formUserDetails->getValue('public_first_name');
+                    $user->profile->public_last_name = $formUserDetails->getValue('public_last_name');
+                    $user->profile->public_email = $formUserDetails->getValue('public_email');
+                    $user->profile->public_home_phone = $formUserDetails->getValue('public_home_phone');
+                    $user->profile->public_work_phone = $formUserDetails->getValue('public_work_phone');
+                    $user->profile->public_mobile_phone = $formUserDetails->getValue('public_mobile_phone');
+                }
+
 
                 $password = $formUserDetails->getValue('password');
                 $password_approve = $formUserDetails->getValue('password_approve');

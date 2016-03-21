@@ -90,6 +90,13 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
      * @var bool
      */
     protected $_isMember = false;
+    
+    /**
+     * isCommentator
+     *
+     * @var bool
+     */
+    protected $_isCommentator = false;
 
     /**
      * isGuest
@@ -283,6 +290,8 @@ class Default_Plugin_BaseController extends Zend_Controller_Action {
             $this->view->isEditor = $this->_isEditor;
             $this->_isMember = ($this->_identity->user_type == 'member');
             $this->view->isMember = $this->_isMember;
+            $this->_isCommentator = ($this->_identity->user_type == 'commentator');
+            $this->view->isCommentator = $this->_isCommentator;
         } else {
             $this->_authenticated = false;
             $this->view->authenticated = false;

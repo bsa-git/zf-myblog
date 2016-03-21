@@ -31,6 +31,7 @@ class Default_Plugin_AclManager extends Zend_Controller_Plugin_Abstract {
         'admin' => 'administrator',
         'editor' => 'editor',
         'member' => 'member',
+        'commentator' => 'commentator',
         'guest' => 'guest'
     );
 
@@ -88,8 +89,10 @@ class Default_Plugin_AclManager extends Zend_Controller_Plugin_Abstract {
 
         // Добавим пользовательские роли
         $this->acl->addRole(new Zend_Acl_Role(self::$roles['guest'])); //$this->_defaultRole
-        // роль 'member' наследует права от роли 'guest'
-        $this->acl->addRole(new Zend_Acl_Role(self::$roles['member']), self::$roles['guest']);
+        // роль 'commentator' наследует права от роли 'guest'
+        $this->acl->addRole(new Zend_Acl_Role(self::$roles['commentator']), self::$roles['guest']);
+        // роль 'member' наследует права от роли 'commentator'
+        $this->acl->addRole(new Zend_Acl_Role(self::$roles['member']), self::$roles['commentator']);
         // роль 'editor' наследует права от роли 'member'
         $this->acl->addRole(new Zend_Acl_Role(self::$roles['editor']), self::$roles['member']);
         // роль 'administrator' наследует права от роли 'editor'
@@ -162,8 +165,11 @@ class Default_Plugin_AclManager extends Zend_Controller_Plugin_Abstract {
             'hint'
         ));
 
+        // Позволим commentator доступ к регистрации
+        $this->acl->allow(self::$roles['commentator'], 'default.account');
+        
         // Позволим members доступ к регистрации и созданию своих блогов
-        $this->acl->allow(self::$roles['member'], 'default.account');
+//        $this->acl->allow(self::$roles['member'], 'default.account');
         $this->acl->allow(self::$roles['member'], 'default.blogmanager');
 
 

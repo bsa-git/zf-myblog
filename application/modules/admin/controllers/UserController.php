@@ -448,6 +448,7 @@ class Admin_UserController extends Default_Plugin_TableGridController {
                     $jsons[$field][] = array('value' => $roles['admin'], 'text' => $roles['admin']);
                     $jsons[$field][] = array('value' => $roles['editor'], 'text' => $roles['editor']);
                     $jsons[$field][] = array('value' => $roles['member'], 'text' => $roles['member']);
+                    $jsons[$field][] = array('value' => $roles['commentator'], 'text' => $roles['commentator']);
                     break;
                 default :
                     $params['field'] = $field;

@@ -82,6 +82,13 @@ class Default_Form_MyForm extends Zend_Form {
      * @var string
      */
     protected  $_language = '';
+    
+    /**
+     * User type
+     *
+     * @var string
+     */
+    protected  $_user_type = '';
 
     /**
      * Initialization form
@@ -107,6 +114,16 @@ class Default_Form_MyForm extends Zend_Form {
 
         // Получим язык сайта
         $this->_language = Default_Plugin_SysBox::getTranslateLocale();
+        
+        // Set 
+        $auth = Zend_Auth::getInstance();
+        if ($auth->hasIdentity()) {
+            $identity = $auth->getIdentity();
+            $this->_user_type = $identity->user_type;
+        }  else {
+            $this->_user_type = 'guest';
+        }
+        
     }
 
     /**

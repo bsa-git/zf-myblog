@@ -10,9 +10,11 @@
                     <li{if $section == 'account'} id="menu_active"{/if}>
                         <a href="{'/account'|url}"><i class="icon-user icon-white"></i> {'Ваш профиль'|translate}</a>
                     </li>
-                    <li{if $section == 'blogmanager'} id="menu_active"{/if}>
-                        <a href="{'/blogmanager'|url}"><i class="icon-comment icon-white"></i> {'Ваш блог'|translate}</a>
-                    </li>
+                    {if (!$isCommentator)}
+                        <li{if $section == 'blogmanager'} id="menu_active"{/if}>
+                            <a href="{'/blogmanager'|url}"><i class="icon-comment icon-white"></i> {'Ваш блог'|translate}</a>
+                        </li>
+                    {/if}
                     {if ($isAdmin)||($isEditor)}
                         <li{if $section == 'modules'} id="menu_active"{/if}>
                             <a href="{'/index/modules'|url}"><i class="icon-th-list icon-white"></i> {'Модули'|translate}</a>

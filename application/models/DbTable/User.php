@@ -43,6 +43,7 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
      * @var array
      */
     static $userTypes = array(
+        'commentator' => 'commentator',
         'member' => 'member',
         'editor' => 'editor',
         'administrator' => 'administrator');
@@ -83,7 +84,8 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
 
         $this->add('username', NULL, NULL);
         $this->add('password', NULL, NULL);
-        $this->add('user_type', self::$userTypes['member'], NULL);
+//        $this->add('user_type', self::$userTypes['member'], NULL);
+        $this->add('user_type', self::$userTypes['commentator'], NULL);
         $this->add('ts_created', time(), self::TYPE_TIMESTAMP);
         $this->add('ts_last_login', NULL, self::TYPE_TIMESTAMP);
         $this->add('actual', 1, self::TYPE_BOOLEAN);
@@ -923,8 +925,10 @@ class Default_Model_DbTable_User extends Default_Model_DatabaseObject {
                 $value = md5($value);
                 break;
             case 'user_type':
-                if (!array_key_exists($value, self::$userTypes))
-                    $value = 'member';
+                if (!array_key_exists($value, self::$userTypes)){
+//                    $value = 'member';
+                    $value = 'commentator';
+                }
                 break;
         }
         return parent::__set($name, $value);

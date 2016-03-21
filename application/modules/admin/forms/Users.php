@@ -71,7 +71,7 @@ class Admin_Form_Users extends Default_Form_MyForm {
         $user_type = new Zend_Form_Element_Select('user_type', array(
                     'required' => FALSE,
                     'label' => 'Тип пользователя (роль)',
-                    'multiOptions' => array('member', 'editor', 'administrator'),
+                    'multiOptions' => array('commentator', 'member', 'editor', 'administrator'),
                     'validators' => array(
                         array('UserType'),
                     ),

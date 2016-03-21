@@ -84,8 +84,9 @@ abstract class Default_Model_Profile extends Zend_Db_Table_Abstract {
             switch ($v['action']) {
                 case self::ACTION_DELETE:
                     $where = array();
-                    foreach ($this->_filters as $_k => $_v)
+                    foreach ($this->_filters as $_k => $_v){
                         $where[] = $this->_db->quoteInto($_k . ' = ?', $_v);
+                    }
                     $where[] = $this->_db->quoteInto($this->_keyField . ' = ?', $k);
                     $this->_db->delete($this->_table, $where);
                     break;
@@ -97,8 +98,9 @@ abstract class Default_Model_Profile extends Zend_Db_Table_Abstract {
                     break;
                 case self::ACTION_UPDATE:
                     $where = array();
-                    foreach ($this->_filters as $_k => $_v)
+                    foreach ($this->_filters as $_k => $_v){
                         $where[] = $this->_db->quoteInto($_k . ' = ?', $_v);
+                    }
                     $where[] = $this->_db->quoteInto($this->_keyField . ' = ?', $k);
                     $this->_db->update($this->_table, array($this->_valueField => $v['value']), $where);
                     break;
