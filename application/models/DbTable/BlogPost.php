@@ -586,7 +586,8 @@ class Default_Model_DbTable_BlogPost extends Default_Model_DatabaseObject {
                 ->joinInner(array('p' => 'blog_posts'), 'p.id = t.post_id', array())
                 ->where('p.status = ?', self::STATUS_LIVE)
                 ->where('p.actual = ?', 1)
-                ->group('t.tag');
+                ->group('t.tag')
+                ->order('lower(t.label)');
 
         if ($user_id) { // запрос к конкретному автору
             $select->where('p.user_id = ?', $user_id);

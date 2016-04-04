@@ -7,21 +7,19 @@
 
 
 /****** List *******/
-/*#blog-posts-summary ol, #blog-posts-summary ul {
-    list-style: inherit;
+
+ul#menu {
+    list-style: none;
 }
 
-#search-posts-summary ol, #search-posts-summary ul {
-    list-style: inherit;
-}*/
-
-.teaser ol, .teaser ul {
-    list-style: inherit;
+.box2 ul {
+    list-style: none;
 }
 
-#tabs-post ol, #tabs-post ul {
-    list-style: inherit;
+.box2 li a{
+    text-decoration: none;
 }
+
 
 /****** Hero *******/
 

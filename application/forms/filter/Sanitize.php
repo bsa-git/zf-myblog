@@ -31,6 +31,7 @@ class Default_Form_Filter_Sanitize implements Zend_Filter_Interface
         'h5' => array('style'),
         'h6' => array('style'),
         'pre' => array('style'),// Определяет блок предварительно форматированного текста
+        'code' => array('style'),// Определяет блок предварительно форматированного текста
         'span' => array('style'),// Предназначен для определения строчных элементов документа
         'sub' => array(),// Отображает шрифт в виде нижнего индекса
         'sup' => array(),// Отображает шрифт в виде верхнего индекса

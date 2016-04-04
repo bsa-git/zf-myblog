@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="{'/css/bootstrap.min.css'|urlres}" type="text/css" media="screen" />
         <link rel="stylesheet" href="{'/css/font-awesome.min.css'|urlres}" type="text/css" media="all" />
         <link href='http://fonts.googleapis.com/css?family=Playball' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="{'/css/reset.css'|urlres}" type="text/css" media="screen" />
+        <!--<link rel="stylesheet" href="{'/css/reset.css'|urlres}" type="text/css" media="screen" />-->
         <link rel="stylesheet" href="{'/css/layout.css'|urlres}" type="text/css" media="screen" />
         {if ! $report}
             <link rel="stylesheet" href="{"/css/schemes/$scheme.css"|urlres}" type="text/css" media="screen" />
