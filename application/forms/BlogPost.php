@@ -177,40 +177,34 @@ class Default_Form_BlogPost extends Default_Form_MyForm {
 
 
         //-------- Добавим кнопки --------------
-        //Установим значение кнопки
-        if ($this->post->isLive()) {
-            $valueSubmit = 'Сохранить изменения';
-        } elseif ($this->post->isSaved()) {
-            $valueSubmit = 'Сохранить изменения и опубликовать';
-        } else {
-            $valueSubmit = 'Создать и опубликовать';
-        }
 
-        $this->addElement('submit', 'send', array(
+        //Установим значение кнопки сохранить
+        $this->addElement('submit', 'save', array(
             'ignore' => true,
-            'label' => $valueSubmit,
+            'label' => 'Сохранить',
         ));
         
-        $this->getElement('send')->setAttrib('class', 'btn btn-primary');
+        $this->getElement('save')->setAttrib('class', 'btn btn-primary');
 
         //Перезапишем стандартные декораторы, для размещения двух кнопок рядом
-        $this->getElement('send')->setDecorators(array('ViewHelper'));
+        $this->getElement('save')->setDecorators(array('ViewHelper'));
 
-        if (!$this->post->isLive()) {
-            $this->addElement('submit', 'preview', array(
-                'ignore' => true,
-                'label' => 'Предварительный просмотр',
-            ));
+        //Установим значение кнопки закрыть
+        $this->addElement('submit', 'close', array(
+            'ignore' => true,
+            'label' => 'Закрыть',
+        ));
+        
+        $this->getElement('close')->setAttrib('class', 'btn');
 
-            //Перезапишем стандартные декораторы, для размещения двух кнопок рядом
-            $this->getElement('preview')->setDecorators(array('ViewHelper'));
-        }
+        //Перезапишем стандартные декораторы, для размещения двух кнопок рядом
+        $this->getElement('close')->setDecorators(array('ViewHelper'));
 
         //---------------- Группа данные блога ----------------
         // Группируем элементы
         // Группа полей связанных с авторизационными данными
         $this->addDisplayGroup(
-                array('title', 'ts_created', 'ckeditor_description','ckeditor_content', 'send', 'preview'), 'blogDataGroup', array(
+                array('title', 'ts_created', 'ckeditor_description','ckeditor_content', 'save', 'close'), 'blogDataGroup', array(
             'legend' => 'Подробная информация'
                 )
         );

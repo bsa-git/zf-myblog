@@ -139,7 +139,20 @@ class BlogmanagerController extends Default_Plugin_BaseController {
 
         // Проверим тип запроса, если POST значит пришли данные формы
         if ($this->_request->isPost()) {
-
+            
+            // Если выходим из редактора сообщения
+            if($this->_request->getPost('close')){
+                if ($formBlogPost->post->isSaved()) {
+                    //Перейдем на предварительный просмотр сообщения
+                    $url = '/blogmanager/preview' . '?id=' . $formBlogPost->post->getId();
+                    $this->_redirect($url);
+                }  else {
+                   //Перейдем на управление блогом
+                    $url = '/blogmanager';
+                    $this->_redirect($url); 
+                }
+            }
+            
             // Проверяем на валидность поля формы
             $result = $formBlogPost->isValid($this->_getAllParams());
             if ($result) {
@@ -164,22 +177,20 @@ class BlogmanagerController extends Default_Plugin_BaseController {
                 // установи признак публикации статьи в блоге
                 $title = $formBlogPost->getValue('title');
                 if ($formBlogPost->post->isSaved()) {
-                    $message = 'Сообщение отредактировано но не опубликовано в блог.';
-                    $message_log = "User-\"$username\" message-\"$title\" has been edited but not posted to the blog";
-                } else {
-                    $message = 'Создано новое сообщение но не опубликовано в блог.';
-                    $message_log = "User-\"$username\" creates a new message-\"$title\" but not published in the blog";
-                }
-
-                $preview = !is_null($this->_request->getPost('preview'));
-                if (!$preview) {
-                    $formBlogPost->post->sendLive();
-                    if ($formBlogPost->post->isSaved()) {
+                    if ($formBlogPost->post->isLive()) {
                         $message = 'Сообщение отредактировано и опубликовано в блог.';
                         $message_log = "User-\"$username\" message-\"$title\" has been edited and published it in the blog";
-                    } else {
+                    }  else {
+                        $message = 'Сообщение отредактировано но не опубликовано в блог.';
+                        $message_log = "User-\"$username\" message-\"$title\" has been edited but not posted to the blog";
+                    }
+                } else {
+                    if ($formBlogPost->post->isLive()) {
                         $message = 'Создано новое сообщение и опубликовано в блог.';
                         $message_log = "User-\"$username\" creates a new message-\"$title\" and posted to the blog";
+                    }  else {
+                        $message = 'Создано новое сообщение но не опубликовано в блог.';
+                        $message_log = "User-\"$username\" creates a new message-\"$title\" but not published in the blog";
                     }
                 }
 
