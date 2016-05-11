@@ -246,8 +246,8 @@ class UserController extends Default_Plugin_BaseController {
     public function archiveAction() {
         $request = $this->getRequest();
         $params = $request->getParams();
-        $itemCountPerPage = $params['itemCountPerPage'];
-        $page = $params['page'];
+        $itemCountPerPage = isset($params['itemCountPerPage']) ? $params['itemCountPerPage'] : 0;
+        $page = isset($params['page']) ? $params['page'] : 0;
 
         // initialize requested date or month
         $m = (int) trim($request->getUserParam('month'));
@@ -725,7 +725,7 @@ class UserController extends Default_Plugin_BaseController {
             return;
         }
     }
-    
+
     /**
      * Action - comments
      * actions for user comments
@@ -866,7 +866,7 @@ class UserController extends Default_Plugin_BaseController {
 
         $this->sendJson($json);
     }
-    
+
     /**
      * Get URL video for Got-tv.ru site
      *
