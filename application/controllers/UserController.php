@@ -89,8 +89,8 @@ class UserController extends Default_Plugin_BaseController {
         //------------------
         $request = $this->getRequest();
         $params = $request->getParams();
-        $itemCountPerPage = $params['itemCountPerPage'];
-        $page = $params['page'];
+        $itemCountPerPage = isset($params['itemCountPerPage'])? $params['itemCountPerPage']:0;
+        $page = isset($params['page'])?$params['page']:0;
 
         if (isset($this->user->profile->num_posts)) {
             $limit = max(1, (int) $this->user->profile->num_posts);
@@ -911,5 +911,3 @@ class UserController extends Default_Plugin_BaseController {
     }
 
 }
-
-?>

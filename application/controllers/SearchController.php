@@ -324,5 +324,3 @@ class SearchController extends Default_Plugin_BaseController {
     }
 
 }
-
-?>

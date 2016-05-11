@@ -626,5 +626,3 @@ class AccountController extends Default_Plugin_BaseController {
     }
 
 }
-
-?>
