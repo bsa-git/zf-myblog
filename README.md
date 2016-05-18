@@ -31,7 +31,7 @@ Examples of the application installation are for `OS "Windows"` and web server `
 - Also added plug-ins for working with arrays, strings, XML, HTTP, and others `application/plugins`
 - Added site administration module `application/modules/admin`. With this module you can manage registered users, users messages, configure the application, and use a variety of tools
 - With the site administration module, you can view and clear the error logs, reports and statistics. And you can generate reports in HTML and PDF formats
-- On the client side using the librarys [Prototype](http://prototypejs.org/), [Scriptaculous](http://madrobby.github.io/scriptaculous/), [Bootstrap 2](http://twbs.github.io/bootstrap/2.3.2/), а также сервисы [Lightbox](http://lokeshdhakar.com/projects/lightbox2/), [Highlight](http://highlightjs.readthedocs.org/en/latest/#), [MyUi](http://pabloaravena.info/mytablegrid/index.html#), [Prototype-window](http://prototype-window.xilinus.com/index.html), [Prototype Accordion](https://github.com/deleteme/prototype-accordion), [Prototype Carousel](http://miedlar.com/dev/carousel), which are `public/js`
+- On the client side using the librarys [Prototype](http://prototypejs.org/), [Scriptaculous](http://madrobby.github.io/scriptaculous/), [Bootstrap 2](http://twbs.github.io/bootstrap/2.3.2/), and services [Lightbox](http://lokeshdhakar.com/projects/lightbox2/), [Highlight](http://highlightjs.readthedocs.org/en/latest/#), [MyUi](http://pabloaravena.info/mytablegrid/index.html#), [Prototype-window](http://prototype-window.xilinus.com/index.html), [Prototype Accordion](https://github.com/deleteme/prototype-accordion), [Prototype Carousel](http://miedlar.com/dev/carousel), which are `public/js`
 
 ## Installing
 
