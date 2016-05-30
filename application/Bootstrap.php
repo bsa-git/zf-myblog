@@ -398,6 +398,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $logMsg->addPriority('ADMIN_ROW_UPDATE', 25);
         $logMsg->addPriority('ADMIN_ROW_INSERT', 26);
         $logMsg->addPriority('ADMIN_ROW_DELETE', 27);
+        $logMsg->addPriority('MY_MSG', 28);
 
         // Adding new priorities for the $logStat
         $logStat->addPriority('LOGIN_OK', 8);

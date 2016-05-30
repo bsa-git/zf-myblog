@@ -953,7 +953,7 @@ class Admin_BlogController extends Default_Plugin_TableGridController {
         //-----------------------
         // Проверим строку на валидность
         $jsons = $this->_isValidRow($row);
-        if ($jsons['class_message']) { // Ошибка валидации
+        if (isset($jsons['class_message'])) { // Ошибка валидации
             return $jsons;
         }
 

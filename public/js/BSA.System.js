@@ -45,6 +45,7 @@ BSA.Sys = {
             // open office
             '.odt', '.ods'
         ],
+        list_replace_values_for_json: ['\\', '"', '/']
     },
     // Init script function
     init: function ()
@@ -379,7 +380,6 @@ BSA.Sys = {
 
         new Ajax.Request(link.href, options);
     },
-
     getJsonResponse: function (transport, sanitize) {
         var json;
         //--------------
@@ -412,6 +412,20 @@ BSA.Sys = {
             return json;
         }
         return json;
+    },
+    replaceValuesForJson: function (value) {
+        if (Object.isString(value)) {
+            BSA.Sys.settings.list_replace_values_for_json.each(function (rep) {
+                if (!value.include('\\' + rep) && value.include(rep)) {
+                    if (rep === '\\') {
+                        value = value.replace(new RegExp(rep + rep, 'g'), '\\' + rep);
+                    } else {
+                        value = value.replace(new RegExp(rep, 'g'), '\\' + rep);
+                    }
+                }
+            })
+        }
+        return value;
     },
     // Error handling
     onFailure: function (message) {

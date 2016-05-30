@@ -385,6 +385,7 @@ BSA.MyTableGrid = Class.create({
         var arrTable, arrMyTable;
         var table = '';
         var myTable = '';
+        var value;
         //---------------------
         // Получим имя таблицы нашего обьекта
         arrMyTable = this.name.split('.');
@@ -403,9 +404,11 @@ BSA.MyTableGrid = Class.create({
                         table = (arrTable.length > 1) ? arrTable[1] : arrTable[0];
                     }
                     if (table === '' || table == myTable || (table == (myTable + '_profile'))) {
+                        value = row[key];
+                        value = BSA.Sys.replaceValuesForJson(value);
                         params = {
                             field: key,
-                            value: row[key]
+                            value: value
                         };
                         resultRow[key] = self._getValueForComboBox(params);
                     }
