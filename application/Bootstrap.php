@@ -22,7 +22,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
         $_startTime = microtime(1);
 
-        
         //------- Define the autoloader parameters ------------
         // Define basic prefix and the base path to the resources for the default module
         $autoloader = new Zend_Application_Module_Autoloader(
