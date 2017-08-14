@@ -45,7 +45,8 @@ Temporary Items
 # =========================
 # My Ignore
 # =========================
-/nbproject/*
+.idea
+nbproject
 /data/*
 !/data/backup/
 /vendor/*
